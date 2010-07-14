@@ -1,0 +1,20 @@
+An app build with the express purpose of exposing the rich spirit and inventory information made available by the Washington State Liquor Control Board.
+
+This app allows the user to find what spirits are aavilable at Washington State Liquor stores.  They can search by store, spirit brand or category and even filter based on what results are near them or what stores are open.
+
+Data Model
+
+Stores
+|Id|Store Type|Retail|Store Number|City|Address|Hours|Contact|
+
+Store Contacts
+|Store Id|Role|Name|Number|
+
+Store Hours
+|Store Id|Start Day|End Day|Open|Close|Summer Hours|
+
+Spirits
+|Id|Category|Brand Name|Brand Code|Retail Price|Sales Tax|Total Retail Price|Class H Price|Merchandising Special Note|Size (Liters)|Case Price|Proof OR %|Liter Cost|On Sale|Closeout|
+
+Store Inventory
+|Store Id|Spirit Id|Quantity In Stock|

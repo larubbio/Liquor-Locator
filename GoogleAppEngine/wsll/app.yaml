@@ -1,0 +1,16 @@
+application: WSLL
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /dataloader
+  script: data_loader.py
+  login: admin
+
+- url: /images
+  static_dir: images
+
+- url: /.*
+  script: pepperstep.py
+
