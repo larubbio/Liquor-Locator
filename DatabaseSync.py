@@ -1,7 +1,8 @@
 import logging
-import mechanize
 import re
 import sys
+import time
+import urllib,urllib2
 
 from BeautifulSoup import BeautifulSoup
 
@@ -201,7 +202,8 @@ def processSpirit(category, row):
     class_h_price = columns[5].decodeContents().replace('$', '').replace(',', '')
 
     # Merchandising Special Note
-    special_note = columns[6].findChild().decodeContents()
+    special_note = unicode(columns[6].decodeContents())
+    special_note.replace('<br />', '')
 
     # Size (Liters)
     size = columns[7].decodeContents()
@@ -236,14 +238,10 @@ def processSpirit(category, row):
     spirit.closeout = special_note.find('CLOSEOUT') >= 0
 
     # For each click 'Find Store'
-    br.select_form(name="DetailForm")
-        
-    bc = br.form.find_control('brandcode')
-    bc.readonly = False
-    bc.value = brand_code
-    
-    spirit_inventory_page = br.submit()
-    page = BeautifulSoup(spirit_inventory_page.read())
+    params = {'CityName' : '', 'CountyName' : '', 'StoreNo' : '', 'brandcode' : brand_code}
+    html = loadURL(STORE_SEARCH_URL, params)
+
+    page = BeautifulSoup(html)
 
     table = page.findAll('table')[3]
     rows = table.findAll('tr')[1:]
@@ -251,7 +249,32 @@ def processSpirit(category, row):
     for row in rows:
         processStoreAndSpiritInventory(spirit, row)   
 
-    br.back()
+def loadURL(url, params=None):
+    logging.info("Loading %s (%s)" % (url, params))
+
+    retry_time = 1
+    html = None
+
+    while retry_time <= 256 and html is None:
+        try:
+            if params:
+                data = urllib.urlencode(params) 
+                request = urllib2.Request(url, data)
+                response = urllib2.urlopen(request)
+            else:
+                response = urllib2.urlopen(url)
+
+            html = response.read()
+        except IOError as (errno, strerror):
+            logging.debug("I/O error(%s): %s (%s)" % (errno, strerror, retry_time))
+            time.sleep(retry_time)
+            retry_time = retry_time * 2
+
+    return html
+
+BRAND_SEARCH_URL = 'http://liq.wa.gov/services/brandpicklist.asp'
+BRAND_CATEGORIES_URL = 'http://liq.wa.gov/services/brandsearch.asp'
+STORE_SEARCH_URL = 'http://liq.wa.gov/services/find_store.asp'
 
 engine = create_engine('mysql://wsll:wsll@localhost/wsll', echo=False)
 
@@ -261,48 +284,38 @@ session = Model.Session()
 metadata = Model.Base.metadata
 metadata.create_all(engine) 
 
-br = mechanize.Browser()
-
-# Log information about HTTP redirects and Refreshes.
-br.set_debug_redirects(True)
-# Log HTTP response bodies (ie. the HTML, most of the time).
-#br.set_debug_responses(True)
-# Print HTTP headers.
-br.set_debug_http(True)
-
 # To make sure you're seeing all debug output:
-logger = logging.getLogger("mechanize")
-logger.addHandler(logging.StreamHandler(sys.stdout))
+logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
-br.open("http://liq.wa.gov/pricebook/pricebookmenu1.asp")
+html = loadURL(BRAND_CATEGORIES_URL)
 
-# follow second link with element text matching regular expression
-resp = br.follow_link(text_regex=r"Product Availability")
+page = BeautifulSoup(html)
+categories = [c.decodeContents() for c in page.findAll('form')[0].findAll('option')]
 
-br.select_form(name="frmBrandSearch")
-control = br.form.find_control("CatBrand")
-categories = [i.name for i in control.items]
-categories.remove("VALUE")
+# Remove the first category which is just UI information
+categories = categories[1:]
 
-#categories = ['APERITIF', 'VODKA']
+categories = ['COCKTAILS', 'WINE - IMPORTED - MISC', 'APERITIF', 'VODKA']
 for c in categories:
     print c
-    br.select_form(name="frmBrandSearch")
-    br["CatBrand"] = [c]
-    cat_page = br.submit()
 
-    # Parse the page 
-    page = BeautifulSoup(cat_page.read())
+    params = {'BrandName' : '', 'CatBrand' : c, 'submit1' : 'Find Product' }
+    html = loadURL(BRAND_SEARCH_URL, params)
 
-    # Loop over each row storing spirit information
-    table = page('table')[4]
-    rows = table.findAll('tr')[1:]
-    for row in rows:
-        processSpirit(c, row)
-        print ".",
+    # Only record the spirit if it is in stock
+    if html.find('out of stock') is -1:
+        # Parse the page 
+        page = BeautifulSoup(html)
 
-    print
-    br.back()
+        # Loop over each row storing spirit information
+        table = page('table')[4]
+        rows = table.findAll('tr')[1:]
+
+        for row in rows:
+            processSpirit(c, row)
+            print ".",
+
+        print
 
 session.commit()
