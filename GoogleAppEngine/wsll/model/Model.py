@@ -1,11 +1,24 @@
 from google.appengine.ext import db
 
+class Catalog(db.Model):
+    created_date = db.DateProperty()
+    status = db.StringProperty()
+
+    def to_dict(self):
+        return {
+                'id': self.key().id(),
+                'created_date': unicode(self.created_date),
+                'status': self.status,
+                }
+
 class Contacts(db.Model):
+    cid = db.IntegerProperty(required=True)
     role = db.StringProperty()
     name = db.StringProperty()
     number = db.PhoneNumberProperty()
 
 class Hours(db.Model):
+    cid = db.IntegerProperty(required=True)
     start_day = db.StringProperty()
     end_day = db.StringProperty()
     open = db.StringProperty()
@@ -13,6 +26,7 @@ class Hours(db.Model):
     summer_hours = db.BooleanProperty()
 
 class Spirit(db.Model):
+    cid = db.IntegerProperty(required=True)
     category = db.CategoryProperty(required=True, indexed=True)
     name = db.StringProperty(required=True, indexed=True)
     code = db.IntegerProperty(required=True, indexed=True)
@@ -29,16 +43,18 @@ class Spirit(db.Model):
     closeout = db.BooleanProperty(indexed=True)
     
 class Store(db.Model):
+    cid = db.IntegerProperty(required=True)
     store_type = db.StringProperty()
     retail = db.BooleanProperty()
     store_number = db.IntegerProperty(required=True, indexed=True)
     address = db.PostalAddressProperty(required=True)
     location = db.GeoPtProperty(required=True, indexed=True)
 
-    hours = db.ReferenceProperty(reference_class=Hours, collection_name="stores"
+    hours = db.ReferenceProperty(reference_class=Hours, collection_name="stores")
     contacts = db.ReferenceProperty(reference_class=Contacts, collection_name='stores')
 
 class StoreInventory(db.Model):
+    cid = db.IntegerProperty(required=True)
     store = db.ReferenceProperty(reference_class=Store, collection_name='inventory')
     spirit = db.ReferenceProperty(reference_class=Spirit, collection_name="stores")
     quantity = db.IntegerProperty()
