@@ -43,7 +43,7 @@ DELETE  /stores        id               Delete the store and all child data
 
 GET     /categories                     
 PUT     /categories                     Not Allowed
-POST    /categories                     Creates new category
+POST    /categories                     Not Allowed
 DELETE  /categories                     Not Allowed
                              
 GET     /spirits       brand_code,      Loads all or searches

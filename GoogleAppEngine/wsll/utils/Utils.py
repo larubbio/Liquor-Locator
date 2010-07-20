@@ -2,11 +2,16 @@ import logging
 from google.appengine.ext import db
 import utils.JSONUtils as JSONUtils
 
+def set_trace():
+    import sys
+    for attr in ('stdin', 'stdout', 'stderr'):
+        setattr(sys, attr, getattr(sys, '__%s__' % attr))
+    import pdb
+    pdb.set_trace()
+
 def catalogFromId(request, cid):
     key = db.Key.from_path('Catalog', cid)
     catalog = db.get(key)
-
-    logging.info(key)
 
     if catalog is None:
         request.error(400)

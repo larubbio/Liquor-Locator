@@ -47,9 +47,30 @@ class CatalogsHandler(webapp.RequestHandler):
         if catalog is None:
             return
 
-        catalog.delete()
-
         # Todo: delete all child data
+        q = db.GqlQuery("SELECT * FROM Store WHERE cid = :1", id)
+        
+        for store in q.run():
+            
+            # Delete all hours
+            for h in store.hours:
+                h.delete()
+
+            # Delete the contacts
+            for c in store.contacts:
+                c.delete()
+
+            store.delete()
+
+        q = db.GqlQuery("SELECT * FROM Spirit WHERE cid = :1", id)
+        for s in q.run():
+            s.delete()
+
+        q = db.GqlQuery("SELECT * FROM Category WHERE cid = :1", id)
+        for s in q.run():
+            s.delete()
+
+        catalog.delete()
 
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write(JSONUtils.to_json({'status':'success', 'msg':'Deleted catalog %s' % id}))

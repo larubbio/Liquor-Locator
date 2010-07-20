@@ -11,43 +11,11 @@ class Catalog(db.Model):
                 'status': self.status,
                 }
 
-class Contacts(db.Model):
-    cid = db.IntegerProperty(required=True)
-    role = db.StringProperty()
-    name = db.StringProperty()
-    phone_number = db.PhoneNumberProperty()
-
-    def to_dict(self):
-        return {
-                'id': self.key().id(),
-                'role': self.role,
-                'name': self.name,
-                'phone_number': self.phone_number,
-                }
-
-class Hours(db.Model):
-    cid = db.IntegerProperty(required=True)
-    start_day = db.StringProperty()
-    end_day = db.StringProperty()
-    open = db.StringProperty()
-    close = db.StringProperty()
-    summer_hours = db.BooleanProperty()
-
-    def to_dict(self):
-        return {
-                'id': self.key().id(),
-                'start_day': self.start_day,
-                'end_day': self.end_day,
-                'open': self.open,
-                'close': self.close,
-                'summer_hours': self.summer_hours,
-                }
-
 class Spirit(db.Model):
     cid = db.IntegerProperty(required=True)
     category = db.CategoryProperty(required=True, indexed=True)
-    name = db.StringProperty(required=True, indexed=True)
-    code = db.IntegerProperty(required=True, indexed=True)
+    brand_name = db.StringProperty(required=True, indexed=True)
+    brand_code = db.StringProperty(required=True, indexed=True)
     retail_price = db.FloatProperty(required=True)
     sales_tax = db.FloatProperty(required=True)
     total_retail_price = db.FloatProperty(required=True)
@@ -64,8 +32,8 @@ class Spirit(db.Model):
         return {
                 'id': self.key().id(),
                 'category': self.category,
-                'name': self.name,
-                'code': self.code,
+                'brand_name': self.brand_name,
+                'brand_code': self.brand_code,
                 'retail_price': self.retail_price,
                 'sales_tax': self.sales_tax,
                 'total_retail_price': self.total_retail_price,
@@ -85,12 +53,22 @@ class Store(db.Model):
     retail = db.BooleanProperty()
     store_number = db.IntegerProperty(required=True, indexed=True)
     address = db.PostalAddressProperty(required=True)
-    location = db.GeoPtProperty(required=True, indexed=True)
+    location = db.GeoPtProperty(indexed=True)
 
-    hours = db.ReferenceProperty(reference_class=Hours, collection_name="stores")
-    contacts = db.ReferenceProperty(reference_class=Contacts, collection_name='stores')
+    @property
+    def contacts(self):
+        return Contact.gql("WHERE stores = :1", self.key())
 
     def to_dict(self):
+        hours = []
+        contacts = []
+
+        for h in self.hours:
+            hours.append(h.to_dict())
+
+        for c in self.contacts:
+            contacts.append(c.to_dict())
+        
         return {
                 'id': self.key().id(),
                 'store_type': self.store_type,
@@ -98,6 +76,44 @@ class Store(db.Model):
                 'store_number': self.store_number,
                 'address': self.address,
                 'location': self.location,
+                'hours' : hours,
+                'contacts' : contacts,
+                }
+
+class Contact(db.Model):
+    cid = db.IntegerProperty(required=True)
+    role = db.StringProperty()
+    name = db.StringProperty()
+    number = db.PhoneNumberProperty()
+
+    # Group affiliation
+    stores = db.ListProperty(db.Key)
+
+    def to_dict(self):
+        return {
+                'role': self.role,
+                'name': self.name,
+                'number': self.number,
+                }
+
+class Hours(db.Model):
+    cid = db.IntegerProperty(required=True)
+    start_day = db.StringProperty()
+    end_day = db.StringProperty()
+    open = db.StringProperty()
+    close = db.StringProperty()
+    summer_hours = db.BooleanProperty()
+
+    store = db.ReferenceProperty(Store, collection_name="hours")
+
+    def to_dict(self):
+        return {
+                'id': self.key().id(),
+                'start_day': self.start_day,
+                'end_day': self.end_day,
+                'open': self.open,
+                'close': self.close,
+                'summer_hours': self.summer_hours,
                 }
 
 class StoreInventory(db.Model):
@@ -112,3 +128,11 @@ class StoreInventory(db.Model):
                 'quantity': self.quantity,
                 }
 
+class Category(db.Model):
+    cid = db.IntegerProperty(required=True)
+    name = db.StringProperty(required=True)
+
+    def to_dict(self):
+        return {
+                'name': self.name,
+                }

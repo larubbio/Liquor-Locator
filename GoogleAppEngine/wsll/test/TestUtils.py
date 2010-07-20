@@ -6,8 +6,10 @@ def loadURL(url, method='get', params=None):
     data = None
     json = None
 
-    if params:
+    if params and method in ['get', 'delete']:
         data = urllib.urlencode(params) 
+    else:
+        data = params
 
     if data:
         if method in ['get', 'delete']:

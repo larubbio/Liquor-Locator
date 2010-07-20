@@ -2,14 +2,13 @@ import logging
 from google.appengine.ext import db
 from google.appengine.ext import webapp
 
-from model.Model import Catalog
+from model.Model import Catalog, Store, Hours, Contact
 import utils.JSONUtils as JSONUtils
 import utils.Utils as Utils
 
 class StoresHandler(webapp.RequestHandler):
 
     def get(self, cid):
-        logging.info("StoresHandler::get %s" % cid)
         stores = []
         id = None
         brand_code = None
@@ -57,6 +56,7 @@ class StoresHandler(webapp.RequestHandler):
         
     def post(self, cid):
         logging.info("StoresHandler::post %s" % cid)
+
         body = self.request.body_file.getvalue()
         logging.info('Body: %s' % body)
 
@@ -67,33 +67,54 @@ class StoresHandler(webapp.RequestHandler):
 
         s = JSONUtils.loads(body)
 
-#         store_type = self.request.get('store_type')
-#         retail = self.request.get('retail')
-#         store_number = self.request.get('store_number')
-#         address = self.request.get('address')
-#         address2 = self.request.get('address2')
-#         city = self.request.get('city')
-#         zip = self.request.get('zip')
+        store_type = s['store_type']
+        retail = bool(s['retail_sales'])
+        store_number = s['store_number']
+        address = s['address']
+        address2 = s['address2']
+        city = s['city']
+        zip = s['zip']
 
-#         if self.request.get('address2') is None:
-#             a = db.PostalAddress("%s, %s, WA %s" % (address, city, zip))
-#         else:
-#             a = db.PostalAddress("%s, %s %s, WA %s" % (address, address2, city, zip))
+        if s['address2'] is None:
+            a = db.PostalAddress("%s, %s, WA %s" % (address, city, zip))
+        else:
+            a = db.PostalAddress("%s, %s %s, WA %s" % (address, address2, city, zip))
 
-#         store = Store(cid=id,
-#                       store_type=store_type,
-#                       retail=retail,
-#                       store_number=store_number,
-#                       address=a,
-#                       location=None)
+        store = Store(cid=int(cid),
+                      store_type=store_type,
+                      retail=retail,
+                      store_number=store_number,
+                      address=a,
+                      location=None)
 
-#         # Hours
-#         for h in 
-#         store.put()
+        store.put()
+
+        # Create the hours
+        for h in s['hours']:
+            hours = Hours(store=store,
+                          cid=int(cid),
+                          start_day=h['start_day'],
+                          end_day=h['end_day'],
+                          open=h['open'],
+                          close=h['close'],
+                          summer_hours=bool(h['summer_hours']))
+
+            hours.put()
+
+        # Create the store contacts
+        for c in s['contacts']:
+            key = "%s-%s-%s" % (cid, c['name'], c['number'])
+            contact = Contact.get_or_insert(key_name=key,
+                                            cid=int(cid),
+                                            role=c['role'],
+                                            name=c['name'],
+                                            number=c['number'])
+
+            contact.stores.append(store.key())
+            contact.put()
 
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.out.write('ret')
-#JSONUtils.to_json(store)     
+        self.response.out.write(JSONUtils.to_json(store))
         
 
     def delete(self, cid):
@@ -105,3 +126,11 @@ class StoresHandler(webapp.RequestHandler):
         catalog = Utils.catalogFromId(self, cid)
         if catalog is None:
             return
+
+        # Load the store and delete it
+#        catalog.delete()
+
+        # Todo: delete all child data
+
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.out.write(JSONUtils.to_json({'status':'success', 'msg':'Deleted catalog %s' % id}))
