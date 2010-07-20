@@ -18,3 +18,57 @@ Spirits
 
 Store Inventory
 |Store Id|Spirit Id|Quantity In Stock|
+
+Todo:
+ - Geocode store location
+ - cascade delete catalogs
+ - cascade delete stores
+
+REST API
+
+VERB    URI             Query String    Comment
+GET     /catalogs       current         Either gets all or just the current
+PUT     /catalogs                       Not Allowed
+POST    /catalogs                       Creates new catalog
+DELETE  /catalogs       id              Deletes the catalog and all child data
+
+(All below are assumed to have catalog id at root of URI)
+
+GET     /stores        id,              Get all stores, just 'id' 
+                       brand_code       or those with a certain spirit
+                       lat,long,dist    or certain distance from me
+PUT     /stores                         Not Allowed
+POST    /stores                         Creates new store
+DELETE  /stores        id               Delete the store and all child data
+
+GET     /categories                     
+PUT     /categories                     Not Allowed
+POST    /categories                     Creates new category
+DELETE  /categories                     Not Allowed
+                             
+GET     /spirits       brand_code,      Loads all or searches
+                       name,
+                       category
+PUT     /spirits                        Not Allowed
+POST    /spirits                        Creates new spirit
+DELETE  /spirits                        Not Allowed
+
+GET     /spirit/{id}                    
+PUT     /spirit/{id}                    Updates spirit
+POST    /spirit/{id}                    Not Allowed
+DELETE  /spirit/{id}                    Deletes spirit
+
+GET     /spirit/{id}/stores             Returns stores that have spirit        
+PUT     /spirit/{id}/stores             Not Allowed
+POST    /spirit/{id}/stores             Add store inventory       
+DELETE  /spirit/{id}/stores             Not Allowed
+
+GET     /store/{id}                     
+PUT     /store/{id}                     Updates store
+POST    /store/{id}                     Not Allowed
+DELETE  /store/{id}                     Deletes store
+
+GET     /store/{id}/spirits             Just the spirits in this store         
+PUT     /store/{id}/spirits             Not Allowed
+POST    /store/{id}/spirits             Adds spirit to store
+DELETE  /store/{id}/spirits             Deletes store
