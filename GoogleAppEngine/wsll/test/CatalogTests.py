@@ -35,6 +35,7 @@ class CatalogTestCase(unittest.TestCase):
         assert self.c1['id'] not in ids, 'Non-newest catalog loaded'
         assert self.c2['id'] in ids, 'Failed to load newest catalogs'
         assert len(catalogs) == 1, 'Loaded more than one catalog'      
+        assert catalogs[0]['status'] == 'ACTIVE', 'Non Active catalog loaded'
 
     def testDeleteCatalog(self):
         """Verify we can delete a catalog"""

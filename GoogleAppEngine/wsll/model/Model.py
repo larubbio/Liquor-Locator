@@ -123,8 +123,13 @@ class StoreInventory(db.Model):
     quantity = db.IntegerProperty()
 
     def to_dict(self):
+        
         return {
                 'id': self.key().id(),
+                'store_id': self.store.store_number, 
+                'store_address': self.store.address,
+                'spirit_id': self.spirit.brand_code,
+                'spirit_name': self.spirit.brand_name,
                 'quantity': self.quantity,
                 }
 

@@ -74,7 +74,7 @@ class StoreHours(Base):
         Session().add(self)    
 
     def __repr__(self):
-       return "<Hours(%s, '%s - %s %s - %s')>" % (self.id, self.start_day, self.end_day, self.open, self.close)
+       return "<Hours('%s - %s %s - %s')>" % (self.start_day, self.end_day, self.open, self.close)
 
 class Spirit(Base):
     __tablename__ = 'spirits'

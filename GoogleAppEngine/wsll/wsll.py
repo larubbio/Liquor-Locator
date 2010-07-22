@@ -3,13 +3,17 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 
 from handlers.CatalogsHandler import CatalogsHandler
 from handlers.StoresHandler import StoresHandler
+from handlers.SpiritHandler import SpiritHandler
 from handlers.SpiritsHandler import SpiritsHandler
+from handlers.SpiritInventoryHandler import SpiritInventoryHandler
 from handlers.CategoriesHandler import CategoriesHandler
 
 application = webapp.WSGIApplication(
                                      [('/catalogs', CatalogsHandler),
-                                      ('/(.*)/stores', StoresHandler),
                                       ('/(.*)/spirits', SpiritsHandler),
+                                      ('/(.*)/spirit/(.*)/stores', SpiritInventoryHandler),
+                                      ('/(.*)/spirit/(.*)', SpiritHandler),
+                                      ('/(.*)/stores', StoresHandler),
                                       ('/(.*)/categories', CategoriesHandler),
                                       ],
                                      debug=True)
