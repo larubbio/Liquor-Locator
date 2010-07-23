@@ -253,7 +253,7 @@ def processSpirit(category, row):
 
     br.back()
 
-engine = create_engine('mysql://wsll:wsll@localhost/wsll', echo=False)
+engine = create_engine('mysql://wsll:wsll@localhost/wsll2', echo=False)
 
 Model.Session.configure(bind=engine)
 session = Model.Session()

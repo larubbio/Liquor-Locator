@@ -23,6 +23,8 @@ class Store(Base):
     address = Column(String(45))
     address2 = Column(String(45))
     zip = Column(String(45))
+    lat = Column(Numeric('10,7'))
+    long = Column(Numeric('10,7'))
     
     # many to many Stores<->Contacts
     contacts = relationship('StoreContact', secondary=store_contacts, backref='stores')

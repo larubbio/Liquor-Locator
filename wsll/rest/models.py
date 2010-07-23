@@ -81,6 +81,8 @@ class Store(models.Model):
     address = models.CharField(max_length=45)
     address2 = models.CharField(max_length=45)
     zip = models.CharField(max_length=45)
+    lat = models.DecimalField(max_digits=10, decimal_places=7)
+    long = models.DecimalField(max_digits=10, decimal_places=7)
 
     # many to many
     contacts = models.ManyToManyField(Contact, 
