@@ -11,7 +11,8 @@ from model import Model
 LOG_FILENAME = 'gae-update.log'
 logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
 
-base_url = 'http://localhost:8080/'
+#base_url = 'http://localhost:8080/'
+base_url = 'http://liquorlocator.appspot.com/'
 catalogs_url = base_url + 'catalogs'
 
 def loadURL(url, method='get', params=None):
@@ -31,6 +32,8 @@ def loadURL(url, method='get', params=None):
 
     else:
         request = urllib2.Request(url)
+        if method in ['post']:
+            request.headers['Content-Length'] = 0
         
     request.get_method = lambda: method.upper()
 
@@ -40,11 +43,13 @@ def loadURL(url, method='get', params=None):
         response = urllib2.urlopen(request)
         json_str = response.read()
     except urllib2.HTTPError, e:
+        logging.error("HTTPError (%s): %s" % (e.code, e.msg))
         json_str = e.read()
 
     return json_str
 
 # Create a catalog
+logging.info("loading %s" % catalogs_url)
 catalog = json.loads( loadURL(catalogs_url, method='post') )
 
 # TODO: Validate catalog was created
@@ -63,30 +68,6 @@ metadata.create_all(engine)
 # To make sure you're seeing all debug output:
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
-
-# Upload all spirits
-for spirit in session.query(Model.Spirit):
-    logging.info("Adding Spirit %s (%s)" % (spirit.brand_name, spirit.id))
-
-    params = json.dumps({'brand_code': spirit.id,
-                         'category': spirit.category,
-                         'brand_name': spirit.brand_name,
-                         'retail_price': str(spirit.retail_price),
-                         'sales_tax': str(spirit.sales_tax),
-                         'total_retail_price': str(spirit.total_retail_price),
-                         'class_h_price': str(spirit.class_h_price),
-                         'merchandising_note': spirit.merchandising_note,
-                         'size': str(spirit.size),
-                         'case_price': str(spirit.case_price),
-                         'liter_cost': str(spirit.liter_cost),
-                         'proof': spirit.proof,
-                         'on_sale': spirit.on_sale,
-                         'closeout': spirit.closeout,
-                         })
-
-    s = loadURL(spirits_url, method='post', params=params)
-
-    # TODO: Validate spirit was created
 
 # Upload all stores
 for store in session.query(Model.Store):
@@ -124,21 +105,39 @@ for store in session.query(Model.Store):
 
     # Validate store
 
-# Set up inventory
-for si in session.query(Model.StoreInventory):
-    logging.info("Adding %d units of %s to %s" % (si.qty, si.spirit_id, si.store_id))
+# Upload all spirits
+for spirit in session.query(Model.Spirit):
+    logging.info("Adding Spirit %s (%s)" % (spirit.brand_name, spirit.id))
 
-    url = '%s%d/spirit/%s/stores' % (base_url, catalog['id'], si.spirit_id)
+    # Set up inventory
+    inv = []
 
-    params = json.dumps({'store_id': si.store_id,
-                         'quantity': si.qty,})
+    # Insert inventory
+    for i in spirit.inventory:
+        inv.append({'store_id': i.store_id, 
+                    'quantity': i.qty,})
 
-    ret = loadURL(url, 
-                  method='post', 
-                  params=params)
+    params = json.dumps({'brand_code': spirit.id,
+                         'category': spirit.category,
+                         'brand_name': spirit.brand_name,
+                         'retail_price': str(spirit.retail_price),
+                         'sales_tax': str(spirit.sales_tax),
+                         'total_retail_price': str(spirit.total_retail_price),
+                         'class_h_price': str(spirit.class_h_price),
+                         'merchandising_note': spirit.merchandising_note,
+                         'size': str(spirit.size),
+                         'case_price': str(spirit.case_price),
+                         'liter_cost': str(spirit.liter_cost),
+                         'proof': spirit.proof,
+                         'on_sale': spirit.on_sale,
+                         'closeout': spirit.closeout,
+                         'inventory': inv,
+                         })
 
+    s = loadURL(spirits_url, method='post', params=params)
 
-    # Validate inventory
+    # TODO: Validate spirit was created
+
 
 # Update catalog from NEW to ACTIVE
 
