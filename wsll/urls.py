@@ -13,6 +13,8 @@ urlpatterns = patterns('',
     (r'^spirit/(?P<spirit_id>\d+)/stores$', 'wsll.rest.views.spirit_inventory'),
     (r'^spirit/(?P<spirit_id>\d+)$', 'wsll.rest.views.spirit'),
     (r'^stores$', 'wsll.rest.views.stores'),
+    (r'^store/(?P<store_id>\d+)$', 'wsll.rest.views.store'),
+    (r'^store/(?P<store_id>\d+)/spirits$', 'wsll.rest.views.store_inventory'),
     (r'^categories$', 'wsll.rest.views.categories'),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 

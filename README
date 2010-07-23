@@ -26,41 +26,41 @@ Todo:
 REST API
 
   VERB    URI             Query String    Comment
-  GET     /categories                     
+X GET     /categories                     
   PUT     /categories                     Not Allowed
   POST    /categories                     Not Allowed
   DELETE  /categories                     Not Allowed
                              
-  GET     /stores        id,              Get all stores, just 'id' 
-                         brand_code       or those with a certain spirit
+X GET     /stores        id,              Get all stores, just 'id' 
+X                        brand_code       or those with a certain spirit
                          lat,long,dist    or certain distance from me
   PUT     /stores                         Not Allowed
   POST    /stores                         Not Allowed
   DELETE  /stores                         Not Allowed
 
-  GET     /spirits       brand_code,      Loads all or searches
-                         name,
-                         category
+X GET     /spirits       brand_code,      Loads all or searches
+X                        name,
+X                        category
   PUT     /spirits                        Not Allowed
   POST    /spirits                        Not Allowed
   DELETE  /spirits                        Not Allowed
 
-  GET     /spirit/{id}                    
+X GET     /spirit/{id}                    
   PUT     /spirit/{id}                    Not Allowed
   POST    /spirit/{id}                    Not Allowed
   DELETE  /spirit/{id}                    Not Allowed
 
-  GET     /spirit/{id}/stores             Returns stores that have spirit       
+X GET     /spirit/{id}/stores             Returns stores that have spirit       
   PUT     /spirit/{id}/stores             Not Allowed
   POST    /spirit/{id}/stores             Not Allowed
   DELETE  /spirit/{id}/stores             Not Allowed
 
-  GET     /store/{id}                     
+X GET     /store/{id}                     
   PUT     /store/{id}                     Updates store (Not Implemented)
   POST    /store/{id}                     Not Allowed
   DELETE  /store/{id}                     Not Allowed
 
-  GET     /store/{id}/spirits             Just the spirits in this store         
+X GET     /store/{id}/spirits             Just the spirits in this store         
   PUT     /store/{id}/spirits             Not Allowed
   POST    /store/{id}/spirits             Not Allowed
   DELETE  /store/{id}/spirits             Not Allowed
