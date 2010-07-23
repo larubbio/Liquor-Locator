@@ -26,48 +26,41 @@ Todo:
 REST API
 
   VERB    URI             Query String    Comment
-X GET     /catalogs       current         Either gets all or just the current
-  PUT     /catalogs                       Not Allowed
-  POST    /catalogs                       Creates new catalog
-  DELETE  /catalogs       id              Deletes the catalog and all child data
-
-(All below are assumed to have catalog id at root of URI)
-
-  GET     /stores        id,              Get all stores, just 'id' 
-                         brand_code       or those with a certain spirit
-                         lat,long,dist    or certain distance from me
-  PUT     /stores                         Not Allowed
-X POST    /stores                         Creates new store
-  DELETE  /stores                         Not Allowed
-
-X GET     /categories                     
+  GET     /categories                     
   PUT     /categories                     Not Allowed
   POST    /categories                     Not Allowed
   DELETE  /categories                     Not Allowed
                              
+  GET     /stores        id,              Get all stores, just 'id' 
+                         brand_code       or those with a certain spirit
+                         lat,long,dist    or certain distance from me
+  PUT     /stores                         Not Allowed
+  POST    /stores                         Not Allowed
+  DELETE  /stores                         Not Allowed
+
   GET     /spirits       brand_code,      Loads all or searches
                          name,
                          category
   PUT     /spirits                        Not Allowed
-X POST    /spirits                        Creates new spirit
+  POST    /spirits                        Not Allowed
   DELETE  /spirits                        Not Allowed
 
-X GET     /spirit/{id}                    
-  PUT     /spirit/{id}                    Updates spirit (Not Implemented)
+  GET     /spirit/{id}                    
+  PUT     /spirit/{id}                    Not Allowed
   POST    /spirit/{id}                    Not Allowed
-  DELETE  /spirit/{id}                    Deletes spirit (Not Implemented)
+  DELETE  /spirit/{id}                    Not Allowed
 
   GET     /spirit/{id}/stores             Returns stores that have spirit       
   PUT     /spirit/{id}/stores             Not Allowed
-  POST    /spirit/{id}/stores             Add store inventory       
+  POST    /spirit/{id}/stores             Not Allowed
   DELETE  /spirit/{id}/stores             Not Allowed
 
   GET     /store/{id}                     
   PUT     /store/{id}                     Updates store (Not Implemented)
   POST    /store/{id}                     Not Allowed
-  DELETE  /store/{id}                     Deletes store (Not Implemented)
+  DELETE  /store/{id}                     Not Allowed
 
   GET     /store/{id}/spirits             Just the spirits in this store         
   PUT     /store/{id}/spirits             Not Allowed
   POST    /store/{id}/spirits             Not Allowed
-  DELETE  /store/{id}/spirits             Deletes store (Not Implemented)
+  DELETE  /store/{id}/spirits             Not Allowed
