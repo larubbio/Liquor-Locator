@@ -54,13 +54,13 @@ class StoreContact(Base):
 class StoreHours(Base):
     __tablename__ = 'hours'
 
-#    id = Column(Integer, primary_key=True)
-    store_id = Column(Integer, ForeignKey('stores.id'), primary_key=True)
-    start_day = Column(String(5), primary_key=True)
-    end_day = Column(String(5), primary_key=True)
-    open = Column(String(5), primary_key=True)
-    close = Column(String(5), primary_key=True)
-    summer_hours = Column(Boolean, primary_key=True)
+    id = Column(Integer, primary_key=True)
+    store_id = Column(Integer, ForeignKey('stores.id'))
+    start_day = Column(String(5))
+    end_day = Column(String(5))
+    open = Column(String(5))
+    close = Column(String(5))
+    summer_hours = Column(Boolean)
 
     store = relationship(Store, backref='hours')
 
@@ -119,5 +119,5 @@ class StoreInventory(Base):
         Session().add(self)
 
     def __repr__(self):
-       return "<StoreInventory(%s,  '%s')>" % (self.id, self.name)
+       return "<StoreInventory(%s, %s %s)>" % (self.spirit_id, self.store_id, self.qty)
 
