@@ -2,7 +2,7 @@ import logging
 from google.appengine.ext import db
 from google.appengine.ext import webapp
 
-from model.Model import Catalog, Category
+from models import Category
 import utils.JSONUtils as JSONUtils
 import utils.Utils as Utils
 

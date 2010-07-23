@@ -1,5 +1,5 @@
-application: wsll
-version: 1
+application: liquorlocator
+version: alpha-1
 runtime: python
 api_version: 1
 

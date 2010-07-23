@@ -2,7 +2,7 @@ import logging
 from google.appengine.ext import db
 from google.appengine.ext import webapp
 
-from model.Model import Catalog, Spirit, Category
+from models import Spirit
 import utils.JSONUtils as JSONUtils
 import utils.Utils as Utils
 

@@ -4,7 +4,7 @@ import time
 from google.appengine.ext import db
 from google.appengine.ext import webapp
 
-from model.Model import Catalog
+from models import Catalog
 import utils.JSONUtils as JSONUtils
 import utils.Utils as Utils
 
@@ -64,9 +64,17 @@ class CatalogsHandler(webapp.RequestHandler):
 
         q = db.GqlQuery("SELECT * FROM Spirit WHERE cid = :1", id)
         for s in q.run():
+            # Delete the inventory
+            for i in s.inventory:
+                i.delete()
+
             s.delete()
 
         q = db.GqlQuery("SELECT * FROM Category WHERE cid = :1", id)
+        for s in q.run():
+            s.delete()
+
+        q = db.GqlQuery("SELECT * FROM  WHERE cid = :1", id)
         for s in q.run():
             s.delete()
 

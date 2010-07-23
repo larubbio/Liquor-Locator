@@ -2,7 +2,7 @@ import logging
 from google.appengine.ext import db
 from google.appengine.ext import webapp
 
-from model.Model import Catalog, Spirit, Category
+from models import Spirit, Category, StoreInventory
 import utils.JSONUtils as JSONUtils
 import utils.Utils as Utils
 
@@ -55,6 +55,19 @@ class SpiritsHandler(webapp.RequestHandler):
                         on_sale=on_sale,
                         closeout=closeout)
         spirit.put()
+
+        # Create the inventory
+        for i in s['inventory']:
+            store_id = i['store_id']
+            qty = i['quantity']
+
+            store = db.GqlQuery("SELECT * FROM Store where cid = :1 AND store_number = :2", int(cid), store_id).get()
+            
+            StoreInventory(cid=int(cid),
+                           spirit=spirit,
+                           store=store,
+                           quantity=qty).put()
+
 
         # Add this category to the category list if it isn't there already
         key = "%s-%s" % (cid, category)
