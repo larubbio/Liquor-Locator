@@ -4,6 +4,5 @@ images/
 *anjuta*
 *sqlite*
 *.class
-prototype/search/target
-prototype/web/api/target
-prototype/web/ui/target
+output.log
+*\#

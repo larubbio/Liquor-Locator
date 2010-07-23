@@ -89,7 +89,7 @@ class Spirit(Base):
     total_retail_price = Column(Numeric('10,2'))
     class_h_price = Column(Numeric('10,2'))
     merchandising_note = Column(UnicodeText)
-    size = Column(Numeric('5,3'))
+    size = Column(Numeric('6,4'))
     case_price = Column(Numeric('10,2'))
     liter_cost = Column(Numeric('10,2'))
     proof = Column(Integer)
