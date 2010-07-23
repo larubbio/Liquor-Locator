@@ -1,9 +1,0 @@
-application: liquorlocator
-version: alpha-1
-runtime: python
-api_version: 1
-
-handlers:
-- url: /.*
-  script: wsll.py
-
