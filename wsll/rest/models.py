@@ -81,6 +81,8 @@ class Store(models.Model):
     address = models.CharField(max_length=45)
     address2 = models.CharField(max_length=45)
     zip = models.CharField(max_length=45)
+    lat_rad = models.DecimalField(max_digits=15, decimal_places=12)
+    long_rad = models.DecimalField(max_digits=15, decimal_places=12)
     lat = models.DecimalField(max_digits=10, decimal_places=7)
     long = models.DecimalField(max_digits=10, decimal_places=7)
 
@@ -95,6 +97,11 @@ class Store(models.Model):
     def dict(self):
         ret = self.__dict__.copy()
         del ret['_state']
+
+        ret['lat'] = str(self.lat)
+        ret['long'] = str(self.long)
+        del ret['lat_rad']
+        del ret['long_rad']
 
         ret['hours'] = []
         for h in self.hours.all():

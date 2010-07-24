@@ -1,3 +1,4 @@
+import math
 from models import Spirit, Store, StoreInventory, Contact, Hours, Category
 
 from django.template import Context, loader
@@ -57,6 +58,15 @@ def stores(request):
         spirit = get_object_or_404(Spirit, pk=request.GET['brand_code'])
 
         stores = spirit.inventory.all()
+    elif 'lat' in request.GET and 'long' in request.GET and 'dist' in request.GET:
+        # Convert to radians
+        lat = math.pi * float(request.GET['lat']) / 180
+        long = math.pi * float(request.GET['long']) / 180
+
+        # Convert to kilometers
+        dist = 1.609344 * float(request.GET['dist'])
+       
+        stores = Store.objects.raw('SELECT * FROM stores WHERE acos(sin(%s) * sin(lat_rad) + cos(%s) * cos(lat_rad) * cos(long_rad - (%s))) * 6371 <= %s;' % (lat, lat, long, dist))
     else:
         stores = Store.objects.all()
 

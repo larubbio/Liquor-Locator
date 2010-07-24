@@ -23,6 +23,8 @@ class Store(Base):
     address = Column(String(45))
     address2 = Column(String(45))
     zip = Column(String(45))
+    lat_rad = Column(Numeric('12,11'))
+    long_rad = Column(Numeric('12,11'))
     lat = Column(Numeric('10,7'))
     long = Column(Numeric('10,7'))
     
