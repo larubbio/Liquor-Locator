@@ -3,6 +3,7 @@ import re
 import sys
 import time
 import urllib,urllib2
+import math
 
 from BeautifulSoup import BeautifulSoup
 
@@ -11,6 +12,30 @@ from model import Model
 
 LOG_FILENAME = 'output.log'
 logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
+
+def geocode_store(store, address):
+    params = {'q' : address,
+              'key' : 'ABQIAAAAOtgwyX124IX2Zpe7gGhBsxS3tJNgUZ1nThh1KEATL8UWMaiosxQ7wZ2BhjWP4DLhPcIryslC442YvA',
+              'sensor' : 'true',
+              'output' : 'json',
+              'oe' : 'utf8'}
+
+    ret = loadURL('http://maps.google.com/maps/geo', params)
+    json = simplejson.loads(ret)
+
+    if json['Status']['code'] == 200:
+        s.long = json['Placemark'][0]['Point']['coordinates'][0]
+        s.lat = json['Placemark'][0]['Point']['coordinates'][1]
+        
+        s.long_rad = math.pi*s.long/180.0
+        s.lat_rad = math.pi*s.lat/180.0
+        
+        logging.info("GeoCoding store %d (%s, %s)" % (s.id, s.lat, s.long))
+    else:
+        logging.error("Unexpected status code")
+        logging.error(json)
+
+
 
 def processHours(store, col):
     summer_hours = False
@@ -149,6 +174,9 @@ def processStoreAndSpiritInventory(spirit, row):
     if store is None:
         store = Model.Store(store_number)
 
+        address = '%s %s WA, %s' % (address1, city, zip)
+        geocode_store(store, address)
+        
     store.store_type = store_type
     store.retail_sales = retail
     store.city = city
