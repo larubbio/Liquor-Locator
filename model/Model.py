@@ -8,15 +8,16 @@ Session = scoped_session(sessionmaker(autocommit=False,
                                       autoflush=True))
 
 # association table
-store_contacts = Table('store_contacts', Base.metadata,
-                       Column('store_id', Integer, ForeignKey('stores.id')),
-                       Column('contact_id', Integer, ForeignKey('contacts.id'))
+store_contacts = Table('store_contacts_bak', Base.metadata,
+                       Column('store_id', Integer, ForeignKey('stores_bak.id')),
+                       Column('contact_id', Integer, ForeignKey('contacts_bak.id'))
                        )
 
 class Store(Base):
-    __tablename__ = 'stores'
+    __tablename__ = 'stores_bak'
 
     id = Column(Integer, primary_key=True)
+    name = Column(String(45))
     store_type = Column(String(45))
     retail_sales = Column(Boolean)
     city = Column(String(45))
@@ -39,7 +40,7 @@ class Store(Base):
        return "<Store(%s, '%s')>" % (self.id, self.city)
 
 class StoreContact(Base):
-    __tablename__ = 'contacts'
+    __tablename__ = 'contacts_bak'
 
     id = Column(Integer, primary_key=True)
     role = Column(String(45))
@@ -56,10 +57,10 @@ class StoreContact(Base):
        return "<Contact(%s, '%s')>" % (self.id, self.name)
 
 class StoreHours(Base):
-    __tablename__ = 'hours'
+    __tablename__ = 'hours_bak'
 
     id = Column(Integer, primary_key=True)
-    store_id = Column(Integer, ForeignKey('stores.id'))
+    store_id = Column(Integer, ForeignKey('stores_bak.id'))
     start_day = Column(String(5))
     end_day = Column(String(5))
     open = Column(String(5))
@@ -81,7 +82,7 @@ class StoreHours(Base):
        return "<Hours('%s - %s %s - %s')>" % (self.start_day, self.end_day, self.open, self.close)
 
 class Spirit(Base):
-    __tablename__ = 'spirits'
+    __tablename__ = 'spirits_bak'
 
     id = Column(String(10), primary_key=True)
     category = Column(String(50))
@@ -106,12 +107,12 @@ class Spirit(Base):
        return "<Item(%s, '%s')>" % (self.id, self.brand_name)
 
 class StoreInventory(Base):
-    __tablename__ = 'store_inventory'
+    __tablename__ = 'store_inventory_bak'
 
     id = Column(Integer, primary_key=True)
     qty = Column(Integer)
-    store_id = Column(Integer, ForeignKey('stores.id'))
-    spirit_id = Column(String(10), ForeignKey('spirits.id'))
+    store_id = Column(Integer, ForeignKey('stores_bak.id'))
+    spirit_id = Column(String(10), ForeignKey('spirits_bak.id'))
 
 
     store = relationship(Store, backref='inventory')
