@@ -304,8 +304,12 @@ def loadURL(url, params=None):
                 response = urllib2.urlopen(url)
 
             html = response.read()
-        except IOError as (errno, strerror):
-            logging.debug("I/O error(%s): %s (%s)" % (errno, strerror, retry_time))
+        except IOError as e:
+            logging.error("I/O error: %s (%s)" % (e, retry_time))
+            time.sleep(retry_time)
+            retry_time = retry_time * 2
+        except ValueError as e:
+            logging.error("ValueError: %s (%s)" % (e, retry_time))
             time.sleep(retry_time)
             retry_time = retry_time * 2
 
