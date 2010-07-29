@@ -75,6 +75,7 @@ class Contact(models.Model):
 class Store(models.Model):
     id = models.IntegerField(primary_key=True)
 
+    name = models.CharField(max_length=45)
     store_type = models.CharField(max_length=45)
     retail_sales = models.BooleanField()
     city = models.CharField(max_length=45)
@@ -100,8 +101,8 @@ class Store(models.Model):
 
         ret['lat'] = str(self.lat)
         ret['long'] = str(self.long)
-        del ret['lat_rad']
-        del ret['long_rad']
+        ret['lat_rad'] = str(self.lat_rad)
+        ret['long_rad'] = str(self.long_rad)
 
         ret['hours'] = []
         for h in self.hours.all():
