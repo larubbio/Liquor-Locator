@@ -1,5 +1,6 @@
 import logging
 import re
+import simplejson
 import sys
 import time
 import urllib,urllib2
@@ -20,17 +21,22 @@ def geocode_store(store, address):
               'output' : 'json',
               'oe' : 'utf8'}
 
-    ret = loadURL('http://maps.google.com/maps/geo', params)
+    data = urllib.urlencode(params) 
+    ret = loadURL('http://maps.google.com/maps/geo?%s' % data)
     json = simplejson.loads(ret)
 
     if json['Status']['code'] == 200:
-        s.long = json['Placemark'][0]['Point']['coordinates'][0]
-        s.lat = json['Placemark'][0]['Point']['coordinates'][1]
+        store.long = json['Placemark'][0]['Point']['coordinates'][0]
+        store.lat = json['Placemark'][0]['Point']['coordinates'][1]
         
-        s.long_rad = math.pi*s.long/180.0
-        s.lat_rad = math.pi*s.lat/180.0
-        
-        logging.info("GeoCoding store %d (%s, %s)" % (s.id, s.lat, s.long))
+        store.long_rad = math.pi*store.long/180.0
+        store.lat_rad = math.pi*store.lat/180.0
+
+        logging.info("GeoCoding store %s (%s, %s) (%s, %s)" % (store.id, 
+                                                               store.lat, 
+                                                               store.long,
+                                                               store.lat_rad,
+                                                               store.long_rad))
     else:
         logging.error("Unexpected status code")
         logging.error(json)
@@ -81,7 +87,7 @@ def processHours(store, col):
                                          end_hour,
                                          summer_hours)
 
-            store.hours.append(hours)
+                store.hours.append(hours)
             
         # Sun hours look to always be noon to 5pm
         elif l.find('Sun') >= 0:
@@ -107,7 +113,7 @@ def processHours(store, col):
                                          end_hour,
                                          summer_hours)
 
-            store.hours.append(hours)
+                store.hours.append(hours)
 
 def processContact(store, col):
     role = None
@@ -134,7 +140,7 @@ def processContact(store, col):
             if contact is None:
                 contact = Model.StoreContact(role, name, number)
 
-            store.contacts.append(contact)
+                store.contacts.append(contact)
 
             role = None
 
@@ -151,10 +157,12 @@ def processStoreAndSpiritInventory(spirit, row):
     store_number = cols[0].contents[4]
 
     # City
-    city = cols[0].decodeContents()[:cols[0].decodeContents().find(' <br')]
+#    city = cols[0].decodeContents()[:cols[0].decodeContents().find(' <br')]
+    city = cols[0].contents[0]
 
     # Name
-    city = cols[1].contents[0]
+#    name = cols[1].decodeContents()[:cols[1].decodeContents().find(' <br')]
+    name = cols[1].contents[0]
 
     # Address
     address1 = cols[1].contents[2]
@@ -176,19 +184,20 @@ def processStoreAndSpiritInventory(spirit, row):
 
         address = '%s %s WA, %s' % (address1, city, zip)
         geocode_store(store, address)
-        
-    store.store_type = store_type
-    store.retail_sales = retail
-    store.city = city
-    store.address = address1
-    store.address2 = address2
-    store.zip = zip
 
-    # Hours
-    processHours(store, cols[2])
+        store.name = name.strip()
+        store.store_type = store_type
+        store.retail_sales = retail
+        store.city = city.strip()
+        store.address = address1
+        store.address2 = address2
+        store.zip = zip
 
-    # Contact
-    processContact(store, cols[3])
+        # Hours
+        processHours(store, cols[2])
+
+        # Contact
+        processContact(store, cols[3])
 
     # Quantity in Stock
     qty = cols[4].find('font').decodeContents()
@@ -269,13 +278,15 @@ def processSpirit(category, row):
     params = {'CityName' : '', 'CountyName' : '', 'StoreNo' : '', 'brandcode' : brand_code}
     html = loadURL(STORE_SEARCH_URL, params)
 
-    page = BeautifulSoup(html)
+    if html.find('No Products Found') is -1:
 
-    table = page.findAll('table')[3]
-    rows = table.findAll('tr')[1:]
+        page = BeautifulSoup(html)
 
-    for row in rows:
-        processStoreAndSpiritInventory(spirit, row)   
+        table = page.findAll('table')[3]
+        rows = table.findAll('tr')[1:]
+
+        for row in rows:
+            processStoreAndSpiritInventory(spirit, row)   
 
 def loadURL(url, params=None):
     logging.info("Loading %s (%s)" % (url, params))
@@ -304,13 +315,21 @@ BRAND_SEARCH_URL = 'http://liq.wa.gov/services/brandpicklist.asp'
 BRAND_CATEGORIES_URL = 'http://liq.wa.gov/services/brandsearch.asp'
 STORE_SEARCH_URL = 'http://liq.wa.gov/services/find_store.asp'
 
-engine = create_engine('mysql://wsll:wsll@localhost/wsll2', echo=False)
+engine = create_engine('mysql://wsll:wsll@localhost/wsll', echo=False)
 
 Model.Session.configure(bind=engine)
 session = Model.Session()
 
 metadata = Model.Base.metadata
 metadata.create_all(engine) 
+
+# Truncate backup tables
+session.execute("TRUNCATE TABLE contacts_bak")
+session.execute("TRUNCATE TABLE hours_bak")
+session.execute("TRUNCATE TABLE spirits_bak")
+session.execute("TRUNCATE TABLE store_contacts_bak")
+session.execute("TRUNCATE TABLE store_inventory_bak")
+session.execute("TRUNCATE TABLE stores_bak")
 
 # To make sure you're seeing all debug output:
 logger = logging.getLogger()
@@ -324,26 +343,56 @@ categories = [c.decodeContents() for c in page.findAll('form')[0].findAll('optio
 # Remove the first category which is just UI information
 categories = categories[1:]
 
-categories = ['COCKTAILS', 'WINE - IMPORTED - MISC', 'APERITIF', 'VODKA']
-for c in categories:
-    print c
+#categories = ['WINE - RED TABLE',]
+try:
+    for c in categories:
+        print c
 
-    params = {'BrandName' : '', 'CatBrand' : c, 'submit1' : 'Find Product' }
-    html = loadURL(BRAND_SEARCH_URL, params)
+        params = {'BrandName' : '', 'CatBrand' : c, 'submit1' : 'Find Product' }
+        html = loadURL(BRAND_SEARCH_URL, params)
 
-    # Only record the spirit if it is in stock
-    if html.find('out of stock') is -1:
-        # Parse the page 
-        page = BeautifulSoup(html)
+        # Only record the spirit if it is in stock
+        if html.find('out of stock') is -1:
+            # Parse the page 
+            page = BeautifulSoup(html)
 
-        # Loop over each row storing spirit information
-        table = page('table')[4]
-        rows = table.findAll('tr')[1:]
+            # Loop over each row storing spirit information
+            table = page('table')[4]
+            rows = table.findAll('tr')[1:]
 
-        for row in rows:
-            processSpirit(c, row)
-            print ".",
+            for row in rows:
+                processSpirit(c, row)
+                print ".",
 
-        print
+            print
+except:
+    import pdb, sys
+    e, m, tb = sys.exc_info()
+    pdb.post_mortem(tb)
+
+
+# Swap live tables with backups
+session.execute('''RENAME TABLE 
+  contacts TO contacts_tmp,
+  hours TO hours_tmp,
+  spirits TO spirits_tmp,
+  store_contacts TO store_contacts_tmp,
+  store_inventory TO store_inventory_tmp,
+  stores TO stores_tmp,
+
+  contacts_bak TO contacts,
+  hours_bak TO hours,
+  spirits_bak TO spirits,
+  store_contacts_bak TO store_contacts,
+  store_inventory_bak TO store_inventory,
+  stores_bak TO stores,
+
+  contacts_tmp TO contacts_bak,
+  hours_tmp TO hours_bak,
+  spirits_tmp TO spirits_bak,
+  store_contacts_tmp TO store_contacts_bak,
+  store_inventory_tmp TO store_inventory_bak,
+  stores_tmp TO stores_bak
+''')
 
 session.commit()
