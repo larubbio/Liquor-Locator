@@ -1,14 +1,5 @@
-images/
-*.pyc
-*~
-*anjuta*
-*sqlite*
-*.class
-output.log
-*\#
-
 # xcode noise
-build/*
+LiquorLocator/build/*
 *.pbxuser
 *.mode1v3
 
@@ -18,3 +9,13 @@ build/*
 # osx noise
 .DS_Store
 profile
+
+images/
+*.pyc
+*~
+*anjuta*
+*sqlite*
+*.class
+output.log
+*\#
+
