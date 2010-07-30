@@ -7,7 +7,7 @@
 //
 
 #import "CategoriesViewController.h"
-#import "Category.h"
+#import "JSON.h"
 // This framework was imported so we could use the kCFURLErrorNotConnectedToInternet error code.
 #import <CFNetwork/CFNetwork.h>
 
@@ -16,6 +16,8 @@
 @synthesize categoryList;
 @synthesize categoryJSONConnection;
 @synthesize categoryData;
+
+@synthesize table;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -70,7 +72,31 @@
     [super dealloc];
 }
 
-#pragma mark NSURLConnection delegate methods
+#pragma mark -
+#pragma mark Table View Data Source Methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.categoryList count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CategoryTableIdentifier = @"CategoryTableIdentifier";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CategoryTableIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CategoryTableIdentifier] autorelease];
+    }
+    
+    NSUInteger row = [indexPath row];
+    cell.text = [categoryList objectAtIndex:row];
+    
+    return cell;
+}
+
+#pragma mark -
+#pragma mark NSURLConnection Delegate Methods
 
 // The following are delegate methods for NSURLConnection. Similar to callback functions, this is how the connection object,
 // which is working in the background, can asynchronously communicate back to its delegate on the thread from which it was
@@ -108,30 +134,29 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     self.categoryJSONConnection = nil;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;   
-    // Spawn a thread to fetch the earthquake data so that the UI is not blocked while the application parses the XML data.
-    //
-    // IMPORTANT! - Don't access UIKit objects on secondary threads.
-    //
-//    [NSThread detachNewThreadSelector:@selector(parseEarthquakeData:) toTarget:self withObject:earthquakeData];
-	// determine the proper encoding based on the HTTP response, if available
-	// (otherwise, assume UTF-8 encoding.)
-	NSString *textEncodingName = [response textEncodingName];
-	NSStringEncoding likelyEncoding = NSUTF8StringEncoding;
-	if (textEncodingName != nil)
-	{
-		CFStringRef cfsr_textEncodingName = (CFStringRef) textEncodingName;
-		CFStringEncoding cf_encoding = CFStringConvertIANACharSetNameToEncoding(cfsr_textEncodingName);
-		likelyEncoding = CFStringConvertEncodingToNSStringEncoding(cf_encoding);
-	}
-	
+
 	// grab the JSON data as a string
-	NSString *jsonString = [[NSString alloc] initWithData:categoryData encoding:likelyEncoding];
+	NSString *jsonString = [[NSString alloc] initWithData:categoryData encoding:NSUTF8StringEncoding];
+	NSAssert(jsonString != nil, @"TODO larubbio: handle no data!");
     NSLog(jsonString);
     
-    // earthquakeData will be retained by the thread until parseEarthquakeData: has finished executing, so we no longer need
+    // Create new SBJSON parser object
+    SBJSON *parser = [[SBJSON alloc] init];
+
+    // parse the JSON response into an object
+    // Here we're using NSArray since we're parsing an array of JSON category objects
+    self.categoryList = [parser objectWithString:jsonString error:nil];
+    
+    // categoryData will be retained by the thread until parsecategoryData: has finished executing, so we no longer need
     // a reference to it in the main thread.
     self.categoryData = nil;
+
+    [table reloadData];
+
+    [parser release];
+    [jsonString release];
 }
+
 
 // Handle errors in the download or the parser by showing an alert to the user. This is a very simple way of handling the error,
 // partly because this application does not have any offline functionality for the user. Most real applications should
