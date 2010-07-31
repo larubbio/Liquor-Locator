@@ -10,11 +10,12 @@
 
 @interface LiquorLocatorAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
-    IBOutlet UITabBarController *rootController;
+  
+    IBOutlet UINavigationController *navController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) UITabBarController *rootController;
+@property (nonatomic, retain) IBOutlet UINavigationController *navController;
 
 @end
 

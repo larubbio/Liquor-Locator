@@ -1,45 +1,50 @@
 //
-//  CategoriesViewController.m
+//  SpiritListViewController.m
 //  LiquorLocator
 //
-//  Created by Rob LaRubbio on 7/29/10.
+//  Created by Rob LaRubbio on 7/30/10.
 //  Copyright 2010 Pug Dog Dev LLC. All rights reserved.
 //
 
-#import "CategoriesViewController.h"
 #import "SpiritListViewController.h"
-#import "LiquorLocatorAppDelegate.h"
 
 #import "JSON.h"
 // This framework was imported so we could use the kCFURLErrorNotConnectedToInternet error code.
 #import <CFNetwork/CFNetwork.h>
 
-@implementation CategoriesViewController
+@implementation SpiritListViewController
 
-@synthesize categoryList;
-@synthesize categoryJSONConnection;
-@synthesize categoryData;
+@synthesize category;
+
+@synthesize spiritList;
+@synthesize spiritJSONConnection;
+@synthesize spiritData;
 
 @synthesize table;
 
+
 - (void)viewDidAppear:(BOOL)animated {
 	// Initialize the array of earthquakes and pass a reference to that list to the Root view controller.
-    self.categoryList = [NSMutableArray array];
-
+    self.spiritList = [NSMutableArray array];
+    
     // Use NSURLConnection to asynchronously download the data. This means the main thread will not be blocked - the
     // application will remain responsive to the user. 
     //
     // IMPORTANT! The main thread of the application should never be blocked! Also, avoid synchronous network access on any thread.
     //
-    static NSString *feedURLString = @"http://wsll.pugdogdev.com/categories";
-    NSURLRequest *categoryURLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:feedURLString]];
-    self.categoryJSONConnection = [[[NSURLConnection alloc] initWithRequest:categoryURLRequest delegate:self] autorelease];
+    static NSString *feedURLString = @"http://wsll.pugdogdev.com/spirits?";
+    NSString *query = [NSString stringWithFormat:@"category=%@", category];
+    query = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *spiritsFeedURLString = [feedURLString stringByAppendingString:query];
+    
+    NSURLRequest *spiritURLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:spiritsFeedURLString]];
+    self.spiritJSONConnection = [[[NSURLConnection alloc] initWithRequest:spiritURLRequest delegate:self] autorelease];
     
     // Test the validity of the connection object. The most likely reason for the connection object to be nil is a malformed
     // URL, which is a programmatic error easily detected during development. If the URL is more dynamic, then you should
     // implement a more flexible validation technique, and be able to both recover from errors and communicate problems
     // to the user in an unobtrusive manner.
-    NSAssert(self.categoryJSONConnection != nil, @"Failure to create URL connection.");
+    NSAssert(self.spiritJSONConnection != nil, @"Failure to create URL connection.");
     
     // Start the status bar network activity indicator. We'll turn it off when the connection finishes or experiences an error.
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -53,47 +58,39 @@
 }
 
 - (void)dealloc {
-    [categoryData release];
-    [categoryJSONConnection release];
+    [category release];
+    [spiritData release];
+    [spiritJSONConnection release];
     [response release];	
-    [categoryList release];
+    [spiritList release];    
     [super dealloc];
 }
 
 #pragma mark -
 #pragma mark Table View Data Source Methods
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.categoryList count];
+    return [self.spiritList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CategoryTableIdentifier = @"CategoryTableIdentifier";
+    static NSString *SpiritTableIdentifier = @"SpiritTableIdentifier";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CategoryTableIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SpiritTableIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CategoryTableIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SpiritTableIdentifier] autorelease];
     }
     
     NSUInteger row = [indexPath row];
-    cell.text = [categoryList objectAtIndex:row];
+    NSDictionary *spirit = [spiritList objectAtIndex:row]; 
+    cell.text = [spirit objectForKey:@"brand_name"];
     
     return cell;
-}
-
-#pragma mark -
-#pragma mark Table View Delegate Methods
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSUInteger row = [indexPath row];
-    
-    SpiritListViewController *spiritListController = [[SpiritListViewController alloc] initWithNibName:@"SpiritListView" bundle:nil];
-    spiritListController.category = [categoryList objectAtIndex:row];
-    
-    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    [delegate.navController pushViewController:spiritListController animated:YES];
 }
 
 #pragma mark -
@@ -110,11 +107,11 @@
 		[response release];
 	}
 	response = [theResponse retain];
-    self.categoryData = [NSMutableData data];
+    self.spiritData = [NSMutableData data];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [categoryData appendData:data];
+    [spiritData appendData:data];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -128,35 +125,34 @@
         // otherwise handle the error generically
         [self handleError:error];
     }
-    self.categoryJSONConnection = nil;
+    self.spiritJSONConnection = nil;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    self.categoryJSONConnection = nil;
+    self.spiritJSONConnection = nil;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;   
-
+    
 	// grab the JSON data as a string
-	NSString *jsonString = [[NSString alloc] initWithData:categoryData encoding:NSUTF8StringEncoding];
+	NSString *jsonString = [[NSString alloc] initWithData:spiritData encoding:NSUTF8StringEncoding];
 	NSAssert(jsonString != nil, @"TODO larubbio: handle no data!");
     NSLog(jsonString);
     
     // Create new SBJSON parser object
     SBJSON *parser = [[SBJSON alloc] init];
-
+    
     // parse the JSON response into an object
     // Here we're using NSArray since we're parsing an array of JSON category objects
-    self.categoryList = [parser objectWithString:jsonString error:nil];
+    self.spiritList = [parser objectWithString:jsonString error:nil];
     
     // categoryData will be retained by the thread until parsecategoryData: has finished executing, so we no longer need
     // a reference to it in the main thread.
-    self.categoryData = nil;
-
+    self.spiritData = nil;
+    
     [table reloadData];
-
+    
     [parser release];
     [jsonString release];
 }
-
 
 // Handle errors in the download or the parser by showing an alert to the user. This is a very simple way of handling the error,
 // partly because this application does not have any offline functionality for the user. Most real applications should
@@ -167,4 +163,6 @@
     [alertView show];
     [alertView release];
 }
+
 @end
+

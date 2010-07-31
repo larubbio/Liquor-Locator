@@ -7,22 +7,24 @@
 //
 
 #import "LiquorLocatorAppDelegate.h"
+#import "RootViewController.h"
 
 @implementation LiquorLocatorAppDelegate
 
 @synthesize window;
-@synthesize rootController;
+@synthesize navController;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
 
     // Override point for customization after application launch
-    [window addSubview:rootController.view];
-    [window makeKeyAndVisible];
+    
+    [window addSubview:navController.view];
+    [window makeKeyAndVisible];    
 }
 
 
 - (void)dealloc {
-    [rootController release];
+    [navController release];
     [window release];
     [super dealloc];
 }
