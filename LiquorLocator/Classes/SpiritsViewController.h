@@ -10,11 +10,13 @@
 #import "JSONLoaderController.h"
 
 @interface SpiritsViewController : JSONLoaderController 
-    <UITableViewDelegate, UITableViewDataSource> {
+    <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate> {
 
+    NSArray *allSpirits;
     IBOutlet UISearchBar *search;
 }
 
+@property (nonatomic, retain) NSArray *allSpirits;
 @property (nonatomic, retain) UISearchBar *search;
 
 - (void)resetSearch;

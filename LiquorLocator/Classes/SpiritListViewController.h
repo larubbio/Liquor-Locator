@@ -12,12 +12,12 @@
 @interface SpiritListViewController : JSONLoaderController <UITableViewDelegate, UITableViewDataSource> {
     
     NSString *category;
+    NSString *brandName;
     
     // Store
 }
 
 @property (nonatomic, retain) NSString *category;
-
-- (void)setCategory:(NSString *)category;
+@property (nonatomic, retain) NSString *brandName;
 
 @end

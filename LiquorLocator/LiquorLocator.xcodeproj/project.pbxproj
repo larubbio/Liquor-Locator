@@ -23,6 +23,8 @@
 		4628BF15120284BD00ECE4BE /* CampaignView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF13120284BD00ECE4BE /* CampaignView.xib */; };
 		4628BF2912028A0200ECE4BE /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 4628BF2812028A0200ECE4BE /* Category.m */; };
 		4651F1121205099800A2079B /* JSONLoaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4651F1111205099800A2079B /* JSONLoaderController.m */; };
+		4651F3061205D30400A2079B /* SpiritDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4651F3051205D30400A2079B /* SpiritDetailViewController.m */; };
+		4651F3081205D34900A2079B /* SpiritDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4651F3071205D34900A2079B /* SpiritDetailView.xib */; };
 		46E647EA12034DAB00AB9328 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E647DF12034DAB00AB9328 /* NSObject+SBJSON.m */; };
 		46E647EB12034DAB00AB9328 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E647E112034DAB00AB9328 /* NSString+SBJSON.m */; };
 		46E647EC12034DAB00AB9328 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E647E312034DAB00AB9328 /* SBJSON.m */; };
@@ -61,6 +63,9 @@
 		4628BF2812028A0200ECE4BE /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
 		4651F1101205099800A2079B /* JSONLoaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONLoaderController.h; sourceTree = "<group>"; };
 		4651F1111205099800A2079B /* JSONLoaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONLoaderController.m; sourceTree = "<group>"; };
+		4651F3041205D30400A2079B /* SpiritDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpiritDetailViewController.h; sourceTree = "<group>"; };
+		4651F3051205D30400A2079B /* SpiritDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpiritDetailViewController.m; sourceTree = "<group>"; };
+		4651F3071205D34900A2079B /* SpiritDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpiritDetailView.xib; sourceTree = "<group>"; };
 		46E647DD12034DAB00AB9328 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		46E647DE12034DAB00AB9328 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		46E647DF12034DAB00AB9328 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -149,6 +154,7 @@
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* LiquorLocator-Info.plist */,
 				46E64864120374B700AB9328 /* RootView.xib */,
+				4651F3071205D34900A2079B /* SpiritDetailView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -180,6 +186,8 @@
 				46E649DE1203D11A00AB9328 /* SpiritListViewController.m */,
 				4651F1101205099800A2079B /* JSONLoaderController.h */,
 				4651F1111205099800A2079B /* JSONLoaderController.m */,
+				4651F3041205D30400A2079B /* SpiritDetailViewController.h */,
+				4651F3051205D30400A2079B /* SpiritDetailViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -262,6 +270,7 @@
 				4628BF15120284BD00ECE4BE /* CampaignView.xib in Resources */,
 				46E64865120374B700AB9328 /* RootView.xib in Resources */,
 				46E649E11203D11A00AB9328 /* SpiritListView.xib in Resources */,
+				4651F3081205D34900A2079B /* SpiritDetailView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +297,7 @@
 				46E64862120362C100AB9328 /* RootViewController.m in Sources */,
 				46E649E01203D11A00AB9328 /* SpiritListViewController.m in Sources */,
 				4651F1121205099800A2079B /* JSONLoaderController.m in Sources */,
+				4651F3061205D30400A2079B /* SpiritDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

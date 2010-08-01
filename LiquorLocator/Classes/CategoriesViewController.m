@@ -8,6 +8,8 @@
 
 #import "CategoriesViewController.h"
 #import "SpiritListViewController.h"
+#import "SpiritDetailViewController.h"
+
 #import "LiquorLocatorAppDelegate.h"
 
 @implementation CategoriesViewController

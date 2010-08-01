@@ -12,10 +12,16 @@
 @implementation SpiritListViewController
 
 @synthesize category;
+@synthesize brandName;
 
 - (void)viewDidAppear:(BOOL)animated {
-    NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?category=%@", category];
-    self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    if (self.category != nil) {
+        NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?category=%@", category];
+        self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    } else {
+        NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?name=%@", brandName];
+        self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }
     
     [super viewDidAppear:animated];
 }
