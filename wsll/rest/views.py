@@ -1,6 +1,7 @@
 import math
 from models import Spirit, Store, StoreInventory, Contact, Hours, Category
 
+from django.db import connection
 from django.template import Context, loader
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
@@ -17,14 +18,30 @@ def spirits(request):
     elif 'category' in request.GET:
         spirits = get_list_or_404(Spirit, category=request.GET['category'])
     else:
-        spirits = Spirit.objects.all()
+        cursor = connection.cursor()
+
+        cursor.execute("select brand_name, count(*), id from spirits group by brand_name order by brand_name")
+        
+        data = []
+        rows = cursor.fetchall()
+        for row in rows:
+            info = {'brand_name': row[0], 'count': row[1]}
+            if row[1] == 1:
+                info['id'] = row[2]
+
+            data.append(info)
+
+        mimetype = 'application/json'
+        return HttpResponse(simplejson.dumps(data),mimetype)
 
 
     data = []
     for s in spirits:
         sd = s.dict()
-        data.append({'brand_name':sd['brand_name'], 
-                     'id':sd['id']})
+        data.append({'brand_name': sd['brand_name'], 
+                     'id': sd['id'],
+                     'size': sd['size'],
+                     'total_retail_price': sd['total_retail_price']})
 
     mimetype = 'application/json'
     return HttpResponse(simplejson.dumps(data),mimetype)
