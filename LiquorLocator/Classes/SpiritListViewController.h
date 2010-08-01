@@ -7,31 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSONLoaderController.h"
 
-@interface SpiritListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface SpiritListViewController : JSONLoaderController <UITableViewDelegate, UITableViewDataSource> {
     
     NSString *category;
     
     // Store
-	NSArray *spiritList;
-    
-    // for downloading the xml data
-    NSURLConnection *spiritJSONConnection;
-    NSURLResponse *response;
-    NSMutableData *spiritData;
-    
-    IBOutlet UITableView *table;
 }
 
 @property (nonatomic, retain) NSString *category;
 
-@property (nonatomic, retain) NSArray *spiritList;
-@property (nonatomic, retain) NSURLConnection *spiritJSONConnection;
-@property (nonatomic, retain) NSMutableData *spiritData;
-
-@property (nonatomic, retain) UITableView *table;
-
-- (void)handleError:(NSError *)error;
 - (void)setCategory:(NSString *)category;
 
 @end

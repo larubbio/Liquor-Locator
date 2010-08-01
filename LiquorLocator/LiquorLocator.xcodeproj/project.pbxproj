@@ -22,6 +22,7 @@
 		4628BF14120284BD00ECE4BE /* CampaignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4628BF12120284BD00ECE4BE /* CampaignViewController.m */; };
 		4628BF15120284BD00ECE4BE /* CampaignView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF13120284BD00ECE4BE /* CampaignView.xib */; };
 		4628BF2912028A0200ECE4BE /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 4628BF2812028A0200ECE4BE /* Category.m */; };
+		4651F1121205099800A2079B /* JSONLoaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4651F1111205099800A2079B /* JSONLoaderController.m */; };
 		46E647EA12034DAB00AB9328 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E647DF12034DAB00AB9328 /* NSObject+SBJSON.m */; };
 		46E647EB12034DAB00AB9328 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E647E112034DAB00AB9328 /* NSString+SBJSON.m */; };
 		46E647EC12034DAB00AB9328 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E647E312034DAB00AB9328 /* SBJSON.m */; };
@@ -58,6 +59,8 @@
 		4628BF13120284BD00ECE4BE /* CampaignView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CampaignView.xib; path = Classes/CampaignView.xib; sourceTree = "<group>"; };
 		4628BF2712028A0200ECE4BE /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
 		4628BF2812028A0200ECE4BE /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
+		4651F1101205099800A2079B /* JSONLoaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONLoaderController.h; sourceTree = "<group>"; };
+		4651F1111205099800A2079B /* JSONLoaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONLoaderController.m; sourceTree = "<group>"; };
 		46E647DD12034DAB00AB9328 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		46E647DE12034DAB00AB9328 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		46E647DF12034DAB00AB9328 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -175,6 +178,8 @@
 				46E64861120362C100AB9328 /* RootViewController.m */,
 				46E649DD1203D11A00AB9328 /* SpiritListViewController.h */,
 				46E649DE1203D11A00AB9328 /* SpiritListViewController.m */,
+				4651F1101205099800A2079B /* JSONLoaderController.h */,
+				4651F1111205099800A2079B /* JSONLoaderController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 				46E647EF12034DAB00AB9328 /* SBJsonWriter.m in Sources */,
 				46E64862120362C100AB9328 /* RootViewController.m in Sources */,
 				46E649E01203D11A00AB9328 /* SpiritListViewController.m in Sources */,
+				4651F1121205099800A2079B /* JSONLoaderController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

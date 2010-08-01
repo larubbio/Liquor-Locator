@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSONLoaderController.h"
 
+@interface SpiritsViewController : JSONLoaderController 
+    <UITableViewDelegate, UITableViewDataSource> {
 
-@interface SpiritsViewController : UIViewController {
-
+    IBOutlet UISearchBar *search;
 }
 
+@property (nonatomic, retain) UISearchBar *search;
+
+- (void)resetSearch;
+- (void)handleSearchForTerm:(NSString *)searchTerm;
 @end

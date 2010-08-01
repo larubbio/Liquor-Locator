@@ -27,6 +27,4 @@
 @property (nonatomic, retain) IBOutlet UITabBarItem *campaignTabBarItem;
 @property (nonatomic, retain) UIViewController *selectedViewController;
 
-- (void)foo;
-
 @end

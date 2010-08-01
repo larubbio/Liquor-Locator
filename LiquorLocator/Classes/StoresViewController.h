@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSONLoaderController.h"
 
-
-@interface StoresViewController : UIViewController {
+@interface StoresViewController : JSONLoaderController
+    <UITableViewDataSource, UITableViewDelegate> {
 
 }
 
