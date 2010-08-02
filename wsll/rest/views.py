@@ -14,7 +14,9 @@ def spirits(request):
     if 'id' in request.GET:
         spirits = get_list_or_404(Spirit, pk=request.GET['id'])
     elif 'name' in request.GET:
-        spirits = Spirit.objects.all().filter(brand_name__icontains=request.GET['name'])
+        spirits = get_list_or_404(Spirit, brand_name=request.GET['name'])
+    elif 'search' in request.GET:
+        spirits = Spirit.objects.all().filter(brand_name__icontains=request.GET['search'])
     elif 'category' in request.GET:
         spirits = get_list_or_404(Spirit, category=request.GET['category'])
     else:
