@@ -1,19 +1,22 @@
 //
-//  StoresViewController.m
+//  StoreListViewController.m
 //  LiquorLocator
 //
-//  Created by Rob LaRubbio on 7/29/10.
+//  Created by Rob LaRubbio on 8/3/10.
 //  Copyright 2010 Pug Dog Dev LLC. All rights reserved.
 //
 
-#import "StoresViewController.h"
+#import "StoreListViewController.h"
 #import "StoreDetailViewController.h"
 #import "LiquorLocatorAppDelegate.h"
 
-@implementation StoresViewController
+@implementation StoreListViewController
+
+@synthesize spiritId;
 
 - (void)viewDidAppear:(BOOL)animated {
-    self.feedURLString = @"http://wsll.pugdogdev.com/stores";
+    NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirit/%@/stores", spiritId];
+    self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     [super viewDidAppear:animated];
 }
@@ -26,6 +29,7 @@
 }
 
 - (void)dealloc {
+    [spiritId release];
     [super dealloc];
 }
 
@@ -46,7 +50,8 @@
     }
     
     NSUInteger row = [indexPath row];
-    NSDictionary *store = [objectList objectAtIndex:row]; 
+    NSDictionary *storeInv = [objectList objectAtIndex:row]; 
+    NSDictionary *store = [storeInv objectForKey:@"store"];
     cell.textLabel.text = [store objectForKey:@"name"];
     
     return cell;
@@ -57,7 +62,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger row = [indexPath row];
-    NSDictionary *store = [objectList objectAtIndex:row];   
+    NSDictionary *storeInv = [objectList objectAtIndex:row]; 
+    NSDictionary *store = [storeInv objectForKey:@"store"];
     
     StoreDetailViewController *storeDetailViewController = [[StoreDetailViewController alloc] initWithNibName:@"StoreDetailView" bundle:nil];
     storeDetailViewController.storeId = [((NSString *)[store objectForKey:@"id"]) intValue];

@@ -7,40 +7,26 @@
 //
 
 #import "SpiritDetailViewController.h"
-
+#import "StoreListViewController.h"
+#import "LiquorLocatorAppDelegate.h"
 
 @implementation SpiritDetailViewController
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
+@synthesize spiritId;
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
+@synthesize priceBtn;
+@synthesize sizeBtn;
+@synthesize viewStoresBtn;
 
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"View will appear");
 }
-*/
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (void)viewDidAppear:(BOOL)animated {
+    self.feedURLString = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirit/%@", spiritId];
+    
+    [super viewDidAppear:animated];
 }
-*/
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
@@ -54,10 +40,38 @@
 	// e.g. self.myOutlet = nil;
 }
 
-
 - (void)dealloc {
+    [spiritId release];
+    [priceBtn release];
+    [sizeBtn release];
+    [viewStoresBtn release];
     [super dealloc];
 }
 
+- (void)viewStores:(id)sender {
+    StoreListViewController *controller = [[StoreListViewController alloc] initWithNibName:@"StoresView" bundle:nil];   
+    ((StoreListViewController *)controller).spiritId = spiritId;
+    
+    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate.navController pushViewController:controller animated:YES];
+    
+    [controller release];
+}
+
+#pragma mark -
+#pragma mark NSURLConnection Delegate Methods
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    [super connectionDidFinishLoading:connection];
+    
+    NSString *priceTitle = [NSString stringWithFormat:@"Cost: $%@", [objectList objectForKey:@"price"]];
+    NSString *sizeTitle = [NSString stringWithFormat:@"Size: %@ Liters", [objectList objectForKey:@"size"]];
+    
+    [priceBtn setTitle:priceTitle forState:UIControlStateNormal];
+    priceBtn.hidden = NO;
+    [sizeBtn setTitle:sizeTitle forState:UIControlStateNormal];
+    sizeBtn.hidden = NO;
+    
+    viewStoresBtn.hidden = NO;
+}
 
 @end

@@ -113,10 +113,10 @@
     id controller;
     NSUInteger row = [indexPath row];
     NSDictionary *spirit = [objectList objectAtIndex:row]; 
-    int count = [((NSString *)[spirit valueForKey:@"count"]) intValue];
     
-    if (count == 1) {
-         controller = [[SpiritDetailViewController alloc] initWithNibName:@"SpiritDetailView" bundle:nil];
+    if ([spirit objectForKey:@"id"]) {
+        controller = [[SpiritDetailViewController alloc] initWithNibName:@"SpiritDetailView" bundle:nil];
+        ((SpiritDetailViewController *)controller).spiritId = [spirit objectForKey:@"id"];
     } else {
         controller = [[SpiritListViewController alloc] initWithNibName:@"SpiritListView" bundle:nil];   
         ((SpiritListViewController *)controller).brandName = [spirit objectForKey:@"brand_name"];

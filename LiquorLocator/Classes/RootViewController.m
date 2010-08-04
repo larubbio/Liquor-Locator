@@ -14,6 +14,9 @@
 
 @implementation RootViewController
 
+@synthesize locationManager;
+@synthesize userLocation;
+
 @synthesize viewControllers;
 @synthesize tabBar;
 @synthesize	categoriesTabBarItem;
@@ -23,6 +26,12 @@
 @synthesize selectedViewController;
 
 - (void)viewDidLoad {
+    self.locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.distanceFilter = 10.0f;
+    [locationManager startUpdatingLocation];
+
     self.title = @"Categories";
     
     tabBar.selectedItem = categoriesTabBarItem;	
@@ -65,6 +74,8 @@
 }
 
 - (void)dealloc {
+    [locationManager release];
+    [userLocation release];
     [tabBar release];
     [categoriesTabBarItem release];
     [storesTabBarItem release];
@@ -73,6 +84,16 @@
     [viewControllers release];
     [selectedViewController release];
     [super dealloc];
+}
+
+#pragma mark -
+#pragma mark Core Location Delegate Methods
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    self.userLocation = newLocation;
+    [locationManager stopUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
 }
 
 #pragma mark -

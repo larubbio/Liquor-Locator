@@ -16,7 +16,7 @@
     NSURLResponse *response;
     NSMutableData *jsonData;
     
-    NSMutableArray *objectList;
+    id objectList;
     
     IBOutlet UITableView *table;    
 }
@@ -24,7 +24,7 @@
 @property (nonatomic, retain) NSString *feedURLString;
 @property (nonatomic, retain) NSURLConnection *JSONConnection;
 @property (nonatomic, retain) NSMutableData *jsonData;
-@property (nonatomic, retain) NSMutableArray *objectList;
+@property (nonatomic, retain) id objectList;
 
 @property (nonatomic, retain) UITableView *table;
 

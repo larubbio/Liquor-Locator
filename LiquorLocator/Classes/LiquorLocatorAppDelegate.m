@@ -12,7 +12,9 @@
 @implementation LiquorLocatorAppDelegate
 
 @synthesize window;
+
 @synthesize navController;
+
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
 
@@ -22,12 +24,10 @@
     [window makeKeyAndVisible];    
 }
 
-
 - (void)dealloc {
     [navController release];
     [window release];
     [super dealloc];
 }
-
 
 @end

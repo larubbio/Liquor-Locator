@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
+@interface RootViewController : UIViewController <UITabBarDelegate, CLLocationManagerDelegate> {
+    CLLocationManager *locationManager;
+    CLLocation *userLocation;
 
-@interface RootViewController : UIViewController <UITabBarDelegate> {
 	NSArray *viewControllers;
 	IBOutlet UITabBar *tabBar;
 	IBOutlet UITabBarItem *categoriesTabBarItem;
@@ -26,5 +29,8 @@
 @property (nonatomic, retain) IBOutlet UITabBarItem *spiritsTabBarItem;
 @property (nonatomic, retain) IBOutlet UITabBarItem *campaignTabBarItem;
 @property (nonatomic, retain) UIViewController *selectedViewController;
+
+@property (nonatomic, retain) CLLocationManager *locationManager;
+@property (nonatomic, retain) CLLocation *userLocation;
 
 @end
