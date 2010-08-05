@@ -28,7 +28,7 @@ class Spirit(models.Model):
                'brand_name' : self.brand_name,
                'retail_price' : str(self.retail_price),
                'sales_tax' : str(self.sales_tax),
-               'total_retail_price' : str(self.total_retail_price),
+               'price' : str(self.total_retail_price),
                'class_h_price' : str(self.class_h_price),
                'merchandising_note' : self.merchandising_note,
                'size' : str(self.size),
@@ -98,11 +98,11 @@ class Store(models.Model):
     def dict(self):
         ret = self.__dict__.copy()
         del ret['_state']
+        del ret['lat_rad']
+        del ret['long_rad']
 
         ret['lat'] = str(self.lat)
         ret['long'] = str(self.long)
-        ret['lat_rad'] = str(self.lat_rad)
-        ret['long_rad'] = str(self.long_rad)
 
         ret['hours'] = []
         for h in self.hours.all():

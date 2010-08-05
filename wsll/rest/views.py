@@ -14,11 +14,14 @@ def spirits(request):
     data = []
 
     if 'id' in request.GET:
-        spirits = get_list_or_404(Spirit, pk=request.GET['id'])
+        spirits = get_list_or_404(Spirit, 
+                                  pk=request.GET['id'])
     elif 'name' in request.GET:
-        spirits = get_list_or_404(Spirit, brand_name=request.GET['name'])
+        spirits = get_list_or_404(Spirit,
+                                  brand_name=request.GET['name'])
     elif 'category' in request.GET:
-        spirits = get_list_or_404(Spirit, category=request.GET['category'])
+        spirits = get_list_or_404(Spirit.objects.order_by('brand_name'), 
+                                  category=request.GET['category'])
     elif 'search' in request.GET:
         cursor = connection.cursor()
 
@@ -39,7 +42,7 @@ def spirits(request):
             data.append({'brand_name': sd['brand_name'], 
                          'id': sd['id'],
                          'size': sd['size'],
-                         'price': sd['total_retail_price']})
+                         'price': sd['price']})
 
     # If rows has data I need the more compressed json dict
     if len(rows):
@@ -83,7 +86,7 @@ def stores(request):
     elif 'brand_code' in request.GET:
         spirit = get_object_or_404(Spirit, pk=request.GET['brand_code'])
 
-        stores = spirit.inventory.all()
+        stores = spirit.inventory.all().order_by('name')
     elif 'lat' in request.GET and 'long' in request.GET and 'dist' in request.GET:
         # Convert to radians
         lat = math.pi * float(request.GET['lat']) / 180
@@ -94,7 +97,7 @@ def stores(request):
        
         stores = Store.objects.raw('SELECT * FROM stores WHERE acos(sin(%s) * sin(lat_rad) + cos(%s) * cos(lat_rad) * cos(long_rad - (%s))) * 6371 <= %s;' % (lat, lat, long, dist))
     else:
-        stores = Store.objects.all()
+        stores = Store.objects.all().order_by('name')
 
     data = [s.dict() for s in stores]
 
@@ -111,7 +114,7 @@ def store_inventory(request, store_id):
     store = get_object_or_404(Store, pk=store_id)
 
     ret = []
-    for si in store.inventory.all():
+    for si in store.inventory.all().order_by('brand_name'):
         ret.append({'qty':si.qty, 
                     'spirit_id': si.spirit.id,
                     'brand_name': si.spirit.brand_name})
