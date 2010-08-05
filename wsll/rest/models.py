@@ -1,3 +1,4 @@
+import datetime
 from django.utils import simplejson
 
 from django.db import models
@@ -95,7 +96,7 @@ class Store(models.Model):
     def __unicode__(self):
         return "<Store: %d, '%s'>" % (self.id, self.city)
 
-    def dict(self):
+    def dict(self, children=False):
         ret = self.__dict__.copy()
         del ret['_state']
         del ret['lat_rad']
@@ -104,18 +105,65 @@ class Store(models.Model):
         ret['lat'] = str(self.lat)
         ret['long'] = str(self.long)
 
-        ret['hours'] = []
-        for h in self.hours.all():
-            ret['hours'].append(h.dict())
+        if children:
+            # I want to handle summer hours here.  Some, but not all stores 
+            # have them.
+            # Summer Hours: Begin on the Monday of the May 15 week. 
+            #               End on the Saturday of the September 15 week
+            in_summer_hours = False
 
-        ret['contacts'] = []
-        for c in self.contacts.all():
-            ret['contacts'].append(c.dict())
+            today = datetime.date.today()
+            # First see if we are within the month range
+            if today.month >= 5 and today.month <= 9:
+                # Start off assuming we are in summer hours
+                in_summer_hours = True
+
+                # This is the calendar matrix I'm working off of
+                #  M  T  W  T  F  S  S - Calendar Day
+                #  0  1  2  3  4  5  6 - today.weekday()
+                # 15 16 17 18 19 20 21
+                # 14 15 16 
+                # 13 14 15 16
+                #    13 14 15
+                #             15
+                #                15
+                #  9                15
+                start_day = 15 - (6 - today.weekday())
+                end_day = start_day + 6
+
+                # If we are in may but before the mon. of the week of the 15th
+                if today.month == 5:
+                    if today.day < start_day:
+                        in_summer_hours = False
+
+                # If we are in sep. but after the sat of the week of the 15th
+                if today.month == 9:
+                    if today.day > upper_day:
+                        in_summer_hours = False
+
+            if in_summer_hours:
+                # Get just the summer hours
+                _hours = self.hours.all().filter(summer_hours=1)
+                if len(_hours) == 0:
+                    # This store doesn't have different summer hours
+                    _hours = self.hours.all()
+            else:
+                _hours = self.hours.all()
+
+
+            ret['hours'] = []
+            for h in _hours:
+                ret['hours'].append(h.dict())
+
+
+            ret['contacts'] = []
+            for c in self.contacts.all():
+                ret['contacts'].append(c.dict())
 
         return ret
 
     def json(self):
-        ret = self.dict()
+        ret = self.dict(children=True)
 
         return simplejson.dumps(ret)
 
@@ -139,6 +187,7 @@ class Hours(models.Model):
     def dict(self):
         ret = self.__dict__.copy()
         del ret['_state']
+        del ret['summer_hours']
 
         return ret
 
