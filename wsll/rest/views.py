@@ -17,11 +17,8 @@ def spirits(request):
         spirits = get_list_or_404(Spirit, 
                                   pk=request.GET['id'])
     elif 'name' in request.GET:
-        cursor = connection.cursor()
-
-        cursor.execute("select brand_name, count(*), id from spirits where brand_name = '" + request.GET['name'] + "' group by brand_name order by brand_name")
-        
-        rows = cursor.fetchall()
+        spirits = get_list_or_404(Spirit, 
+                                  brand_name=request.GET['name'])
 
     elif 'category' in request.GET:
         cursor = connection.cursor()
@@ -43,14 +40,14 @@ def spirits(request):
         
         rows = cursor.fetchall()
 
-    # If spirits has data I want the fuller json dict
+    # If spirits has data I still use the compressed json
     if len(spirits):
         for s in spirits:
             sd = s.dict()
-            data.append({'brand_name': sd['brand_name'], 
+            data.append({'n': sd['brand_name'], 
                          'id': sd['id'],
-                         'size': sd['size'],
-                         'price': sd['price']})
+                         's': sd['size'],
+                         'p': sd['price']})
 
     # If rows has data I need the more compressed json dict
     if len(rows):
@@ -61,7 +58,7 @@ def spirits(request):
                 info['s'] = str(row[3])
                 info['p'] = str(row[4])
             else:
-                info['c'] = row[1]
+                info['c'] = str(row[1])
 
             data.append(info)
 
@@ -74,8 +71,6 @@ def spirit_inventory(request, spirit_id):
     ret = []
     for si in spirit.inventory.all():
         store = si.store.dict()
-        del store['hours']
-        del store['contacts']
 
         ret.append({'qty':si.qty, 'store':store})
 
@@ -134,7 +129,7 @@ def store_inventory(request, store_id):
             info['s'] = str(row[3])
             info['p'] = str(row[4])
         else:
-            info['c'] = row[1]
+            info['c'] = str(row[1])
 
         ret.append(info)
 
