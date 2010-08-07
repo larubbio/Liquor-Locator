@@ -12,10 +12,11 @@
     UIWindow *window;
   
     IBOutlet UINavigationController *navController;
+    IBOutlet UIView *splashView;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UINavigationController *navController;
-
+@property (nonatomic, retain) UIWindow *window;
+@property (nonatomic, retain) UINavigationController *navController;
+@property (nonatomic, retain) UIView *splashView;
 @end
 

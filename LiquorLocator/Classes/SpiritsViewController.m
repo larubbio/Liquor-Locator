@@ -7,9 +7,6 @@
 //
 
 #import "SpiritsViewController.h"
-#import "SpiritListViewController.h"
-#import "SpiritDetailViewController.h"
-#import "LiquorLocatorAppDelegate.h"
 
 @implementation SpiritsViewController
 
@@ -52,7 +49,7 @@
     NSMutableArray *toRemove = [[NSMutableArray alloc] init];
     
     for (NSDictionary *spirit in self.objectList) {
-        NSString *name = [spirit objectForKey:@"brand_name"];
+        NSString *name = [spirit objectForKey:@"n"];
         if([name rangeOfString:searchTerm
                        options:NSCaseInsensitiveSearch].location == NSNotFound) {
             [toRemove addObject:spirit];
@@ -78,61 +75,20 @@
 }
 
 - (void)dealloc {
-    [super dealloc];
     [allSpirits release];
     [search release];
+    [super dealloc];
 }
 
 #pragma mark -
-#pragma mark Table View Data Source Methods
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [self.objectList count];
-}
+#pragma mark JSON Parsing Method
+- (void)jsonParsingComplete:(id)objects {
+    [super jsonParsingComplete:objects];
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *SpiritTableIdentifier = @"SpiritTableIdentifier";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SpiritTableIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SpiritTableIdentifier] autorelease];
-    }
-    
-    NSUInteger row = [indexPath row];
-    NSDictionary *spirit = [objectList objectAtIndex:row]; 
-    cell.textLabel.text = [spirit objectForKey:@"brand_name"];
-        
-    return cell;
-}
-
-#pragma mark -
-#pragma mark Table View Delegate Methods
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    id controller;
-    NSUInteger row = [indexPath row];
-    NSDictionary *spirit = [objectList objectAtIndex:row]; 
-    
-    if ([spirit objectForKey:@"id"]) {
-        controller = [[SpiritDetailViewController alloc] initWithNibName:@"SpiritDetailView" bundle:nil];
-        ((SpiritDetailViewController *)controller).spiritId = [spirit objectForKey:@"id"];
-    } else {
-        controller = [[SpiritListViewController alloc] initWithNibName:@"SpiritListView" bundle:nil];   
-        ((SpiritListViewController *)controller).brandName = [spirit objectForKey:@"brand_name"];
-    }
-    
-    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    [delegate.navController pushViewController:controller animated:YES];
-    
-    [controller release];
-}
-
-#pragma mark -
-#pragma mark NSURLConnection Delegate Methods
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    [super connectionDidFinishLoading:connection];
     [allSpirits release];
     allSpirits = [[NSMutableArray alloc] initWithArray:self.objectList copyItems:YES];
+    
+    [table reloadData];
 }
+
 @end

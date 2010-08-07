@@ -8,14 +8,16 @@
 
 #import "StoresViewController.h"
 #import "StoreDetailViewController.h"
+#import "StoreAnnotation.h"
 #import "LiquorLocatorAppDelegate.h"
+#import "RootViewController.h"
 
 @implementation StoresViewController
 
 - (void)viewDidAppear:(BOOL)animated {
     self.feedURLString = @"http://wsll.pugdogdev.com/stores";
     
-    [super viewDidAppear:animated];
+    [super viewDidAppear:animated];    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,42 +32,11 @@
 }
 
 #pragma mark -
-#pragma mark Table View Data Source Methods
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [self.objectList count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *StoreTableIdentifier = @"StoreTableIdentifier";
+#pragma mark JSON Parsing Method
+- (void)jsonParsingComplete:(id)objects {
+    [super jsonParsingComplete:objects];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:StoreTableIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:StoreTableIdentifier] autorelease];
-    }
-    
-    NSUInteger row = [indexPath row];
-    NSDictionary *store = [objectList objectAtIndex:row]; 
-    cell.textLabel.text = [store objectForKey:@"name"];
-    
-    return cell;
-}
-
-#pragma mark -
-#pragma mark Table View Delegate Methods
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSUInteger row = [indexPath row];
-    NSDictionary *store = [objectList objectAtIndex:row];   
-    
-    StoreDetailViewController *storeDetailViewController = [[StoreDetailViewController alloc] initWithNibName:@"StoreDetailView" bundle:nil];
-    storeDetailViewController.storeId = [((NSString *)[store objectForKey:@"id"]) intValue];
-    
-    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    [delegate.navController pushViewController:storeDetailViewController animated:YES];
-    
-    [storeDetailViewController release];
+    [table reloadData];
 }
 
 @end

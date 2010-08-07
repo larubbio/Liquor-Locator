@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JSONLoaderController.h"
+#import "SpiritList.h"
 
-@interface SpiritsViewController : JSONLoaderController 
-    <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate> {
+@interface SpiritsViewController : SpiritList <UISearchBarDelegate> {
 
     NSArray *allSpirits;
+    
     IBOutlet UISearchBar *search;
 }
 

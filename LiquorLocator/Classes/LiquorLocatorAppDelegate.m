@@ -14,14 +14,26 @@
 @synthesize window;
 
 @synthesize navController;
-
+@synthesize splashView;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
 
     // Override point for customization after application launch
-    
     [window addSubview:navController.view];
     [window makeKeyAndVisible];    
+
+/*    [window addSubview:splashView];
+    [window makeKeyAndVisible];    
+    [NSThread detachNewThreadSelector:@selector(getInitialData:) 
+                             toTarget:self withObject:nil];
+*/    
+
+}
+
+-(void)getInitialData:(id)obj {
+    [NSThread sleepForTimeInterval:3.0]; // simulate waiting for server response
+    [splashView removeFromSuperview];
+    [window addSubview:navController.view];
 }
 
 - (void)dealloc {
