@@ -14,32 +14,40 @@ def spirits(request):
     data = []
 
     if 'id' in request.GET:
-        spirits = get_list_or_404(Spirit, pk=request.GET['id'])
+        spirits = get_list_or_404(Spirit, 
+                                  pk=request.GET['id'])
     elif 'name' in request.GET:
-        spirits = get_list_or_404(Spirit, brand_name=request.GET['name'])
+        spirits = get_list_or_404(Spirit, 
+                                  brand_name=request.GET['name'])
+
     elif 'category' in request.GET:
-        spirits = get_list_or_404(Spirit, category=request.GET['category'])
+        cursor = connection.cursor()
+
+        cursor.execute("select brand_name, count(*), id, size, total_retail_price from spirits where category = '" + request.GET['category'] + "' group by brand_name order by brand_name")
+        
+        rows = cursor.fetchall()
+
     elif 'search' in request.GET:
         cursor = connection.cursor()
 
-        cursor.execute("select brand_name, count(*), id from spirits where brand_name like '%%" + request.GET['search'] + "%%' group by brand_name order by brand_name")
+        cursor.execute("select brand_name, count(*), id, size, total_retail_price from spirits where brand_name like '%%" + request.GET['search'] + "%%' group by brand_name order by brand_name")
         
         rows = cursor.fetchall()
     else:
         cursor = connection.cursor()
 
-        cursor.execute("select brand_name, count(*), id from spirits group by brand_name order by brand_name")
+        cursor.execute("select brand_name, count(*), id, size, total_retail_price from spirits group by brand_name order by brand_name")
         
         rows = cursor.fetchall()
 
-    # If spirits has data I want the fuller json dict
+    # If spirits has data I still use the compressed json
     if len(spirits):
         for s in spirits:
             sd = s.dict()
-            data.append({'brand_name': sd['brand_name'], 
+            data.append({'n': sd['brand_name'], 
                          'id': sd['id'],
-                         'size': sd['size'],
-                         'price': sd['total_retail_price']})
+                         's': sd['size'],
+                         'p': sd['price']})
 
     # If rows has data I need the more compressed json dict
     if len(rows):
@@ -47,8 +55,10 @@ def spirits(request):
             info = {'n': row[0]}
             if row[1] == 1:
                 info['id'] = row[2]
+                info['s'] = str(row[3])
+                info['p'] = str(row[4])
             else:
-                info['c'] = row[1]
+                info['c'] = str(row[1])
 
             data.append(info)
 
@@ -61,8 +71,6 @@ def spirit_inventory(request, spirit_id):
     ret = []
     for si in spirit.inventory.all():
         store = si.store.dict()
-        del store['hours']
-        del store['contacts']
 
         ret.append({'qty':si.qty, 'store':store})
 
@@ -83,7 +91,7 @@ def stores(request):
     elif 'brand_code' in request.GET:
         spirit = get_object_or_404(Spirit, pk=request.GET['brand_code'])
 
-        stores = spirit.inventory.all()
+        stores = spirit.inventory.all().order_by('name')
     elif 'lat' in request.GET and 'long' in request.GET and 'dist' in request.GET:
         # Convert to radians
         lat = math.pi * float(request.GET['lat']) / 180
@@ -94,7 +102,7 @@ def stores(request):
        
         stores = Store.objects.raw('SELECT * FROM stores WHERE acos(sin(%s) * sin(lat_rad) + cos(%s) * cos(lat_rad) * cos(long_rad - (%s))) * 6371 <= %s;' % (lat, lat, long, dist))
     else:
-        stores = Store.objects.all()
+        stores = Store.objects.all().order_by('name')
 
     data = [s.dict() for s in stores]
 
@@ -108,13 +116,22 @@ def store(request, store_id):
     return HttpResponse(store.json(),mimetype)
 
 def store_inventory(request, store_id):
-    store = get_object_or_404(Store, pk=store_id)
-
     ret = []
-    for si in store.inventory.all():
-        ret.append({'qty':si.qty, 
-                    'spirit_id': si.spirit.id,
-                    'brand_name': si.spirit.brand_name})
+    cursor = connection.cursor()
+
+    cursor.execute("select s.brand_name, count(*), s.id, s.size, s.total_retail_price from store_inventory si, spirits s where si.store_id = '" + store_id + "' and si.spirit_id = s.id group by brand_name order by brand_name")
+        
+    rows = cursor.fetchall()
+    for row in rows:
+        info = {'n': row[0]}
+        if row[1] == 1:
+            info['id'] = row[2]
+            info['s'] = str(row[3])
+            info['p'] = str(row[4])
+        else:
+            info['c'] = str(row[1])
+
+        ret.append(info)
 
     mimetype = 'application/json'
     return HttpResponse(simplejson.dumps(ret),mimetype)
