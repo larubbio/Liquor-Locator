@@ -14,9 +14,11 @@
     NSString *category;
     NSString *brandName;
     int storeId;
+    NSString *storeName;
 }
 
 @property (nonatomic, retain) NSString *category;
 @property (nonatomic, retain) NSString *brandName;
 @property (nonatomic, assign) int storeId;
+@property (nonatomic, retain) NSString *storeName;
 @end

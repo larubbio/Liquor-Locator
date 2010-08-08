@@ -31,12 +31,4 @@
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark JSON Parsing Method
-- (void)jsonParsingComplete:(id)objects {
-    [super jsonParsingComplete:objects];
-    
-    [table reloadData];
-}
-
 @end

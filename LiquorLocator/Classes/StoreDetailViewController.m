@@ -148,6 +148,7 @@
 - (IBAction)viewSpirits:(id)sender {
     SpiritListViewController *controller = [[SpiritListViewController alloc] initWithNibName:@"SpiritListView" bundle:nil];   
     ((SpiritListViewController *)controller).storeId = storeId;
+    ((SpiritListViewController *)controller).storeName = storeName.text;
 
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate.navController pushViewController:controller animated:YES];

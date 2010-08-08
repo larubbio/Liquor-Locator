@@ -7,10 +7,6 @@
 //
 
 #import "StoresViewController.h"
-#import "StoreDetailViewController.h"
-#import "StoreAnnotation.h"
-#import "LiquorLocatorAppDelegate.h"
-#import "RootViewController.h"
 
 @implementation StoresViewController
 
@@ -29,14 +25,6 @@
 
 - (void)dealloc {
     [super dealloc];
-}
-
-#pragma mark -
-#pragma mark JSON Parsing Method
-- (void)jsonParsingComplete:(id)objects {
-    [super jsonParsingComplete:objects];
-    
-    [table reloadData];
 }
 
 @end

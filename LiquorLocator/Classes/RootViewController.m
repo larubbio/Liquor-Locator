@@ -9,7 +9,7 @@
 #import "RootViewController.h"
 #import "CategoriesViewController.h"
 #import "StoresViewController.h"
-#import "SpiritsViewController.h"
+#import "SearchViewController.h"
 #import "CampaignViewController.h"
 
 @implementation RootViewController
@@ -39,10 +39,10 @@
     // Custom initialization
     CategoriesViewController *categoriesTabViewController = [[CategoriesViewController alloc] initWithNibName:@"CategoriesView" bundle:nil];
     StoresViewController *storesTabViewController = [[StoresViewController alloc] initWithNibName:@"StoresView" bundle:nil];
-    SpiritsViewController *spiritsTabViewController = [[SpiritsViewController alloc] initWithNibName:@"SpiritsView" bundle:nil];
+    SearchViewController *searchTabViewController = [[SearchViewController alloc] initWithNibName:@"SearchView" bundle:nil];
     CampaignViewController *campaignTabViewController = [[CampaignViewController alloc] initWithNibName:@"CampaignView" bundle:nil];
 		
-    NSArray *array = [[NSArray alloc] initWithObjects:categoriesTabViewController, storesTabViewController, spiritsTabViewController, campaignTabViewController, nil];
+    NSArray *array = [[NSArray alloc] initWithObjects:categoriesTabViewController, storesTabViewController, searchTabViewController, campaignTabViewController, nil];
     self.viewControllers = array;
 		
 	[categoriesTabViewController viewWillAppear:YES];
@@ -55,7 +55,7 @@
     [array release];
     [categoriesTabViewController release];
     [storesTabViewController release];
-    [spiritsTabViewController release];
+    [searchTabViewController release];
     [campaignTabViewController release];
     
     [super viewDidLoad];

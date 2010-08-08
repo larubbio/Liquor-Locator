@@ -18,6 +18,8 @@
 @synthesize table;
 @synthesize map;
 
+@synthesize tableData;
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -64,6 +66,7 @@
 - (void)dealloc {
     [table release];
     [map release];
+    [tableData release];
     [super dealloc];
 }
 
@@ -87,7 +90,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger row = [indexPath row];
-    NSDictionary *dict = [objectList objectAtIndex:row];
+    NSDictionary *dict = [tableData objectAtIndex:row];
     NSDictionary *store;
     
     // This branch is for handling the different JSON between a store list and store inv list
@@ -110,7 +113,7 @@
 #pragma mark Table View Data Source Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.objectList count];
+    return [self.tableData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -124,7 +127,7 @@
     }
     
     NSUInteger row = [indexPath row];
-    NSDictionary *dict = [objectList objectAtIndex:row];
+    NSDictionary *dict = [tableData objectAtIndex:row];
     NSDictionary *store;
 
     // This branch is for handling the different JSON between a store list and store inv list
@@ -135,19 +138,15 @@
     }
     cell.textLabel.text = [store objectForKey:@"name"];
     
-    // Compute distance
-    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    RootViewController *rootView = [delegate.navController.viewControllers objectAtIndex:0];
+    NSString *detail;
+    if ([store objectForKey:@"qty"]) {
+        detail = [NSString stringWithFormat:@"%.2f miles %d In Stock", [((NSDecimalNumber *)[store objectForKey:@"dist"]) doubleValue],
+                                                                       [((NSDecimalNumber *)[store objectForKey:@"qty"]) integerValue]];
+    } else {
+        detail = [NSString stringWithFormat:@"%.2f miles", [((NSDecimalNumber *)[store objectForKey:@"dist"]) doubleValue]];
+    }
+    cell.detailTextLabel.text = detail;
     
-    double latitude = [[store objectForKey:@"lat"] doubleValue];
-    double longitude = [[store objectForKey:@"long"] doubleValue];
-    CLLocation *storeLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-    CLLocationDistance distance = [storeLocation distanceFromLocation:rootView.userLocation];
-    double miles = distance * 0.000621371192;
-    
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2f miles", miles];
-    
-    [storeLocation release];
     return cell;
 }
 
@@ -156,12 +155,16 @@
 - (void)jsonParsingComplete:(id)objects {
     [super jsonParsingComplete:objects];
     
+    NSMutableArray *tmpData = [[NSMutableArray alloc] init];
+    
     // Create all my annotations and add to map
-    for (NSDictionary *dict in self.objectList) {
-        NSDictionary *store;
+    // I'll also munge the returned json so both store inventory and store list json look the same
+    for (NSMutableDictionary *dict in self.objectList) {
+        NSMutableDictionary *store;
         
         if ([dict objectForKey:@"store"]) {
             store = [dict objectForKey:@"store"];
+            [store setObject:[dict objectForKey:@"qty"] forKey:@"qty"];
         } else {
             store = dict;
         }
@@ -172,11 +175,37 @@
         anno.latitude = [((NSString *)[store objectForKey:@"lat"]) doubleValue];
         anno.longitude = [((NSString *)[store objectForKey:@"long"]) doubleValue];
         
+        // Compute distance
+        LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+        RootViewController *rootView = [delegate.navController.viewControllers objectAtIndex:0];
+        
+        double latitude = [[store objectForKey:@"lat"] doubleValue];
+        double longitude = [[store objectForKey:@"long"] doubleValue];
+        CLLocation *storeLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+        CLLocationDistance distance = [storeLocation distanceFromLocation:rootView.userLocation];
+        double miles = distance * 0.000621371192;
+
+        NSDecimalNumber *dist = [[NSDecimalNumber alloc] initWithDouble:miles];
+        [store setObject:dist forKey:@"dist"];
+        
+        [tmpData addObject:store];
+        
         [map addAnnotation:anno];
         
         [anno release];
+        [storeLocation release];
+        [dist release];
     }
+
+    NSSortDescriptor *distDescriptor =
+    [[[NSSortDescriptor alloc] initWithKey:@"dist"
+                                 ascending:YES
+                                  selector:@selector(compare:)] autorelease];
     
+    NSArray *descriptors = [NSArray arrayWithObjects:distDescriptor, nil];
+    self.tableData = [tmpData sortedArrayUsingDescriptors:descriptors];
+    
+    [tmpData release];
     [table reloadData];
 }
 
