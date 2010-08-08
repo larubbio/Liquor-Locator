@@ -49,7 +49,7 @@
 }
 
 - (void)viewStores:(id)sender {
-    StoreListViewController *controller = [[StoreListViewController alloc] initWithNibName:@"StoresView" bundle:nil];   
+    StoreListViewController *controller = [[StoreListViewController alloc] initWithNibName:@"StoreListView" bundle:nil];   
     ((StoreListViewController *)controller).spiritId = spiritId;
     
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -59,9 +59,9 @@
 }
 
 #pragma mark -
-#pragma mark NSURLConnection Delegate Methods
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    [super connectionDidFinishLoading:connection];
+#pragma mark JSON Parsing Method
+- (void)jsonParsingComplete:(id)objects {
+    [super jsonParsingComplete:objects];
     
     NSString *priceTitle = [NSString stringWithFormat:@"Cost: $%@", [objectList objectForKey:@"price"]];
     NSString *sizeTitle = [NSString stringWithFormat:@"Size: %@ Liters", [objectList objectForKey:@"size"]];
@@ -72,6 +72,8 @@
     sizeBtn.hidden = NO;
     
     viewStoresBtn.hidden = NO;
+    
+    self.title = [objectList objectForKey:@"brand_name"];
 }
 
 @end

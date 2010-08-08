@@ -148,6 +148,7 @@
 - (IBAction)viewSpirits:(id)sender {
     SpiritListViewController *controller = [[SpiritListViewController alloc] initWithNibName:@"SpiritListView" bundle:nil];   
     ((SpiritListViewController *)controller).storeId = storeId;
+    ((SpiritListViewController *)controller).storeName = storeName.text;
 
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate.navController pushViewController:controller animated:YES];
@@ -157,9 +158,9 @@
 
     
 #pragma mark -
-#pragma mark NSURLConnection Delegate Methods
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    [super connectionDidFinishLoading:connection];
+#pragma mark JSON Parsing Method
+- (void)jsonParsingComplete:(id)objects {
+    [super jsonParsingComplete:objects];
     
     // Pull all data out of the dictionary into local variables
     NSString *_name = [self.objectList objectForKey:@"name"];
@@ -240,6 +241,8 @@
     
     // Add data to view outlets
     storeName.text = [NSString stringWithFormat:@"%@ - #%d", _name, storeId];
+    self.title = storeName.text;
+    
     street.text = _street;
 //    address2.text = _address2;
     cityZip.text = [NSString stringWithFormat:@"%@, WA %@", _city, _zip];
