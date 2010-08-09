@@ -10,6 +10,7 @@
 #import "JSON.h"
 // This framework was imported so we could use the kCFURLErrorNotConnectedToInternet error code.
 #import <CFNetwork/CFNetwork.h>
+#import "LiquorLocatorAppDelegate.h"
 
 @implementation JSONLoaderController
 
@@ -19,6 +20,16 @@
 @synthesize objectList;
 
 - (void)viewDidAppear:(BOOL)animated {
+    HUD = nil;
+    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+
+    // Check out cache
+    id objects = [delegate getCachedDataForKey:self.feedURLString];
+    if (objects != nil) {
+        [self jsonParsingComplete:objects];
+        return;
+    }
+
     // Start the status bar network activity indicator. We'll turn it off when the connection finishes or experiences an error.
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 
@@ -61,6 +72,9 @@
     [super didReceiveMemoryWarning];
 	
 	// Release any cached data, images, etc that aren't in use.
+    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    
+    [delegate purgeCache];
 }
 
 - (void)viewDidUnload {
@@ -130,20 +144,9 @@
     self.JSONConnection = nil;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;   
 
-    [NSThread detachNewThreadSelector:@selector(parseJSONData:) toTarget:self withObject:jsonData];
-
-    self.jsonData = nil;
-}
-    
-- (void)parseJSONData:(NSData *)data {
- 
-    // You must create a autorelease pool for all secondary threads.
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    // grab the JSON data as a string
-	NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+	NSString *jsonString = [[NSString alloc] initWithData:self.jsonData encoding:NSUTF8StringEncoding];
 	NSAssert(jsonString != nil, @"TODO larubbio: handle no data!");
-//    NSLog(jsonString);
+    //    NSLog(jsonString);
     
     // Create new SBJSON parser object
     SBJSON *parser = [[SBJSON alloc] init];
@@ -152,29 +155,36 @@
     
     // parse the JSON response into an object
     // Here we're using NSArray since we're parsing an array of JSON category objects
-    [self performSelectorOnMainThread:@selector(jsonParsingComplete:) withObject:objects waitUntilDone:NO];
+    [self jsonParsingComplete:objects];
     
     [parser release];
     [jsonString release];
-    [pool release];
+    
+    self.jsonData = nil;
 }
-
+    
 // The secondary (parsing) thread calls jsonParsingComplete: on the main thread with all of the parsed objects. 
 - (void)jsonParsingComplete:(id)objects {
+    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    
+    [delegate putCachedData:objects forKey:self.feedURLString];
     
     self.objectList = objects;
     
     // Hide my loading HUD
-    [HUD hide:YES];
+    if (HUD != nil) {
+        [HUD hide:YES];
+    }
 }
 
 #pragma mark -
 #pragma mark MBProgressHUDDelegate methods
 
 - (void)hudWasHidden {
-    // Remove HUD from screen when the HUD was hidded
+    // Remove HUD from screen when the HUD is hidden
     [HUD removeFromSuperview];
     [HUD release];
+    HUD = nil;
 }
 
 @end

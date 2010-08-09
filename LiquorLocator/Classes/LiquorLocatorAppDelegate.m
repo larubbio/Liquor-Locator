@@ -16,9 +16,11 @@
 @synthesize navController;
 @synthesize splashView;
 
+@synthesize dataCache;
 #define SPLASH
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
-
+    dataCache = [[NSMutableDictionary alloc] init];
+    
     // Override point for customization after application launch
 #ifdef SPLASH
     [window addSubview:navController.view];
@@ -31,6 +33,18 @@
 
 }
 
+- (id)getCachedDataForKey:(NSString *)key {
+    return [dataCache objectForKey:key];
+}
+
+- (void)putCachedData:(id)data forKey:(NSString *)key {
+    [dataCache setObject:data forKey:key];
+}
+     
+- (void)purgeCache {
+    [dataCache removeAllObjects];
+}
+
 -(void)getInitialData:(id)obj {
     [NSThread sleepForTimeInterval:3.0]; // simulate waiting for server response
     [splashView removeFromSuperview];
@@ -38,6 +52,7 @@
 }
 
 - (void)dealloc {
+    [dataCache release];
     [navController release];
     [window release];
     [super dealloc];

@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "JSONLoaderController.h"
 
-@interface StoreList : JSONLoaderController  <UITableViewDataSource, UITableViewDelegate> {
+@interface StoreList : JSONLoaderController  <UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate> {
     IBOutlet UITableView *table;   
     IBOutlet MKMapView *map;
     
@@ -22,5 +22,6 @@
 @property (nonatomic, retain) NSArray *tableData;
 
 - (void)toggleView:(id)sender;
-
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control;
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation;
 @end

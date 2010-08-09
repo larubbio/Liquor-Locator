@@ -138,14 +138,21 @@
     }
     cell.textLabel.text = [store objectForKey:@"name"];
     
-    NSString *detail;
-    if ([store objectForKey:@"qty"]) {
-        detail = [NSString stringWithFormat:@"%.2f miles %d In Stock", [((NSDecimalNumber *)[store objectForKey:@"dist"]) doubleValue],
-                                                                       [((NSDecimalNumber *)[store objectForKey:@"qty"]) integerValue]];
-    } else {
-        detail = [NSString stringWithFormat:@"%.2f miles", [((NSDecimalNumber *)[store objectForKey:@"dist"]) doubleValue]];
+    NSString *detail = nil;
+    if ([store objectForKey:@"dist"]) {
+        if ([store objectForKey:@"qty"]) {
+            detail = [NSString stringWithFormat:@"%.2f miles %d In Stock", [((NSDecimalNumber *)[store objectForKey:@"dist"]) doubleValue],
+                                                                           [((NSDecimalNumber *)[store objectForKey:@"qty"]) integerValue]];
+        } else {
+            detail = [NSString stringWithFormat:@"%.2f miles", [((NSDecimalNumber *)[store objectForKey:@"dist"]) doubleValue]];
+        }
+    } else if ([store objectForKey:@"qty"]) {
+        detail = [NSString stringWithFormat:@"%d In Stock", [((NSDecimalNumber *)[store objectForKey:@"qty"]) integerValue]];
     }
-    cell.detailTextLabel.text = detail;
+    
+    if (detail != nil) {
+        cell.detailTextLabel.text = detail;
+    }
     
     return cell;
 }
@@ -172,6 +179,7 @@
         StoreAnnotation *anno = [[StoreAnnotation alloc] init];
         anno.name = [store objectForKey:@"name"];
         anno.address = [store objectForKey:@"address"];
+        anno.storeId = [((NSString *)[store objectForKey:@"id"]) intValue];
         anno.latitude = [((NSString *)[store objectForKey:@"lat"]) doubleValue];
         anno.longitude = [((NSString *)[store objectForKey:@"long"]) doubleValue];
         
@@ -179,22 +187,25 @@
         LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
         RootViewController *rootView = [delegate.navController.viewControllers objectAtIndex:0];
         
-        double latitude = [[store objectForKey:@"lat"] doubleValue];
-        double longitude = [[store objectForKey:@"long"] doubleValue];
-        CLLocation *storeLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-        CLLocationDistance distance = [storeLocation distanceFromLocation:rootView.userLocation];
-        double miles = distance * 0.000621371192;
+        if (rootView.userLocation != nil) {
+            double latitude = [[store objectForKey:@"lat"] doubleValue];
+            double longitude = [[store objectForKey:@"long"] doubleValue];
+            CLLocation *storeLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+            CLLocationDistance distance = [storeLocation distanceFromLocation:rootView.userLocation];
+            double miles = distance * 0.000621371192;
 
-        NSDecimalNumber *dist = [[NSDecimalNumber alloc] initWithDouble:miles];
-        [store setObject:dist forKey:@"dist"];
+            NSDecimalNumber *dist = [[NSDecimalNumber alloc] initWithDouble:miles];
+            [store setObject:dist forKey:@"dist"];
+
+            [storeLocation release];
+            [dist release];
+        }
         
         [tmpData addObject:store];
         
         [map addAnnotation:anno];
         
         [anno release];
-        [storeLocation release];
-        [dist release];
     }
 
     NSSortDescriptor *distDescriptor =
@@ -207,6 +218,36 @@
     
     [tmpData release];
     [table reloadData];
+}
+
+#pragma mark -
+#pragma mark Map View Delegate Methods
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    MKPinAnnotationView *pinView;
+    
+    pinView = (MKPinAnnotationView *)[self.map dequeueReusableAnnotationViewWithIdentifier:@"annoView"];
+    
+    if (pinView == nil) {
+        pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"annoView"];
+        pinView.pinColor = MKPinAnnotationColorRed;
+        pinView.animatesDrop=NO;
+        pinView.canShowCallout = YES;
+
+        UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        pinView.rightCalloutAccessoryView = rightButton;
+    }    
+
+    return pinView; 
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    StoreDetailViewController *storeDetailViewController = [[StoreDetailViewController alloc] initWithNibName:@"StoreDetailView" bundle:nil];
+    storeDetailViewController.storeId = ((StoreAnnotation *)view.annotation).storeId;
+    
+    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate.navController pushViewController:storeDetailViewController animated:YES];
+    
+    [storeDetailViewController release];
 }
 
 @end

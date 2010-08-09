@@ -248,8 +248,8 @@
     cityZip.text = [NSString stringWithFormat:@"%@, WA %@", _city, _zip];
     
     StoreAnnotation *store = [[StoreAnnotation alloc] init];
-    store.name = _name;
-    store.address = _street;
+  //  store.name = _name;
+  //  store.address = _street;
     store.latitude = _latitude;
     store.longitude = _longitude;
     
