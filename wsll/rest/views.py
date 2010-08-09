@@ -23,14 +23,15 @@ def spirits(request):
     elif 'category' in request.GET:
         cursor = connection.cursor()
 
-        cursor.execute("select brand_name, count(*), id, size, total_retail_price from spirits where category = '" + request.GET['category'] + "' group by brand_name order by brand_name")
+        cursor.execute("select brand_name, count(*), id, size, total_retail_price from spirits where category = %s group by brand_name order by brand_name", [request.GET['category'])
         
         rows = cursor.fetchall()
 
     elif 'search' in request.GET:
         cursor = connection.cursor()
 
-        cursor.execute("select brand_name, count(*), id, size, total_retail_price from spirits where brand_name like '%%" + request.GET['search'] + "%%' group by brand_name order by brand_name")
+        arg = '%' + request.GET['search'] + '%'
+        cursor.execute("select brand_name, count(*), id, size, total_retail_price from spirits where brand_name like %s group by brand_name order by brand_name", [arg])
         
         rows = cursor.fetchall()
     else:
@@ -119,7 +120,7 @@ def store_inventory(request, store_id):
     ret = []
     cursor = connection.cursor()
 
-    cursor.execute("select s.brand_name, count(*), s.id, s.size, s.total_retail_price from store_inventory si, spirits s where si.store_id = '" + store_id + "' and si.spirit_id = s.id group by brand_name order by brand_name")
+    cursor.execute("select s.brand_name, count(*), s.id, s.size, s.total_retail_price from store_inventory si, spirits s where si.store_id = %s and si.spirit_id = s.id group by brand_name order by brand_name", [store_id])
         
     rows = cursor.fetchall()
     for row in rows:
