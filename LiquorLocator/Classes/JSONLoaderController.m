@@ -12,6 +12,8 @@
 #import <CFNetwork/CFNetwork.h>
 #import "LiquorLocatorAppDelegate.h"
 
+#import "Constants.h"
+
 @implementation JSONLoaderController
 
 @synthesize feedURLString;
@@ -41,7 +43,7 @@
 	
     // Regisete for HUD callbacks so we can remove it from the window at the right time
     HUD.delegate = self;
-    HUD.labelText = @"Loading";
+    HUD.labelText = kLoading;
 
     // Show the HUD while the we load and parse data
     [HUD show:YES];

@@ -10,6 +10,8 @@
 #import "StoreListViewController.h"
 #import "LiquorLocatorAppDelegate.h"
 
+#import "Constants.h"
+
 @implementation SpiritDetailViewController
 
 @synthesize spiritId;
@@ -63,8 +65,8 @@
 - (void)jsonParsingComplete:(id)objects {
     [super jsonParsingComplete:objects];
     
-    NSString *priceTitle = [NSString stringWithFormat:@"Cost: $%@", [objectList objectForKey:@"price"]];
-    NSString *sizeTitle = [NSString stringWithFormat:@"Size: %@ Liters", [objectList objectForKey:@"size"]];
+    NSString *priceTitle = [NSString stringWithFormat:@"Cost: $%@", [objectList objectForKey:kPrice]];
+    NSString *sizeTitle = [NSString stringWithFormat:@"Size: %@ Liters", [objectList objectForKey:kSize]];
     
     [priceBtn setTitle:priceTitle forState:UIControlStateNormal];
     priceBtn.hidden = NO;
@@ -73,7 +75,7 @@
     
     viewStoresBtn.hidden = NO;
     
-    self.title = [objectList objectForKey:@"brand_name"];
+    self.title = [objectList objectForKey:kBrandName];
 }
 
 @end

@@ -11,6 +11,8 @@
 #import "SpiritDetailViewController.h"
 #import "LiquorLocatorAppDelegate.h"
 
+#import "Constants.h"
+
 @implementation SpiritList
 
 @synthesize table;
@@ -55,14 +57,14 @@
     NSUInteger row = [indexPath row];
     NSDictionary *spirit = [objectList objectAtIndex:row]; 
 
-    if ([spirit objectForKey:@"id"]) {
+    if ([spirit objectForKey:kId]) {
         cell = [tableView dequeueReusableCellWithIdentifier:SingleSpiritCellIdentifier];
         if (cell == nil) {
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:SingleSpiritCellIdentifier] autorelease];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
 
-        NSString *detail = [NSString stringWithFormat:@"Size: %@ Price: $%@", [spirit objectForKey:@"s"], [spirit objectForKey:@"p"]];
+        NSString *detail = [NSString stringWithFormat:@"Size: %@ Price: $%@", [spirit objectForKey:kShortSize], [spirit objectForKey:kShortPrice]];
         cell.detailTextLabel.text = detail;
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:MultiSpiritCellIdentifier];
@@ -71,10 +73,10 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         
-        cell.detailTextLabel.text = [spirit objectForKey:@"c"];
+        cell.detailTextLabel.text = [spirit objectForKey:kShortCount];
     }
 
-    cell.textLabel.text = [spirit objectForKey:@"n"];
+    cell.textLabel.text = [spirit objectForKey:kShortName];
     
     return cell;
 }
@@ -87,12 +89,12 @@
     NSUInteger row = [indexPath row];
     NSDictionary *spirit = [objectList objectAtIndex:row]; 
     
-    if ([spirit objectForKey:@"id"]) {
+    if ([spirit objectForKey:kId]) {
         controller = [[SpiritDetailViewController alloc] initWithNibName:@"SpiritDetailView" bundle:nil];
-        ((SpiritDetailViewController *)controller).spiritId = [spirit objectForKey:@"id"];
+        ((SpiritDetailViewController *)controller).spiritId = [spirit objectForKey:kId];
     } else {
         controller = [[SpiritListViewController alloc] initWithNibName:@"SpiritListView" bundle:nil];   
-        ((SpiritListViewController *)controller).brandName = [spirit objectForKey:@"n"];
+        ((SpiritListViewController *)controller).brandName = [spirit objectForKey:kShortName];
     }
     
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];

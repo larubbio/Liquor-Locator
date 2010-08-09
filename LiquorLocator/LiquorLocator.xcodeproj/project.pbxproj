@@ -32,6 +32,7 @@
 		4671108D120DAE5300B250F9 /* StoreList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4671108B120DAE5300B250F9 /* StoreList.m */; };
 		46711123120E02EC00B250F9 /* SpiritList.m in Sources */ = {isa = PBXBuildFile; fileRef = 46711122120E02EC00B250F9 /* SpiritList.m */; };
 		467111CA120E120D00B250F9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 467111C9120E120D00B250F9 /* Default.png */; };
+		4671147D1210677000B250F9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4671147C1210677000B250F9 /* Constants.m */; };
 		469B5F35120881E700A7E5DE /* StoreAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 469B5F34120881E700A7E5DE /* StoreAnnotation.m */; };
 		469B5FD11208A92900A7E5DE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 469B5FD01208A92800A7E5DE /* CoreLocation.framework */; };
 		469B60961209205C00A7E5DE /* StoreListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 469B60941209205C00A7E5DE /* StoreListViewController.m */; };
@@ -88,6 +89,8 @@
 		46711121120E02EC00B250F9 /* SpiritList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpiritList.h; sourceTree = "<group>"; };
 		46711122120E02EC00B250F9 /* SpiritList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpiritList.m; sourceTree = "<group>"; };
 		467111C9120E120D00B250F9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		4671147B1210677000B250F9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		4671147C1210677000B250F9 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		469B5F33120881E700A7E5DE /* StoreAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreAnnotation.h; sourceTree = "<group>"; };
 		469B5F34120881E700A7E5DE /* StoreAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreAnnotation.m; sourceTree = "<group>"; };
 		469B5FD01208A92800A7E5DE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -142,6 +145,8 @@
 				4628BF25120289C500ECE4BE /* Controllers */,
 				1D3623240D0F684500981E51 /* LiquorLocatorAppDelegate.h */,
 				1D3623250D0F684500981E51 /* LiquorLocatorAppDelegate.m */,
+				4671147B1210677000B250F9 /* Constants.h */,
+				4671147C1210677000B250F9 /* Constants.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -371,6 +376,7 @@
 				46710EB51209C7A100B250F9 /* MBProgressHUD.m in Sources */,
 				4671108D120DAE5300B250F9 /* StoreList.m in Sources */,
 				46711123120E02EC00B250F9 /* SpiritList.m in Sources */,
+				4671147D1210677000B250F9 /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

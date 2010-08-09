@@ -12,6 +12,7 @@
 #import "LiquorLocatorAppDelegate.h"
 #import "RootViewController.h"
 
+#import "Constants.h"
 
 @implementation StoreList
 
@@ -32,9 +33,9 @@
     region.span = span;
     map.region = region;   
     
-    NSString *title = @"Map";
+    NSString *title = kMap;
     if (table.hidden) {
-        title = @"List";
+        title = kList;
     }
     UIBarButtonItem *barBtn = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:self action:@selector(toggleView:)];
     
@@ -74,12 +75,12 @@
 - (void)toggleView:(id)sender {
     UIBarButtonItem *barBtn = sender;
     
-    if ([barBtn.title isEqualToString:@"Map"]) {
-        barBtn.title = @"List";
+    if ([barBtn.title isEqualToString:kMap]) {
+        barBtn.title = kList;
         map.hidden = NO;
         table.hidden = YES;
     } else {
-        barBtn.title = @"Map";
+        barBtn.title = kList;
         map.hidden = YES;
         table.hidden = NO;
     }        
@@ -94,14 +95,14 @@
     NSDictionary *store;
     
     // This branch is for handling the different JSON between a store list and store inv list
-    if ([dict objectForKey:@"store"]) {
-        store = [dict objectForKey:@"store"];
+    if ([dict objectForKey:kStore]) {
+        store = [dict objectForKey:kStore];
     } else {
         store = dict;
     }
     
     StoreDetailViewController *storeDetailViewController = [[StoreDetailViewController alloc] initWithNibName:@"StoreDetailView" bundle:nil];
-    storeDetailViewController.storeId = [((NSString *)[store objectForKey:@"id"]) intValue];
+    storeDetailViewController.storeId = [((NSString *)[store objectForKey:kId]) intValue];
     
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate.navController pushViewController:storeDetailViewController animated:YES];
@@ -131,23 +132,23 @@
     NSDictionary *store;
 
     // This branch is for handling the different JSON between a store list and store inv list
-    if ([dict objectForKey:@"store"]) {
-        store = [dict objectForKey:@"store"];
+    if ([dict objectForKey:kStore]) {
+        store = [dict objectForKey:kStore];
     } else {
         store = dict;
     }
-    cell.textLabel.text = [store objectForKey:@"name"];
+    cell.textLabel.text = [store objectForKey:kName];
     
     NSString *detail = nil;
-    if ([store objectForKey:@"dist"]) {
-        if ([store objectForKey:@"qty"]) {
-            detail = [NSString stringWithFormat:@"%.2f miles %d In Stock", [((NSDecimalNumber *)[store objectForKey:@"dist"]) doubleValue],
-                                                                           [((NSDecimalNumber *)[store objectForKey:@"qty"]) integerValue]];
+    if ([store objectForKey:kDist]) {
+        if ([store objectForKey:kQty]) {
+            detail = [NSString stringWithFormat:@"%.2f miles %d In Stock", [((NSDecimalNumber *)[store objectForKey:kDist]) doubleValue],
+                                                                           [((NSDecimalNumber *)[store objectForKey:kQty]) integerValue]];
         } else {
-            detail = [NSString stringWithFormat:@"%.2f miles", [((NSDecimalNumber *)[store objectForKey:@"dist"]) doubleValue]];
+            detail = [NSString stringWithFormat:@"%.2f miles", [((NSDecimalNumber *)[store objectForKey:kDist]) doubleValue]];
         }
-    } else if ([store objectForKey:@"qty"]) {
-        detail = [NSString stringWithFormat:@"%d In Stock", [((NSDecimalNumber *)[store objectForKey:@"qty"]) integerValue]];
+    } else if ([store objectForKey:kQty]) {
+        detail = [NSString stringWithFormat:@"%d In Stock", [((NSDecimalNumber *)[store objectForKey:kQty]) integerValue]];
     }
     
     if (detail != nil) {
@@ -169,33 +170,33 @@
     for (NSMutableDictionary *dict in self.objectList) {
         NSMutableDictionary *store;
         
-        if ([dict objectForKey:@"store"]) {
-            store = [dict objectForKey:@"store"];
-            [store setObject:[dict objectForKey:@"qty"] forKey:@"qty"];
+        if ([dict objectForKey:kStore]) {
+            store = [dict objectForKey:kStore];
+            [store setObject:[dict objectForKey:kQty] forKey:kQty];
         } else {
             store = dict;
         }
         
         StoreAnnotation *anno = [[StoreAnnotation alloc] init];
-        anno.name = [store objectForKey:@"name"];
-        anno.address = [store objectForKey:@"address"];
-        anno.storeId = [((NSString *)[store objectForKey:@"id"]) intValue];
-        anno.latitude = [((NSString *)[store objectForKey:@"lat"]) doubleValue];
-        anno.longitude = [((NSString *)[store objectForKey:@"long"]) doubleValue];
+        anno.name = [store objectForKey:kName];
+        anno.address = [store objectForKey:kAddress];
+        anno.storeId = [((NSString *)[store objectForKey:kId]) intValue];
+        anno.latitude = [((NSString *)[store objectForKey:kLat]) doubleValue];
+        anno.longitude = [((NSString *)[store objectForKey:kLong]) doubleValue];
         
         // Compute distance
         LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
         RootViewController *rootView = [delegate.navController.viewControllers objectAtIndex:0];
         
         if (rootView.userLocation != nil) {
-            double latitude = [[store objectForKey:@"lat"] doubleValue];
-            double longitude = [[store objectForKey:@"long"] doubleValue];
+            double latitude = [[store objectForKey:kLat] doubleValue];
+            double longitude = [[store objectForKey:kLong] doubleValue];
             CLLocation *storeLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
             CLLocationDistance distance = [storeLocation distanceFromLocation:rootView.userLocation];
             double miles = distance * 0.000621371192;
 
             NSDecimalNumber *dist = [[NSDecimalNumber alloc] initWithDouble:miles];
-            [store setObject:dist forKey:@"dist"];
+            [store setObject:dist forKey:kDist];
 
             [storeLocation release];
             [dist release];
@@ -209,7 +210,7 @@
     }
 
     NSSortDescriptor *distDescriptor =
-    [[[NSSortDescriptor alloc] initWithKey:@"dist"
+    [[[NSSortDescriptor alloc] initWithKey:kDist
                                  ascending:YES
                                   selector:@selector(compare:)] autorelease];
     
