@@ -43,6 +43,11 @@
 }
 
 - (void)handleSearchForTerm:(NSString *)searchTerm {
+    if (self.JSONConnection != nil) {
+        [self.JSONConnection cancel];
+        self.JSONConnection = nil;
+    }
+    
     NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?search=%@", searchTerm];
     self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 

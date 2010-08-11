@@ -12,6 +12,8 @@
 @interface SpiritDetailViewController : JSONLoaderController {
     NSString *spiritId;
     
+    IBOutlet UILabel *spiritName;
+    IBOutlet UILabel *onSale;
     IBOutlet UIButton *priceBtn;
     IBOutlet UIButton *sizeBtn;
     IBOutlet UIButton *viewStoresBtn;
@@ -19,6 +21,8 @@
 
 @property (nonatomic, retain) NSString *spiritId;
 
+@property (nonatomic, retain) UILabel *spiritName;
+@property (nonatomic, retain) UILabel *onSale;
 @property (nonatomic, retain) UIButton *priceBtn;
 @property (nonatomic, retain) UIButton *sizeBtn;
 @property (nonatomic, retain) UIButton *viewStoresBtn;
