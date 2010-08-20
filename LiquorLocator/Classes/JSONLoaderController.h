@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
-
-@interface JSONLoaderController : UIViewController {
+@interface JSONLoaderController : UIViewController <MBProgressHUDDelegate> {
     NSString *feedURLString;
     
     NSURLConnection *JSONConnection;
@@ -18,7 +18,7 @@
     
     id objectList;
     
-    IBOutlet UITableView *table;    
+    MBProgressHUD *HUD;
 }
 
 @property (nonatomic, retain) NSString *feedURLString;
@@ -26,8 +26,7 @@
 @property (nonatomic, retain) NSMutableData *jsonData;
 @property (nonatomic, retain) id objectList;
 
-@property (nonatomic, retain) UITableView *table;
-
 - (void)handleError:(NSError *)error;
+- (void)jsonParsingComplete:(id)objects;
 
 @end

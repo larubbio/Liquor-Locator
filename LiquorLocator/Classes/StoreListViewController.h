@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JSONLoaderController.h"
+#import "StoreList.h"
 
-
-@interface StoreListViewController : JSONLoaderController <UITableViewDelegate, UITableViewDataSource> {
+@interface StoreListViewController : StoreList {
     NSString *spiritId;
 }
 
 @property (nonatomic, retain) NSString *spiritId;
-
 @end

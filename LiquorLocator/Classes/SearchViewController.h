@@ -1,5 +1,5 @@
 //
-//  SpiritsViewController.h
+//  SearchViewController.h
 //  LiquorLocator
 //
 //  Created by Rob LaRubbio on 7/29/10.
@@ -7,16 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JSONLoaderController.h"
+#import "SpiritList.h"
 
-@interface SpiritsViewController : JSONLoaderController 
-    <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate> {
-
-    NSArray *allSpirits;
+@interface SearchViewController : SpiritList <UISearchBarDelegate> {
     IBOutlet UISearchBar *search;
 }
 
-@property (nonatomic, retain) NSArray *allSpirits;
 @property (nonatomic, retain) UISearchBar *search;
 
 - (void)resetSearch;

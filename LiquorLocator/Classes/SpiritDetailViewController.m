@@ -10,10 +10,14 @@
 #import "StoreListViewController.h"
 #import "LiquorLocatorAppDelegate.h"
 
+#import "Constants.h"
+
 @implementation SpiritDetailViewController
 
 @synthesize spiritId;
 
+@synthesize spiritName;
+@synthesize onSale;
 @synthesize priceBtn;
 @synthesize sizeBtn;
 @synthesize viewStoresBtn;
@@ -42,6 +46,8 @@
 
 - (void)dealloc {
     [spiritId release];
+    [spiritName release];
+    [onSale release];
     [priceBtn release];
     [sizeBtn release];
     [viewStoresBtn release];
@@ -49,7 +55,7 @@
 }
 
 - (void)viewStores:(id)sender {
-    StoreListViewController *controller = [[StoreListViewController alloc] initWithNibName:@"StoresView" bundle:nil];   
+    StoreListViewController *controller = [[StoreListViewController alloc] initWithNibName:@"StoreListView" bundle:nil];   
     ((StoreListViewController *)controller).spiritId = spiritId;
     
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -59,19 +65,37 @@
 }
 
 #pragma mark -
-#pragma mark NSURLConnection Delegate Methods
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    [super connectionDidFinishLoading:connection];
+#pragma mark JSON Parsing Method
+- (void)jsonParsingComplete:(id)objects {
+    [super jsonParsingComplete:objects];
     
-    NSString *priceTitle = [NSString stringWithFormat:@"Cost: $%@", [objectList objectForKey:@"price"]];
-    NSString *sizeTitle = [NSString stringWithFormat:@"Size: %@ Liters", [objectList objectForKey:@"size"]];
+    NSString *priceTitle = [NSString stringWithFormat:@"Cost: $%@", [objectList objectForKey:kPrice]];
+    NSString *sizeTitle = [NSString stringWithFormat:@"Size: %@ Liters", [objectList objectForKey:kSize]];
     
+    spiritName.text = [objectList objectForKey:kBrandName];
+    spiritName.hidden = NO;
+    
+    BOOL on_sale = [((NSString *)[objectList objectForKey:kOnSale]) boolValue];
+    BOOL closeout = [((NSString *)[objectList objectForKey:kCloseout]) boolValue];
+    
+    if (on_sale && closeout) {
+        onSale.text = @"This product is on sale and closeout.";
+        onSale.hidden = NO;
+    } else if (on_sale) {
+        onSale.text = @"This product is on sale.";
+        onSale.hidden = NO;
+    } else if (closeout) {
+        onSale.text = @"This product is on closeout.";
+        onSale.hidden = NO;
+    }    
     [priceBtn setTitle:priceTitle forState:UIControlStateNormal];
     priceBtn.hidden = NO;
     [sizeBtn setTitle:sizeTitle forState:UIControlStateNormal];
     sizeBtn.hidden = NO;
     
     viewStoresBtn.hidden = NO;
+    
+    self.title = [objectList objectForKey:kBrandName];
 }
 
 @end

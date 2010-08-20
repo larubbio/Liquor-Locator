@@ -9,8 +9,10 @@
 #import "RootViewController.h"
 #import "CategoriesViewController.h"
 #import "StoresViewController.h"
-#import "SpiritsViewController.h"
+#import "SearchViewController.h"
 #import "CampaignViewController.h"
+
+#import "Constants.h"
 
 @implementation RootViewController
 
@@ -32,17 +34,17 @@
     locationManager.distanceFilter = 10.0f;
     [locationManager startUpdatingLocation];
 
-    self.title = @"Categories";
+    self.title = kCategories;
     
     tabBar.selectedItem = categoriesTabBarItem;	
     
     // Custom initialization
     CategoriesViewController *categoriesTabViewController = [[CategoriesViewController alloc] initWithNibName:@"CategoriesView" bundle:nil];
     StoresViewController *storesTabViewController = [[StoresViewController alloc] initWithNibName:@"StoresView" bundle:nil];
-    SpiritsViewController *spiritsTabViewController = [[SpiritsViewController alloc] initWithNibName:@"SpiritsView" bundle:nil];
+    SearchViewController *searchTabViewController = [[SearchViewController alloc] initWithNibName:@"SearchView" bundle:nil];
     CampaignViewController *campaignTabViewController = [[CampaignViewController alloc] initWithNibName:@"CampaignView" bundle:nil];
 		
-    NSArray *array = [[NSArray alloc] initWithObjects:categoriesTabViewController, storesTabViewController, spiritsTabViewController, campaignTabViewController, nil];
+    NSArray *array = [[NSArray alloc] initWithObjects:categoriesTabViewController, storesTabViewController, searchTabViewController, campaignTabViewController, nil];
     self.viewControllers = array;
 		
 	[categoriesTabViewController viewWillAppear:YES];
@@ -55,7 +57,7 @@
     [array release];
     [categoriesTabViewController release];
     [storesTabViewController release];
-    [spiritsTabViewController release];
+    [searchTabViewController release];
     [campaignTabViewController release];
     
     [super viewDidLoad];
@@ -104,16 +106,16 @@
     
 	if (item == categoriesTabBarItem) {
 		controller = [viewControllers objectAtIndex:0];
-        self.title = @"Categories";
+        self.title = kCategories;
 	} else if (item == storesTabBarItem) {
 		controller = [viewControllers objectAtIndex:1];
-        self.title = @"Stores";
+        self.title = kStores;
 	} else if (item == spiritsTabBarItem) {
 		controller = [viewControllers objectAtIndex:2];
-        self.title = @"Spirits";
+        self.title = kSearch;
     } else if (item == campaignTabBarItem) {
 		controller = [viewControllers objectAtIndex:3];
-        self.title = @"Campaign";
+        self.title = kCampaign;
     }
     
 	[controller viewWillAppear:YES];

@@ -12,6 +12,7 @@
 #import "SpiritListViewController.h"
 #import "StoreAnnotation.h"
 
+#import "Constants.h"
 
 @implementation StoreDetailViewController
 
@@ -85,8 +86,8 @@
     RootViewController *rootView = [delegate.navController.viewControllers objectAtIndex:0];
 
 	CLLocationCoordinate2D userCoordinate = rootView.userLocation.coordinate;
-    double latitude = [((NSString *)[self.objectList objectForKey:@"lat"]) doubleValue];
-    double longitude = [((NSString *)[self.objectList objectForKey:@"long"]) doubleValue];
+    double latitude = [((NSString *)[self.objectList objectForKey:kLat]) doubleValue];
+    double longitude = [((NSString *)[self.objectList objectForKey:kLong]) doubleValue];
     
 	NSString* startLocationParameter = [NSString stringWithFormat:@"%f,%f", userCoordinate.latitude, userCoordinate.longitude];    
 	NSString* destinationLocationParameter= [NSString stringWithFormat:@"%f,%f", latitude, longitude];    
@@ -99,11 +100,11 @@
 - (IBAction)callStoreManager:(id)sender {
     NSString *phone = nil;
 
-    for (NSDictionary *contact in [self.objectList objectForKey:@"contacts"]) {
-        NSString *role = [contact objectForKey:@"role"];
-        NSString *number = [contact objectForKey:@"number"];
+    for (NSDictionary *contact in [self.objectList objectForKey:kContacts]) {
+        NSString *role = [contact objectForKey:kRole];
+        NSString *number = [contact objectForKey:kNumber];
         
-        if ([role isEqualToString:@"Store Manager"]) {
+        if ([role isEqualToString:kStoreManager]) {
             phone = number;
         }
     }
@@ -114,11 +115,11 @@
 - (IBAction)callDistrictManager:(id)sender {
     NSString *phone = nil;
     
-    for (NSDictionary *contact in [self.objectList objectForKey:@"contacts"]) {
-        NSString *role = [contact objectForKey:@"role"];
-        NSString *number = [contact objectForKey:@"number"];
+    for (NSDictionary *contact in [self.objectList objectForKey:kContacts]) {
+        NSString *role = [contact objectForKey:kRole];
+        NSString *number = [contact objectForKey:kNumber];
         
-        if ([role isEqualToString:@"District Manager"]) {
+        if ([role isEqualToString:kDistrictManager]) {
             phone = number;
         }
     }
@@ -148,6 +149,7 @@
 - (IBAction)viewSpirits:(id)sender {
     SpiritListViewController *controller = [[SpiritListViewController alloc] initWithNibName:@"SpiritListView" bundle:nil];   
     ((SpiritListViewController *)controller).storeId = storeId;
+    ((SpiritListViewController *)controller).storeName = storeName.text;
 
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate.navController pushViewController:controller animated:YES];
@@ -157,25 +159,25 @@
 
     
 #pragma mark -
-#pragma mark NSURLConnection Delegate Methods
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    [super connectionDidFinishLoading:connection];
+#pragma mark JSON Parsing Method
+- (void)jsonParsingComplete:(id)objects {
+    [super jsonParsingComplete:objects];
     
     // Pull all data out of the dictionary into local variables
-    NSString *_name = [self.objectList objectForKey:@"name"];
-    NSString *_street = [self.objectList objectForKey:@"address"];
-//    NSString *_address2 = [self.objectList objectForKey:@"address2"];
-    NSString *_city = [self.objectList objectForKey:@"city"];
-    NSString *_zip = [self.objectList objectForKey:@"zip"];
-    double _latitude = [((NSString *)[self.objectList objectForKey:@"lat"]) doubleValue];
-    double _longitude = [((NSString *)[self.objectList objectForKey:@"long"]) doubleValue];
+    NSString *_name = [self.objectList objectForKey:kName];
+    NSString *_street = [self.objectList objectForKey:kAddress];
+//    NSString *_address2 = [self.objectList objectForKey:kAddress2];
+    NSString *_city = [self.objectList objectForKey:kCity];
+    NSString *_zip = [self.objectList objectForKey:kZip];
+    double _latitude = [((NSString *)[self.objectList objectForKey:kLat]) doubleValue];
+    double _longitude = [((NSString *)[self.objectList objectForKey:kLong]) doubleValue];
     
-    for (NSDictionary *contact in [self.objectList objectForKey:@"contacts"]) {
-        NSString *role = [contact objectForKey:@"role"];
-        NSString *name = [contact objectForKey:@"name"];
-        NSString *number = [contact objectForKey:@"number"];
+    for (NSDictionary *contact in [self.objectList objectForKey:kContacts]) {
+        NSString *role = [contact objectForKey:kRole];
+        NSString *name = [contact objectForKey:kName];
+        NSString *number = [contact objectForKey:kNumber];
         
-        if ([role isEqualToString:@"Store Manager"]) {
+        if ([role isEqualToString:kStoreManager]) {
             storeManagerName.text = name;
             storeManagerPhone.text = number;
         } else {
@@ -187,16 +189,11 @@
     
     // Handle hours
     int count = 0;
-    for (NSDictionary *hours in [self.objectList objectForKey:@"hours"]) {
-        NSString *startDay = [hours objectForKey:@"start_day"];
-        NSString *endDay = [hours objectForKey:@"end_day"];
-        NSString *open = [hours objectForKey:@"open"];
-        NSString *close = [hours objectForKey:@"close"];
-        
-        // For now ignore summer hours
-        NSNumber *summerHours = [hours objectForKey:@"summer_hours"];
-        
-        if ([summerHours boolValue]) continue;
+    for (NSDictionary *hours in [self.objectList objectForKey:kHours]) {
+        NSString *startDay = [hours objectForKey:kStartDay];
+        NSString *endDay = [hours objectForKey:kEndDay];
+        NSString *open = [hours objectForKey:kOpen];
+        NSString *close = [hours objectForKey:kClose];
         
         if (count == 0) {
             if ([startDay isEqualToString:endDay]) {
@@ -240,13 +237,15 @@
     
     // Add data to view outlets
     storeName.text = [NSString stringWithFormat:@"%@ - #%d", _name, storeId];
+    self.title = storeName.text;
+    
     street.text = _street;
 //    address2.text = _address2;
     cityZip.text = [NSString stringWithFormat:@"%@, WA %@", _city, _zip];
     
     StoreAnnotation *store = [[StoreAnnotation alloc] init];
-    store.name = _name;
-    store.address = _street;
+  //  store.name = _name;
+  //  store.address = _street;
     store.latitude = _latitude;
     store.longitude = _longitude;
     

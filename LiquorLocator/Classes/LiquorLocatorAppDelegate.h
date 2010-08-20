@@ -12,10 +12,19 @@
     UIWindow *window;
   
     IBOutlet UINavigationController *navController;
+    IBOutlet UIView *splashView;
+    
+    NSMutableDictionary *dataCache;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UINavigationController *navController;
+@property (nonatomic, retain) UIWindow *window;
+@property (nonatomic, retain) UINavigationController *navController;
+@property (nonatomic, retain) UIView *splashView;
 
+@property (nonatomic, retain) NSMutableDictionary *dataCache;
+
+- (id)getCachedDataForKey:(NSString *)key;
+- (void)putCachedData:(id)data forKey:(NSString *)key;
+- (void)purgeCache;
 @end
 

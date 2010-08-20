@@ -14,6 +14,8 @@
 
 @implementation CategoriesViewController
 
+@synthesize table;
+
 - (void)viewDidAppear:(BOOL)animated {
     self.feedURLString = @"http://wsll.pugdogdev.com/categories";
     
@@ -46,6 +48,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CategoryTableIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CategoryTableIdentifier] autorelease];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     NSUInteger row = [indexPath row];
@@ -65,6 +68,16 @@
     
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate.navController pushViewController:spiritListController animated:YES];
+    
+    [spiritListController release];    
+}
+
+#pragma mark -
+#pragma mark JSON Parsing Method
+- (void)jsonParsingComplete:(id)objects {
+    [super jsonParsingComplete:objects];
+    
+    [table reloadData];
 }
 
 @end

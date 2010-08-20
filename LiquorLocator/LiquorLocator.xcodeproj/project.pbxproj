@@ -20,14 +20,19 @@
 		4628BF061202846900ECE4BE /* StoresView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF041202846900ECE4BE /* StoresView.xib */; };
 		4628BF0A1202849200ECE4BE /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4628BF081202849200ECE4BE /* CategoriesViewController.m */; };
 		4628BF0B1202849200ECE4BE /* CategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF091202849200ECE4BE /* CategoriesView.xib */; };
-		4628BF0F120284A500ECE4BE /* SpiritsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4628BF0D120284A500ECE4BE /* SpiritsViewController.m */; };
-		4628BF10120284A500ECE4BE /* SpiritsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF0E120284A500ECE4BE /* SpiritsView.xib */; };
+		4628BF0F120284A500ECE4BE /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4628BF0D120284A500ECE4BE /* SearchViewController.m */; };
+		4628BF10120284A500ECE4BE /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF0E120284A500ECE4BE /* SearchView.xib */; };
 		4628BF14120284BD00ECE4BE /* CampaignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4628BF12120284BD00ECE4BE /* CampaignViewController.m */; };
 		4628BF15120284BD00ECE4BE /* CampaignView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF13120284BD00ECE4BE /* CampaignView.xib */; };
 		4628BF2912028A0200ECE4BE /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 4628BF2812028A0200ECE4BE /* Category.m */; };
 		4651F1121205099800A2079B /* JSONLoaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4651F1111205099800A2079B /* JSONLoaderController.m */; };
 		4651F3061205D30400A2079B /* SpiritDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4651F3051205D30400A2079B /* SpiritDetailViewController.m */; };
 		4651F3081205D34900A2079B /* SpiritDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4651F3071205D34900A2079B /* SpiritDetailView.xib */; };
+		46710EB51209C7A100B250F9 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 46710EB41209C7A100B250F9 /* MBProgressHUD.m */; };
+		4671108D120DAE5300B250F9 /* StoreList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4671108B120DAE5300B250F9 /* StoreList.m */; };
+		46711123120E02EC00B250F9 /* SpiritList.m in Sources */ = {isa = PBXBuildFile; fileRef = 46711122120E02EC00B250F9 /* SpiritList.m */; };
+		467111CA120E120D00B250F9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 467111C9120E120D00B250F9 /* Default.png */; };
+		4671147D1210677000B250F9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4671147C1210677000B250F9 /* Constants.m */; };
 		469B5F35120881E700A7E5DE /* StoreAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 469B5F34120881E700A7E5DE /* StoreAnnotation.m */; };
 		469B5FD11208A92900A7E5DE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 469B5FD01208A92800A7E5DE /* CoreLocation.framework */; };
 		469B60961209205C00A7E5DE /* StoreListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 469B60941209205C00A7E5DE /* StoreListViewController.m */; };
@@ -64,9 +69,9 @@
 		4628BF071202849200ECE4BE /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesViewController.h; sourceTree = "<group>"; };
 		4628BF081202849200ECE4BE /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
 		4628BF091202849200ECE4BE /* CategoriesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CategoriesView.xib; path = Classes/CategoriesView.xib; sourceTree = "<group>"; };
-		4628BF0C120284A500ECE4BE /* SpiritsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpiritsViewController.h; sourceTree = "<group>"; };
-		4628BF0D120284A500ECE4BE /* SpiritsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpiritsViewController.m; sourceTree = "<group>"; };
-		4628BF0E120284A500ECE4BE /* SpiritsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SpiritsView.xib; path = Classes/SpiritsView.xib; sourceTree = "<group>"; };
+		4628BF0C120284A500ECE4BE /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		4628BF0D120284A500ECE4BE /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		4628BF0E120284A500ECE4BE /* SearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchView.xib; path = Classes/SearchView.xib; sourceTree = "<group>"; };
 		4628BF11120284BD00ECE4BE /* CampaignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CampaignViewController.h; sourceTree = "<group>"; };
 		4628BF12120284BD00ECE4BE /* CampaignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CampaignViewController.m; sourceTree = "<group>"; };
 		4628BF13120284BD00ECE4BE /* CampaignView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CampaignView.xib; path = Classes/CampaignView.xib; sourceTree = "<group>"; };
@@ -77,6 +82,15 @@
 		4651F3041205D30400A2079B /* SpiritDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpiritDetailViewController.h; sourceTree = "<group>"; };
 		4651F3051205D30400A2079B /* SpiritDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpiritDetailViewController.m; sourceTree = "<group>"; };
 		4651F3071205D34900A2079B /* SpiritDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpiritDetailView.xib; sourceTree = "<group>"; };
+		46710EB31209C7A100B250F9 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		46710EB41209C7A100B250F9 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		4671108A120DAE5300B250F9 /* StoreList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreList.h; sourceTree = "<group>"; };
+		4671108B120DAE5300B250F9 /* StoreList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreList.m; sourceTree = "<group>"; };
+		46711121120E02EC00B250F9 /* SpiritList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpiritList.h; sourceTree = "<group>"; };
+		46711122120E02EC00B250F9 /* SpiritList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpiritList.m; sourceTree = "<group>"; };
+		467111C9120E120D00B250F9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		4671147B1210677000B250F9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		4671147C1210677000B250F9 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		469B5F33120881E700A7E5DE /* StoreAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreAnnotation.h; sourceTree = "<group>"; };
 		469B5F34120881E700A7E5DE /* StoreAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreAnnotation.m; sourceTree = "<group>"; };
 		469B5FD01208A92800A7E5DE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -124,12 +138,15 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				46710EB01209C78200B250F9 /* HUD */,
 				469B5F2A120881B800A7E5DE /* Annotations */,
 				46E647DC12034DAB00AB9328 /* JSON */,
 				4628BF26120289DF00ECE4BE /* Models */,
 				4628BF25120289C500ECE4BE /* Controllers */,
 				1D3623240D0F684500981E51 /* LiquorLocatorAppDelegate.h */,
 				1D3623250D0F684500981E51 /* LiquorLocatorAppDelegate.m */,
+				4671147B1210677000B250F9 /* Constants.h */,
+				4671147C1210677000B250F9 /* Constants.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -168,11 +185,12 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				467111C9120E120D00B250F9 /* Default.png */,
 				4628BF091202849200ECE4BE /* CategoriesView.xib */,
 				4628BF041202846900ECE4BE /* StoresView.xib */,
 				469B60951209205C00A7E5DE /* StoreListView.xib */,
 				460A7EEC120767E200F36A91 /* StoreDetailView.xib */,
-				4628BF0E120284A500ECE4BE /* SpiritsView.xib */,
+				4628BF0E120284A500ECE4BE /* SearchView.xib */,
 				46E649DF1203D11A00AB9328 /* SpiritListView.xib */,
 				4651F3071205D34900A2079B /* SpiritDetailView.xib */,
 				4628BF13120284BD00ECE4BE /* CampaignView.xib */,
@@ -200,8 +218,8 @@
 				4628BF081202849200ECE4BE /* CategoriesViewController.m */,
 				4628BF021202846900ECE4BE /* StoresViewController.h */,
 				4628BF031202846900ECE4BE /* StoresViewController.m */,
-				4628BF0C120284A500ECE4BE /* SpiritsViewController.h */,
-				4628BF0D120284A500ECE4BE /* SpiritsViewController.m */,
+				4628BF0C120284A500ECE4BE /* SearchViewController.h */,
+				4628BF0D120284A500ECE4BE /* SearchViewController.m */,
 				4628BF11120284BD00ECE4BE /* CampaignViewController.h */,
 				4628BF12120284BD00ECE4BE /* CampaignViewController.m */,
 				46E649DD1203D11A00AB9328 /* SpiritListViewController.h */,
@@ -216,6 +234,10 @@
 				460A7EEB120767E200F36A91 /* StoreDetailViewController.m */,
 				469B60931209205C00A7E5DE /* StoreListViewController.h */,
 				469B60941209205C00A7E5DE /* StoreListViewController.m */,
+				4671108A120DAE5300B250F9 /* StoreList.h */,
+				4671108B120DAE5300B250F9 /* StoreList.m */,
+				46711121120E02EC00B250F9 /* SpiritList.h */,
+				46711122120E02EC00B250F9 /* SpiritList.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -227,6 +249,15 @@
 				4628BF2812028A0200ECE4BE /* Category.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		46710EB01209C78200B250F9 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				46710EB31209C7A100B250F9 /* MBProgressHUD.h */,
+				46710EB41209C7A100B250F9 /* MBProgressHUD.m */,
+			);
+			name = HUD;
 			sourceTree = "<group>";
 		};
 		469B5F2A120881B800A7E5DE /* Annotations */ = {
@@ -304,13 +335,14 @@
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				4628BF061202846900ECE4BE /* StoresView.xib in Resources */,
 				4628BF0B1202849200ECE4BE /* CategoriesView.xib in Resources */,
-				4628BF10120284A500ECE4BE /* SpiritsView.xib in Resources */,
+				4628BF10120284A500ECE4BE /* SearchView.xib in Resources */,
 				4628BF15120284BD00ECE4BE /* CampaignView.xib in Resources */,
 				46E64865120374B700AB9328 /* RootView.xib in Resources */,
 				46E649E11203D11A00AB9328 /* SpiritListView.xib in Resources */,
 				4651F3081205D34900A2079B /* SpiritDetailView.xib in Resources */,
 				460A7EEE120767E200F36A91 /* StoreDetailView.xib in Resources */,
 				469B60971209205C00A7E5DE /* StoreListView.xib in Resources */,
+				467111CA120E120D00B250F9 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,7 +357,7 @@
 				1D3623260D0F684500981E51 /* LiquorLocatorAppDelegate.m in Sources */,
 				4628BF051202846900ECE4BE /* StoresViewController.m in Sources */,
 				4628BF0A1202849200ECE4BE /* CategoriesViewController.m in Sources */,
-				4628BF0F120284A500ECE4BE /* SpiritsViewController.m in Sources */,
+				4628BF0F120284A500ECE4BE /* SearchViewController.m in Sources */,
 				4628BF14120284BD00ECE4BE /* CampaignViewController.m in Sources */,
 				4628BF2912028A0200ECE4BE /* Category.m in Sources */,
 				46E647EA12034DAB00AB9328 /* NSObject+SBJSON.m in Sources */,
@@ -341,6 +373,10 @@
 				460A7EED120767E200F36A91 /* StoreDetailViewController.m in Sources */,
 				469B5F35120881E700A7E5DE /* StoreAnnotation.m in Sources */,
 				469B60961209205C00A7E5DE /* StoreListViewController.m in Sources */,
+				46710EB51209C7A100B250F9 /* MBProgressHUD.m in Sources */,
+				4671108D120DAE5300B250F9 /* StoreList.m in Sources */,
+				46711123120E02EC00B250F9 /* SpiritList.m in Sources */,
+				4671147D1210677000B250F9 /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

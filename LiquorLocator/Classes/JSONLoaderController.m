@@ -10,6 +10,9 @@
 #import "JSON.h"
 // This framework was imported so we could use the kCFURLErrorNotConnectedToInternet error code.
 #import <CFNetwork/CFNetwork.h>
+#import "LiquorLocatorAppDelegate.h"
+
+#import "Constants.h"
 
 @implementation JSONLoaderController
 
@@ -18,14 +21,38 @@
 @synthesize jsonData;
 @synthesize objectList;
 
-@synthesize table;
-
 - (void)viewDidAppear:(BOOL)animated {
+    HUD = nil;
+    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+
+    // Check out cache
+    id objects = [delegate getCachedDataForKey:self.feedURLString];
+    if (objects != nil) {
+        [self jsonParsingComplete:objects];
+        return;
+    }
+
+    // Start the status bar network activity indicator. We'll turn it off when the connection finishes or experiences an error.
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+
+    // Initialize the HUD with my view
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+	
+    // Add HUD to screen
+    [self.view addSubview:HUD];
+	
+    // Regisete for HUD callbacks so we can remove it from the window at the right time
+    HUD.delegate = self;
+    HUD.labelText = kLoading;
+
+    // Show the HUD while the we load and parse data
+    [HUD show:YES];
+    
     // Todo: Add cache.  Calling this twice and then scrolling before the list is reloaded causes a crash
     // since it attempts to get a cell yet I empty out the object list.
     self.objectList = [NSMutableArray array];
     
-    NSLog([NSString stringWithFormat:@"Connecting to %@", self.feedURLString]);
+    NSLog(@"Connecting to %@", self.feedURLString);
 
     // Use NSURLConnection to asynchronously download the data. This means the main thread will not be blocked - the
     // application will remain responsive to the user. 
@@ -40,9 +67,6 @@
     // implement a more flexible validation technique, and be able to both recover from errors and communicate problems
     // to the user in an unobtrusive manner.
     NSAssert(self.JSONConnection != nil, @"Failure to create URL connection.");
-    
-    // Start the status bar network activity indicator. We'll turn it off when the connection finishes or experiences an error.
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,6 +74,9 @@
     [super didReceiveMemoryWarning];
 	
 	// Release any cached data, images, etc that aren't in use.
+    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    
+    [delegate purgeCache];
 }
 
 - (void)viewDidUnload {
@@ -118,27 +145,48 @@
     NSLog(@"Connection::didFinishLoading");
     self.JSONConnection = nil;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;   
-    
-	// grab the JSON data as a string
-	NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+
+	NSString *jsonString = [[NSString alloc] initWithData:self.jsonData encoding:NSUTF8StringEncoding];
 	NSAssert(jsonString != nil, @"TODO larubbio: handle no data!");
-//    NSLog(jsonString);
+    //    NSLog(jsonString);
     
     // Create new SBJSON parser object
     SBJSON *parser = [[SBJSON alloc] init];
     
+    id objects = [parser objectWithString:jsonString error:nil];
+    
     // parse the JSON response into an object
     // Here we're using NSArray since we're parsing an array of JSON category objects
-    self.objectList = [parser objectWithString:jsonString error:nil];
-    
-    // categoryData will be retained by the thread until parsecategoryData: has finished executing, so we no longer need
-    // a reference to it in the main thread.
-    self.jsonData = nil;
-    
-    [table reloadData];
+    [self jsonParsingComplete:objects];
     
     [parser release];
     [jsonString release];
+    
+    self.jsonData = nil;
+}
+    
+// The secondary (parsing) thread calls jsonParsingComplete: on the main thread with all of the parsed objects. 
+- (void)jsonParsingComplete:(id)objects {
+    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    
+    [delegate putCachedData:objects forKey:self.feedURLString];
+    
+    self.objectList = objects;
+    
+    // Hide my loading HUD
+    if (HUD != nil) {
+        [HUD hide:YES];
+    }
+}
+
+#pragma mark -
+#pragma mark MBProgressHUDDelegate methods
+
+- (void)hudWasHidden {
+    // Remove HUD from screen when the HUD is hidden
+    [HUD removeFromSuperview];
+    [HUD release];
+    HUD = nil;
 }
 
 @end

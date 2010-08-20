@@ -14,6 +14,7 @@
     
     NSString *name;
     NSString *address;
+    int storeId;
     
     double latitude;
     double longitude;
@@ -23,6 +24,7 @@
 
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *address;
+@property (nonatomic, assign) int storeId;
 
 @property (nonatomic, assign) double latitude;
 @property (nonatomic, assign) double longitude;

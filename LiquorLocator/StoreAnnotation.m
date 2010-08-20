@@ -15,6 +15,7 @@
 
 @synthesize name;
 @synthesize address;
+@synthesize storeId;
 
 @synthesize latitude;
 @synthesize longitude;
