@@ -184,8 +184,6 @@
     NSError *error;
     id objects = [parser objectWithString:jsonString error:&error];
 
-    objects = nil;
-    
     if (objects == nil) {
         [self handleError:error];
     }

@@ -49,6 +49,7 @@
     NSString *const kCategories = @"Categories";
     NSString *const kStores = @"Stores";
     NSString *const kSearch = @"Search";
+    NSString *const kLocalDistillers = @"Washington State Distillers";
     NSString *const kCampaign = @"Campaign";
 
 @end

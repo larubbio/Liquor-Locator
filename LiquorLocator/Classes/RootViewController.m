@@ -10,6 +10,7 @@
 #import "CategoriesViewController.h"
 #import "StoresViewController.h"
 #import "SearchViewController.h"
+#import "LocalDistillersViewController.h"
 #import "CampaignViewController.h"
 
 #import "Constants.h"
@@ -24,6 +25,7 @@
 @synthesize	categoriesTabBarItem;
 @synthesize storesTabBarItem;
 @synthesize	spiritsTabBarItem;
+@synthesize localDistillersTabBarItem;
 @synthesize campaignTabBarItem;
 @synthesize selectedViewController;
 
@@ -42,9 +44,10 @@
     CategoriesViewController *categoriesTabViewController = [[CategoriesViewController alloc] initWithNibName:@"CategoriesView" bundle:nil];
     StoresViewController *storesTabViewController = [[StoresViewController alloc] initWithNibName:@"StoresView" bundle:nil];
     SearchViewController *searchTabViewController = [[SearchViewController alloc] initWithNibName:@"SearchView" bundle:nil];
+    LocalDistillersViewController *localDistillersTabViewController = [[LocalDistillersViewController alloc] initWithNibName:@"LocalDistillersView" bundle:nil];
     CampaignViewController *campaignTabViewController = [[CampaignViewController alloc] initWithNibName:@"CampaignView" bundle:nil];
 		
-    NSArray *array = [[NSArray alloc] initWithObjects:categoriesTabViewController, storesTabViewController, searchTabViewController, campaignTabViewController, nil];
+    NSArray *array = [[NSArray alloc] initWithObjects:categoriesTabViewController, storesTabViewController, searchTabViewController, localDistillersTabViewController, campaignTabViewController, nil];
     self.viewControllers = array;
 		
 	[categoriesTabViewController viewWillAppear:YES];
@@ -58,6 +61,7 @@
     [categoriesTabViewController release];
     [storesTabViewController release];
     [searchTabViewController release];
+    [localDistillersTabViewController release];
     [campaignTabViewController release];
     
     [super viewDidLoad];
@@ -86,6 +90,7 @@
     [categoriesTabBarItem release];
     [storesTabBarItem release];
     [spiritsTabBarItem release];
+    [localDistillersTabBarItem release];
     [campaignTabBarItem release];
     [viewControllers release];
     [selectedViewController release];
@@ -117,8 +122,11 @@
 	} else if (item == spiritsTabBarItem) {
 		controller = [viewControllers objectAtIndex:2];
         self.title = kSearch;
-    } else if (item == campaignTabBarItem) {
+    } else if (item == localDistillersTabBarItem) {
 		controller = [viewControllers objectAtIndex:3];
+        self.title = kLocalDistillers;
+    } else if (item == campaignTabBarItem) {
+		controller = [viewControllers objectAtIndex:4];
         self.title = kCampaign;
     }
     

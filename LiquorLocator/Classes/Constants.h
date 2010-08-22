@@ -53,6 +53,7 @@ extern NSString *const kLoading;
 extern NSString *const kCategories;
 extern NSString *const kStores;
 extern NSString *const kSearch;
+extern NSString *const kLocalDistillers;
 extern NSString *const kCampaign;
 
 @end
