@@ -88,4 +88,5 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'wsll.rest',
+    'wsll.html',
 )

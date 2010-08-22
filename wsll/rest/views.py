@@ -23,7 +23,7 @@ def spirits(request):
     elif 'category' in request.GET:
         cursor = connection.cursor()
 
-        cursor.execute("select brand_name, count(*), id, size, total_retail_price from spirits where category = %s group by brand_name order by brand_name", [request.GET['category'])
+        cursor.execute("select brand_name, count(*), id, size, total_retail_price from spirits where category = %s group by brand_name order by brand_name", [request.GET['category']])
         
         rows = cursor.fetchall()
 

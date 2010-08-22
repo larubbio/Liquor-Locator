@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     (r'^store/(?P<store_id>\d+)$', 'wsll.rest.views.store'),
     (r'^store/(?P<store_id>\d+)/spirits$', 'wsll.rest.views.store_inventory'),
     (r'^categories$', 'wsll.rest.views.categories'),
+    ('info', 'wsll.html.views.info'),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
