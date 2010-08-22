@@ -192,7 +192,13 @@
             double latitude = [[store objectForKey:kLat] doubleValue];
             double longitude = [[store objectForKey:kLong] doubleValue];
             CLLocation *storeLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-            CLLocationDistance distance = [storeLocation distanceFromLocation:rootView.userLocation];
+            CLLocationDistance distance;
+            
+            if ([storeLocation respondsToSelector:@selector(distanceFromLocation:)]) {
+                distance = [storeLocation distanceFromLocation:rootView.userLocation];
+            } else {
+                distance = [storeLocation getDistanceFrom:rootView.userLocation];
+            }
             double miles = distance * 0.000621371192;
 
             NSDecimalNumber *dist = [[NSDecimalNumber alloc] initWithDouble:miles];

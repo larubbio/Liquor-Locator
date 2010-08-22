@@ -8,6 +8,8 @@
 
 #import "JSONLoaderController.h"
 #import "JSON.h"
+#import <unistd.h>
+
 // This framework was imported so we could use the kCFURLErrorNotConnectedToInternet error code.
 #import <CFNetwork/CFNetwork.h>
 #import "LiquorLocatorAppDelegate.h"
@@ -23,6 +25,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     HUD = nil;
+    errorOccured = NO;
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 
     // Check out cache
@@ -98,10 +101,34 @@
 // partly because this application does not have any offline functionality for the user. Most real applications should
 // handle the error in a less obtrusive way and provide offline functionality to the user.
 - (void)handleError:(NSError *)error {
-    NSString *errorMessage = [error localizedDescription];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Title", @"Title for alert displayed when download or parse error occurs.") message:errorMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
-    [alertView release];
+    errorOccured = YES;
+    if (HUD == nil) {
+        // Initialize the HUD with my view
+        HUD = [[MBProgressHUD alloc] initWithView:self.view];
+
+        // Add HUD to screen
+        [self.view addSubview:HUD];
+        
+        // Regisete for HUD callbacks so we can remove it from the window at the right time
+        HUD.delegate = self;
+        
+        // Show the HUD while the we load and parse data
+        [HUD show:YES];
+    }
+
+    // TODO: Show error HUD
+    // The sample image is based on the work by www.pixelpressicons.com, http://creativecommons.org/licenses/by/2.5/ca/
+	// Make the customViews 37 by 37 pixels for best results (those are the bounds of the build-in progress indicators)
+	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]] autorelease];
+	HUD.mode = MBProgressHUDModeCustomView;
+	HUD.labelText = @"Sorry.";
+    HUD.detailsLabelText = @"We were unable to access the data. ;(";
+    
+    [HUD showWhileExecuting:@selector(delay) onTarget:self withObject:nil animated:YES];
+}
+
+- (void)delay {
+    sleep(3);
 }
 
 #pragma mark -
@@ -153,10 +180,16 @@
     // Create new SBJSON parser object
     SBJSON *parser = [[SBJSON alloc] init];
     
-    id objects = [parser objectWithString:jsonString error:nil];
-    
     // parse the JSON response into an object
-    // Here we're using NSArray since we're parsing an array of JSON category objects
+    NSError *error;
+    id objects = [parser objectWithString:jsonString error:&error];
+
+    objects = nil;
+    
+    if (objects == nil) {
+        [self handleError:error];
+    }
+    
     [self jsonParsingComplete:objects];
     
     [parser release];
@@ -174,7 +207,7 @@
     self.objectList = objects;
     
     // Hide my loading HUD
-    if (HUD != nil) {
+    if (HUD != nil && errorOccured == NO) {
         [HUD hide:YES];
     }
 }

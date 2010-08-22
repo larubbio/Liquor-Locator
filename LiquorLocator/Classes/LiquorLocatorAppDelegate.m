@@ -17,9 +17,18 @@
 @synthesize splashView;
 
 @synthesize dataCache;
+
+#pragma mark UIApplication Delegate Methods
 #define SPLASH
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
     dataCache = [[NSMutableDictionary alloc] init];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyyMMdd"];
+    NSString *dateStr = [dateFormat stringFromDate:[NSDate date]];  
+    [dateFormat release];
+    
+    [self putCachedData:dateStr forKey:@"DATE"];
     
     // Override point for customization after application launch
 #ifdef SPLASH
@@ -33,12 +42,53 @@
 
 }
 
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    // Check cache date.  If older than 1 week purge and reset date
+    
+    NSString *dateStr = [self getCachedDataForKey:@"DATE"];
+    
+    if (dateStr != nil) {
+        // Convert string to date object
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"yyyyMMdd"];
+        NSDate *cacheDate = [dateFormat dateFromString:dateStr];
+        [dateFormat release];
+        
+        NSDate *today =[NSDate date];
+        
+        if ([cacheDate timeIntervalSinceDate:today] > 7) {
+            [self purgeCache];
+        }        
+    } else {
+        // Cache has no date, add one
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"yyyyMMdd"];
+        NSString *dateStr = [dateFormat stringFromDate:[NSDate date]];  
+        [dateFormat release];
+        
+        [self putCachedData:dateStr forKey:@"DATE"];
+    }        
+}
+
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
+    [self purgeCache];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+}
+
+#pragma mark -
 - (id)getCachedDataForKey:(NSString *)key {
     return [dataCache objectForKey:key];
 }
 
 - (void)putCachedData:(id)data forKey:(NSString *)key {
-    [dataCache setObject:data forKey:key];
+    if (data != nil) {        
+        [dataCache setObject:data forKey:key];
+    }
 }
      
 - (void)purgeCache {

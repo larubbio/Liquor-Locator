@@ -10,7 +10,8 @@
 
 
 @interface CampaignViewController : UIViewController {
-
+    IBOutlet UIWebView *webView;
 }
 
+@property (nonatomic, retain) UIWebView *webView;
 @end

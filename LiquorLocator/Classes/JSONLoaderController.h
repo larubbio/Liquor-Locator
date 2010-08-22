@@ -19,6 +19,7 @@
     id objectList;
     
     MBProgressHUD *HUD;
+    BOOL errorOccured;
 }
 
 @property (nonatomic, retain) NSString *feedURLString;
