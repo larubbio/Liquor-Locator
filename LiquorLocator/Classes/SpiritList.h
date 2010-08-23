@@ -12,8 +12,17 @@
 
 @interface SpiritList : JSONLoaderController  <UITableViewDataSource, UITableViewDelegate>  {
     IBOutlet UITableView *table;   
+    
+    NSMutableDictionary *spirits;
+    NSArray *keys;
+    
+    BOOL indexed;
 }
 
 @property (nonatomic, retain) UITableView *table;
 
+@property (nonatomic, retain) NSMutableDictionary *spirits;
+@property (nonatomic, retain) NSArray *keys;
+
+@property (nonatomic, assign) BOOL indexed;
 @end

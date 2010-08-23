@@ -19,6 +19,8 @@
 @synthesize storeName;
 
 - (void)viewDidAppear:(BOOL)animated {
+    indexed = YES;
+    
     if (self.category != nil) {
         NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?category=%@", category];
         self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

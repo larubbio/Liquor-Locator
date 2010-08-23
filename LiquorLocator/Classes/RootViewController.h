@@ -18,6 +18,7 @@
 	IBOutlet UITabBarItem *categoriesTabBarItem;
 	IBOutlet UITabBarItem *storesTabBarItem;
 	IBOutlet UITabBarItem *spiritsTabBarItem;
+	IBOutlet UITabBarItem *localDistillersTabBarItem;
 	IBOutlet UITabBarItem *campaignTabBarItem;
 	UIViewController *selectedViewController;
 }
@@ -27,6 +28,7 @@
 @property (nonatomic, retain) IBOutlet UITabBarItem *categoriesTabBarItem;
 @property (nonatomic, retain) IBOutlet UITabBarItem *storesTabBarItem;
 @property (nonatomic, retain) IBOutlet UITabBarItem *spiritsTabBarItem;
+@property (nonatomic, retain) IBOutlet UITabBarItem *localDistillersTabBarItem;
 @property (nonatomic, retain) IBOutlet UITabBarItem *campaignTabBarItem;
 @property (nonatomic, retain) UIViewController *selectedViewController;
 

@@ -17,6 +17,11 @@
 
 @synthesize table;
 
+@synthesize spirits;
+@synthesize keys;
+
+@synthesize indexed;
+
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
@@ -30,21 +35,61 @@
     // e.g. self.myOutlet = nil;
 }
 
-
 - (void)dealloc {
     [table release];
+    [spirits release];
+    [keys release];
     [super dealloc];
+}
+
+#pragma mark -
+#pragma mark JSON
+- (void)jsonParsingComplete:(id)objects {
+    if (spirits != nil) {
+        [spirits release];
+        spirits = nil;
+    }
+    spirits = [[NSMutableDictionary alloc] init];
+    
+    if (keys != nil) {
+        [keys release];
+        keys = nil;
+    }
+    
+    // Loop over objects
+    for (NSMutableDictionary *spirit in objects) {
+        NSString *firstLetter = [[spirit objectForKey:kShortName] substringToIndex:1];
+
+        if ([self.spirits objectForKey:firstLetter]) {
+            NSMutableArray *list = [self.spirits objectForKey:firstLetter];
+            [list addObject:spirit];
+        } else {
+            NSMutableArray *list = [[NSMutableArray alloc] init];
+            [list addObject:spirit];
+            [self.spirits setObject:list forKey:firstLetter];
+            
+            [list release];
+        }
+    }
+    
+    NSArray *array = [[spirits allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    self.keys = array;
+    
+    [super jsonParsingComplete:objects];
 }
 
 #pragma mark -
 #pragma mark Table View Data Source Methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return [keys count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.objectList count];
+    NSString *key = [keys objectAtIndex:section];
+    NSArray *spiritSection = [spirits objectForKey:key];
+
+    return [spiritSection count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -54,8 +99,12 @@
     
     UITableViewCell *cell;
     
+    NSUInteger section = [indexPath section];
     NSUInteger row = [indexPath row];
-    NSDictionary *spirit = [objectList objectAtIndex:row]; 
+    
+    NSString *key = [keys objectAtIndex:section];
+    NSArray *spiritSection = [spirits objectForKey:key];
+    NSDictionary *spirit = [spiritSection objectAtIndex:row]; 
 
     if ([spirit objectForKey:kId]) {
         cell = [tableView dequeueReusableCellWithIdentifier:SingleSpiritCellIdentifier];
@@ -81,13 +130,30 @@
     return cell;
 }
 
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return nil;
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    if (indexed) {
+        return keys;
+    } else {
+        return nil;
+    }
+}
+
 #pragma mark -
 #pragma mark Table View Delegate Methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     id controller;
+
+    NSUInteger section = [indexPath section];
     NSUInteger row = [indexPath row];
-    NSDictionary *spirit = [objectList objectAtIndex:row]; 
+    
+    NSString *key = [keys objectAtIndex:section];
+    NSArray *spiritSection = [spirits objectForKey:key];
+    NSDictionary *spirit = [spiritSection objectAtIndex:row]; 
     
     if ([spirit objectForKey:kId]) {
         controller = [[SpiritDetailViewController alloc] initWithNibName:@"SpiritDetailView" bundle:nil];

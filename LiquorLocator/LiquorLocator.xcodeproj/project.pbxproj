@@ -37,6 +37,7 @@
 		469B5FD11208A92900A7E5DE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 469B5FD01208A92800A7E5DE /* CoreLocation.framework */; };
 		469B60961209205C00A7E5DE /* StoreListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 469B60941209205C00A7E5DE /* StoreListViewController.m */; };
 		469B60971209205C00A7E5DE /* StoreListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 469B60951209205C00A7E5DE /* StoreListView.xib */; };
+		46DB35C9121998CB001C5C4B /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 46DB35C8121998CB001C5C4B /* 37x-Checkmark.png */; };
 		46E647EA12034DAB00AB9328 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E647DF12034DAB00AB9328 /* NSObject+SBJSON.m */; };
 		46E647EB12034DAB00AB9328 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E647E112034DAB00AB9328 /* NSString+SBJSON.m */; };
 		46E647EC12034DAB00AB9328 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E647E312034DAB00AB9328 /* SBJSON.m */; };
@@ -47,6 +48,8 @@
 		46E64865120374B700AB9328 /* RootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E64864120374B700AB9328 /* RootView.xib */; };
 		46E649E01203D11A00AB9328 /* SpiritListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E649DE1203D11A00AB9328 /* SpiritListViewController.m */; };
 		46E649E11203D11A00AB9328 /* SpiritListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E649DF1203D11A00AB9328 /* SpiritListView.xib */; };
+		46FF63101221889D00EEC2F6 /* LocalDistillersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FF630E1221889D00EEC2F6 /* LocalDistillersViewController.m */; };
+		46FF63111221889D00EEC2F6 /* LocalDistillersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46FF630F1221889D00EEC2F6 /* LocalDistillersView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +100,7 @@
 		469B60931209205C00A7E5DE /* StoreListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreListViewController.h; sourceTree = "<group>"; };
 		469B60941209205C00A7E5DE /* StoreListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreListViewController.m; sourceTree = "<group>"; };
 		469B60951209205C00A7E5DE /* StoreListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StoreListView.xib; path = Classes/StoreListView.xib; sourceTree = "<group>"; };
+		46DB35C8121998CB001C5C4B /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		46E647DD12034DAB00AB9328 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		46E647DE12034DAB00AB9328 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		46E647DF12034DAB00AB9328 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -116,6 +120,9 @@
 		46E649DD1203D11A00AB9328 /* SpiritListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpiritListViewController.h; sourceTree = "<group>"; };
 		46E649DE1203D11A00AB9328 /* SpiritListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpiritListViewController.m; sourceTree = "<group>"; };
 		46E649DF1203D11A00AB9328 /* SpiritListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SpiritListView.xib; path = Classes/SpiritListView.xib; sourceTree = "<group>"; };
+		46FF630D1221889D00EEC2F6 /* LocalDistillersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalDistillersViewController.h; sourceTree = "<group>"; };
+		46FF630E1221889D00EEC2F6 /* LocalDistillersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDistillersViewController.m; sourceTree = "<group>"; };
+		46FF630F1221889D00EEC2F6 /* LocalDistillersView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LocalDistillersView.xib; path = Classes/LocalDistillersView.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* LiquorLocator-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "LiquorLocator-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -185,7 +192,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				46DB35C8121998CB001C5C4B /* 37x-Checkmark.png */,
 				467111C9120E120D00B250F9 /* Default.png */,
+				46FF630F1221889D00EEC2F6 /* LocalDistillersView.xib */,
 				4628BF091202849200ECE4BE /* CategoriesView.xib */,
 				4628BF041202846900ECE4BE /* StoresView.xib */,
 				469B60951209205C00A7E5DE /* StoreListView.xib */,
@@ -238,6 +247,8 @@
 				4671108B120DAE5300B250F9 /* StoreList.m */,
 				46711121120E02EC00B250F9 /* SpiritList.h */,
 				46711122120E02EC00B250F9 /* SpiritList.m */,
+				46FF630D1221889D00EEC2F6 /* LocalDistillersViewController.h */,
+				46FF630E1221889D00EEC2F6 /* LocalDistillersViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -315,6 +326,9 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Pug Dog Dev LLC";
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "LiquorLocator" */;
 			compatibilityVersion = "Xcode 3.2";
 			hasScannedForEncodings = 1;
@@ -343,6 +357,8 @@
 				460A7EEE120767E200F36A91 /* StoreDetailView.xib in Resources */,
 				469B60971209205C00A7E5DE /* StoreListView.xib in Resources */,
 				467111CA120E120D00B250F9 /* Default.png in Resources */,
+				46DB35C9121998CB001C5C4B /* 37x-Checkmark.png in Resources */,
+				46FF63111221889D00EEC2F6 /* LocalDistillersView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +393,7 @@
 				4671108D120DAE5300B250F9 /* StoreList.m in Sources */,
 				46711123120E02EC00B250F9 /* SpiritList.m in Sources */,
 				4671147D1210677000B250F9 /* Constants.m in Sources */,
+				46FF63101221889D00EEC2F6 /* LocalDistillersViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,11 +430,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rob LaRubbio (49MY637DK7)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "76215F00-0550-41ED-997C-8A8AAC1FCF82";
 				SDKROOT = iphoneos4.0;
 			};
 			name = Debug;
@@ -426,11 +445,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rob LaRubbio (49MY637DK7)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CE20FEC0-6916-4D0B-86EF-59A8FD18F9C7";
 				SDKROOT = iphoneos4.0;
 			};
 			name = Release;

@@ -7,14 +7,23 @@
 //
 
 #import "SearchViewController.h"
+#import "Constants.h"
 
 @implementation SearchViewController
 
 @synthesize search;
 
 - (void)resetSearch {
-    [objectList release];
-    objectList = nil;
+    if (spirits != nil) {
+        [spirits release];
+        spirits = nil;
+    }
+    spirits = [[NSMutableDictionary alloc] init];
+    
+    if (keys != nil) {
+        [keys release];
+        keys = nil;
+    }
 }
 
 #pragma mark -
@@ -81,12 +90,31 @@
 #pragma mark JSON Parsing Method
 - (void)jsonParsingComplete:(id)objects {
     [self resetSearch];
-    self.objectList = objects;
+    
+    // Loop over objects
+    for (NSMutableDictionary *spirit in objects) {
+        NSString *firstLetter = [[spirit objectForKey:kShortName] substringToIndex:1];
+        
+        if ([self.spirits objectForKey:firstLetter]) {
+            NSMutableArray *list = [self.spirits objectForKey:firstLetter];
+            [list addObject:spirit];
+        } else {
+            NSMutableArray *list = [[NSMutableArray alloc] init];
+            [list addObject:spirit];
+            [self.spirits setObject:list forKey:firstLetter];
+            
+            [list release];
+        }
+    }
+    
+    NSArray *array = [[spirits allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    self.keys = array;
     
     [table reloadData];
 }
     
 - (void)viewDidAppear:(BOOL)animated {
+    indexed = NO;
 }
 
 - (void)didReceiveMemoryWarning {
