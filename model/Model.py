@@ -13,6 +13,41 @@ store_contacts = Table('store_contacts_bak', Base.metadata,
                        Column('contact_id', Integer, ForeignKey('contacts_bak.id'))
                        )
 
+distiller_spirits = Table('distiller_spirits_bak', Base.metadata,
+                       Column('distiller_id', Integer, ForeignKey('local_distillers_bak.id')),
+                       Column('spirit_id', Integer, ForeignKey('spirits_bak.id'))
+                       )
+
+class Distiller(Base):
+    __tablename__ = 'local_distillers_bak'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(45))
+    street = Column(String(45))
+    address = Column(String(45))
+    lat = Column(Numeric('10,7'))
+    long = Column(Numeric('10,7'))
+    url = Column(String(255))
+    search_term = Column(String(45))
+    
+    # many to many Distiller<->Spirits
+    # While this is many to many it is actually just one to many, I just don't want
+    # distiller_id in the spirits table
+    spirits = relationship('Spirit', secondary=distiller_spirits, backref='distiller')
+
+    def __init__(self, name, street, address, lat, long, url, search_term):
+        self.name = name
+        self.street = street
+        self.address = address
+        self.lat = lat
+        self.long = long
+        self.url = url
+        self.search_term = search_term
+        Session().add(self)    
+
+    def __repr__(self):
+       return "<Distiller(%s, '%s')>" % (self.id, self.name)
+
 class Store(Base):
     __tablename__ = 'stores_bak'
 
@@ -113,7 +148,6 @@ class StoreInventory(Base):
     qty = Column(Integer)
     store_id = Column(Integer, ForeignKey('stores_bak.id'))
     spirit_id = Column(String(10), ForeignKey('spirits_bak.id'))
-
 
     store = relationship(Store, backref='inventory')
     spirit = relationship(Spirit, backref='inventory')

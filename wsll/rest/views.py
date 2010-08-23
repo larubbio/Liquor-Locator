@@ -1,5 +1,5 @@
 import math
-from models import Spirit, Store, StoreInventory, Contact, Hours, Category
+from models import Spirit, Store, StoreInventory, Contact, Hours, Category, Distiller
 
 from django.db import connection
 from django.template import Context, loader
@@ -141,3 +141,20 @@ def categories(request):
     mimetype = 'application/json'
     data = simplejson.dumps([c.category for c in Category.objects.all()])
     return HttpResponse(data,mimetype)
+
+def distillers(request):
+    mimetype = 'application/json'
+
+    distillers = get_list_or_404(Distiller, 
+                                 url__isnull=False)
+
+    data = simplejson.dumps([{'name':d.name, 'id':d.id, 'in_store':d.search_term is not None} for d in distillers])
+    return HttpResponse(data,mimetype)
+
+def distiller(request, distiller_id):
+    distiller = get_object_or_404(Distiller, pk=distiller_id)
+
+    mimetype = 'application/json'
+    return HttpResponse(distiller.json(),mimetype)
+
+    

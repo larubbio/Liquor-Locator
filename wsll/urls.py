@@ -13,6 +13,8 @@ urlpatterns = patterns('',
     (r'^store/(?P<store_id>\d+)$', 'wsll.rest.views.store'),
     (r'^store/(?P<store_id>\d+)/spirits$', 'wsll.rest.views.store_inventory'),
     (r'^categories$', 'wsll.rest.views.categories'),
+    (r'^distillers$', 'wsll.rest.views.distillers'),
+    (r'^distiller/(?P<distiller_id>\d+)$$', 'wsll.rest.views.distiller'),
     ('info', 'wsll.html.views.info'),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 

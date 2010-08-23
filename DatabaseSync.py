@@ -334,6 +334,8 @@ session.execute("TRUNCATE TABLE spirits_bak")
 session.execute("TRUNCATE TABLE store_contacts_bak")
 session.execute("TRUNCATE TABLE store_inventory_bak")
 session.execute("TRUNCATE TABLE stores_bak")
+session.execute("TRUNCATE TABLE local_distillers_bak")
+session.execute("TRUNCATE TABLE distiller_spirits_bak")
 
 # To make sure you're seeing all debug output:
 logger = logging.getLogger()
@@ -374,6 +376,21 @@ except:
     e, m, tb = sys.exc_info()
     pdb.post_mortem(tb)
 
+# Set up local distillers
+
+# For each local distiller
+distillers = session.query(Model.Distiller).filter(Model.Distiller.search_term!=None)
+for d in distillers.all():
+
+    if d.search_term:
+        search_term = '%' + d.search_term + '%'
+
+        # select all spirits that match search_term
+        spirits = session.query(Model.Spirit).filter(Model.Spirit.brand_name.like(search_term))
+
+        for s in spirits.all():
+            d.spirits.append(s)
+                                          
 
 # Swap live tables with backups
 session.execute('''RENAME TABLE 
@@ -383,6 +400,8 @@ session.execute('''RENAME TABLE
   store_contacts TO store_contacts_tmp,
   store_inventory TO store_inventory_tmp,
   stores TO stores_tmp,
+  local_distillers TO local_distillers_tmp,
+  distiller_spirits TO distiller_spirits_tmp,
 
   contacts_bak TO contacts,
   hours_bak TO hours,
@@ -390,6 +409,8 @@ session.execute('''RENAME TABLE
   store_contacts_bak TO store_contacts,
   store_inventory_bak TO store_inventory,
   stores_bak TO stores,
+  local_distillers_bak TO local_distillers,
+  distiller_spirits TO distiller_spirits_bak,
 
   contacts_tmp TO contacts_bak,
   hours_tmp TO hours_bak,
@@ -397,6 +418,8 @@ session.execute('''RENAME TABLE
   store_contacts_tmp TO store_contacts_bak,
   store_inventory_tmp TO store_inventory_bak,
   stores_tmp TO stores_bak
+  local_distillers_tmp to local_distillers_bak
+  distiller_spirits_tmp TO distiller_spirits_bak
 ''')
 
 session.commit()

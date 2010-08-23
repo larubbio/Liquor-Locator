@@ -3,7 +3,6 @@ from django.utils import simplejson
 
 from django.db import models
 
-# Create your models here.
 class Spirit(models.Model):
     id = models.CharField(max_length=10, primary_key=True)
     category = models.CharField(max_length=50)
@@ -234,3 +233,44 @@ class Category(models.Model):
     class Meta:
         db_table = 'categories_view'
         managed = False
+
+class Distiller(models.Model):
+    id = models.IntegerField(primary_key=True)
+
+    name = models.CharField(max_length=45)
+    street = models.CharField(max_length=45)
+    address = models.CharField(max_length=45)
+    lat = models.DecimalField(max_digits=10, decimal_places=7)
+    long = models.DecimalField(max_digits=10, decimal_places=7)
+    url = models.CharField(max_length=255)
+    search_term = models.CharField(max_length=45)
+
+    # many to many
+    spirits = models.ManyToManyField(Spirit, 
+                                     db_table='distiller_spirits', 
+                                     related_name='distiller')
+
+    def __unicode__(self):
+        return "<Distiller: %d, '%s'>" % (self.id, self.name)
+
+    def dict(self):
+        ret = self.__dict__.copy()
+        del ret['_state']
+
+        ret['lat'] = str(self.lat)
+        ret['long'] = str(self.long)
+
+        ret['spirits'] = []
+        for s in self.spirits.all():
+            ret['spirits'].append(s.dict())
+        
+        return ret
+
+    def json(self):
+        ret = self.dict()
+
+        return simplejson.dumps(ret)
+
+    class Meta:
+        db_table = 'local_distillers'
+
