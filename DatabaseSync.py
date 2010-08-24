@@ -417,8 +417,8 @@ session.execute('''RENAME TABLE
   spirits_tmp TO spirits_bak,
   store_contacts_tmp TO store_contacts_bak,
   store_inventory_tmp TO store_inventory_bak,
-  stores_tmp TO stores_bak
-  local_distillers_tmp to local_distillers_bak
+  stores_tmp TO stores_bak,
+  local_distillers_tmp to local_distillers_bak,
   distiller_spirits_tmp TO distiller_spirits_bak
 ''')
 
