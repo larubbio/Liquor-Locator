@@ -37,6 +37,10 @@
 		469B5FD11208A92900A7E5DE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 469B5FD01208A92800A7E5DE /* CoreLocation.framework */; };
 		469B60961209205C00A7E5DE /* StoreListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 469B60941209205C00A7E5DE /* StoreListViewController.m */; };
 		469B60971209205C00A7E5DE /* StoreListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 469B60951209205C00A7E5DE /* StoreListView.xib */; };
+		46A6AF77122380C300038466 /* DistillerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A6AF75122380C300038466 /* DistillerDetailViewController.m */; };
+		46A6AF78122380C300038466 /* DistillerDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46A6AF76122380C300038466 /* DistillerDetailView.xib */; };
+		46A6AF821223834800038466 /* BlurbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46A6AF811223834800038466 /* BlurbCell.xib */; };
+		46A6AF85122383A900038466 /* DistillerAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46A6AF84122383A900038466 /* DistillerAddressCell.xib */; };
 		46DB35C9121998CB001C5C4B /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 46DB35C8121998CB001C5C4B /* 37x-Checkmark.png */; };
 		46E647EA12034DAB00AB9328 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E647DF12034DAB00AB9328 /* NSObject+SBJSON.m */; };
 		46E647EB12034DAB00AB9328 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E647E112034DAB00AB9328 /* NSString+SBJSON.m */; };
@@ -100,6 +104,11 @@
 		469B60931209205C00A7E5DE /* StoreListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreListViewController.h; sourceTree = "<group>"; };
 		469B60941209205C00A7E5DE /* StoreListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreListViewController.m; sourceTree = "<group>"; };
 		469B60951209205C00A7E5DE /* StoreListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StoreListView.xib; path = Classes/StoreListView.xib; sourceTree = "<group>"; };
+		46A6AF74122380C300038466 /* DistillerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistillerDetailViewController.h; sourceTree = "<group>"; };
+		46A6AF75122380C300038466 /* DistillerDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistillerDetailViewController.m; sourceTree = "<group>"; };
+		46A6AF76122380C300038466 /* DistillerDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DistillerDetailView.xib; path = Classes/DistillerDetailView.xib; sourceTree = "<group>"; };
+		46A6AF811223834800038466 /* BlurbCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlurbCell.xib; sourceTree = "<group>"; };
+		46A6AF84122383A900038466 /* DistillerAddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DistillerAddressCell.xib; sourceTree = "<group>"; };
 		46DB35C8121998CB001C5C4B /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		46E647DD12034DAB00AB9328 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		46E647DE12034DAB00AB9328 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
@@ -195,6 +204,7 @@
 				46DB35C8121998CB001C5C4B /* 37x-Checkmark.png */,
 				467111C9120E120D00B250F9 /* Default.png */,
 				46FF630F1221889D00EEC2F6 /* LocalDistillersView.xib */,
+				46A6AF76122380C300038466 /* DistillerDetailView.xib */,
 				4628BF091202849200ECE4BE /* CategoriesView.xib */,
 				4628BF041202846900ECE4BE /* StoresView.xib */,
 				469B60951209205C00A7E5DE /* StoreListView.xib */,
@@ -206,6 +216,8 @@
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* LiquorLocator-Info.plist */,
 				46E64864120374B700AB9328 /* RootView.xib */,
+				46A6AF811223834800038466 /* BlurbCell.xib */,
+				46A6AF84122383A900038466 /* DistillerAddressCell.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -249,6 +261,8 @@
 				46711122120E02EC00B250F9 /* SpiritList.m */,
 				46FF630D1221889D00EEC2F6 /* LocalDistillersViewController.h */,
 				46FF630E1221889D00EEC2F6 /* LocalDistillersViewController.m */,
+				46A6AF74122380C300038466 /* DistillerDetailViewController.h */,
+				46A6AF75122380C300038466 /* DistillerDetailViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -359,6 +373,9 @@
 				467111CA120E120D00B250F9 /* Default.png in Resources */,
 				46DB35C9121998CB001C5C4B /* 37x-Checkmark.png in Resources */,
 				46FF63111221889D00EEC2F6 /* LocalDistillersView.xib in Resources */,
+				46A6AF78122380C300038466 /* DistillerDetailView.xib in Resources */,
+				46A6AF821223834800038466 /* BlurbCell.xib in Resources */,
+				46A6AF85122383A900038466 /* DistillerAddressCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +411,7 @@
 				46711123120E02EC00B250F9 /* SpiritList.m in Sources */,
 				4671147D1210677000B250F9 /* Constants.m in Sources */,
 				46FF63101221889D00EEC2F6 /* LocalDistillersViewController.m in Sources */,
+				46A6AF77122380C300038466 /* DistillerDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

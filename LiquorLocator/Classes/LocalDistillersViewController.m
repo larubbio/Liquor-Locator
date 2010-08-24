@@ -12,9 +12,10 @@
 @implementation LocalDistillersViewController
 
 @synthesize table;
+@synthesize distillers;
 
 - (void)viewDidAppear:(BOOL)animated {
-    self.feedURLString = @"http://wsll.pugdogdev.com/categories";
+    self.feedURLString = @"http://wsll.pugdogdev.com/distillers";
     
     [super viewDidAppear:animated];
 }
@@ -32,24 +33,67 @@
 
 #pragma mark -
 #pragma mark Table View Data Source Methods
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 3;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.objectList count];
+    if (section == 0) {
+        return 1;
+    } else {
+        NSArray *list = [self.distillers objectForKey:[NSNumber numberWithInt:section]];
+        
+        return [list count];
+    }
 }
+
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return @"Washington State Distillers";
+    } else if (section == 1) {
+        return @"With Inventory in Stores";
+    } else if (section == 2) {
+        return @"Not Yet in Stores";
+    }
+    
+    return nil;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CategoryTableIdentifier = @"CategoryTableIdentifier";
+    static NSString *BlurbTableIdentifier = @"BlurbTableIdentifier";
+    static NSString *LocalDistillerTableIdentifier = @"LocalDistillerTableIdentifier";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CategoryTableIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CategoryTableIdentifier] autorelease];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    
+    NSUInteger section = [indexPath section];
     NSUInteger row = [indexPath row];
-    cell.textLabel.text = [objectList objectAtIndex:row];
+    
+    UITableViewCell *cell;
+    
+    if (section == 0) {
+        cell = [tableView dequeueReusableCellWithIdentifier:BlurbTableIdentifier];
+        if (cell == nil) {
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BlurbTableIdentifier] autorelease];
+        }
+    
+        cell.textLabel.text = @"Describe Distillers";
+    } else if (section == 1 || section == 2) {
+        cell = [tableView dequeueReusableCellWithIdentifier:LocalDistillerTableIdentifier];
+        if (cell == nil) {
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:LocalDistillerTableIdentifier] autorelease];
+        }
+        
+        NSArray *distillersSection = [distillers objectForKey:[NSNumber numberWithInt:section]];
+        NSMutableDictionary *distiller = [distillersSection objectAtIndex:row];
+        cell.textLabel.text = [distiller objectForKey:@"name"];
+        
+        if (section == 1) {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }            
+    }
     
     return cell;
 }
@@ -58,22 +102,58 @@
 #pragma mark Table View Delegate Methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+/*
+    DistillerDetailViewController *controller;
+    
+    NSUInteger section = [indexPath section];
+    if (section != 1) {
+        return nil;
+    }
+    
     NSUInteger row = [indexPath row];
     
-/*
-    SpiritListViewController *spiritListController = [[SpiritListViewController alloc] initWithNibName:@"SpiritListView" bundle:nil];
-    spiritListController.category = [objectList objectAtIndex:row];
+    NSArray *distillerSection = [self.distillers objectForKey:[NSNumber numberWithInt:row]];
+    NSDictionary *distiller = [distillerSection objectAtIndex:row]; 
+    
+    controller = [[DistillerDetailViewController alloc] initWithNibName:@"DistillerDetailView" bundle:nil];
     
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    [delegate.navController pushViewController:spiritListController animated:YES];
+    [delegate.navController pushViewController:controller animated:YES];
     
-    [spiritListController release];    
+    [controller release];
  */
 }
 
 #pragma mark -
 #pragma mark JSON Parsing Method
 - (void)jsonParsingComplete:(id)objects {
+    if (distillers != nil) {
+        [distillers release];
+        distillers = nil;
+    }
+    distillers = [[NSMutableDictionary alloc] init];
+    NSMutableArray *selling = [[NSMutableArray alloc] init];
+    NSMutableArray *website_only = [[NSMutableArray alloc] init];
+    
+    [distillers setObject:selling forKey:[NSNumber numberWithInt:1]];
+    [distillers setObject:website_only forKey:[NSNumber numberWithInt:2]];
+    
+    // Loop over objects
+    for (NSMutableDictionary *d in objects) {
+        BOOL in_store = [((NSString *)[d objectForKey:@"in_store"]) boolValue];
+        
+        if (in_store == YES) {
+            NSMutableArray *list = [self.distillers objectForKey:[NSNumber numberWithInt:1]];
+            [list addObject:d];
+        } else {
+            NSMutableArray *list = [self.distillers objectForKey:[NSNumber numberWithInt:2]];
+            [list addObject:d];
+        }
+    }
+    
+    [selling release];
+    [website_only release];
+    
     [super jsonParsingComplete:objects];
     
     [table reloadData];
