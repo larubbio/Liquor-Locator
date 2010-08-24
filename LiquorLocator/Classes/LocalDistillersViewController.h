@@ -11,7 +11,11 @@
 
 @interface LocalDistillersViewController : JSONLoaderController <UITableViewDelegate, UITableViewDataSource> {
     IBOutlet UITableView *table;
+    
+    NSMutableDictionary *distillers;
 }
 
 @property (nonatomic, retain) UITableView *table;
+
+@property (nonatomic, retain) NSMutableDictionary *distillers;
 @end

@@ -334,7 +334,6 @@ session.execute("TRUNCATE TABLE spirits_bak")
 session.execute("TRUNCATE TABLE store_contacts_bak")
 session.execute("TRUNCATE TABLE store_inventory_bak")
 session.execute("TRUNCATE TABLE stores_bak")
-session.execute("TRUNCATE TABLE local_distillers_bak")
 session.execute("TRUNCATE TABLE distiller_spirits_bak")
 
 # To make sure you're seeing all debug output:
@@ -383,13 +382,14 @@ distillers = session.query(Model.Distiller).filter(Model.Distiller.search_term!=
 for d in distillers.all():
 
     if d.search_term:
-        search_term = '%' + d.search_term + '%'
+        for term in d.search_term.split(','):
+            search_term = '%' + term + '%'
 
-        # select all spirits that match search_term
-        spirits = session.query(Model.Spirit).filter(Model.Spirit.brand_name.like(search_term))
+            # select all spirits that match search_term
+            spirits = session.query(Model.Spirit).filter(Model.Spirit.brand_name.like(search_term))
 
-        for s in spirits.all():
-            d.spirits.append(s)
+            for s in spirits.all():
+                d.spirits.append(s)
                                           
 
 # Swap live tables with backups

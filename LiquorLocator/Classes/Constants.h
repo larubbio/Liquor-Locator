@@ -17,6 +17,7 @@ extern NSString *const kName;
 extern NSString *const kStore;
 extern NSString *const kQty;
 extern NSString *const kDist;
+extern NSString *const kStreet;
 extern NSString *const kAddress;
 extern NSString *const kAddress2;
 extern NSString *const kCity;
@@ -36,6 +37,8 @@ extern NSString *const kSize;
 extern NSString *const kPrice;
 extern NSString *const kOnSale;
 extern NSString *const kCloseout;
+extern NSString *const kURL;
+extern NSString *const kSpirits;
 
 // Short JSON constants
 extern NSString *const kShortName; 
