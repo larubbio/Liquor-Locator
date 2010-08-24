@@ -41,6 +41,8 @@
 		46A6AF78122380C300038466 /* DistillerDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46A6AF76122380C300038466 /* DistillerDetailView.xib */; };
 		46A6AF821223834800038466 /* BlurbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46A6AF811223834800038466 /* BlurbCell.xib */; };
 		46A6AF85122383A900038466 /* DistillerAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46A6AF84122383A900038466 /* DistillerAddressCell.xib */; };
+		46A6AF9512243E5A00038466 /* BlurbViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A6AF9212243E5A00038466 /* BlurbViewCell.m */; };
+		46A6AF9612243E5A00038466 /* DistillerAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A6AF9412243E5A00038466 /* DistillerAddressCell.m */; };
 		46DB35C9121998CB001C5C4B /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 46DB35C8121998CB001C5C4B /* 37x-Checkmark.png */; };
 		46E647EA12034DAB00AB9328 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E647DF12034DAB00AB9328 /* NSObject+SBJSON.m */; };
 		46E647EB12034DAB00AB9328 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E647E112034DAB00AB9328 /* NSString+SBJSON.m */; };
@@ -109,6 +111,10 @@
 		46A6AF76122380C300038466 /* DistillerDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DistillerDetailView.xib; path = Classes/DistillerDetailView.xib; sourceTree = "<group>"; };
 		46A6AF811223834800038466 /* BlurbCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlurbCell.xib; sourceTree = "<group>"; };
 		46A6AF84122383A900038466 /* DistillerAddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DistillerAddressCell.xib; sourceTree = "<group>"; };
+		46A6AF9112243E5A00038466 /* BlurbViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlurbViewCell.h; path = Classes/BlurbViewCell.h; sourceTree = "<group>"; };
+		46A6AF9212243E5A00038466 /* BlurbViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlurbViewCell.m; path = Classes/BlurbViewCell.m; sourceTree = "<group>"; };
+		46A6AF9312243E5A00038466 /* DistillerAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DistillerAddressCell.h; path = Classes/DistillerAddressCell.h; sourceTree = "<group>"; };
+		46A6AF9412243E5A00038466 /* DistillerAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DistillerAddressCell.m; path = Classes/DistillerAddressCell.m; sourceTree = "<group>"; };
 		46DB35C8121998CB001C5C4B /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		46E647DD12034DAB00AB9328 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		46E647DE12034DAB00AB9328 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
@@ -155,7 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				46710EB01209C78200B250F9 /* HUD */,
-				469B5F2A120881B800A7E5DE /* Annotations */,
+				469B5F2A120881B800A7E5DE /* Views */,
 				46E647DC12034DAB00AB9328 /* JSON */,
 				4628BF26120289DF00ECE4BE /* Models */,
 				4628BF25120289C500ECE4BE /* Controllers */,
@@ -285,13 +291,17 @@
 			name = HUD;
 			sourceTree = "<group>";
 		};
-		469B5F2A120881B800A7E5DE /* Annotations */ = {
+		469B5F2A120881B800A7E5DE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				46A6AF9112243E5A00038466 /* BlurbViewCell.h */,
+				46A6AF9212243E5A00038466 /* BlurbViewCell.m */,
+				46A6AF9312243E5A00038466 /* DistillerAddressCell.h */,
+				46A6AF9412243E5A00038466 /* DistillerAddressCell.m */,
 				469B5F33120881E700A7E5DE /* StoreAnnotation.h */,
 				469B5F34120881E700A7E5DE /* StoreAnnotation.m */,
 			);
-			name = Annotations;
+			name = Views;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -412,6 +422,8 @@
 				4671147D1210677000B250F9 /* Constants.m in Sources */,
 				46FF63101221889D00EEC2F6 /* LocalDistillersViewController.m in Sources */,
 				46A6AF77122380C300038466 /* DistillerDetailViewController.m in Sources */,
+				46A6AF9512243E5A00038466 /* BlurbViewCell.m in Sources */,
+				46A6AF9612243E5A00038466 /* DistillerAddressCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

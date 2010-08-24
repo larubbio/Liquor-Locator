@@ -9,13 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "JSONLoaderController.h"
 
+@class BlurbViewCell;
+
 @interface LocalDistillersViewController : JSONLoaderController <UITableViewDelegate, UITableViewDataSource> {
     IBOutlet UITableView *table;
     
     NSMutableDictionary *distillers;
+    
+    IBOutlet BlurbViewCell *blurbCell;
 }
 
 @property (nonatomic, retain) UITableView *table;
 
 @property (nonatomic, retain) NSMutableDictionary *distillers;
+
+@property (nonatomic, retain) BlurbViewCell *blurbCell;
 @end

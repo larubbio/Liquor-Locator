@@ -7,14 +7,19 @@
 //
 
 #import "LocalDistillersViewController.h"
+#import "DistillerDetailViewController.h"
 #import "LiquorLocatorAppDelegate.h"
 
 #import "BlurbViewCell.h"
+
+#import "Constants.h"
 
 @implementation LocalDistillersViewController
 
 @synthesize table;
 @synthesize distillers;
+
+@synthesize blurbCell;
 
 - (void)viewDidAppear:(BOOL)animated {
     self.feedURLString = @"http://wsll.pugdogdev.com/distillers";
@@ -31,6 +36,7 @@
 
 - (void)dealloc {
     [distillers release];
+    [blurbCell release];
     [super dealloc];
 }
 
@@ -63,6 +69,15 @@
     return nil;
 }
 
+- (CGFloat) tableView: (UITableView *) tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath
+{
+    NSUInteger section = [indexPath section];
+    if (section == 0) {
+        return 105;
+    }
+    
+    return 44;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -75,18 +90,15 @@
     UITableViewCell *cell;
     
     if (section == 0) {
-        BlurbViewCell *cell = (BlurbViewCell *)[tableView dequeueReusableCellWithIdentifier:BlurbCellIdentifier];
-        if ( cell == nil ) {
-            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"BlurbCell" owner:self options:nil];
-            id firstObject = [topLevelObjects objectAtIndex:0];
-            if ( [ firstObject isKindOfClass:[UITableViewCell class]] )
-                cell = firstObject;     
-            else {
-                cell = [topLevelObjects objectAtIndex:1];
-            }
+        BlurbViewCell *bc = (BlurbViewCell *)[tableView dequeueReusableCellWithIdentifier:BlurbCellIdentifier];
+        if ( bc == nil ) {
+            [[NSBundle mainBundle] loadNibNamed:@"BlurbCell" owner:self options:nil];
+            bc = self.blurbCell;
         }
 
-        [cell.webView loadHTMLString:@"<b>Describe</b> Distillers" baseURL:nil];
+        [bc.webView loadHTMLString:@"<b>Describe</b> Distillers" baseURL:nil];
+        
+        cell = bc;
     } else if (section == 1 || section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:LocalDistillerTableIdentifier];
         if (cell == nil) {
@@ -110,27 +122,24 @@
 #pragma mark -
 #pragma mark Table View Delegate Methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-/*
-    DistillerDetailViewController *controller;
-    
+{    
     NSUInteger section = [indexPath section];
     if (section != 1) {
-        return nil;
+        return;
     }
     
     NSUInteger row = [indexPath row];
     
-    NSArray *distillerSection = [self.distillers objectForKey:[NSNumber numberWithInt:row]];
+    NSArray *distillerSection = [self.distillers objectForKey:[NSNumber numberWithInt:section]];
     NSDictionary *distiller = [distillerSection objectAtIndex:row]; 
     
-    controller = [[DistillerDetailViewController alloc] initWithNibName:@"DistillerDetailView" bundle:nil];
+    DistillerDetailViewController *controller = [[DistillerDetailViewController alloc] initWithNibName:@"DistillerDetailView" bundle:nil];
+    controller.distillerId = [((NSString *)[distiller objectForKey:kId]) intValue];
     
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate.navController pushViewController:controller animated:YES];
     
     [controller release];
- */
 }
 
 #pragma mark -
