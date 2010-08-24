@@ -15,6 +15,7 @@
     NSString *const kStore = @"store";
     NSString *const kQty = @"qty";
     NSString *const kDist = @"dist";
+    NSString *const kStreet = @"street";
     NSString *const kAddress = @"address";
     NSString *const kAddress2 = @"address2";
     NSString *const kCity = @"city";
@@ -34,6 +35,8 @@
     NSString *const kPrice = @"price";
     NSString *const kOnSale = @"on_sale";
     NSString *const kCloseout = @"closeout";
+    NSString *const kURL = @"url";
+    NSString *const kSpirits = @"spirits";
 
     NSString *const kShortName = @"n";
     NSString *const kShortCount = @"c";

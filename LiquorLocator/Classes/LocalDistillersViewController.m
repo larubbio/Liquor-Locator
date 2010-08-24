@@ -9,6 +9,8 @@
 #import "LocalDistillersViewController.h"
 #import "LiquorLocatorAppDelegate.h"
 
+#import "BlurbViewCell.h"
+
 @implementation LocalDistillersViewController
 
 @synthesize table;
@@ -28,6 +30,7 @@
 }
 
 - (void)dealloc {
+    [distillers release];
     [super dealloc];
 }
 
@@ -63,7 +66,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *BlurbTableIdentifier = @"BlurbTableIdentifier";
+    static NSString *BlurbCellIdentifier = @"BlurbCellIdentifier";
     static NSString *LocalDistillerTableIdentifier = @"LocalDistillerTableIdentifier";
     
     NSUInteger section = [indexPath section];
@@ -72,12 +75,18 @@
     UITableViewCell *cell;
     
     if (section == 0) {
-        cell = [tableView dequeueReusableCellWithIdentifier:BlurbTableIdentifier];
-        if (cell == nil) {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BlurbTableIdentifier] autorelease];
+        BlurbViewCell *cell = (BlurbViewCell *)[tableView dequeueReusableCellWithIdentifier:BlurbCellIdentifier];
+        if ( cell == nil ) {
+            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"BlurbCell" owner:self options:nil];
+            id firstObject = [topLevelObjects objectAtIndex:0];
+            if ( [ firstObject isKindOfClass:[UITableViewCell class]] )
+                cell = firstObject;     
+            else {
+                cell = [topLevelObjects objectAtIndex:1];
+            }
         }
-    
-        cell.textLabel.text = @"Describe Distillers";
+
+        [cell.webView loadHTMLString:@"<b>Describe</b> Distillers" baseURL:nil];
     } else if (section == 1 || section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:LocalDistillerTableIdentifier];
         if (cell == nil) {

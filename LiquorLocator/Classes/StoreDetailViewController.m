@@ -85,15 +85,15 @@
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     RootViewController *rootView = [delegate.navController.viewControllers objectAtIndex:0];
 
-	CLLocationCoordinate2D userCoordinate = rootView.userLocation.coordinate;
+    CLLocationCoordinate2D userCoordinate = rootView.userLocation.coordinate;
     double latitude = [((NSString *)[self.objectList objectForKey:kLat]) doubleValue];
     double longitude = [((NSString *)[self.objectList objectForKey:kLong]) doubleValue];
     
-	NSString* startLocationParameter = [NSString stringWithFormat:@"%f,%f", userCoordinate.latitude, userCoordinate.longitude];    
-	NSString* destinationLocationParameter= [NSString stringWithFormat:@"%f,%f", latitude, longitude];    
-	NSString *googleURL = [[NSString stringWithFormat:@"http://maps.google.com/maps?daddr=%@&saddr=%@", destinationLocationParameter, startLocationParameter] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]; 
+    NSString* startLocationParameter = [NSString stringWithFormat:@"%f,%f", userCoordinate.latitude, userCoordinate.longitude];    
+    NSString* destinationLocationParameter= [NSString stringWithFormat:@"%f,%f", latitude, longitude];    
+    NSString *googleURL = [[NSString stringWithFormat:@"http://maps.google.com/maps?daddr=%@&saddr=%@", destinationLocationParameter, startLocationParameter] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]; 
 	
-	NSLog(@"Directions URL: %@",googleURL);
+    NSLog(@"Directions URL: %@",googleURL);
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:googleURL]];
 }
 
