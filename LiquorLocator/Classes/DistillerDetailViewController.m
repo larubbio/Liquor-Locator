@@ -18,7 +18,16 @@
 
 @implementation DistillerDetailViewController
 
+@synthesize distillerId;
 @synthesize table;
+@synthesize addressCell;
+
+- (void)viewDidAppear:(BOOL)animated {
+    self.feedURLString = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/distiller/%d", distillerId];
+    
+    [super viewDidAppear:animated];
+}
+
 
 - (void)dealloc {
     [table release];
@@ -64,6 +73,16 @@
     return ret;
 }
 
+- (CGFloat) tableView: (UITableView *) tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath
+{
+    NSUInteger section = [indexPath section];
+    if (section == 0) {
+        return 105;
+    }
+    
+    return 44;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
      static NSString *DistillerCellIdentifier = @"DistillerCellIdentifier"; 
      static NSString *URLCellIdentifier = @"URLCellIdentifier";
@@ -78,18 +97,13 @@
      if (section == 0) {
         DistillerAddressCell *dac = (DistillerAddressCell *)[tableView dequeueReusableCellWithIdentifier:DistillerCellIdentifier];
         if ( dac == nil ) {
-            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"DistillerAddressCell" owner:self options:nil];
-            id firstObject = [topLevelObjects objectAtIndex:0];
-            if ( [ firstObject isKindOfClass:[UITableViewCell class]] )
-                dac = firstObject;     
-            else {
-                dac = [topLevelObjects objectAtIndex:1];
-            }
+            [[NSBundle mainBundle] loadNibNamed:@"DistillerAddressCell" owner:self options:nil];
+            dac = self.addressCell;
         }
 
-        dac.street = [self.objectList objectForKey:kStreet];
-        dac.address = [self.objectList objectForKey:kAddress];
-        //        dac.phone = ;
+        dac.street.text = [self.objectList objectForKey:kStreet];
+        dac.address.text = [self.objectList objectForKey:kAddress];
+        //        dac.phone.text = ;
 
         double _latitude = [((NSString *)[self.objectList objectForKey:kLat]) doubleValue];
         double _longitude = [((NSString *)[self.objectList objectForKey:kLong]) doubleValue];
@@ -105,7 +119,9 @@
         dac.map.region = region;
     
         [dac.map addAnnotation:store];
-
+         
+        cell = dac;
+         
         [store release];
     }
 
@@ -123,18 +139,24 @@
     // For section 2 I need the spirit cell
     if (section == 2) {
         NSArray *spiritSection = [self.objectList objectForKey:kSpirits];
-        NSDictionary *spirit = [spiritSection objectAtIndex:row]; 
-
+        NSDictionary *spirit = nil;
+        
         cell = [tableView dequeueReusableCellWithIdentifier:SingleSpiritCellIdentifier];
         if (cell == nil) {
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:SingleSpiritCellIdentifier] autorelease];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
-
-        cell.textLabel.text = [spirit objectForKey:kBrandName];
-
-        NSString *detail = [NSString stringWithFormat:@"Size: %@ Price: $%@", [spirit objectForKey:kSize], [spirit objectForKey:kPrice]];
-        cell.detailTextLabel.text = detail;
+        
+        if ([spiritSection count] > 0) {
+            spirit = [spiritSection objectAtIndex:row]; 
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.text = [spirit objectForKey:kBrandName];
+            
+            NSString *detail = [NSString stringWithFormat:@"Size: %@ Price: $%@", [spirit objectForKey:kSize], [spirit objectForKey:kPrice]];
+            cell.detailTextLabel.text = detail;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.textLabel.text = @"Coming Soon";
+        }            
     }
 
     return cell;
@@ -156,7 +178,7 @@
     
     // For section 2 go to spirit detail page.
     if (section == 2) {
-        controller = [[SpiritDetailViewController alloc] initWithNibName:@"SpiritDetailView" bundle:nil];
+        SpiritDetailViewController *controller = [[SpiritDetailViewController alloc] initWithNibName:@"SpiritDetailView" bundle:nil];
         ((SpiritDetailViewController *)controller).spiritId = [spirit objectForKey:kId];
     
         LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -164,6 +186,14 @@
     
         [controller release];
     }
+}
+
+#pragma mark -
+#pragma mark JSON Parsing Method
+- (void)jsonParsingComplete:(id)objects {
+    [super jsonParsingComplete:objects];
+    
+    [table reloadData];
 }
 
 @end
