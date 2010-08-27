@@ -26,7 +26,7 @@
     if (self.category != nil && self.storeId != 0) {
         NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/store/%d/spirits?category=%@", storeId, [Constants urlencode:category]];
         self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        self.title = storeName;        
+        self.title = category;        
     } else if (self.category != nil) {
         NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?category=%@", [Constants urlencode:category]];
         self.feedURLString = query;
