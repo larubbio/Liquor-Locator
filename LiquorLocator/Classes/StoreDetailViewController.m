@@ -9,7 +9,7 @@
 #import "StoreDetailViewController.h"
 #import "LiquorLocatorAppDelegate.h"
 #import "RootViewController.h"
-#import "SpiritListViewController.h"
+#import "StoreCategoriesViewController.h"
 #import "StoreAnnotation.h"
 
 #import "Constants.h"
@@ -133,9 +133,10 @@
 }    
 
 - (IBAction)viewSpirits:(id)sender {
-    SpiritListViewController *controller = [[SpiritListViewController alloc] initWithNibName:@"SpiritListView" bundle:nil];   
-    ((SpiritListViewController *)controller).storeId = storeId;
-    ((SpiritListViewController *)controller).storeName = storeName.text;
+    
+    StoreCategoriesViewController *controller = [[StoreCategoriesViewController alloc] initWithNibName:@"StoreCategoriesView" bundle:nil];
+    ((StoreCategoriesViewController *)controller).storeId = storeId;
+    ((StoreCategoriesViewController *)controller).storeName = storeName.text;
 
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate.navController pushViewController:controller animated:YES];

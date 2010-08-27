@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JSONLoaderController.h"
+#import "CategoriesList.h"
 
-@interface CategoriesViewController : JSONLoaderController <UITableViewDelegate, UITableViewDataSource> {
-    IBOutlet UITableView *table;
+@interface CategoriesViewController : CategoriesList {
+
 }
-
-@property (nonatomic, retain) UITableView *table;
 @end

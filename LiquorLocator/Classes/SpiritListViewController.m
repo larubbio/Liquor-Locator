@@ -23,7 +23,11 @@
 - (void)viewDidAppear:(BOOL)animated {
     indexed = YES;
     
-    if (self.category != nil) {
+    if (self.category != nil && self.storeId != 0) {
+        NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/store/%d/spirits?category=%@", storeId, [Constants urlencode:category]];
+        self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        self.title = storeName;        
+    } else if (self.category != nil) {
         NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?category=%@", [Constants urlencode:category]];
         self.feedURLString = query;
         self.title = category;
