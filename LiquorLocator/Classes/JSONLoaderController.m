@@ -25,7 +25,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     HUD = nil;
-    errorOccured = NO;
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 
     // Check out cache
@@ -101,7 +100,6 @@
 // partly because this application does not have any offline functionality for the user. Most real applications should
 // handle the error in a less obtrusive way and provide offline functionality to the user.
 - (void)handleError:(NSError *)error {
-    errorOccured = YES;
     if (HUD == nil) {
         // Initialize the HUD with my view
         HUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -116,7 +114,6 @@
         [HUD show:YES];
     }
 
-    // TODO: Show error HUD
     // The sample image is based on the work by www.pixelpressicons.com, http://creativecommons.org/licenses/by/2.5/ca/
 	// Make the customViews 37 by 37 pixels for best results (those are the bounds of the build-in progress indicators)
 	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]] autorelease];
@@ -186,9 +183,9 @@
 
     if (objects == nil) {
         [self handleError:error];
+    } else {
+        [self jsonParsingComplete:objects];
     }
-    
-    [self jsonParsingComplete:objects];
     
     [parser release];
     [jsonString release];
@@ -205,7 +202,7 @@
     self.objectList = objects;
     
     // Hide my loading HUD
-    if (HUD != nil && errorOccured == NO) {
+    if (HUD != nil) {
         [HUD hide:YES];
     }
 }

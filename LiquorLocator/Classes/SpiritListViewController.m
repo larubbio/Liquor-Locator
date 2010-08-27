@@ -11,6 +11,8 @@
 #import "LiquorLocatorAppDelegate.h"
 #import "SpiritListViewController.h"
 
+#import "Constants.h"
+
 @implementation SpiritListViewController
 
 @synthesize category;
@@ -22,12 +24,12 @@
     indexed = YES;
     
     if (self.category != nil) {
-        NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?category=%@", category];
-        self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?category=%@", [Constants urlencode:category]];
+        self.feedURLString = query;
         self.title = category;
     } else if (self.brandName != nil) {
-        NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?name=%@", brandName];
-        self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?name=%@", [Constants urlencode:brandName]];
+        self.feedURLString = query;
         self.title = brandName;
     } else if (self.storeId != 0) {
         NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/store/%d/spirits", storeId];

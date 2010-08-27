@@ -120,7 +120,12 @@ def store_inventory(request, store_id):
     ret = []
     cursor = connection.cursor()
 
-    cursor.execute("select s.brand_name, count(*), s.id, s.size, s.total_retail_price from store_inventory si, spirits s where si.store_id = %s and si.spirit_id = s.id group by brand_name order by brand_name", [store_id])
+    if 'category' in request.GET:
+        cursor = connection.cursor()
+
+        cursor.execute("select s.brand_name, count(*), s.id, s.size, s.total_retail_price from store_inventory si, spirits s where si.store_id = %s and si.spirit_id = s.id and s.category = %s group by brand_name order by brand_name", [store_id, request.GET['category']])
+    else:
+        cursor.execute("select s.brand_name, count(*), s.id, s.size, s.total_retail_price from store_inventory si, spirits s where si.store_id = %s and si.spirit_id = s.id group by brand_name order by brand_name", [store_id])
         
     rows = cursor.fetchall()
     for row in rows:
@@ -133,6 +138,19 @@ def store_inventory(request, store_id):
             info['c'] = str(row[1])
 
         ret.append(info)
+
+    mimetype = 'application/json'
+    return HttpResponse(simplejson.dumps(ret),mimetype)
+
+def store_inventory_grouped(request, store_id):
+    ret = []
+    cursor = connection.cursor()
+
+    cursor.execute("select s.category from store_inventory si, spirits s where si.store_id = %s and si.spirit_id = s.id group by category order by category", [store_id])
+        
+    rows = cursor.fetchall()
+    for row in rows:
+        ret.append(row[0])
 
     mimetype = 'application/json'
     return HttpResponse(simplejson.dumps(ret),mimetype)

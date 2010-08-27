@@ -59,4 +59,5 @@ extern NSString *const kSearch;
 extern NSString *const kLocalDistillers;
 extern NSString *const kCampaign;
 
++(NSString *) urlencode: (NSString *) url;
 @end

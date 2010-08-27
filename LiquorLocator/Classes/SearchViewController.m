@@ -57,8 +57,8 @@
         self.JSONConnection = nil;
     }
     
-    NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?search=%@", searchTerm];
-    self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?search=%@", [Constants urlencode:searchTerm]];
+    self.feedURLString = query;
 
     // Start the status bar network activity indicator. We'll turn it off when the connection finishes or experiences an error.
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -115,6 +115,8 @@
     
 - (void)viewDidAppear:(BOOL)animated {
     indexed = NO;
+    
+    [table reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

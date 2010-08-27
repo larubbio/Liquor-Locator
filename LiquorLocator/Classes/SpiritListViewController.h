@@ -21,4 +21,5 @@
 @property (nonatomic, retain) NSString *brandName;
 @property (nonatomic, assign) int storeId;
 @property (nonatomic, retain) NSString *storeName;
+
 @end
