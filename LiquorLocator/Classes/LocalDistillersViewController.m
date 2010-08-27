@@ -14,6 +14,15 @@
 
 #import "Constants.h"
 
+#ifdef SHOW_BLURB
+#define BLURB_SECTION 0
+#define WITH_INVENTORY 1
+#define WEBSITE_ONLY 2
+#else
+#define BLURB_SECTION -1
+#define WITH_INVENTORY 0
+#define WEBSITE_ONLY 1
+#endif
 @implementation LocalDistillersViewController
 
 @synthesize table;
@@ -43,12 +52,16 @@
 #pragma mark -
 #pragma mark Table View Data Source Methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+#ifdef SHOW_BLURB
     return 3;
+#else
+    return 2;
+#endif
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
+    if (section == BLURB_SECTION) {
         return 1;
     } else {
         NSArray *list = [self.distillers objectForKey:[NSNumber numberWithInt:section]];
@@ -58,11 +71,11 @@
 }
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
+    if (section == BLURB_SECTION) {
         return @"Washington State Distillers";
-    } else if (section == 1) {
+    } else if (section == WITH_INVENTORY) {
         return @"With Inventory in Stores";
-    } else if (section == 2) {
+    } else if (section == WEBSITE_ONLY) {
         return @"Not Yet in Stores";
     }
     
@@ -72,7 +85,7 @@
 - (CGFloat) tableView: (UITableView *) tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath
 {
     NSUInteger section = [indexPath section];
-    if (section == 0) {
+    if (section == BLURB_SECTION) {
         return 105;
     }
     
@@ -89,7 +102,7 @@
     
     UITableViewCell *cell;
     
-    if (section == 0) {
+    if (section == BLURB_SECTION) {
         BlurbViewCell *bc = (BlurbViewCell *)[tableView dequeueReusableCellWithIdentifier:BlurbCellIdentifier];
         if ( bc == nil ) {
             [[NSBundle mainBundle] loadNibNamed:@"BlurbCell" owner:self options:nil];
@@ -99,7 +112,7 @@
         [bc.webView loadHTMLString:@"<b>Describe</b> Distillers" baseURL:nil];
         
         cell = bc;
-    } else if (section == 1 || section == 2) {
+    } else if (section == WITH_INVENTORY || section == WEBSITE_ONLY) {
         cell = [tableView dequeueReusableCellWithIdentifier:LocalDistillerTableIdentifier];
         if (cell == nil) {
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:LocalDistillerTableIdentifier] autorelease];
@@ -109,7 +122,7 @@
         NSMutableDictionary *distiller = [distillersSection objectAtIndex:row];
         cell.textLabel.text = [distiller objectForKey:@"name"];
         
-        if (section == 1) {
+        if (section == WITH_INVENTORY) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;
@@ -124,7 +137,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {    
     NSUInteger section = [indexPath section];
-    if (section != 1) {
+    if (section != WITH_INVENTORY) {
         return;
     }
     
@@ -153,18 +166,18 @@
     NSMutableArray *selling = [[NSMutableArray alloc] init];
     NSMutableArray *website_only = [[NSMutableArray alloc] init];
     
-    [distillers setObject:selling forKey:[NSNumber numberWithInt:1]];
-    [distillers setObject:website_only forKey:[NSNumber numberWithInt:2]];
+    [distillers setObject:selling forKey:[NSNumber numberWithInt:WITH_INVENTORY]];
+    [distillers setObject:website_only forKey:[NSNumber numberWithInt:WEBSITE_ONLY]];
     
     // Loop over objects
     for (NSMutableDictionary *d in objects) {
         BOOL in_store = [((NSString *)[d objectForKey:@"in_store"]) boolValue];
         
         if (in_store == YES) {
-            NSMutableArray *list = [self.distillers objectForKey:[NSNumber numberWithInt:1]];
+            NSMutableArray *list = [self.distillers objectForKey:[NSNumber numberWithInt:WITH_INVENTORY]];
             [list addObject:d];
         } else {
-            NSMutableArray *list = [self.distillers objectForKey:[NSNumber numberWithInt:2]];
+            NSMutableArray *list = [self.distillers objectForKey:[NSNumber numberWithInt:WEBSITE_ONLY]];
             [list addObject:d];
         }
     }

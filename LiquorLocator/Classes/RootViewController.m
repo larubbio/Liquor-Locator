@@ -55,7 +55,7 @@
     [self.view addSubview:categoriesTabViewController.view];
     self.selectedViewController = categoriesTabViewController;
 
-    [self.selectedViewController viewDidAppear:YES];
+//    [self.selectedViewController viewDidAppear:YES];
 
     [array release];
     [categoriesTabViewController release];
@@ -69,6 +69,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [locationManager startUpdatingLocation];
+    
+    [self.selectedViewController viewDidAppear:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -130,7 +132,8 @@
         self.title = kCampaign;
     }
     
-	[controller viewWillAppear:YES];
+
+    [controller viewWillAppear:YES];
 	[self.selectedViewController viewWillDisappear:YES];
 	
     [self.selectedViewController.view removeFromSuperview];

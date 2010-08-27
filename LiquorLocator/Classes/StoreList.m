@@ -39,15 +39,30 @@
     }
     UIBarButtonItem *barBtn = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:self action:@selector(toggleView:)];
     
-    self.navigationItem.rightBarButtonItem = barBtn;
-    
+    if (delegate.navController.topViewController == self) {
+        self.navigationItem.rightBarButtonItem = barBtn;
+    } else {
+        rootView.navigationItem.rightBarButtonItem = barBtn;
+    }
+
     [barBtn release];
 }    
 
-- (void)viewDidDisappear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    
-    self.navigationItem.rightBarButtonItem = nil;
+
+    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    RootViewController *rootView = [delegate.navController.viewControllers objectAtIndex:0];
+
+    if (delegate.navController.topViewController == self) {
+        self.navigationItem.rightBarButtonItem = nil;
+    } else {
+        rootView.navigationItem.rightBarButtonItem = nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,7 +95,7 @@
         map.hidden = NO;
         table.hidden = YES;
     } else {
-        barBtn.title = kList;
+        barBtn.title = kMap;
         map.hidden = YES;
         table.hidden = NO;
     }        
@@ -105,7 +120,12 @@
     storeDetailViewController.storeId = [((NSString *)[store objectForKey:kId]) intValue];
     
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    
+    [self viewWillDisappear:YES];
+    
     [delegate.navController pushViewController:storeDetailViewController animated:YES];
+    
+    [self viewDidDisappear:YES];
     
     [storeDetailViewController release];
 }
