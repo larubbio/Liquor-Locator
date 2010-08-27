@@ -25,6 +25,7 @@ If that isn't enough to convince you, let me tell you about features I'll add in
 <li>See only items that are discounted</li>
 </ul>
 </li>
+</ul>
 
 <p>Thank you, and if you have comments or suggestions please email me at <a href="mailto:wsll@pugdogdev.com">wsll@pugdogdev.com</a></p>"""
     return HttpResponse(ret)
