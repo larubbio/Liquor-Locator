@@ -14,7 +14,7 @@
 #import "StoreAnnotation.h"
 
 #import "Constants.h"
-
+#import "FlurryAPI.h"
 
 @implementation DistillerDetailViewController
 
@@ -194,6 +194,9 @@
     [super jsonParsingComplete:objects];
     
     [table reloadData];
+    
+    NSDictionary *searchParameters= [NSDictionary dictionaryWithObjectsAndKeys:@"Distiller", [self.objectList objectForKey:kName], nil]; 
+    [FlurryAPI logEvent:@"DistillerDetail" withParameters:searchParameters];
 }
 
 @end

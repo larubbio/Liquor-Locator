@@ -12,6 +12,7 @@
 #import "SpiritListViewController.h"
 
 #import "Constants.h"
+#import "FlurryAPI.h"
 
 @implementation SpiritListViewController
 
@@ -27,18 +28,34 @@
         NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/store/%d/spirits?category=%@", storeId, [Constants urlencode:category]];
         self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         self.title = category;        
+        
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"Store", storeName, @"Category", category, nil]; 
+        [FlurryAPI logEvent:@"StoreInventoryView" withParameters:params];
+
     } else if (self.category != nil) {
         NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?category=%@", [Constants urlencode:category]];
         self.feedURLString = query;
         self.title = category;
+        
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"Category", category, nil]; 
+        [FlurryAPI logEvent:@"SpiritsView" withParameters:params];
+        
     } else if (self.brandName != nil) {
         NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?name=%@", [Constants urlencode:brandName]];
         self.feedURLString = query;
         self.title = brandName;
+        
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"Name", brandName, nil]; 
+        [FlurryAPI logEvent:@"SpiritsView" withParameters:params];
+        
     } else if (self.storeId != 0) {
         NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/store/%d/spirits", storeId];
         self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         self.title = storeName;
+        
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"Store", storeName, nil]; 
+        [FlurryAPI logEvent:@"StoreInventoryView" withParameters:params];
+        
     } else {
         NSLog(@"No useful variable set in SpiritListViewController.  Don't know what to load");
     }

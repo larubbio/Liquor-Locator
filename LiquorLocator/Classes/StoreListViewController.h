@@ -11,7 +11,9 @@
 
 @interface StoreListViewController : StoreList {
     NSString *spiritId;
+    NSString *spiritName;
 }
 
 @property (nonatomic, retain) NSString *spiritId;
+@property (nonatomic, retain) NSString *spiritName;
 @end

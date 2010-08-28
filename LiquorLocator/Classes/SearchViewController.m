@@ -7,7 +7,9 @@
 //
 
 #import "SearchViewController.h"
+
 #import "Constants.h"
+#import "FlurryAPI.h"
 
 @implementation SearchViewController
 
@@ -32,6 +34,9 @@
     NSString *searchTerm = [searchBar text];
     [self handleSearchForTerm:searchTerm];
     [searchBar resignFirstResponder];
+
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"SearchTerm", searchTerm, nil]; 
+    [FlurryAPI logEvent:@"Search" withParameters:params];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchTerm {
@@ -67,7 +72,7 @@
     // since it attempts to get a cell yet I empty out the object list.
     self.objectList = [NSMutableArray array];
     
-    NSLog(@"Connecting to %@", self.feedURLString);
+//    NSLog(@"Connecting to %@", self.feedURLString);
     
     // Use NSURLConnection to asynchronously download the data. This means the main thread will not be blocked - the
     // application will remain responsive to the user. 
@@ -84,8 +89,6 @@
     NSAssert(self.JSONConnection != nil, @"Failure to create URL connection.");
 }
  
-
-// The secondary (parsing) thread calls jsonParsingComplete: on the main thread with all of the parsed objects. 
 #pragma mark -
 #pragma mark JSON Parsing Method
 - (void)jsonParsingComplete:(id)objects {

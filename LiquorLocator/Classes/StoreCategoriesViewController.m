@@ -11,6 +11,7 @@
 
 #import "LiquorLocatorAppDelegate.h"
 #import "Constants.h"
+#import "FlurryAPI.h"
 
 @implementation StoreCategoriesViewController
 
@@ -23,9 +24,13 @@
     self.title = storeName;
 
     [super viewDidAppear:animated];
+    
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"Store", storeName, nil]; 
+    [FlurryAPI logEvent:@"CategoriesView" withParameters:params];
 }
 
 - (void)dealloc {
+    [storeName release];
     [super dealloc];
 }
 
@@ -38,12 +43,12 @@
     SpiritListViewController *spiritListController = [[SpiritListViewController alloc] initWithNibName:@"SpiritListView" bundle:nil];
     spiritListController.category = [objectList objectAtIndex:row];
     spiritListController.storeId = storeId;
+    spiritListController.storeName = storeName;
     
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate.navController pushViewController:spiritListController animated:YES];
     
     [spiritListController release];    
 }
-
 
 @end

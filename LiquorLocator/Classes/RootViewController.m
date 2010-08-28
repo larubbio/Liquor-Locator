@@ -14,6 +14,7 @@
 #import "CampaignViewController.h"
 
 #import "Constants.h"
+#import "FlurryAPI.h"
 
 @implementation RootViewController
 
@@ -104,6 +105,7 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     self.userLocation = newLocation;
     [locationManager stopUpdatingLocation];
+    [FlurryAPI setLocation:self.userLocation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
@@ -113,6 +115,8 @@
 #pragma mark Tab Bar Deleget Methods
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
+    [FlurryAPI countPageView];
+    
     UIViewController *controller = nil;
     
 	if (item == categoriesTabBarItem) {

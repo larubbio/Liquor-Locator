@@ -10,6 +10,7 @@
 #import "SpiritListViewController.h"
 
 #import "LiquorLocatorAppDelegate.h"
+#import "FlurryAPI.h"
 
 @implementation CategoriesViewController
 
@@ -17,6 +18,8 @@
     self.feedURLString = @"http://wsll.pugdogdev.com/categories";
     
     [super viewDidAppear:animated];
+    
+    [FlurryAPI logEvent:@"CategoriesView"];
 }
 
 - (void)dealloc {

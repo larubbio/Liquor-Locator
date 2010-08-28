@@ -13,6 +13,7 @@
 #import "StoreAnnotation.h"
 
 #import "Constants.h"
+#import "FlurryAPI.h"
 
 @implementation StoreDetailViewController
 
@@ -150,6 +151,9 @@
 - (void)jsonParsingComplete:(id)objects {
     [super jsonParsingComplete:objects];
     
+    NSDictionary *searchParameters= [NSDictionary dictionaryWithObjectsAndKeys:@"Store", [self.objectList objectForKey:kName], nil]; 
+    [FlurryAPI logEvent:@"StoreDetail" withParameters:searchParameters];
+
     // Pull all data out of the dictionary into local variables
     NSString *_name = [self.objectList objectForKey:kName];
     NSString *_street = [self.objectList objectForKey:kAddress];

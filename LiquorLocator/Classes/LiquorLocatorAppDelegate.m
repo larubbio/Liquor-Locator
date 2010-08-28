@@ -8,6 +8,7 @@
 
 #import "LiquorLocatorAppDelegate.h"
 #import "RootViewController.h"
+#import "FlurryAPI.h"
 
 @implementation LiquorLocatorAppDelegate
 
@@ -18,9 +19,20 @@
 
 @synthesize dataCache;
 
+void uncaughtExceptionHandler(NSException *exception) {
+    [FlurryAPI logError:@"Uncaught" message:@"Crash!" exception:exception];
+}
+
 #pragma mark UIApplication Delegate Methods
 #define SPLASH
-- (void)applicationDidFinishLaunching:(UIApplication *)application {    
+- (void)applicationDidFinishLaunching:(UIApplication *)application { 
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    
+    [FlurryAPI startSession:@"FRBRP3NZIFW8FLSY7DW4"]; // Development
+//    [FlurryAPI startSession:@"L4AWJM8QPWPN3C1EK8K9"]; // Production
+    
+    [FlurryAPI countPageViews:navController];
+    
     dataCache = [[NSMutableDictionary alloc] init];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];

@@ -26,5 +26,6 @@
 - (id)getCachedDataForKey:(NSString *)key;
 - (void)putCachedData:(id)data forKey:(NSString *)key;
 - (void)purgeCache;
+
 @end
 
