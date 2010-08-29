@@ -15,6 +15,22 @@
 
 @synthesize search;
 
+- (void)viewDidAppear {
+    search.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    search.autocorrectionType = UITextAutocorrectionTypeNo;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    indexed = NO;
+    
+    [table reloadData];
+}
+
+- (void)dealloc {
+    [search release];
+    [super dealloc];
+}
+
 - (void)resetSearch {
     if (spirits != nil) {
         [spirits release];
@@ -26,34 +42,6 @@
         [keys release];
         keys = nil;
     }
-}
-
-#pragma mark -
-#pragma mark Search Bar Delegate Methods
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSString *searchTerm = [searchBar text];
-    [self handleSearchForTerm:searchTerm];
-    [searchBar resignFirstResponder];
-
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"SearchTerm", searchTerm, nil]; 
-    [FlurryAPI logEvent:@"Search" withParameters:params];
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchTerm {
-    if ([searchTerm length] == 0) {
-        [self resetSearch];
-        [table reloadData];
-        return;
-    }
-    
-    [self handleSearchForTerm:searchTerm];
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    search.text = @"";
-    [self resetSearch];
-    [table reloadData];
-    [searchBar resignFirstResponder];
 }
 
 - (void)handleSearchForTerm:(NSString *)searchTerm {
@@ -88,7 +76,45 @@
     // to the user in an unobtrusive manner.
     NSAssert(self.JSONConnection != nil, @"Failure to create URL connection.");
 }
- 
+
+#pragma mark -
+#pragma mark Search Bar Delegate Methods
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSString *searchTerm = [searchBar text];
+    [searchBar resignFirstResponder];
+
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"SearchTerm", searchTerm, nil]; 
+    [FlurryAPI logEvent:@"Search" withParameters:params];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchTerm {
+    if ([searchTerm length] == 0) {
+        [self resetSearch];
+        [table reloadData];
+        return;
+    }
+    
+    [self handleSearchForTerm:searchTerm];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    search.text = @"";
+    [self resetSearch];
+    [table reloadData];
+    [searchBar resignFirstResponder];
+}
+
+#pragma mark -
+#pragma mark Table View Delegate Methods
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([search isFirstResponder]) {
+        [self searchBarSearchButtonClicked:search];
+    }
+
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+}
+
 #pragma mark -
 #pragma mark JSON Parsing Method
 - (void)jsonParsingComplete:(id)objects {
@@ -116,22 +142,4 @@
     [table reloadData];
 }
     
-- (void)viewDidAppear:(BOOL)animated {
-    indexed = NO;
-    
-    [table reloadData];
-}
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)dealloc {
-    [search release];
-    [super dealloc];
-}
-
 @end
