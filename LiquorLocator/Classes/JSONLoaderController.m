@@ -15,6 +15,7 @@
 #import "LiquorLocatorAppDelegate.h"
 
 #import "Constants.h"
+#import "FlurryAPI.h"
 
 @implementation JSONLoaderController
 
@@ -100,6 +101,11 @@
 // partly because this application does not have any offline functionality for the user. Most real applications should
 // handle the error in a less obtrusive way and provide offline functionality to the user.
 - (void)handleError:(NSError *)error {
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"Code", [error code], 
+                                                                      @"Desc", [error localizedDescription], 
+                                                                      @"Info", [error userInfo], nil]; 
+    [FlurryAPI logEvent:@"StoreInventoryView" withParameters:params];
+
     if (HUD == nil) {
         // Initialize the HUD with my view
         HUD = [[MBProgressHUD alloc] initWithView:self.view];

@@ -24,7 +24,6 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 #pragma mark UIApplication Delegate Methods
-#define SPLASH
 - (void)applicationDidFinishLaunching:(UIApplication *)application { 
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     
@@ -43,15 +42,20 @@ void uncaughtExceptionHandler(NSException *exception) {
     [self putCachedData:dateStr forKey:@"DATE"];
     
     // Override point for customization after application launch
-#ifdef SPLASH
-    [window addSubview:navController.view];
-    [window makeKeyAndVisible];    
-#else
+    splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    splashView.image = [UIImage imageNamed:@"Default.png"];
     [window addSubview:splashView];
-    [NSThread detachNewThreadSelector:@selector(getInitialData:) 
-                             toTarget:self withObject:nil];
-#endif    
+    [window addSubview:navController.view];
+    [window bringSubviewToFront:splashView];
+    [window makeKeyAndVisible];    
+    
+    [self performSelector:@selector(removeSplash) withObject:nil afterDelay:1.5];
+}
 
+-(void)removeSplash;
+{
+    [splashView removeFromSuperview];
+    [splashView release];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -105,12 +109,6 @@ void uncaughtExceptionHandler(NSException *exception) {
      
 - (void)purgeCache {
     [dataCache removeAllObjects];
-}
-
--(void)getInitialData:(id)obj {
-    [NSThread sleepForTimeInterval:3.0]; // simulate waiting for server response
-    [splashView removeFromSuperview];
-    [window addSubview:navController.view];
 }
 
 - (void)dealloc {

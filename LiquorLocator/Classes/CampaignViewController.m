@@ -16,12 +16,12 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+    [FlurryAPI logEvent:@"CampaignView"];
+
     [super viewDidLoad];
     
     NSURLRequest *URLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://wsll.pugdogdev.com/info"]];
     [webView loadRequest:URLRequest];
-    
-    [FlurryAPI logEvent:@"CampaignView"];
 }
 
 - (void)didReceiveMemoryWarning {

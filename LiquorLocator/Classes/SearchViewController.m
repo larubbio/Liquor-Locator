@@ -32,11 +32,12 @@
 #pragma mark Search Bar Delegate Methods
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSString *searchTerm = [searchBar text];
-    [self handleSearchForTerm:searchTerm];
-    [searchBar resignFirstResponder];
 
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"SearchTerm", searchTerm, nil]; 
     [FlurryAPI logEvent:@"Search" withParameters:params];
+
+    [self handleSearchForTerm:searchTerm];
+    [searchBar resignFirstResponder];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchTerm {

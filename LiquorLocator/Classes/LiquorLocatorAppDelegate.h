@@ -12,14 +12,14 @@
     UIWindow *window;
   
     IBOutlet UINavigationController *navController;
-    IBOutlet UIView *splashView;
+    UIImageView *splashView;
     
     NSMutableDictionary *dataCache;
 }
 
 @property (nonatomic, retain) UIWindow *window;
 @property (nonatomic, retain) UINavigationController *navController;
-@property (nonatomic, retain) UIView *splashView;
+@property (nonatomic, retain) UIImageView *splashView;
 
 @property (nonatomic, retain) NSMutableDictionary *dataCache;
 
