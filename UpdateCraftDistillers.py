@@ -22,7 +22,6 @@ stores = session.query(Model.Store)
 
 distillers = session.query(Model.Distiller).filter(Model.Distiller.search_term!=None)
 for d in distillers.all():
-
     if d.search_term:
         for term in d.search_term.split(','):
 
