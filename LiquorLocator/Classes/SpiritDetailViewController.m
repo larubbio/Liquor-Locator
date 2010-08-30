@@ -23,10 +23,6 @@
 @synthesize sizeBtn;
 @synthesize viewStoresBtn;
 
-- (void)viewWillAppear:(BOOL)animated {
-    NSLog(@"View will appear");
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     self.feedURLString = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirit/%@", spiritId];
     
@@ -71,7 +67,7 @@
 - (void)jsonParsingComplete:(id)objects {
     [super jsonParsingComplete:objects];
     
-    NSDictionary *searchParameters= [NSDictionary dictionaryWithObjectsAndKeys:@"Spirit", [self.objectList objectForKey:kBrandName], nil]; 
+    NSDictionary *searchParameters= [NSDictionary dictionaryWithObjectsAndKeys:[self.objectList objectForKey:kBrandName], @"Spirit", nil]; 
     [FlurryAPI logEvent:@"SpiritDetail" withParameters:searchParameters];
         
     NSString *priceTitle = [NSString stringWithFormat:@"Cost: $%@", [objectList objectForKey:kPrice]];

@@ -195,7 +195,7 @@
     
     [table reloadData];
     
-    NSDictionary *searchParameters= [NSDictionary dictionaryWithObjectsAndKeys:@"Distiller", [self.objectList objectForKey:kName], nil]; 
+    NSDictionary *searchParameters= [NSDictionary dictionaryWithObjectsAndKeys:[self.objectList objectForKey:kName], @"Distiller", nil]; 
     [FlurryAPI logEvent:@"DistillerDetail" withParameters:searchParameters];
 }
 

@@ -15,6 +15,22 @@
 
 @synthesize search;
 
+- (void)viewDidAppear {
+    search.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    search.autocorrectionType = UITextAutocorrectionTypeNo;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    indexed = NO;
+    
+    [table reloadData];
+}
+
+- (void)dealloc {
+    [search release];
+    [super dealloc];
+}
+
 - (void)resetSearch {
     if (spirits != nil) {
         [spirits release];
@@ -33,7 +49,7 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSString *searchTerm = [searchBar text];
 
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"SearchTerm", searchTerm, nil]; 
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:searchTerm, @"SearchTerm", nil]; 
     [FlurryAPI logEvent:@"Search" withParameters:params];
 
     [self handleSearchForTerm:searchTerm];
@@ -89,7 +105,18 @@
     // to the user in an unobtrusive manner.
     NSAssert(self.JSONConnection != nil, @"Failure to create URL connection.");
 }
- 
+
+#pragma mark -
+#pragma mark Table View Delegate Methods
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([search isFirstResponder]) {
+        [self searchBarSearchButtonClicked:search];
+    }
+
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+}
+
 #pragma mark -
 #pragma mark JSON Parsing Method
 - (void)jsonParsingComplete:(id)objects {
@@ -117,22 +144,4 @@
     [table reloadData];
 }
     
-- (void)viewDidAppear:(BOOL)animated {
-    indexed = NO;
-    
-    [table reloadData];
-}
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)dealloc {
-    [search release];
-    [super dealloc];
-}
-
 @end

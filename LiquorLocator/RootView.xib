@@ -57,26 +57,46 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUITabBarItem" id="748909250">
 								<string key="IBUITitle">Categories</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">categories.png</string>
+								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUITabBar" ref="944349941"/>
 							</object>
 							<object class="IBUITabBarItem" id="135511110">
 								<string key="IBUITitle">Stores</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">stores.png</string>
+								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUITabBar" ref="944349941"/>
 							</object>
 							<object class="IBUITabBarItem" id="173797320">
 								<string key="IBUITitle">Search</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">search.png</string>
+								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUITabBar" ref="944349941"/>
 							</object>
 							<object class="IBUITabBarItem" id="66164437">
 								<string key="IBUITitle">Local</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">local.png</string>
+								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUITabBar" ref="944349941"/>
 							</object>
 							<object class="IBUITabBarItem" id="830009061">
 								<string key="IBUITitle">Campaign</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">campaign.png</string>
+								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUITabBar" ref="944349941"/>
 							</object>
@@ -247,6 +267,7 @@
 					<string>17.IBEditorWindowLastContentRect</string>
 					<string>17.IBPluginDependency</string>
 					<string>20.IBPluginDependency</string>
+					<string>20.showNotes</string>
 					<string>21.IBPluginDependency</string>
 					<string>30.IBPluginDependency</string>
 					<string>40.IBPluginDependency</string>
@@ -258,6 +279,7 @@
 					<string>{{317, 156}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<boolean value="NO"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -575,6 +597,25 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<string key="IBDocument.LastKnownRelativeProjectPath">LiquorLocator.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<bool key="EncodedWithXMLCoder">YES</bool>
+			<object class="NSArray" key="dict.sortedKeys">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>campaign.png</string>
+				<string>categories.png</string>
+				<string>local.png</string>
+				<string>search.png</string>
+				<string>stores.png</string>
+			</object>
+			<object class="NSMutableArray" key="dict.values">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{48, 32}</string>
+				<string>{48, 32}</string>
+				<string>{48, 32}</string>
+				<string>{48, 32}</string>
+				<string>{48, 32}</string>
+			</object>
+		</object>
 		<string key="IBCocoaTouchPluginVersion">117</string>
 	</data>
 </archive>

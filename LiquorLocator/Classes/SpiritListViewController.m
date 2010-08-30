@@ -29,7 +29,7 @@
         self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         self.title = category;        
         
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"Store", storeName, @"Category", category, nil]; 
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:storeName, @"Store", category, @"Category", nil]; 
         [FlurryAPI logEvent:@"StoreInventoryView" withParameters:params];
 
     } else if (self.category != nil) {
@@ -37,7 +37,7 @@
         self.feedURLString = query;
         self.title = category;
         
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"Category", category, nil]; 
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:category, @"Category", nil]; 
         [FlurryAPI logEvent:@"SpiritsView" withParameters:params];
         
     } else if (self.brandName != nil) {
@@ -45,7 +45,7 @@
         self.feedURLString = query;
         self.title = brandName;
         
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"Name", brandName, nil]; 
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:brandName, @"Name", nil]; 
         [FlurryAPI logEvent:@"SpiritsView" withParameters:params];
         
     } else if (self.storeId != 0) {
@@ -53,7 +53,7 @@
         self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         self.title = storeName;
         
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"Store", storeName, nil]; 
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:storeName, @"Store", nil]; 
         [FlurryAPI logEvent:@"StoreInventoryView" withParameters:params];
         
     } else {

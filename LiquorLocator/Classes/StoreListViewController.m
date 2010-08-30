@@ -15,7 +15,7 @@
 @synthesize spiritName;
 
 - (void)viewDidAppear:(BOOL)animated {
-    NSDictionary *params= [NSDictionary dictionaryWithObjectsAndKeys:@"Spirit", spiritName, nil]; 
+    NSDictionary *params= [NSDictionary dictionaryWithObjectsAndKeys:spiritName, @"Spirit", nil]; 
     [FlurryAPI logEvent:@"StoresView" withParameters:params];
 
     NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirit/%@/stores", spiritId];
