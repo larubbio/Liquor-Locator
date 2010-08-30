@@ -7,6 +7,7 @@
 //
 
 #import "CampaignViewController.h"
+#import "FlurryAPI.h"
 
 
 @implementation CampaignViewController
@@ -19,6 +20,8 @@
     
     NSURLRequest *URLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://wsll.pugdogdev.com/info"]];
     [webView loadRequest:URLRequest];
+    
+    [FlurryAPI logEvent:@"CampaignView"];
 }
 
 - (void)didReceiveMemoryWarning {

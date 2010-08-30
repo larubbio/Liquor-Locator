@@ -135,7 +135,7 @@
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    if (indexed) {
+    if (indexed && [keys count] > 10) {
         return keys;
     } else {
         return nil;

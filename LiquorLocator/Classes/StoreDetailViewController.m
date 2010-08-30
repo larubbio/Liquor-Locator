@@ -9,10 +9,11 @@
 #import "StoreDetailViewController.h"
 #import "LiquorLocatorAppDelegate.h"
 #import "RootViewController.h"
-#import "SpiritListViewController.h"
+#import "StoreCategoriesViewController.h"
 #import "StoreAnnotation.h"
 
 #import "Constants.h"
+#import "FlurryAPI.h"
 
 @implementation StoreDetailViewController
 
@@ -133,9 +134,10 @@
 }    
 
 - (IBAction)viewSpirits:(id)sender {
-    SpiritListViewController *controller = [[SpiritListViewController alloc] initWithNibName:@"SpiritListView" bundle:nil];   
-    ((SpiritListViewController *)controller).storeId = storeId;
-    ((SpiritListViewController *)controller).storeName = storeName.text;
+    
+    StoreCategoriesViewController *controller = [[StoreCategoriesViewController alloc] initWithNibName:@"StoreCategoriesView" bundle:nil];
+    ((StoreCategoriesViewController *)controller).storeId = storeId;
+    ((StoreCategoriesViewController *)controller).storeName = storeName.text;
 
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate.navController pushViewController:controller animated:YES];
@@ -149,6 +151,9 @@
 - (void)jsonParsingComplete:(id)objects {
     [super jsonParsingComplete:objects];
     
+    NSDictionary *searchParameters= [NSDictionary dictionaryWithObjectsAndKeys:@"Store", [self.objectList objectForKey:kName], nil]; 
+    [FlurryAPI logEvent:@"StoreDetail" withParameters:searchParameters];
+
     // Pull all data out of the dictionary into local variables
     NSString *_name = [self.objectList objectForKey:kName];
     NSString *_street = [self.objectList objectForKey:kAddress];

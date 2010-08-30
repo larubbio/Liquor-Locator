@@ -7,16 +7,22 @@
 //
 
 #import "StoreListViewController.h"
+#import "FlurryAPI.h"
 
 @implementation StoreListViewController
 
 @synthesize spiritId;
+@synthesize spiritName;
 
 - (void)viewDidAppear:(BOOL)animated {
     NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirit/%@/stores", spiritId];
     self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     [super viewDidAppear:animated];
+    
+    NSDictionary *params= [NSDictionary dictionaryWithObjectsAndKeys:@"Spirit", spiritName, nil]; 
+    [FlurryAPI logEvent:@"StoresView" withParameters:params];
+    
 }
 
 - (void)didReceiveMemoryWarning {

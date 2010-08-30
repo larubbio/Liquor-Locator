@@ -13,6 +13,7 @@
 #import "BlurbViewCell.h"
 
 #import "Constants.h"
+#import "FlurryAPI.h"
 
 #ifdef SHOW_BLURB
 #define BLURB_SECTION 0
@@ -34,6 +35,8 @@
     self.feedURLString = @"http://wsll.pugdogdev.com/distillers";
     
     [super viewDidAppear:animated];
+    
+    [FlurryAPI logEvent:@"DistillerssView"];
 }
 
 - (void)didReceiveMemoryWarning {

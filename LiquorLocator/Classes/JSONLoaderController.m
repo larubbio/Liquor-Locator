@@ -54,7 +54,7 @@
     // since it attempts to get a cell yet I empty out the object list.
     self.objectList = [NSMutableArray array];
     
-    NSLog(@"Connecting to %@", self.feedURLString);
+//    NSLog(@"Connecting to %@", self.feedURLString);
 
     // Use NSURLConnection to asynchronously download the data. This means the main thread will not be blocked - the
     // application will remain responsive to the user. 
@@ -134,7 +134,7 @@
 // which is working in the background, can asynchronously communicate back to its delegate on the thread from which it was
 // started - in this case, the main thread.
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)theResponse {
-    NSLog(@"Connection::didReceiveResponse");
+//    NSLog(@"Connection::didReceiveResponse");
 	if (response != nil)
 	{
 		// according to the URL Loading System guide, it is possible to receive 
@@ -146,12 +146,12 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    NSLog(@"Connection::didReceiveData");
+//    NSLog(@"Connection::didReceiveData");
     [jsonData appendData:data];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"Connection::didFailWithError");
+//    NSLog(@"Connection::didFailWithError");
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;   
     if ([error code] == kCFURLErrorNotConnectedToInternet) {
         // if we can identify the error, we can present a more precise message to the user.
@@ -166,7 +166,7 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"Connection::didFinishLoading");
+//    NSLog(@"Connection::didFinishLoading");
     self.JSONConnection = nil;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;   
 

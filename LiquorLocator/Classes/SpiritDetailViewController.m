@@ -11,6 +11,7 @@
 #import "LiquorLocatorAppDelegate.h"
 
 #import "Constants.h"
+#import "FlurryAPI.h"
 
 @implementation SpiritDetailViewController
 
@@ -57,6 +58,7 @@
 - (void)viewStores:(id)sender {
     StoreListViewController *controller = [[StoreListViewController alloc] initWithNibName:@"StoreListView" bundle:nil];   
     ((StoreListViewController *)controller).spiritId = spiritId;
+    ((StoreListViewController *)controller).spiritName = [self.objectList objectForKey:kBrandName];
     
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate.navController pushViewController:controller animated:YES];
@@ -69,6 +71,9 @@
 - (void)jsonParsingComplete:(id)objects {
     [super jsonParsingComplete:objects];
     
+    NSDictionary *searchParameters= [NSDictionary dictionaryWithObjectsAndKeys:@"Spirit", [self.objectList objectForKey:kBrandName], nil]; 
+    [FlurryAPI logEvent:@"SpiritDetail" withParameters:searchParameters];
+        
     NSString *priceTitle = [NSString stringWithFormat:@"Cost: $%@", [objectList objectForKey:kPrice]];
     NSString *sizeTitle = [NSString stringWithFormat:@"Size: %@ Liters", [objectList objectForKey:kSize]];
     

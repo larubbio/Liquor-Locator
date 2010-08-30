@@ -7,6 +7,7 @@
 //
 
 #import "StoresViewController.h"
+#import "FlurryAPI.h"
 
 @implementation StoresViewController
 
@@ -14,6 +15,8 @@
     self.feedURLString = @"http://wsll.pugdogdev.com/stores";
     
     [super viewDidAppear:animated];    
+
+    [FlurryAPI logEvent:@"StoresView"];
 }
 
 - (void)didReceiveMemoryWarning {

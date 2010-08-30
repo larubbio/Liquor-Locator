@@ -43,6 +43,10 @@
 		46A6AF85122383A900038466 /* DistillerAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46A6AF84122383A900038466 /* DistillerAddressCell.xib */; };
 		46A6AF9512243E5A00038466 /* BlurbViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A6AF9212243E5A00038466 /* BlurbViewCell.m */; };
 		46A6AF9612243E5A00038466 /* DistillerAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A6AF9412243E5A00038466 /* DistillerAddressCell.m */; };
+		46CABEB71228394400B8D751 /* CategoriesList.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CABEB61228394400B8D751 /* CategoriesList.m */; };
+		46CABED612283AB500B8D751 /* StoreCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CABED412283AB500B8D751 /* StoreCategoriesViewController.m */; };
+		46CABED712283AB500B8D751 /* StoreCategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46CABED512283AB500B8D751 /* StoreCategoriesView.xib */; };
+		46CABF25122867AB00B8D751 /* libFlurryWithLocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CABF24122867AB00B8D751 /* libFlurryWithLocation.a */; };
 		46DB35C9121998CB001C5C4B /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 46DB35C8121998CB001C5C4B /* 37x-Checkmark.png */; };
 		46E647EA12034DAB00AB9328 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E647DF12034DAB00AB9328 /* NSObject+SBJSON.m */; };
 		46E647EB12034DAB00AB9328 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E647E112034DAB00AB9328 /* NSString+SBJSON.m */; };
@@ -115,6 +119,14 @@
 		46A6AF9212243E5A00038466 /* BlurbViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlurbViewCell.m; path = Classes/BlurbViewCell.m; sourceTree = "<group>"; };
 		46A6AF9312243E5A00038466 /* DistillerAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DistillerAddressCell.h; path = Classes/DistillerAddressCell.h; sourceTree = "<group>"; };
 		46A6AF9412243E5A00038466 /* DistillerAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DistillerAddressCell.m; path = Classes/DistillerAddressCell.m; sourceTree = "<group>"; };
+		46CABEB51228394400B8D751 /* CategoriesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesList.h; sourceTree = "<group>"; };
+		46CABEB61228394400B8D751 /* CategoriesList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesList.m; sourceTree = "<group>"; };
+		46CABED312283AB500B8D751 /* StoreCategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreCategoriesViewController.h; sourceTree = "<group>"; };
+		46CABED412283AB500B8D751 /* StoreCategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreCategoriesViewController.m; sourceTree = "<group>"; };
+		46CABED512283AB500B8D751 /* StoreCategoriesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StoreCategoriesView.xib; path = Classes/StoreCategoriesView.xib; sourceTree = "<group>"; };
+		46CABF22122867AB00B8D751 /* FlurryAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAdDelegate.h; sourceTree = "<group>"; };
+		46CABF23122867AB00B8D751 /* FlurryAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAPI.h; sourceTree = "<group>"; };
+		46CABF24122867AB00B8D751 /* libFlurryWithLocation.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryWithLocation.a; sourceTree = "<group>"; };
 		46DB35C8121998CB001C5C4B /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		46E647DD12034DAB00AB9328 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		46E647DE12034DAB00AB9328 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
@@ -151,6 +163,7 @@
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				460A7FB3120779B100F36A91 /* MapKit.framework in Frameworks */,
 				469B5FD11208A92900A7E5DE /* CoreLocation.framework in Frameworks */,
+				46CABF25122867AB00B8D751 /* libFlurryWithLocation.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +173,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				46CABF21122867AB00B8D751 /* FlurryLibWithLocation */,
 				46710EB01209C78200B250F9 /* HUD */,
 				469B5F2A120881B800A7E5DE /* Views */,
 				46E647DC12034DAB00AB9328 /* JSON */,
@@ -211,9 +225,11 @@
 				467111C9120E120D00B250F9 /* Default.png */,
 				46FF630F1221889D00EEC2F6 /* LocalDistillersView.xib */,
 				46A6AF76122380C300038466 /* DistillerDetailView.xib */,
+				46A6AF84122383A900038466 /* DistillerAddressCell.xib */,
 				4628BF091202849200ECE4BE /* CategoriesView.xib */,
 				4628BF041202846900ECE4BE /* StoresView.xib */,
 				469B60951209205C00A7E5DE /* StoreListView.xib */,
+				46CABED512283AB500B8D751 /* StoreCategoriesView.xib */,
 				460A7EEC120767E200F36A91 /* StoreDetailView.xib */,
 				4628BF0E120284A500ECE4BE /* SearchView.xib */,
 				46E649DF1203D11A00AB9328 /* SpiritListView.xib */,
@@ -223,7 +239,6 @@
 				8D1107310486CEB800E47090 /* LiquorLocator-Info.plist */,
 				46E64864120374B700AB9328 /* RootView.xib */,
 				46A6AF811223834800038466 /* BlurbCell.xib */,
-				46A6AF84122383A900038466 /* DistillerAddressCell.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -245,6 +260,8 @@
 				4628BF081202849200ECE4BE /* CategoriesViewController.m */,
 				4628BF021202846900ECE4BE /* StoresViewController.h */,
 				4628BF031202846900ECE4BE /* StoresViewController.m */,
+				46CABED312283AB500B8D751 /* StoreCategoriesViewController.h */,
+				46CABED412283AB500B8D751 /* StoreCategoriesViewController.m */,
 				4628BF0C120284A500ECE4BE /* SearchViewController.h */,
 				4628BF0D120284A500ECE4BE /* SearchViewController.m */,
 				4628BF11120284BD00ECE4BE /* CampaignViewController.h */,
@@ -261,14 +278,16 @@
 				460A7EEB120767E200F36A91 /* StoreDetailViewController.m */,
 				469B60931209205C00A7E5DE /* StoreListViewController.h */,
 				469B60941209205C00A7E5DE /* StoreListViewController.m */,
-				4671108A120DAE5300B250F9 /* StoreList.h */,
-				4671108B120DAE5300B250F9 /* StoreList.m */,
-				46711121120E02EC00B250F9 /* SpiritList.h */,
-				46711122120E02EC00B250F9 /* SpiritList.m */,
 				46FF630D1221889D00EEC2F6 /* LocalDistillersViewController.h */,
 				46FF630E1221889D00EEC2F6 /* LocalDistillersViewController.m */,
 				46A6AF74122380C300038466 /* DistillerDetailViewController.h */,
 				46A6AF75122380C300038466 /* DistillerDetailViewController.m */,
+				4671108A120DAE5300B250F9 /* StoreList.h */,
+				4671108B120DAE5300B250F9 /* StoreList.m */,
+				46711121120E02EC00B250F9 /* SpiritList.h */,
+				46711122120E02EC00B250F9 /* SpiritList.m */,
+				46CABEB51228394400B8D751 /* CategoriesList.h */,
+				46CABEB61228394400B8D751 /* CategoriesList.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -304,6 +323,17 @@
 			name = Views;
 			path = ..;
 			sourceTree = "<group>";
+		};
+		46CABF21122867AB00B8D751 /* FlurryLibWithLocation */ = {
+			isa = PBXGroup;
+			children = (
+				46CABF22122867AB00B8D751 /* FlurryAdDelegate.h */,
+				46CABF23122867AB00B8D751 /* FlurryAPI.h */,
+				46CABF24122867AB00B8D751 /* libFlurryWithLocation.a */,
+			);
+			name = FlurryLibWithLocation;
+			path = "../../../Downloads/Flurry iPhone SDK v2.7/FlurryLibWithLocation";
+			sourceTree = SOURCE_ROOT;
 		};
 		46E647DC12034DAB00AB9328 /* JSON */ = {
 			isa = PBXGroup;
@@ -386,6 +416,7 @@
 				46A6AF78122380C300038466 /* DistillerDetailView.xib in Resources */,
 				46A6AF821223834800038466 /* BlurbCell.xib in Resources */,
 				46A6AF85122383A900038466 /* DistillerAddressCell.xib in Resources */,
+				46CABED712283AB500B8D751 /* StoreCategoriesView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +455,8 @@
 				46A6AF77122380C300038466 /* DistillerDetailViewController.m in Sources */,
 				46A6AF9512243E5A00038466 /* BlurbViewCell.m in Sources */,
 				46A6AF9612243E5A00038466 /* DistillerAddressCell.m in Sources */,
+				46CABEB71228394400B8D751 /* CategoriesList.m in Sources */,
+				46CABED612283AB500B8D751 /* StoreCategoriesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +473,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LiquorLocator_Prefix.pch;
 				INFOPLIST_FILE = "LiquorLocator-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/FlurryLibWithLocation\"",
+					"\"$(SRCROOT)/../../../Downloads/Flurry iPhone SDK v2.7/FlurryLibWithLocation\"",
+				);
 				PRODUCT_NAME = LiquorLocator;
 			};
 			name = Debug;
@@ -452,6 +490,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LiquorLocator_Prefix.pch;
 				INFOPLIST_FILE = "LiquorLocator-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/FlurryLibWithLocation\"",
+					"\"$(SRCROOT)/../../../Downloads/Flurry iPhone SDK v2.7/FlurryLibWithLocation\"",
+				);
 				PRODUCT_NAME = LiquorLocator;
 			};
 			name = Release;
