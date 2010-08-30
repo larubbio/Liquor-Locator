@@ -80,7 +80,6 @@
     NSString* destinationLocationParameter= [NSString stringWithFormat:@"%f,%f", latitude, longitude];    
     NSString *googleURL = [[NSString stringWithFormat:@"http://maps.google.com/maps?daddr=%@&saddr=%@", destinationLocationParameter, startLocationParameter] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]; 
 	
-    NSLog(@"Directions URL: %@",googleURL);
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:googleURL]];
 }
 

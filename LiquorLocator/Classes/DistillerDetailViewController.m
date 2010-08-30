@@ -169,25 +169,31 @@
     NSUInteger section = [indexPath section];
     NSUInteger row = [indexPath row];
 
-    NSArray *spiritSection = [self.objectList objectForKey:kSpirits];
-    NSDictionary *spirit = [spiritSection objectAtIndex:row]; 
-
     // For section 0 load map?  Call number?
     
     // For section 1 open url in safari
+    if (section == 1) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[self.objectList objectForKey:kURL]]];
+    }
     
     // For section 2 go to spirit detail page.
     if (section == 2) {
-        SpiritDetailViewController *controller = [[SpiritDetailViewController alloc] initWithNibName:@"SpiritDetailView" bundle:nil];
-        ((SpiritDetailViewController *)controller).spiritId = [spirit objectForKey:kId];
+        NSArray *spiritSection = [self.objectList objectForKey:kSpirits];
+        if ([spiritSection count] > 0) {
+            NSDictionary *spirit = [spiritSection objectAtIndex:row]; 
+        
+            SpiritDetailViewController *controller = [[SpiritDetailViewController alloc] initWithNibName:@"SpiritDetailView" bundle:nil];
+            ((SpiritDetailViewController *)controller).spiritId = [spirit objectForKey:kId];
     
-        LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-        [delegate.navController pushViewController:controller animated:YES];
+            LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+            [delegate.navController pushViewController:controller animated:YES];
     
-        [controller release];
+            [controller release];
+        }
     }
-}
 
+    [tableView reloadData];
+}
 #pragma mark -
 #pragma mark JSON Parsing Method
 - (void)jsonParsingComplete:(id)objects {
