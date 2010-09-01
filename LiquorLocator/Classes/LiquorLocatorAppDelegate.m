@@ -54,11 +54,12 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 -(void)removeSplash;
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
+    
+    navController.view.frame = [[UIScreen mainScreen] applicationFrame];    
+    
     [splashView removeFromSuperview];
     [splashView release];
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

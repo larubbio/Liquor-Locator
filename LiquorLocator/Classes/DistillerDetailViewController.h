@@ -24,4 +24,7 @@
 @property (nonatomic, retain) UITableView *table;
 
 @property (nonatomic, retain) DistillerAddressCell *addressCell;
+
+- (IBAction)loadDirections:(id)sender;
+- (IBAction)callDistiller:(id)sender;
 @end
