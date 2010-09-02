@@ -28,6 +28,7 @@
 @synthesize	spiritsTabBarItem;
 @synthesize localDistillersTabBarItem;
 @synthesize campaignTabBarItem;
+@synthesize selectedTabBarItem;
 @synthesize selectedViewController;
 
 - (void)viewDidLoad {
@@ -55,7 +56,7 @@
 	    
     [self.view addSubview:categoriesTabViewController.view];
     self.selectedViewController = categoriesTabViewController;
-
+    self.selectedTabBarItem = categoriesTabBarItem;
 //    [self.selectedViewController viewDidAppear:YES];
 
     [array release];
@@ -83,6 +84,7 @@
     [spiritsTabBarItem release];
     [localDistillersTabBarItem release];
     [campaignTabBarItem release];
+    [selectedTabBarItem release];
     [viewControllers release];
     [selectedViewController release];
     [super dealloc];
@@ -105,10 +107,14 @@
 #pragma mark Tab Bar Deleget Methods
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
+    if (item == self.selectedTabBarItem) {
+        return;
+    }
+    
 #ifdef FLURRY
     [FlurryAPI countPageView];
 #endif
-    
+        
     UIViewController *controller = nil;
     
 	if (item == categoriesTabBarItem) {
@@ -128,17 +134,17 @@
         self.title = kCampaign;
     }
     
-
     [controller viewWillAppear:YES];
-	[self.selectedViewController viewWillDisappear:YES];
+    [self.selectedViewController viewWillDisappear:YES];
 	
     [self.selectedViewController.view removeFromSuperview];
     [self.view addSubview:controller.view];
 	
-	[self.selectedViewController viewDidDisappear:YES];
-	[controller viewDidAppear:YES];
+    [self.selectedViewController viewDidDisappear:YES];
+    [controller viewDidAppear:YES];
     
     self.selectedViewController = controller;
+    self.selectedTabBarItem = item;
 }
 
 
