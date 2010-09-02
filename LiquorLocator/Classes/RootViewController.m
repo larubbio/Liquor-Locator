@@ -74,18 +74,6 @@
     [self.selectedViewController viewDidAppear:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-}
-
 - (void)dealloc {
     [locationManager release];
     [userLocation release];
@@ -104,7 +92,7 @@
 #pragma mark Core Location Delegate Methods
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     self.userLocation = newLocation;
-    [locationManager stopUpdatingLocation];
+//    [locationManager stopUpdatingLocation];
     [FlurryAPI setLocation:self.userLocation];
 }
 
