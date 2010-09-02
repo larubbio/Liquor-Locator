@@ -93,7 +93,9 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     self.userLocation = newLocation;
 //    [locationManager stopUpdatingLocation];
+#ifdef FLURRY
     [FlurryAPI setLocation:self.userLocation];
+#endif
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
@@ -103,7 +105,9 @@
 #pragma mark Tab Bar Deleget Methods
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
+#ifdef FLURRY
     [FlurryAPI countPageView];
+#endif
     
     UIViewController *controller = nil;
     

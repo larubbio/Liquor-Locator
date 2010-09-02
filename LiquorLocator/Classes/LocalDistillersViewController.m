@@ -32,8 +32,10 @@
 @synthesize blurbCell;
 
 - (void)viewDidAppear:(BOOL)animated {
+#ifdef FLURRY
     [FlurryAPI logEvent:@"DistillersView"];
-
+#endif
+    
     self.feedURLString = @"http://wsll.pugdogdev.com/distillers";
     
     [super viewDidAppear:animated];

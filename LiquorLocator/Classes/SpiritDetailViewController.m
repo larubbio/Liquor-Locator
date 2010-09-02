@@ -67,9 +67,11 @@
 - (void)jsonParsingComplete:(id)objects {
     [super jsonParsingComplete:objects];
     
+#ifdef FLURRY
     NSDictionary *searchParameters= [NSDictionary dictionaryWithObjectsAndKeys:[self.objectList objectForKey:kBrandName], @"Spirit", nil]; 
     [FlurryAPI logEvent:@"SpiritDetail" withParameters:searchParameters];
-        
+#endif
+    
     NSString *priceTitle = [NSString stringWithFormat:@"Cost: $%@", [objectList objectForKey:kPrice]];
     NSString *sizeTitle = [NSString stringWithFormat:@"Size: %@ Liters", [objectList objectForKey:kSize]];
     

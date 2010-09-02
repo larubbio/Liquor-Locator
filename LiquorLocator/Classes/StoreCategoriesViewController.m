@@ -19,9 +19,11 @@
 @synthesize storeId;
 
 - (void)viewDidAppear:(BOOL)animated {
+#ifdef FLURRY
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:storeName, @"Store", nil]; 
     [FlurryAPI logEvent:@"CategoriesView" withParameters:params];
-
+#endif
+    
     NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/store/%d/categories", storeId];
     self.feedURLString = query;
     self.title = storeName;

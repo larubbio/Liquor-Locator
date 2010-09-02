@@ -15,7 +15,9 @@
 @implementation CategoriesViewController
 
 - (void)viewDidAppear:(BOOL)animated {
+#ifdef FLURRY    
     [FlurryAPI logEvent:@"CategoriesView"];
+#endif
     
     self.feedURLString = @"http://wsll.pugdogdev.com/categories";
     

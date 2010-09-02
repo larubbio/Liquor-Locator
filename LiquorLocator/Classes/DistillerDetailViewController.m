@@ -202,8 +202,10 @@
     
     [table reloadData];
     
+#ifdef FLURRY
     NSDictionary *searchParameters= [NSDictionary dictionaryWithObjectsAndKeys:[self.objectList objectForKey:kName], @"Distiller", nil]; 
     [FlurryAPI logEvent:@"DistillerDetail" withParameters:searchParameters];
+#endif
 }
 
 #pragma mark -

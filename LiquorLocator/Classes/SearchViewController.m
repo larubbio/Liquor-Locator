@@ -49,9 +49,11 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSString *searchTerm = [searchBar text];
 
+#ifdef FLURRY    
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:searchTerm, @"SearchTerm", nil]; 
     [FlurryAPI logEvent:@"Search" withParameters:params];
-
+#endif
+    
     [self handleSearchForTerm:searchTerm];
     [searchBar resignFirstResponder];
 }

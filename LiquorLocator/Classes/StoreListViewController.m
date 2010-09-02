@@ -15,9 +15,11 @@
 @synthesize spiritName;
 
 - (void)viewDidAppear:(BOOL)animated {
+#ifdef FLURRY
     NSDictionary *params= [NSDictionary dictionaryWithObjectsAndKeys:spiritName, @"Spirit", nil]; 
     [FlurryAPI logEvent:@"StoresView" withParameters:params];
-
+#endif
+    
     NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirit/%@/stores", spiritId];
     self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     

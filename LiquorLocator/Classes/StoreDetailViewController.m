@@ -150,9 +150,11 @@
 - (void)jsonParsingComplete:(id)objects {
     [super jsonParsingComplete:objects];
     
+#ifdef FLURRY
     NSDictionary *searchParameters= [NSDictionary dictionaryWithObjectsAndKeys:[self.objectList objectForKey:kName], @"Store", nil]; 
     [FlurryAPI logEvent:@"StoreDetail" withParameters:searchParameters];
-
+#endif
+    
     // Pull all data out of the dictionary into local variables
     NSString *_name = [self.objectList objectForKey:kName];
     NSString *_street = [self.objectList objectForKey:kAddress];

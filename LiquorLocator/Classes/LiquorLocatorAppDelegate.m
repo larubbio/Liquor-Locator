@@ -20,17 +20,21 @@
 @synthesize dataCache;
 
 void uncaughtExceptionHandler(NSException *exception) {
+#ifdef FLURRY
     [FlurryAPI logError:@"Uncaught" message:@"Crash!" exception:exception];
+#endif
 }
 
 #pragma mark UIApplication Delegate Methods
 - (void)applicationDidFinishLaunching:(UIApplication *)application { 
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     
+#ifdef FLURRY
     [FlurryAPI startSession:@"FRBRP3NZIFW8FLSY7DW4"]; // Development
 //    [FlurryAPI startSession:@"L4AWJM8QPWPN3C1EK8K9"]; // Production
     
     [FlurryAPI countPageViews:navController];
+#endif
     
     dataCache = [[NSMutableDictionary alloc] init];
     
