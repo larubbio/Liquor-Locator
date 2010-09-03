@@ -150,7 +150,7 @@ def store_inventory_grouped(request, store_id):
         
     rows = cursor.fetchall()
     for row in rows:
-        ret.append({'cat': row[0], 'count': row[1]})
+        ret.append({'cat': row[0], 'count': str(row[1])})
 
     mimetype = 'application/json'
     return HttpResponse(simplejson.dumps(ret),mimetype)
@@ -163,7 +163,7 @@ def categories(request):
         
     rows = cursor.fetchall()
     for row in rows:
-        ret.append({'cat': row[0], 'count': row[1]})
+        ret.append({'cat': row[0], 'count': str(row[1])})
 
     mimetype = 'application/json'
     return HttpResponse(simplejson.dumps(ret),mimetype)
