@@ -146,19 +146,27 @@ def store_inventory_grouped(request, store_id):
     ret = []
     cursor = connection.cursor()
 
-    cursor.execute("select s.category from store_inventory si, spirits s where si.store_id = %s and si.spirit_id = s.id group by category order by category", [store_id])
+    cursor.execute("select s.category, count(distinct brand_name) from store_inventory si, spirits s where si.store_id = %s and si.spirit_id = s.id group by category order by category", [store_id])
         
     rows = cursor.fetchall()
     for row in rows:
-        ret.append(row[0])
+        ret.append({'cat': row[0], 'count': row[1]})
 
     mimetype = 'application/json'
     return HttpResponse(simplejson.dumps(ret),mimetype)
 
 def categories(request):
+    ret = []
+    cursor = connection.cursor()
+
+    cursor.execute("select category, count(distinct brand_name) from spirits group by category order by category")
+        
+    rows = cursor.fetchall()
+    for row in rows:
+        ret.append({'cat': row[0], 'count': row[1]})
+
     mimetype = 'application/json'
-    data = simplejson.dumps([c.category for c in Category.objects.all()])
-    return HttpResponse(data,mimetype)
+    return HttpResponse(simplejson.dumps(ret),mimetype)
 
 def distillers(request):
     mimetype = 'application/json'
