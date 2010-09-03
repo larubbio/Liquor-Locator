@@ -12,9 +12,9 @@ def info(request):
 <ul>
 <li><b>Less information</b> will be available to you, the consumer. As this application demonstrates, there is a large amount of information currently available about liquor store inventory through the state. This very convenient and easy accessibility to information you will go away if either initiative passes.</li>
 
-<li><b>Reduced Variety of Liquors</b> to choose from. Handing over liquor retailing to private business would result in fewer options. Private stores need to maximize profits with limited shelve space. As a store owner, wouldn't you choose to stock primarily top sellers? This leaves less room for small local distillers or new brands for you as a consumer to find.</li>
+<li><b>Reduced Variety of Liquors</b> to choose from. We believe anding over liquor retailing to private business would result in fewer options. Private stores need to maximize profits with limited shelve space. As a store owner, wouldn't you choose to stock primarily top sellers? This leaves less room for small local distillers or new brands for you as a consumer to find.</li>
 
-<li><b>Local Distillers</b> Recent changes to state laws have made it easier for local micro-distillers to start up. Currently at least 5 distillers have new products in stores with dozens more on the way. These are small business who create jobs in our communities and purchase source materials from Washington farmers, making creative and unique spirits. While this industry won't completely disappear if the initiatives pass, it will become significantly harder to get new or small-batch product into a private enterprises such as Costco. </li>
+<li><b>Local Distillers</b> Recent changes to state laws have made it easier for local micro-distillers to start up. Currently at least 5 distillers have new products in stores with dozens more on the way. These are small businesses who create jobs in our communities and purchase source materials from Washington farmers, and are making creative and unique spirits. While this industry won't completely disappear if the initiatives pass, we believe it will become significantly harder to get new or small-batch product into a private enterprises such as Costco. </li>
 </ul>
 </p>
 
