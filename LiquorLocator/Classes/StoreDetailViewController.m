@@ -80,7 +80,6 @@
     NSString* destinationLocationParameter= [NSString stringWithFormat:@"%f,%f", latitude, longitude];    
     NSString *googleURL = [[NSString stringWithFormat:@"http://maps.google.com/maps?daddr=%@&saddr=%@", destinationLocationParameter, startLocationParameter] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]; 
 	
-    NSLog(@"Directions URL: %@",googleURL);
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:googleURL]];
 }
 
@@ -151,9 +150,11 @@
 - (void)jsonParsingComplete:(id)objects {
     [super jsonParsingComplete:objects];
     
-    NSDictionary *searchParameters= [NSDictionary dictionaryWithObjectsAndKeys:@"Store", [self.objectList objectForKey:kName], nil]; 
+#ifdef FLURRY
+    NSDictionary *searchParameters= [NSDictionary dictionaryWithObjectsAndKeys:[self.objectList objectForKey:kName], @"Store", nil]; 
     [FlurryAPI logEvent:@"StoreDetail" withParameters:searchParameters];
-
+#endif
+    
     // Pull all data out of the dictionary into local variables
     NSString *_name = [self.objectList objectForKey:kName];
     NSString *_street = [self.objectList objectForKey:kAddress];

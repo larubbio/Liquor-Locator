@@ -15,6 +15,7 @@
 #import "LiquorLocatorAppDelegate.h"
 
 #import "Constants.h"
+#import "FlurryAPI.h"
 
 @implementation JSONLoaderController
 
@@ -81,11 +82,6 @@
     [delegate purgeCache];
 }
 
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-}
-
 - (void)dealloc {
     [jsonData release];
     [JSONConnection release];
@@ -100,6 +96,13 @@
 // partly because this application does not have any offline functionality for the user. Most real applications should
 // handle the error in a less obtrusive way and provide offline functionality to the user.
 - (void)handleError:(NSError *)error {
+#ifdef FLURRY
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[error code], @"Code",  
+                                                                      [error localizedDescription], @"Desc",  
+                                                                      [error userInfo], @"Info", nil]; 
+    [FlurryAPI logEvent:@"StoreInventoryView" withParameters:params];
+#endif
+    
     if (HUD == nil) {
         // Initialize the HUD with my view
         HUD = [[MBProgressHUD alloc] initWithView:self.view];

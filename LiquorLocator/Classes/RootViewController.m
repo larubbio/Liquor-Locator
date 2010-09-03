@@ -28,6 +28,7 @@
 @synthesize	spiritsTabBarItem;
 @synthesize localDistillersTabBarItem;
 @synthesize campaignTabBarItem;
+@synthesize selectedTabBarItem;
 @synthesize selectedViewController;
 
 - (void)viewDidLoad {
@@ -55,7 +56,7 @@
 	    
     [self.view addSubview:categoriesTabViewController.view];
     self.selectedViewController = categoriesTabViewController;
-
+    self.selectedTabBarItem = categoriesTabBarItem;
 //    [self.selectedViewController viewDidAppear:YES];
 
     [array release];
@@ -74,18 +75,6 @@
     [self.selectedViewController viewDidAppear:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-}
-
 - (void)dealloc {
     [locationManager release];
     [userLocation release];
@@ -95,6 +84,7 @@
     [spiritsTabBarItem release];
     [localDistillersTabBarItem release];
     [campaignTabBarItem release];
+    [selectedTabBarItem release];
     [viewControllers release];
     [selectedViewController release];
     [super dealloc];
@@ -104,8 +94,10 @@
 #pragma mark Core Location Delegate Methods
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     self.userLocation = newLocation;
-    [locationManager stopUpdatingLocation];
+//    [locationManager stopUpdatingLocation];
+#ifdef FLURRY
     [FlurryAPI setLocation:self.userLocation];
+#endif
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
@@ -115,8 +107,14 @@
 #pragma mark Tab Bar Deleget Methods
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
-    [FlurryAPI countPageView];
+    if (item == self.selectedTabBarItem) {
+        return;
+    }
     
+#ifdef FLURRY
+    [FlurryAPI countPageView];
+#endif
+        
     UIViewController *controller = nil;
     
 	if (item == categoriesTabBarItem) {
@@ -136,17 +134,17 @@
         self.title = kCampaign;
     }
     
-
     [controller viewWillAppear:YES];
-	[self.selectedViewController viewWillDisappear:YES];
+    [self.selectedViewController viewWillDisappear:YES];
 	
     [self.selectedViewController.view removeFromSuperview];
     [self.view addSubview:controller.view];
 	
-	[self.selectedViewController viewDidDisappear:YES];
-	[controller viewDidAppear:YES];
+    [self.selectedViewController viewDidDisappear:YES];
+    [controller viewDidAppear:YES];
     
     self.selectedViewController = controller;
+    self.selectedTabBarItem = item;
 }
 
 

@@ -29,33 +29,37 @@
         self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         self.title = category;        
         
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"Store", storeName, @"Category", category, nil]; 
+#ifdef FLURRY
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:storeName, @"Store", category, @"Category", nil]; 
         [FlurryAPI logEvent:@"StoreInventoryView" withParameters:params];
-
+#endif
     } else if (self.category != nil) {
         NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?category=%@", [Constants urlencode:category]];
         self.feedURLString = query;
         self.title = category;
-        
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"Category", category, nil]; 
+     
+#ifdef FLURRY
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:category, @"Category", nil]; 
         [FlurryAPI logEvent:@"SpiritsView" withParameters:params];
-        
+#endif        
     } else if (self.brandName != nil) {
         NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?name=%@", [Constants urlencode:brandName]];
         self.feedURLString = query;
         self.title = brandName;
-        
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"Name", brandName, nil]; 
+      
+#ifdef FLURRY
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:brandName, @"Name", nil]; 
         [FlurryAPI logEvent:@"SpiritsView" withParameters:params];
-        
+#endif        
     } else if (self.storeId != 0) {
         NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/store/%d/spirits", storeId];
         self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         self.title = storeName;
-        
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"Store", storeName, nil]; 
+       
+#ifdef FLURRY
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:storeName, @"Store", nil]; 
         [FlurryAPI logEvent:@"StoreInventoryView" withParameters:params];
-        
+#endif        
     } else {
         NSLog(@"No useful variable set in SpiritListViewController.  Don't know what to load");
     }

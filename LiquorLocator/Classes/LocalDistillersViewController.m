@@ -32,11 +32,13 @@
 @synthesize blurbCell;
 
 - (void)viewDidAppear:(BOOL)animated {
+#ifdef FLURRY
+    [FlurryAPI logEvent:@"DistillersView"];
+#endif
+    
     self.feedURLString = @"http://wsll.pugdogdev.com/distillers";
     
     [super viewDidAppear:animated];
-    
-    [FlurryAPI logEvent:@"DistillerssView"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -125,11 +127,15 @@
         NSMutableDictionary *distiller = [distillersSection objectAtIndex:row];
         cell.textLabel.text = [distiller objectForKey:@"name"];
         
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+/*
         if (section == WITH_INVENTORY) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;
-        }            
+        }  
+ */
     }
     
     return cell;
@@ -140,9 +146,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {    
     NSUInteger section = [indexPath section];
+/*
     if (section != WITH_INVENTORY) {
         return;
     }
+*/
     
     NSUInteger row = [indexPath row];
     

@@ -44,6 +44,37 @@
     }
 }
 
+#pragma mark -
+#pragma mark Search Bar Delegate Methods
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSString *searchTerm = [searchBar text];
+
+#ifdef FLURRY    
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:searchTerm, @"SearchTerm", nil]; 
+    [FlurryAPI logEvent:@"Search" withParameters:params];
+#endif
+    
+    [self handleSearchForTerm:searchTerm];
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchTerm {
+    if ([searchTerm length] == 0) {
+        [self resetSearch];
+        [table reloadData];
+        return;
+    }
+    
+    [self handleSearchForTerm:searchTerm];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    search.text = @"";
+    [self resetSearch];
+    [table reloadData];
+    [searchBar resignFirstResponder];
+}
+
 - (void)handleSearchForTerm:(NSString *)searchTerm {
     if (self.JSONConnection != nil) {
         [self.JSONConnection cancel];
@@ -75,33 +106,6 @@
     // implement a more flexible validation technique, and be able to both recover from errors and communicate problems
     // to the user in an unobtrusive manner.
     NSAssert(self.JSONConnection != nil, @"Failure to create URL connection.");
-}
-
-#pragma mark -
-#pragma mark Search Bar Delegate Methods
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSString *searchTerm = [searchBar text];
-    [searchBar resignFirstResponder];
-
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"SearchTerm", searchTerm, nil]; 
-    [FlurryAPI logEvent:@"Search" withParameters:params];
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchTerm {
-    if ([searchTerm length] == 0) {
-        [self resetSearch];
-        [table reloadData];
-        return;
-    }
-    
-    [self handleSearchForTerm:searchTerm];
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    search.text = @"";
-    [self resetSearch];
-    [table reloadData];
-    [searchBar resignFirstResponder];
 }
 
 #pragma mark -

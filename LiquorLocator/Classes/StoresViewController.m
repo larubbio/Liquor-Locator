@@ -12,11 +12,13 @@
 @implementation StoresViewController
 
 - (void)viewDidAppear:(BOOL)animated {
+#ifdef FLURRY
+    [FlurryAPI logEvent:@"StoresView"];
+#endif
+    
     self.feedURLString = @"http://wsll.pugdogdev.com/stores";
     
     [super viewDidAppear:animated];    
-
-    [FlurryAPI logEvent:@"StoresView"];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -9,6 +9,7 @@
 #import "DistillerDetailViewController.h"
 #import "SpiritDetailViewController.h"
 #import "LiquorLocatorAppDelegate.h"
+#import "RootViewController.h"
 
 #import "DistillerAddressCell.h"
 #import "StoreAnnotation.h"
@@ -169,25 +170,31 @@
     NSUInteger section = [indexPath section];
     NSUInteger row = [indexPath row];
 
-    NSArray *spiritSection = [self.objectList objectForKey:kSpirits];
-    NSDictionary *spirit = [spiritSection objectAtIndex:row]; 
-
     // For section 0 load map?  Call number?
     
     // For section 1 open url in safari
+    if (section == 1) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[self.objectList objectForKey:kURL]]];
+    }
     
     // For section 2 go to spirit detail page.
     if (section == 2) {
-        SpiritDetailViewController *controller = [[SpiritDetailViewController alloc] initWithNibName:@"SpiritDetailView" bundle:nil];
-        ((SpiritDetailViewController *)controller).spiritId = [spirit objectForKey:kId];
+        NSArray *spiritSection = [self.objectList objectForKey:kSpirits];
+        if ([spiritSection count] > 0) {
+            NSDictionary *spirit = [spiritSection objectAtIndex:row]; 
+        
+            SpiritDetailViewController *controller = [[SpiritDetailViewController alloc] initWithNibName:@"SpiritDetailView" bundle:nil];
+            ((SpiritDetailViewController *)controller).spiritId = [spirit objectForKey:kId];
     
-        LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-        [delegate.navController pushViewController:controller animated:YES];
+            LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+            [delegate.navController pushViewController:controller animated:YES];
     
-        [controller release];
+            [controller release];
+        }
     }
-}
 
+    [tableView reloadData];
+}
 #pragma mark -
 #pragma mark JSON Parsing Method
 - (void)jsonParsingComplete:(id)objects {
@@ -195,8 +202,48 @@
     
     [table reloadData];
     
-    NSDictionary *searchParameters= [NSDictionary dictionaryWithObjectsAndKeys:@"Distiller", [self.objectList objectForKey:kName], nil]; 
+#ifdef FLURRY
+    NSDictionary *searchParameters= [NSDictionary dictionaryWithObjectsAndKeys:[self.objectList objectForKey:kName], @"Distiller", nil]; 
     [FlurryAPI logEvent:@"DistillerDetail" withParameters:searchParameters];
+#endif
 }
+
+#pragma mark -
+#pragma mark IBAction methods
+- (IBAction)loadDirections:(id)sender {
+    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    RootViewController *rootView = [delegate.navController.viewControllers objectAtIndex:0];
+    
+    CLLocationCoordinate2D userCoordinate = rootView.userLocation.coordinate;
+    double latitude = [((NSString *)[self.objectList objectForKey:kLat]) doubleValue];
+    double longitude = [((NSString *)[self.objectList objectForKey:kLong]) doubleValue];
+    
+    NSString* startLocationParameter = [NSString stringWithFormat:@"%f,%f", userCoordinate.latitude, userCoordinate.longitude];    
+    NSString* destinationLocationParameter= [NSString stringWithFormat:@"%f,%f", latitude, longitude];    
+    NSString *googleURL = [[NSString stringWithFormat:@"http://maps.google.com/maps?daddr=%@&saddr=%@", destinationLocationParameter, startLocationParameter] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]; 
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:googleURL]];
+}
+
+- (IBAction)callDistiller:(id)sender {
+    NSString *phone = [self.objectList objectForKey:kNumber];
+    if (phone) {
+        NSCharacterSet *doNotWant = [NSCharacterSet characterSetWithCharactersInString:@"-() ."];
+        phone = [[phone componentsSeparatedByCharactersInSet: doNotWant] componentsJoinedByString: @""];
+        NSString *phoneURL = [NSString stringWithFormat:@"tel://%@", phone];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneURL]];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc]
+							  initWithTitle:@"I'm soooo sorry." 
+							  message:@"I wasn't able to find a phone for this store, so I can't call it for you"
+							  delegate:nil 
+							  cancelButtonTitle:@"Okay" 
+							  otherButtonTitles:nil];
+		
+		[alert show];
+		[alert release];        
+    }
+}
+
 
 @end

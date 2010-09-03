@@ -19,14 +19,16 @@
 @synthesize storeId;
 
 - (void)viewDidAppear:(BOOL)animated {
+#ifdef FLURRY
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:storeName, @"Store", nil]; 
+    [FlurryAPI logEvent:@"CategoriesView" withParameters:params];
+#endif
+    
     NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/store/%d/categories", storeId];
     self.feedURLString = query;
     self.title = storeName;
 
     [super viewDidAppear:animated];
-    
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"Store", storeName, nil]; 
-    [FlurryAPI logEvent:@"CategoriesView" withParameters:params];
 }
 
 - (void)dealloc {

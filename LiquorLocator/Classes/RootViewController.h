@@ -20,6 +20,8 @@
 	IBOutlet UITabBarItem *spiritsTabBarItem;
 	IBOutlet UITabBarItem *localDistillersTabBarItem;
 	IBOutlet UITabBarItem *campaignTabBarItem;
+    
+    UITabBarItem *selectedTabBarItem;
 	UIViewController *selectedViewController;
 }
 
@@ -30,6 +32,7 @@
 @property (nonatomic, retain) IBOutlet UITabBarItem *spiritsTabBarItem;
 @property (nonatomic, retain) IBOutlet UITabBarItem *localDistillersTabBarItem;
 @property (nonatomic, retain) IBOutlet UITabBarItem *campaignTabBarItem;
+@property (nonatomic, retain) UITabBarItem *selectedTabBarItem;
 @property (nonatomic, retain) UIViewController *selectedViewController;
 
 @property (nonatomic, retain) CLLocationManager *locationManager;
