@@ -137,7 +137,7 @@ class Store(models.Model):
 
                 # If we are in sep. but after the sat of the week of the 15th
                 if today.month == 9:
-                    if today.day > upper_day:
+                    if today.day > end_day:
                         in_summer_hours = False
 
             if in_summer_hours:

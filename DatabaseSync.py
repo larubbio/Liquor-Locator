@@ -11,7 +11,7 @@ from BeautifulSoup import BeautifulSoup
 from sqlalchemy import create_engine
 from model import Model
 
-LOG_FILENAME = 'output.log'
+LOG_FILENAME = '/home/rob/output.log'
 logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
 
 def geocode_store(store, address):
@@ -349,31 +349,23 @@ categories = [c.decodeContents() for c in page.findAll('form')[0].findAll('optio
 categories = categories[1:]
 
 #categories = ['WINE - RED TABLE',]
-try:
-    for c in categories:
-        print c
+for c in categories:
+    logging.info(c)
 
-        params = {'BrandName' : '', 'CatBrand' : c, 'submit1' : 'Find Product' }
-        html = loadURL(BRAND_SEARCH_URL, params)
+    params = {'BrandName' : '', 'CatBrand' : c, 'submit1' : 'Find Product' }
+    html = loadURL(BRAND_SEARCH_URL, params)
 
-        # Only record the spirit if it is in stock
-        if html.find('out of stock') is -1:
-            # Parse the page 
-            page = BeautifulSoup(html)
+    # Only record the spirit if it is in stock
+    if html.find('out of stock') is -1:
+        # Parse the page 
+        page = BeautifulSoup(html)
 
-            # Loop over each row storing spirit information
-            table = page('table')[4]
-            rows = table.findAll('tr')[1:]
+        # Loop over each row storing spirit information
+        table = page('table')[4]
+        rows = table.findAll('tr')[1:]
 
-            for row in rows:
-                processSpirit(c, row)
-                print ".",
-
-            print
-except:
-    import pdb, sys
-    e, m, tb = sys.exc_info()
-    pdb.post_mortem(tb)
+        for row in rows:
+            processSpirit(c, row)
 
 # Set up local distillers
 
