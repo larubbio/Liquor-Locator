@@ -39,6 +39,8 @@ extern NSString *const kOnSale;
 extern NSString *const kCloseout;
 extern NSString *const kURL;
 extern NSString *const kSpirits;
+extern NSString *const kCategory;
+extern NSString *const kCount;
 
 // Short JSON constants
 extern NSString *const kShortName; 

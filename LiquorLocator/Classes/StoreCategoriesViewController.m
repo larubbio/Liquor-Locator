@@ -41,9 +41,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger row = [indexPath row];
+    NSDictionary *cat = [objectList objectAtIndex:row];
     
     SpiritListViewController *spiritListController = [[SpiritListViewController alloc] initWithNibName:@"SpiritListView" bundle:nil];
-    spiritListController.category = [objectList objectAtIndex:row];
+    spiritListController.category = [cat objectForKey:kCategory];
     spiritListController.storeId = storeId;
     spiritListController.storeName = storeName;
     

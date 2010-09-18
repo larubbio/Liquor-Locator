@@ -83,6 +83,10 @@
 }
 
 - (void)dealloc {
+    if (HUD != nil) {
+        HUD.delegate = nil;
+    }
+    
     [jsonData release];
     [JSONConnection release];
     [response release];	
@@ -97,10 +101,7 @@
 // handle the error in a less obtrusive way and provide offline functionality to the user.
 - (void)handleError:(NSError *)error {
 #ifdef FLURRY
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[error code], @"Code",  
-                                                                      [error localizedDescription], @"Desc",  
-                                                                      [error userInfo], @"Info", nil]; 
-    [FlurryAPI logEvent:@"StoreInventoryView" withParameters:params];
+    [FlurryAPI logError:@"Error" message:feedURLString error:error];
 #endif
     
     if (HUD == nil) {
@@ -169,25 +170,30 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-//    NSLog(@"Connection::didFinishLoading");
     self.JSONConnection = nil;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;   
 
 	NSString *jsonString = [[NSString alloc] initWithData:self.jsonData encoding:NSUTF8StringEncoding];
-	NSAssert(jsonString != nil, @"TODO larubbio: handle no data!");
-    //    NSLog(jsonString);
     
-    // Create new SBJSON parser object
     SBJSON *parser = [[SBJSON alloc] init];
     
     // parse the JSON response into an object
-    NSError *error;
-    id objects = [parser objectWithString:jsonString error:&error];
+    @try {
+        NSError *error;
+        id objects = [parser objectWithString:jsonString error:&error];
 
-    if (objects == nil) {
+        if (objects == nil) {
+            [self handleError:error];
+        } else {
+            [self jsonParsingComplete:objects];
+        }
+    } @catch (NSException *exception) {
+        self.objectList = nil;
+        
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[exception name], @"ExceptionName",  
+                                                                            [exception reason], @"ExceptionReason", nil]; 
+        NSError *error = [NSError errorWithDomain:@"LiquorLocator" code:1 userInfo:userInfo];
         [self handleError:error];
-    } else {
-        [self jsonParsingComplete:objects];
     }
     
     [parser release];

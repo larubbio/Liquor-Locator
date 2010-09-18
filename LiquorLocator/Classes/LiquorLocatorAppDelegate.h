@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface LiquorLocatorAppDelegate : NSObject <UIApplicationDelegate> {
-    UIWindow *window;
+    IBOutlet UIWindow *window;
   
     IBOutlet UINavigationController *navController;
-    UIImageView *splashView;
+    IBOutlet UIImageView *splashView;
     
     NSMutableDictionary *dataCache;
 }

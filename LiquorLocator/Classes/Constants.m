@@ -37,6 +37,8 @@
     NSString *const kCloseout = @"closeout";
     NSString *const kURL = @"url";
     NSString *const kSpirits = @"spirits";
+    NSString *const kCategory = @"cat";
+    NSString *const kCount = @"count";
 
     NSString *const kShortName = @"n";
     NSString *const kShortCount = @"c";

@@ -7,7 +7,7 @@
 //
 
 #import "CategoriesList.h"
-
+#import "Constants.h"
 
 @implementation CategoriesList
 
@@ -17,7 +17,6 @@
     [table release];
     [super dealloc];
 }
-
 
 #pragma mark -
 #pragma mark Table View Data Source Methods
@@ -33,13 +32,15 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CategoryTableIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CategoryTableIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CategoryTableIdentifier] autorelease];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     NSUInteger row = [indexPath row];
-    cell.textLabel.text = [objectList objectAtIndex:row];
-    
+    NSDictionary *cat = [objectList objectAtIndex:row];
+    cell.textLabel.text = [cat objectForKey:kCategory];
+    cell.detailTextLabel.text = [cat objectForKey:kCount];
+
     return cell;
 }
 
