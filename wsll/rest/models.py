@@ -18,6 +18,7 @@ class Spirit(models.Model):
     proof = models.IntegerField()
     on_sale = models.BooleanField()
     closeout = models.BooleanField()
+    image_url = models.CharField(max_length=255)
 
     def __unicode__(self):
         return "<Spirit: %s '%s'>" % (self.id, self.brand_name)
@@ -37,6 +38,7 @@ class Spirit(models.Model):
                'proof' : self.proof,
                'on_sale' : self.on_sale,
                'closeout' : self.closeout,
+               'image_url' : self.image_url,
                }
 
         return ret

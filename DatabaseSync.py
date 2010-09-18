@@ -223,6 +223,9 @@ def processSpirit(category, row):
     # Brand Name
     brand_name = columns[0].findChild().decodeContents()
 
+    # Image URL
+    image_url = google_image_search(brand_name)
+
     # Brand Code
     brand_code = columns[1].findChild().decodeContents()
 
@@ -273,6 +276,7 @@ def processSpirit(category, row):
     spirit.liter_cost = liter_cost
     spirit.on_sale = special_note.find('TEMP PRICE REDUCTION') >= 0
     spirit.closeout = special_note.find('CLOSEOUT') >= 0
+    spirit.image_url = image_url
 
     # For each click 'Find Store'
     params = {'CityName' : '', 'CountyName' : '', 'StoreNo' : '', 'brandcode' : brand_code}
@@ -314,6 +318,33 @@ def loadURL(url, params=None):
             retry_time = retry_time * 2
 
     return html
+
+def google_image_search(brand):
+    url = None
+    params = {'q' : brand,
+              'v' : '1.0'}
+
+    data = urllib.urlencode(params) 
+    ret = loadURL('http://ajax.googleapis.com/ajax/services/search/images?%s' % data)
+    json = simplejson.loads(ret)
+
+    if json['responseStatus'] == 200:
+        if (len(json['responseData']['results']) > 0):
+            result = json['responseData']['results'][0]
+            # TODO
+            width = result['width']
+            height = result['height']
+            url = result['url']
+
+            logging.info("Loading Image for %s" % (s.brand_name))
+        else:
+            logging.info("No Image for %s" % (s.brand_name))
+
+    else:
+        logging.error("Unexpected status code")
+        logging.error(json)
+
+    return url
 
 BRAND_SEARCH_URL = 'http://liq.wa.gov/services/brandpicklist.asp'
 BRAND_CATEGORIES_URL = 'http://liq.wa.gov/services/brandsearch.asp'
