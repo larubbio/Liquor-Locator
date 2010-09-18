@@ -133,7 +133,6 @@ class Spirit(Base):
     proof = Column(Integer)
     on_sale = Column(Boolean)
     closeout = Column(Boolean)
-    image_url = Column(String(255))
 
     def __init__(self, id):
         self.id = id
