@@ -223,9 +223,6 @@ def processSpirit(category, row):
     # Brand Name
     brand_name = columns[0].findChild().decodeContents()
 
-    # Image URL
-    image_url = google_image_search(brand_name)
-
     # Brand Code
     brand_code = columns[1].findChild().decodeContents()
 
@@ -262,6 +259,25 @@ def processSpirit(category, row):
 
     if spirit is None:
         spirit = Model.Spirit(brand_code)
+
+    # Clean up the names some
+    if 'VODKA' in category:
+        brand_name = brand_name.replace(' VK ', ' VODKA ')
+        brand_name = brand_name.replace(' VKA ', ' VODKA ')
+
+    if 'WHISKEY' in category:
+        brand_name = brand_name.replace(' WHSK ', ' WHISKEY ')
+        brand_name = brand_name.replace(' BBN ', ' BOURBON ')
+
+    if 'WHISKY' in category:
+        brand_name = brand_name.replace(' SC ', ' SCOTCH ')
+
+    if 'TEQUILA' in category:
+        brand_name = brand_name.replace(' TEQ ', ' TEQUILA ')
+
+    if 'BRANDY' in category:
+        brand_name = brand_name.replace(' BRDY ', ' BRANDY ')
+        brand_name = brand_name.replace(' CGNC ', ' COGNAC ')
 
     spirit.category = category
     spirit.brand_name = brand_name
@@ -318,33 +334,6 @@ def loadURL(url, params=None):
             retry_time = retry_time * 2
 
     return html
-
-def google_image_search(brand):
-    url = None
-    params = {'q' : brand,
-              'v' : '1.0'}
-
-    data = urllib.urlencode(params) 
-    ret = loadURL('http://ajax.googleapis.com/ajax/services/search/images?%s' % data)
-    json = simplejson.loads(ret)
-
-    if json['responseStatus'] == 200:
-        if (len(json['responseData']['results']) > 0):
-            result = json['responseData']['results'][0]
-            # TODO
-            width = result['width']
-            height = result['height']
-            url = result['url']
-
-            logging.info("Loading Image for %s" % (s.brand_name))
-        else:
-            logging.info("No Image for %s" % (s.brand_name))
-
-    else:
-        logging.error("Unexpected status code")
-        logging.error(json)
-
-    return url
 
 BRAND_SEARCH_URL = 'http://liq.wa.gov/services/brandpicklist.asp'
 BRAND_CATEGORIES_URL = 'http://liq.wa.gov/services/brandsearch.asp'
