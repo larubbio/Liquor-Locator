@@ -335,9 +335,13 @@ def loadURL(url, params=None):
 
     return html
 
-BRAND_SEARCH_URL = 'http://liq.wa.gov/services/brandpicklist.asp'
-BRAND_CATEGORIES_URL = 'http://liq.wa.gov/services/brandsearch.asp'
-STORE_SEARCH_URL = 'http://liq.wa.gov/services/find_store.asp'
+# Old URLS
+#BRAND_SEARCH_URL = 'http://liq.wa.gov/services/brandpicklist.asp'
+#BRAND_CATEGORIES_URL = 'http://liq.wa.gov/services/brandsearch.asp'
+#STORE_SEARCH_URL = 'http://liq.wa.gov/services/find_store.asp'
+BRAND_SEARCH_URL = 'http://liq.wa.gov/homepageServices/brandpicklist.asp'
+BRAND_CATEGORIES_URL = 'http://liq.wa.gov/homepageServices/brandsearch.asp'
+STORE_SEARCH_URL = 'http://liq.wa.gov/homepageServices/find_store.asp'
 
 engine = create_engine('mysql://wsll:wsll@localhost/wsll', echo=False)
 
@@ -360,15 +364,17 @@ session.execute("TRUNCATE TABLE distiller_spirits_bak")
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
-html = loadURL(BRAND_CATEGORIES_URL)
+#html = loadURL(BRAND_CATEGORIES_URL)
 
-page = BeautifulSoup(html)
-categories = [c.decodeContents() for c in page.findAll('form')[0].findAll('option')]
+#page = BeautifulSoup(html)
+#categories = [c.decodeContents() for c in page.findAll('form')[0].findAll('option')]
 
 # Remove the first category which is just UI information
-categories = categories[1:]
+#categories = categories[1:]
 
-#categories = ['WINE - RED TABLE',]
+import pdb; pdb.set_trace()
+categories = ['BRANDY', 'CIDER', 'COCKTAILS', 'GIN', 'INDUSTRIAL ALCOHOL - AVAILABLE BY PERMIT ONLY', 'LIQUEURS', 'MALT BEVERAGES', 'RUM', 'SCHNAPPS', 'SLOE GIN', 'SPIRIT - GIFT SELECTIONS', 'TEQUILA', 'VERMOUTH', 'VODKA', 'WHISKEY - AMERICAN BLEND', 'WHISKEY - BOURBON', 'WHISKEY - KENTUCKY & TENNESSEE', 'WHISKEY - OTHER - DOMESTIC', 'WHISKEY - RYE', 'WHISKY - CANADIAN', 'WHISKY - IRISH', 'WHISKY - OTHER - IMPORTED', 'WHISKY - SCOTCH', 'WINE - ALL OTHERS', 'WINE - DESSERT', 'WINE - FRUIT FLAVORED', 'WINE - GIFT SELECTIONS', 'WINE - IMPORTED - MISC', 'WINE - PINK TABLE', 'WINE - RED TABLE', 'WINE - SANGRIA', 'WINE - SPARKLING & CHAMPAGNE', 'WINE - UNLISTED - HUB STORES', 'WINE - WHITE TABLE']
+
 for c in categories:
     logging.info(c)
 
@@ -405,33 +411,33 @@ for d in distillers.all():
                                           
 
 # Swap live tables with backups
-session.execute('''RENAME TABLE 
-  contacts TO contacts_tmp,
-  hours TO hours_tmp,
-  spirits TO spirits_tmp,
-  store_contacts TO store_contacts_tmp,
-  store_inventory TO store_inventory_tmp,
-  stores TO stores_tmp,
-  local_distillers TO local_distillers_tmp,
-  distiller_spirits TO distiller_spirits_tmp,
+# session.execute('''RENAME TABLE 
+#   contacts TO contacts_tmp,
+#   hours TO hours_tmp,
+#   spirits TO spirits_tmp,
+#   store_contacts TO store_contacts_tmp,
+#   store_inventory TO store_inventory_tmp,
+#   stores TO stores_tmp,
+#   local_distillers TO local_distillers_tmp,
+#   distiller_spirits TO distiller_spirits_tmp,
 
-  contacts_bak TO contacts,
-  hours_bak TO hours,
-  spirits_bak TO spirits,
-  store_contacts_bak TO store_contacts,
-  store_inventory_bak TO store_inventory,
-  stores_bak TO stores,
-  local_distillers_bak TO local_distillers,
-  distiller_spirits_bak TO distiller_spirits,
+#   contacts_bak TO contacts,
+#   hours_bak TO hours,
+#   spirits_bak TO spirits,
+#   store_contacts_bak TO store_contacts,
+#   store_inventory_bak TO store_inventory,
+#   stores_bak TO stores,
+#   local_distillers_bak TO local_distillers,
+#   distiller_spirits_bak TO distiller_spirits,
 
-  contacts_tmp TO contacts_bak,
-  hours_tmp TO hours_bak,
-  spirits_tmp TO spirits_bak,
-  store_contacts_tmp TO store_contacts_bak,
-  store_inventory_tmp TO store_inventory_bak,
-  stores_tmp TO stores_bak,
-  local_distillers_tmp to local_distillers_bak,
-  distiller_spirits_tmp TO distiller_spirits_bak
-''')
+#   contacts_tmp TO contacts_bak,
+#   hours_tmp TO hours_bak,
+#   spirits_tmp TO spirits_bak,
+#   store_contacts_tmp TO store_contacts_bak,
+#   store_inventory_tmp TO store_inventory_bak,
+#   stores_tmp TO stores_bak,
+#   local_distillers_tmp to local_distillers_bak,
+#   distiller_spirits_tmp TO distiller_spirits_bak
+# ''')
 
 session.commit()
