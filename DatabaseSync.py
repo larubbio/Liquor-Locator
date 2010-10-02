@@ -7,8 +7,8 @@ import urllib,urllib2
 import math
 
 import html5lib
-from html5lib import treebuilders
-from lxml import etree
+#from html5lib import treebuilders
+#from lxml import etree
 
 from BeautifulSoup import BeautifulSoup
 
@@ -376,15 +376,15 @@ html = loadURL(BRAND_CATEGORIES_URL)
 page = parser.parse(html)
 
 categories = []
-for element in page.getroot().iter():
-    if element.tag == '{http://www.w3.org/1999/xhtml}option':
-        categories.append(element.text)
+#for element in page.getroot().iter():
+#    if element.tag == '{http://www.w3.org/1999/xhtml}option':
+#        categories.append(element.text)
 
 # Remove the first category which is just UI information
-categories = categories[1:]
+#categories = categories[1:]
 
-categories = ['APERITIF',]
-#categories = ['BRANDY', 'CIDER', 'COCKTAILS', 'GIN', 'INDUSTRIAL ALCOHOL - AVAILABLE BY PERMIT ONLY', 'LIQUEURS', 'MALT BEVERAGES', 'RUM', 'SCHNAPPS', 'SLOE GIN', 'SPIRIT - GIFT SELECTIONS', 'TEQUILA', 'VERMOUTH', 'VODKA', 'WHISKEY - AMERICAN BLEND', 'WHISKEY - BOURBON', 'WHISKEY - KENTUCKY & TENNESSEE', 'WHISKEY - OTHER - DOMESTIC', 'WHISKEY - RYE', 'WHISKY - CANADIAN', 'WHISKY - IRISH', 'WHISKY - OTHER - IMPORTED', 'WHISKY - SCOTCH', 'WINE - ALL OTHERS', 'WINE - DESSERT', 'WINE - FRUIT FLAVORED', 'WINE - GIFT SELECTIONS', 'WINE - IMPORTED - MISC', 'WINE - PINK TABLE', 'WINE - RED TABLE', 'WINE - SANGRIA', 'WINE - SPARKLING & CHAMPAGNE', 'WINE - UNLISTED - HUB STORES', 'WINE - WHITE TABLE']
+#categories = ['APERITIF',]
+categories = ['APERITIF', 'BRANDY', 'CIDER', 'COCKTAILS', 'GIN', 'INDUSTRIAL ALCOHOL - AVAILABLE BY PERMIT ONLY', 'LIQUEURS', 'MALT BEVERAGES', 'RUM', 'SCHNAPPS', 'SLOE GIN', 'SPIRIT - GIFT SELECTIONS', 'TEQUILA', 'VERMOUTH', 'VODKA', 'WHISKEY - AMERICAN BLEND', 'WHISKEY - BOURBON', 'WHISKEY - KENTUCKY & TENNESSEE', 'WHISKEY - OTHER - DOMESTIC', 'WHISKEY - RYE', 'WHISKY - CANADIAN', 'WHISKY - IRISH', 'WHISKY - OTHER - IMPORTED', 'WHISKY - SCOTCH', 'WINE - ALL OTHERS', 'WINE - DESSERT', 'WINE - FRUIT FLAVORED', 'WINE - GIFT SELECTIONS', 'WINE - IMPORTED - MISC', 'WINE - PINK TABLE', 'WINE - RED TABLE', 'WINE - SANGRIA', 'WINE - SPARKLING & CHAMPAGNE', 'WINE - UNLISTED - HUB STORES', 'WINE - WHITE TABLE']
 
 for c in categories:
     logging.info(c)
