@@ -370,10 +370,10 @@ session.execute("TRUNCATE TABLE distiller_spirits_bak")
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
-parser = html5lib.HTMLParser(tree=treebuilders.getTreeBuilder("lxml"))
-html = loadURL(BRAND_CATEGORIES_URL)
+#parser = html5lib.HTMLParser(tree=treebuilders.getTreeBuilder("lxml"))
+#html = loadURL(BRAND_CATEGORIES_URL)
 
-page = parser.parse(html)
+#page = parser.parse(html)
 
 categories = []
 #for element in page.getroot().iter():
