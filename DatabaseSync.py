@@ -6,6 +6,10 @@ import time
 import urllib,urllib2
 import math
 
+import html5lib
+from html5lib import treebuilders
+from lxml import etree
+
 from BeautifulSoup import BeautifulSoup
 
 from sqlalchemy import create_engine
@@ -292,7 +296,7 @@ def processSpirit(category, row):
     spirit.liter_cost = liter_cost
     spirit.on_sale = special_note.find('TEMP PRICE REDUCTION') >= 0
     spirit.closeout = special_note.find('CLOSEOUT') >= 0
-    spirit.image_url = image_url
+#    spirit.image_url = image_url
 
     # For each click 'Find Store'
     params = {'CityName' : '', 'CountyName' : '', 'StoreNo' : '', 'brandcode' : brand_code}
@@ -335,10 +339,12 @@ def loadURL(url, params=None):
 
     return html
 
-# Old URLS
+# Old URLs
 #BRAND_SEARCH_URL = 'http://liq.wa.gov/services/brandpicklist.asp'
 #BRAND_CATEGORIES_URL = 'http://liq.wa.gov/services/brandsearch.asp'
 #STORE_SEARCH_URL = 'http://liq.wa.gov/services/find_store.asp'
+
+# New URLs
 BRAND_SEARCH_URL = 'http://liq.wa.gov/homepageServices/brandpicklist.asp'
 BRAND_CATEGORIES_URL = 'http://liq.wa.gov/homepageServices/brandsearch.asp'
 STORE_SEARCH_URL = 'http://liq.wa.gov/homepageServices/find_store.asp'
@@ -364,16 +370,21 @@ session.execute("TRUNCATE TABLE distiller_spirits_bak")
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
-#html = loadURL(BRAND_CATEGORIES_URL)
+parser = html5lib.HTMLParser(tree=treebuilders.getTreeBuilder("lxml"))
+html = loadURL(BRAND_CATEGORIES_URL)
 
-#page = BeautifulSoup(html)
-#categories = [c.decodeContents() for c in page.findAll('form')[0].findAll('option')]
+page = parser.parse(html)
+
+categories = []
+for element in page.getroot().iter():
+    if element.tag == '{http://www.w3.org/1999/xhtml}option':
+        categories.append(element.text)
 
 # Remove the first category which is just UI information
-#categories = categories[1:]
+categories = categories[1:]
 
-import pdb; pdb.set_trace()
-categories = ['BRANDY', 'CIDER', 'COCKTAILS', 'GIN', 'INDUSTRIAL ALCOHOL - AVAILABLE BY PERMIT ONLY', 'LIQUEURS', 'MALT BEVERAGES', 'RUM', 'SCHNAPPS', 'SLOE GIN', 'SPIRIT - GIFT SELECTIONS', 'TEQUILA', 'VERMOUTH', 'VODKA', 'WHISKEY - AMERICAN BLEND', 'WHISKEY - BOURBON', 'WHISKEY - KENTUCKY & TENNESSEE', 'WHISKEY - OTHER - DOMESTIC', 'WHISKEY - RYE', 'WHISKY - CANADIAN', 'WHISKY - IRISH', 'WHISKY - OTHER - IMPORTED', 'WHISKY - SCOTCH', 'WINE - ALL OTHERS', 'WINE - DESSERT', 'WINE - FRUIT FLAVORED', 'WINE - GIFT SELECTIONS', 'WINE - IMPORTED - MISC', 'WINE - PINK TABLE', 'WINE - RED TABLE', 'WINE - SANGRIA', 'WINE - SPARKLING & CHAMPAGNE', 'WINE - UNLISTED - HUB STORES', 'WINE - WHITE TABLE']
+categories = ['APERITIF',]
+#categories = ['BRANDY', 'CIDER', 'COCKTAILS', 'GIN', 'INDUSTRIAL ALCOHOL - AVAILABLE BY PERMIT ONLY', 'LIQUEURS', 'MALT BEVERAGES', 'RUM', 'SCHNAPPS', 'SLOE GIN', 'SPIRIT - GIFT SELECTIONS', 'TEQUILA', 'VERMOUTH', 'VODKA', 'WHISKEY - AMERICAN BLEND', 'WHISKEY - BOURBON', 'WHISKEY - KENTUCKY & TENNESSEE', 'WHISKEY - OTHER - DOMESTIC', 'WHISKEY - RYE', 'WHISKY - CANADIAN', 'WHISKY - IRISH', 'WHISKY - OTHER - IMPORTED', 'WHISKY - SCOTCH', 'WINE - ALL OTHERS', 'WINE - DESSERT', 'WINE - FRUIT FLAVORED', 'WINE - GIFT SELECTIONS', 'WINE - IMPORTED - MISC', 'WINE - PINK TABLE', 'WINE - RED TABLE', 'WINE - SANGRIA', 'WINE - SPARKLING & CHAMPAGNE', 'WINE - UNLISTED - HUB STORES', 'WINE - WHITE TABLE']
 
 for c in categories:
     logging.info(c)
@@ -387,7 +398,7 @@ for c in categories:
         page = BeautifulSoup(html)
 
         # Loop over each row storing spirit information
-        table = page('table')[4]
+        table = page('table')[3]
         rows = table.findAll('tr')[1:]
 
         for row in rows:
@@ -409,35 +420,34 @@ for d in distillers.all():
             for s in spirits.all():
                 d.spirits.append(s)
                                           
-
-# Swap live tables with backups
-# session.execute('''RENAME TABLE 
-#   contacts TO contacts_tmp,
-#   hours TO hours_tmp,
-#   spirits TO spirits_tmp,
-#   store_contacts TO store_contacts_tmp,
-#   store_inventory TO store_inventory_tmp,
-#   stores TO stores_tmp,
-#   local_distillers TO local_distillers_tmp,
-#   distiller_spirits TO distiller_spirits_tmp,
-
-#   contacts_bak TO contacts,
-#   hours_bak TO hours,
-#   spirits_bak TO spirits,
-#   store_contacts_bak TO store_contacts,
-#   store_inventory_bak TO store_inventory,
-#   stores_bak TO stores,
-#   local_distillers_bak TO local_distillers,
-#   distiller_spirits_bak TO distiller_spirits,
-
-#   contacts_tmp TO contacts_bak,
-#   hours_tmp TO hours_bak,
-#   spirits_tmp TO spirits_bak,
-#   store_contacts_tmp TO store_contacts_bak,
-#   store_inventory_tmp TO store_inventory_bak,
-#   stores_tmp TO stores_bak,
-#   local_distillers_tmp to local_distillers_bak,
-#   distiller_spirits_tmp TO distiller_spirits_bak
-# ''')
+   #Swap live tables with backups
+   # session.execute('''RENAME TABLE 
+   #   contacts TO contacts_tmp,
+   #   hours TO hours_tmp,
+   #   spirits TO spirits_tmp,
+   #   store_contacts TO store_contacts_tmp,
+   #   store_inventory TO store_inventory_tmp,
+   #   stores TO stores_tmp,
+   #   local_distillers TO local_distillers_tmp,
+   #   distiller_spirits TO distiller_spirits_tmp,
+   
+   #   contacts_bak TO contacts,
+   #   hours_bak TO hours,
+   #   spirits_bak TO spirits,
+   #   store_contacts_bak TO store_contacts,
+   #   store_inventory_bak TO store_inventory,
+   #   stores_bak TO stores,
+   #   local_distillers_bak TO local_distillers,
+   #   distiller_spirits_bak TO distiller_spirits,
+   
+   #   contacts_tmp TO contacts_bak,
+   #   hours_tmp TO hours_bak,
+   #   spirits_tmp TO spirits_bak,
+   #   store_contacts_tmp TO store_contacts_bak,
+   #   store_inventory_tmp TO store_inventory_bak,
+   #   stores_tmp TO stores_bak,
+   #   local_distillers_tmp to local_distillers_bak,
+   #   distiller_spirits_tmp TO distiller_spirits_bak
+   # ''')
 
 session.commit()
