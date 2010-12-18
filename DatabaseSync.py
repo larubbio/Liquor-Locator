@@ -422,8 +422,9 @@ for d in distillers.all():
                 d.spirits.append(s)
                                           
    #Swap live tables with backups if difference between them is < 5%
-s = text("""select (abs(new - old)/new)*100 from (select count(*) as new from spirits_bak) as n, (select count(*) as old from spirits) as o""")
-if session.execute(s).fetchall()[0][0] < 5:
+s = text("""select old, new, (abs(new - old)/new)*100 from (select count(*) as new from spirits_bak) as n, (select count(*) as old from spirits) as o""")
+row = session.execute(s).fetchall()
+if row[0][2] < 5 and row[0][1] > 5000:
     session.execute('''RENAME TABLE 
      contacts TO contacts_tmp,
      hours TO hours_tmp,
