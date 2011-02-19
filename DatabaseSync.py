@@ -346,9 +346,14 @@ def loadURL(url, params=None):
 #STORE_SEARCH_URL = 'http://liq.wa.gov/services/find_store.asp'
 
 # New URLs
-BRAND_SEARCH_URL = 'http://liq.wa.gov/homepageServices/brandpicklist.asp'
-BRAND_CATEGORIES_URL = 'http://liq.wa.gov/homepageServices/brandsearch.asp'
-STORE_SEARCH_URL = 'http://liq.wa.gov/homepageServices/find_store.asp'
+#BRAND_SEARCH_URL = 'http://liq.wa.gov/homepageServices/brandpicklist.asp'
+#BRAND_CATEGORIES_URL = 'http://liq.wa.gov/homepageServices/brandsearch.asp'
+#STORE_SEARCH_URL = 'http://liq.wa.gov/homepageServices/find_store.asp'
+
+# Newer URLs
+BRAND_SEARCH_URL = 'http://liq.wa.gov/LCBhomenet/StoreInformation/BrandSearch.aspx'
+BRAND_CATEGORIES_URL = 'http://liq.wa.gov/LCBhomenet/StoreInformation/BrandSearch.aspx'
+#STORE_SEARCH_URL = 'http://liq.wa.gov/homepageServices/find_store.asp'
 
 engine = create_engine('mysql://wsll:wsll@localhost/wsll', echo=False)
 
@@ -371,26 +376,21 @@ session.execute("TRUNCATE TABLE distiller_spirits_bak")
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
-#parser = html5lib.HTMLParser(tree=treebuilders.getTreeBuilder("lxml"))
-#html = loadURL(BRAND_CATEGORIES_URL)
-
-#page = parser.parse(html)
+html = loadURL(BRAND_CATEGORIES_URL)
+page = BeautifulSoup(html)
 
 categories = []
-#for element in page.getroot().iter():
-#    if element.tag == '{http://www.w3.org/1999/xhtml}option':
-#        categories.append(element.text)
-
-# Remove the first category which is just UI information
-#categories = categories[1:]
+opt = page.findAll('option')
+for o in opt:
+    categories.append(o.decodeContents().strip())
 
 #categories = ['APERITIF',]
-categories = ['APERITIF', 'BRANDY', 'CIDER', 'COCKTAILS', 'GIN', 'INDUSTRIAL ALCOHOL - AVAILABLE BY PERMIT ONLY', 'LIQUEURS', 'MALT BEVERAGES', 'RUM', 'SCHNAPPS', 'SLOE GIN', 'SPIRIT - GIFT SELECTIONS', 'TEQUILA', 'VERMOUTH', 'VODKA', 'WHISKEY - AMERICAN BLEND', 'WHISKEY - BOURBON', 'WHISKEY - KENTUCKY & TENNESSEE', 'WHISKEY - OTHER - DOMESTIC', 'WHISKEY - RYE', 'WHISKY - CANADIAN', 'WHISKY - IRISH', 'WHISKY - OTHER - IMPORTED', 'WHISKY - SCOTCH', 'WINE - ALL OTHERS', 'WINE - DESSERT', 'WINE - FRUIT FLAVORED', 'WINE - GIFT SELECTIONS', 'WINE - IMPORTED - MISC', 'WINE - PINK TABLE', 'WINE - RED TABLE', 'WINE - SANGRIA', 'WINE - SPARKLING & CHAMPAGNE', 'WINE - UNLISTED - HUB STORES', 'WINE - WHITE TABLE']
+#categories = ['APERITIF', 'BRANDY', 'CIDER', 'COCKTAILS', 'GIN', 'INDUSTRIAL ALCOHOL - AVAILABLE BY PERMIT ONLY', 'LIQUEURS', 'MALT BEVERAGES', 'RUM', 'SCHNAPPS', 'SLOE GIN', 'SPIRIT - GIFT SELECTIONS', 'TEQUILA', 'VERMOUTH', 'VODKA', 'WHISKEY - AMERICAN BLEND', 'WHISKEY - BOURBON', 'WHISKEY - KENTUCKY & TENNESSEE', 'WHISKEY - OTHER - DOMESTIC', 'WHISKEY - RYE', 'WHISKY - CANADIAN', 'WHISKY - IRISH', 'WHISKY - OTHER - IMPORTED', 'WHISKY - SCOTCH', 'WINE - ALL OTHERS', 'WINE - DESSERT', 'WINE - FRUIT FLAVORED', 'WINE - GIFT SELECTIONS', 'WINE - IMPORTED - MISC', 'WINE - PINK TABLE', 'WINE - RED TABLE', 'WINE - SANGRIA', 'WINE - SPARKLING & CHAMPAGNE', 'WINE - UNLISTED - HUB STORES', 'WINE - WHITE TABLE']
 
 for c in categories:
     logging.info(c)
 
-    params = {'BrandName' : '', 'CatBrand' : c, 'submit1' : 'Find Product' }
+    params = {'IDBrandName' : '', 'IDCatBrand' : c, 'Button3' : 'Find by Category' }
     html = loadURL(BRAND_SEARCH_URL, params)
 
     # Only record the spirit if it is in stock
