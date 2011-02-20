@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="42"/>
+			<integer value="99"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -112,7 +112,7 @@
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 					</object>
-					<object class="IBUILabel" id="246756134">
+					<object class="IBUILabel" id="93810579">
 						<reference key="NSNextResponder" ref="678799577"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{117, 71}, {183, 22}}</string>
@@ -440,7 +440,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Mon</string>
-						<object class="NSFont" key="IBUIFont" id="978521416">
+						<object class="NSFont" key="IBUIFont" id="829345685">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">12</double>
 							<int key="NSfFlags">16</int>
@@ -461,7 +461,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">10:00 - 6:30</string>
-						<reference key="IBUIFont" ref="978521416"/>
+						<reference key="IBUIFont" ref="829345685"/>
 						<reference key="IBUITextColor" ref="747418852"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -479,7 +479,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Tue</string>
-						<reference key="IBUIFont" ref="978521416"/>
+						<reference key="IBUIFont" ref="829345685"/>
 						<reference key="IBUITextColor" ref="747418852"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -496,7 +496,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">10:00 - 6:30</string>
-						<reference key="IBUIFont" ref="978521416"/>
+						<reference key="IBUIFont" ref="829345685"/>
 						<reference key="IBUITextColor" ref="747418852"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -514,7 +514,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Wed</string>
-						<reference key="IBUIFont" ref="978521416"/>
+						<reference key="IBUIFont" ref="829345685"/>
 						<reference key="IBUITextColor" ref="747418852"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -531,7 +531,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">10:00 - 6:30</string>
-						<reference key="IBUIFont" ref="978521416"/>
+						<reference key="IBUIFont" ref="829345685"/>
 						<reference key="IBUITextColor" ref="747418852"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -549,7 +549,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Thur</string>
-						<reference key="IBUIFont" ref="978521416"/>
+						<reference key="IBUIFont" ref="829345685"/>
 						<reference key="IBUITextColor" ref="747418852"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -566,14 +566,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">10:00 - 6:30</string>
-						<reference key="IBUIFont" ref="978521416"/>
+						<reference key="IBUIFont" ref="829345685"/>
 						<reference key="IBUITextColor" ref="747418852"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUITextAlignment">1</int>
 					</object>
-					<object class="IBUILabel" id="84414810">
+					<object class="IBUILabel" id="358237324">
 						<reference key="NSNextResponder" ref="678799577"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{165, 140}, {77, 21}}</string>
@@ -584,13 +584,13 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Fri</string>
-						<reference key="IBUIFont" ref="978521416"/>
+						<reference key="IBUIFont" ref="829345685"/>
 						<reference key="IBUITextColor" ref="747418852"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 					</object>
-					<object class="IBUILabel" id="524916835">
+					<object class="IBUILabel" id="847889109">
 						<reference key="NSNextResponder" ref="678799577"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{221, 140}, {79, 21}}</string>
@@ -601,14 +601,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">10:00 - 6:30</string>
-						<reference key="IBUIFont" ref="978521416"/>
+						<reference key="IBUIFont" ref="829345685"/>
 						<reference key="IBUITextColor" ref="747418852"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUITextAlignment">1</int>
 					</object>
-					<object class="IBUILabel" id="427310800">
+					<object class="IBUILabel" id="560115971">
 						<reference key="NSNextResponder" ref="678799577"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{165, 157}, {77, 21}}</string>
@@ -619,13 +619,13 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Sat</string>
-						<reference key="IBUIFont" ref="978521416"/>
+						<reference key="IBUIFont" ref="829345685"/>
 						<reference key="IBUITextColor" ref="747418852"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 					</object>
-					<object class="IBUILabel" id="283158390">
+					<object class="IBUILabel" id="933672883">
 						<reference key="NSNextResponder" ref="678799577"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{221, 157}, {79, 21}}</string>
@@ -636,14 +636,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">10:00 - 6:30</string>
-						<reference key="IBUIFont" ref="978521416"/>
+						<reference key="IBUIFont" ref="829345685"/>
 						<reference key="IBUITextColor" ref="747418852"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUITextAlignment">1</int>
 					</object>
-					<object class="IBUILabel" id="756520052">
+					<object class="IBUILabel" id="917508180">
 						<reference key="NSNextResponder" ref="678799577"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{165, 174}, {77, 21}}</string>
@@ -654,13 +654,13 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Sun</string>
-						<reference key="IBUIFont" ref="978521416"/>
+						<reference key="IBUIFont" ref="829345685"/>
 						<reference key="IBUITextColor" ref="747418852"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 					</object>
-					<object class="IBUILabel" id="882743390">
+					<object class="IBUILabel" id="1058230895">
 						<reference key="NSNextResponder" ref="678799577"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{221, 174}, {79, 21}}</string>
@@ -671,7 +671,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">10:00 - 6:30</string>
-						<reference key="IBUIFont" ref="978521416"/>
+						<reference key="IBUIFont" ref="829345685"/>
 						<reference key="IBUITextColor" ref="747418852"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -808,70 +808,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">51</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">day1</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="901954161"/>
-					</object>
-					<int key="connectionID">86</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">day2</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="491494382"/>
-					</object>
-					<int key="connectionID">87</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">day3</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="527074731"/>
-					</object>
-					<int key="connectionID">88</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">day4</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="590023830"/>
-					</object>
-					<int key="connectionID">89</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">hours1</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="541306632"/>
-					</object>
-					<int key="connectionID">90</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">hours2</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="190031410"/>
-					</object>
-					<int key="connectionID">91</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">hours3</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="1007792261"/>
-					</object>
-					<int key="connectionID">92</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">hours4</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="119359184"/>
-					</object>
-					<int key="connectionID">93</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">callStoreManager:</string>
 						<reference key="source" ref="482542514"/>
@@ -897,6 +833,70 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">96</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">monHours</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="541306632"/>
+					</object>
+					<int key="connectionID">106</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">friHours</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="847889109"/>
+					</object>
+					<int key="connectionID">107</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">openClosed</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="93810579"/>
+					</object>
+					<int key="connectionID">108</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">satHours</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="933672883"/>
+					</object>
+					<int key="connectionID">109</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">sunHours</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1058230895"/>
+					</object>
+					<int key="connectionID">110</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">thursHours</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="119359184"/>
+					</object>
+					<int key="connectionID">111</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">tueHours</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="190031410"/>
+					</object>
+					<int key="connectionID">112</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">wedHours</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1007792261"/>
+					</object>
+					<int key="connectionID">113</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -943,16 +943,16 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="541306632"/>
 							<reference ref="190031410"/>
 							<reference ref="1007792261"/>
-							<reference ref="882743390"/>
-							<reference ref="427310800"/>
+							<reference ref="1058230895"/>
+							<reference ref="560115971"/>
 							<reference ref="163366397"/>
-							<reference ref="756520052"/>
+							<reference ref="917508180"/>
 							<reference ref="119359184"/>
 							<reference ref="590023830"/>
-							<reference ref="84414810"/>
-							<reference ref="524916835"/>
-							<reference ref="283158390"/>
-							<reference ref="246756134"/>
+							<reference ref="358237324"/>
+							<reference ref="847889109"/>
+							<reference ref="933672883"/>
+							<reference ref="93810579"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1114,7 +1114,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">99</int>
-						<reference key="object" ref="84414810"/>
+						<reference key="object" ref="358237324"/>
 						<reference key="parent" ref="678799577"/>
 						<string key="objectName">fri</string>
 					</object>
@@ -1132,37 +1132,37 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">100</int>
-						<reference key="object" ref="427310800"/>
+						<reference key="object" ref="560115971"/>
 						<reference key="parent" ref="678799577"/>
 						<string key="objectName">sat</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">101</int>
-						<reference key="object" ref="756520052"/>
+						<reference key="object" ref="917508180"/>
 						<reference key="parent" ref="678799577"/>
 						<string key="objectName">sun</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">102</int>
-						<reference key="object" ref="524916835"/>
+						<reference key="object" ref="847889109"/>
 						<reference key="parent" ref="678799577"/>
 						<string key="objectName">friHours</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">103</int>
-						<reference key="object" ref="283158390"/>
+						<reference key="object" ref="933672883"/>
 						<reference key="parent" ref="678799577"/>
 						<string key="objectName">satHours</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">104</int>
-						<reference key="object" ref="882743390"/>
+						<reference key="object" ref="1058230895"/>
 						<reference key="parent" ref="678799577"/>
 						<string key="objectName">sunHours</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">105</int>
-						<reference key="object" ref="246756134"/>
+						<reference key="object" ref="93810579"/>
 						<reference key="parent" ref="678799577"/>
 						<string key="objectName">openClosed</string>
 					</object>
@@ -1273,7 +1273,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">105</int>
+			<int key="maxID">113</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

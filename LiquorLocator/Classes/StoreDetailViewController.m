@@ -43,7 +43,7 @@
 @synthesize map;
 
 - (void)viewDidAppear:(BOOL)animated {
-    self.feedURLString = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/store/%d", storeId];
+    self.feedURLString = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/store/%d?hoursByDay=1", storeId];
     
     [super viewDidAppear:animated];
 }
@@ -58,6 +58,16 @@
     [districtManagerName release];                                                                 
     [districtManagerPhone release];                                                                
 
+    [monHours release];
+    [tueHours release];
+    [wedHours release];
+    [thursHours release];
+    [friHours release];
+    [satHours release];
+    [sunHours release];
+    
+    [openClosed release];
+    
     [map release];
     [super dealloc];
 }
@@ -174,51 +184,67 @@
     }
     
     // Handle hours
-    int count = 0;
     for (NSDictionary *hours in [self.objectList objectForKey:kHours]) {
         NSString *startDay = [hours objectForKey:kStartDay];
-        NSString *endDay = [hours objectForKey:kEndDay];
         NSString *open = [hours objectForKey:kOpen];
         NSString *close = [hours objectForKey:kClose];
+
         
-        if (count == 0) {
-            if ([startDay isEqualToString:endDay]) {
-                day1.text = startDay;
+        if ([startDay isEqualToString:@"Mon"]) {
+            if (open == nil) {
+                monHours.text = @"Closed";
             } else {
-                day1.text = [NSString stringWithFormat:@"%@ - %@", startDay, endDay];
+                monHours.text = [NSString stringWithFormat:@"%@ - %@", open, close];
             }
-            hours1.text = [NSString stringWithFormat:@"%@ - %@", open, close];
-            firstHours.hidden = NO;
-            
-        } else if (count == 1) {
-            if ([startDay isEqualToString:endDay]) {
-                day2.text = startDay;
-            } else {    
-                day2.text = [NSString stringWithFormat:@"%@ - %@", startDay, endDay];
-            }            
-            hours2.text = [NSString stringWithFormat:@"%@ - %@", open, close];
-            secondHours.hidden = NO;
-
-        } else if (count == 2) {
-            if ([startDay isEqualToString:endDay]) {
-                day3.text = startDay;
-            } else {
-                day3.text = [NSString stringWithFormat:@"%@ - %@", startDay, endDay];
-            }            
-            hours3.text = [NSString stringWithFormat:@"%@ - %@", open, close];
-            thirdHours.hidden = NO;
-
-        } else if (count == 3) {
-            if ([startDay isEqualToString:endDay]) {
-                day4.text = startDay;
-            } else {
-                day4.text = [NSString stringWithFormat:@"%@ - %@", startDay, endDay];
-            }            
-            hours4.text = [NSString stringWithFormat:@"%@ - %@", open, close];
-            fourthHours.hidden = NO;
         }
-        
-        count = count + 1;
+            
+        if ([startDay isEqualToString:@"Tue"]) {
+            if (open == nil) {
+                tueHours.text = @"Closed";
+            } else {
+                tueHours.text = [NSString stringWithFormat:@"%@ - %@", open, close];
+            }
+        }
+
+        if ([startDay isEqualToString:@"Wed"]) {
+            if (open == nil) {
+                wedHours.text = @"Closed";
+            } else {
+                wedHours.text = [NSString stringWithFormat:@"%@ - %@", open, close];
+            }
+        }
+
+        if ([startDay isEqualToString:@"Thur"]) {
+            if (open == nil) {
+                thursHours.text = @"Closed";
+            } else {
+                thursHours.text = [NSString stringWithFormat:@"%@ - %@", open, close];
+            }
+        }
+
+        if ([startDay isEqualToString:@"Fri"]) {
+            if (open == nil) {
+                friHours.text = @"Closed";
+            } else {
+                friHours.text = [NSString stringWithFormat:@"%@ - %@", open, close];
+            }
+        }
+
+        if ([startDay isEqualToString:@"Sat"]) {
+            if (open == nil) {
+                satHours.text = @"Closed";
+            } else {
+                satHours.text = [NSString stringWithFormat:@"%@ - %@", open, close];
+            }
+        }
+
+        if ([startDay isEqualToString:@"Sun"]) {
+            if (open == nil) {
+                sunHours.text = @"Closed";
+            } else {
+                sunHours.text = [NSString stringWithFormat:@"%@ - %@", open, close];
+            }
+        }
     }
     
     // Add data to view outlets
