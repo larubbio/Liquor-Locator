@@ -171,7 +171,9 @@
     NSUInteger row = [indexPath row];
 
     // For section 0 load map?  Call number?
-    [self loadDirections];
+    if (section == 0) {
+        [self loadDirections];
+    }
     
     // For section 1 open url in safari
     if (section == 1) {
