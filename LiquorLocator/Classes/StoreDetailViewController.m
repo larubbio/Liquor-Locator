@@ -28,21 +28,15 @@
 @synthesize districtManagerName;                                                               
 @synthesize districtManagerPhone; 
 
-@synthesize firstHours;
-@synthesize day1;
-@synthesize hours1;
+@synthesize monHours;
+@synthesize tueHours;
+@synthesize wedHours;
+@synthesize thursHours;
+@synthesize friHours;
+@synthesize satHours;
+@synthesize sunHours;
 
-@synthesize secondHours;
-@synthesize day2;
-@synthesize hours2;
-
-@synthesize thirdHours;
-@synthesize day3;
-@synthesize hours3;
-
-@synthesize fourthHours;
-@synthesize day4;
-@synthesize hours4;
+@synthesize openClosed;
 
 @synthesize mask;
 @synthesize districtManagerView;

@@ -22,8 +22,6 @@
 		4628BF0B1202849200ECE4BE /* CategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF091202849200ECE4BE /* CategoriesView.xib */; };
 		4628BF0F120284A500ECE4BE /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4628BF0D120284A500ECE4BE /* SearchViewController.m */; };
 		4628BF10120284A500ECE4BE /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF0E120284A500ECE4BE /* SearchView.xib */; };
-		4628BF14120284BD00ECE4BE /* CampaignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4628BF12120284BD00ECE4BE /* CampaignViewController.m */; };
-		4628BF15120284BD00ECE4BE /* CampaignView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF13120284BD00ECE4BE /* CampaignView.xib */; };
 		4650CECC1241BD8E00C7C1EF /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4650CEC91241BD8E00C7C1EF /* AsyncImageView.m */; };
 		4650CECD1241BD8E00C7C1EF /* HTTPUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4650CECB1241BD8E00C7C1EF /* HTTPUtil.m */; };
 		4650CED31241BE1600C7C1EF /* HTTPParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 4650CED01241BE1600C7C1EF /* HTTPParam.m */; };
@@ -37,6 +35,7 @@
 		4671108D120DAE5300B250F9 /* StoreList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4671108B120DAE5300B250F9 /* StoreList.m */; };
 		46711123120E02EC00B250F9 /* SpiritList.m in Sources */ = {isa = PBXBuildFile; fileRef = 46711122120E02EC00B250F9 /* SpiritList.m */; };
 		4671147D1210677000B250F9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4671147C1210677000B250F9 /* Constants.m */; };
+		4672FAE51310838700E2549B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4672FAE41310838700E2549B /* Default.png */; };
 		469B5F35120881E700A7E5DE /* StoreAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 469B5F34120881E700A7E5DE /* StoreAnnotation.m */; };
 		469B5FD11208A92900A7E5DE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 469B5FD01208A92800A7E5DE /* CoreLocation.framework */; };
 		469B60961209205C00A7E5DE /* StoreListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 469B60941209205C00A7E5DE /* StoreListViewController.m */; };
@@ -47,7 +46,6 @@
 		46A6AF85122383A900038466 /* DistillerAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46A6AF84122383A900038466 /* DistillerAddressCell.xib */; };
 		46A6AF9512243E5A00038466 /* BlurbViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A6AF9212243E5A00038466 /* BlurbViewCell.m */; };
 		46A6AF9612243E5A00038466 /* DistillerAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A6AF9412243E5A00038466 /* DistillerAddressCell.m */; };
-		46B525E71238509200FB3E10 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 46B525E61238509200FB3E10 /* Default.png */; };
 		46B52659123871B200FB3E10 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 46B52658123871B200FB3E10 /* Icon.png */; };
 		46CABEB71228394400B8D751 /* CategoriesList.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CABEB61228394400B8D751 /* CategoriesList.m */; };
 		46CABED612283AB500B8D751 /* StoreCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CABED412283AB500B8D751 /* StoreCategoriesViewController.m */; };
@@ -96,9 +94,6 @@
 		4628BF0C120284A500ECE4BE /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		4628BF0D120284A500ECE4BE /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		4628BF0E120284A500ECE4BE /* SearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchView.xib; path = Classes/SearchView.xib; sourceTree = "<group>"; };
-		4628BF11120284BD00ECE4BE /* CampaignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CampaignViewController.h; sourceTree = "<group>"; };
-		4628BF12120284BD00ECE4BE /* CampaignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CampaignViewController.m; sourceTree = "<group>"; };
-		4628BF13120284BD00ECE4BE /* CampaignView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CampaignView.xib; path = Classes/CampaignView.xib; sourceTree = "<group>"; };
 		4650CEC81241BD8E00C7C1EF /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		4650CEC91241BD8E00C7C1EF /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
 		4650CECA1241BD8E00C7C1EF /* HTTPUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPUtil.h; sourceTree = "<group>"; };
@@ -125,6 +120,7 @@
 		46711122120E02EC00B250F9 /* SpiritList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpiritList.m; sourceTree = "<group>"; };
 		4671147B1210677000B250F9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		4671147C1210677000B250F9 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		4672FAE41310838700E2549B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		469B5F33120881E700A7E5DE /* StoreAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreAnnotation.h; sourceTree = "<group>"; };
 		469B5F34120881E700A7E5DE /* StoreAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreAnnotation.m; sourceTree = "<group>"; };
 		469B5FD01208A92800A7E5DE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -140,7 +136,6 @@
 		46A6AF9212243E5A00038466 /* BlurbViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlurbViewCell.m; path = Classes/BlurbViewCell.m; sourceTree = "<group>"; };
 		46A6AF9312243E5A00038466 /* DistillerAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DistillerAddressCell.h; path = Classes/DistillerAddressCell.h; sourceTree = "<group>"; };
 		46A6AF9412243E5A00038466 /* DistillerAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DistillerAddressCell.m; path = Classes/DistillerAddressCell.m; sourceTree = "<group>"; };
-		46B525E61238509200FB3E10 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		46B52658123871B200FB3E10 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		46CABEB51228394400B8D751 /* CategoriesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesList.h; sourceTree = "<group>"; };
 		46CABEB61228394400B8D751 /* CategoriesList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesList.m; sourceTree = "<group>"; };
@@ -261,7 +256,6 @@
 				4628BF0E120284A500ECE4BE /* SearchView.xib */,
 				46E649DF1203D11A00AB9328 /* SpiritListView.xib */,
 				4651F3071205D34900A2079B /* SpiritDetailView.xib */,
-				4628BF13120284BD00ECE4BE /* CampaignView.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* LiquorLocator-Info.plist */,
 				46E64864120374B700AB9328 /* RootView.xib */,
@@ -291,8 +285,6 @@
 				46CABED412283AB500B8D751 /* StoreCategoriesViewController.m */,
 				4628BF0C120284A500ECE4BE /* SearchViewController.h */,
 				4628BF0D120284A500ECE4BE /* SearchViewController.m */,
-				4628BF11120284BD00ECE4BE /* CampaignViewController.h */,
-				4628BF12120284BD00ECE4BE /* CampaignViewController.m */,
 				46E649DD1203D11A00AB9328 /* SpiritListViewController.h */,
 				46E649DE1203D11A00AB9328 /* SpiritListViewController.m */,
 				4651F3041205D30400A2079B /* SpiritDetailViewController.h */,
@@ -376,7 +368,7 @@
 		46CABFBF122B4BB000B8D751 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				46B525E61238509200FB3E10 /* Default.png */,
+				4672FAE41310838700E2549B /* Default.png */,
 				46CAC0F6122F531E00B8D751 /* campaign.png */,
 				46CAC0F7122F531E00B8D751 /* categories.png */,
 				46CAC0F8122F531E00B8D751 /* local.png */,
@@ -457,7 +449,6 @@
 				4628BF061202846900ECE4BE /* StoresView.xib in Resources */,
 				4628BF0B1202849200ECE4BE /* CategoriesView.xib in Resources */,
 				4628BF10120284A500ECE4BE /* SearchView.xib in Resources */,
-				4628BF15120284BD00ECE4BE /* CampaignView.xib in Resources */,
 				46E64865120374B700AB9328 /* RootView.xib in Resources */,
 				46E649E11203D11A00AB9328 /* SpiritListView.xib in Resources */,
 				4651F3081205D34900A2079B /* SpiritDetailView.xib in Resources */,
@@ -474,8 +465,8 @@
 				46CAC0FD122F531E00B8D751 /* local.png in Resources */,
 				46CAC0FE122F531E00B8D751 /* search.png in Resources */,
 				46CAC0FF122F531E00B8D751 /* stores.png in Resources */,
-				46B525E71238509200FB3E10 /* Default.png in Resources */,
 				46B52659123871B200FB3E10 /* Icon.png in Resources */,
+				4672FAE51310838700E2549B /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,7 +482,6 @@
 				4628BF051202846900ECE4BE /* StoresViewController.m in Sources */,
 				4628BF0A1202849200ECE4BE /* CategoriesViewController.m in Sources */,
 				4628BF0F120284A500ECE4BE /* SearchViewController.m in Sources */,
-				4628BF14120284BD00ECE4BE /* CampaignViewController.m in Sources */,
 				46E647EA12034DAB00AB9328 /* NSObject+SBJSON.m in Sources */,
 				46E647EB12034DAB00AB9328 /* NSString+SBJSON.m in Sources */,
 				46E647EC12034DAB00AB9328 /* SBJSON.m in Sources */,

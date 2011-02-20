@@ -30,9 +30,9 @@ void uncaughtExceptionHandler(NSException *exception) {
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     
 #ifdef FLURRY
-    [FlurryAPI setAppVersion:@"1.0"];
-//    [FlurryAPI startSession:@"FRBRP3NZIFW8FLSY7DW4"]; // Development
-    [FlurryAPI startSession:@"L4AWJM8QPWPN3C1EK8K9"]; // Production
+    [FlurryAPI setAppVersion:@"1.1"];
+    [FlurryAPI startSession:@"FRBRP3NZIFW8FLSY7DW4"]; // Development
+//    [FlurryAPI startSession:@"L4AWJM8QPWPN3C1EK8K9"]; // Production
     
     [FlurryAPI countPageViews:navController];
 #endif

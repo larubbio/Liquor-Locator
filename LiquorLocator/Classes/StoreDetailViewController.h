@@ -23,21 +23,15 @@
     IBOutlet UILabel *districtManagerName;
     IBOutlet UILabel *districtManagerPhone;
 
-    IBOutlet UIView  *firstHours;
-    IBOutlet UILabel *day1;
-    IBOutlet UILabel *hours1;
+    IBOutlet UILabel *monHours;
+    IBOutlet UILabel *tueHours;
+    IBOutlet UILabel *wedHours;
+    IBOutlet UILabel *thursHours;
+    IBOutlet UILabel *friHours;
+    IBOutlet UILabel *satHours;
+    IBOutlet UILabel *sunHours;
 
-    IBOutlet UIView  *secondHours;
-    IBOutlet UILabel *day2;
-    IBOutlet UILabel *hours2;
-
-    IBOutlet UIView  *thirdHours;
-    IBOutlet UILabel *day3;
-    IBOutlet UILabel *hours3;
-
-    IBOutlet UIView  *fourthHours;
-    IBOutlet UILabel *day4;
-    IBOutlet UILabel *hours4;
+    IBOutlet UILabel *openClosed;
     
     IBOutlet UIView *mask;
     IBOutlet UIView *districtManagerView;
@@ -55,21 +49,15 @@
 @property (nonatomic, retain) UILabel *districtManagerName;
 @property (nonatomic, retain) UILabel *districtManagerPhone;
 
-@property (nonatomic, retain) UIView  *firstHours;
-@property (nonatomic, retain) UILabel *day1;
-@property (nonatomic, retain) UILabel *hours1;
+@property (nonatomic, retain) UILabel *monHours;
+@property (nonatomic, retain) UILabel *tueHours;
+@property (nonatomic, retain) UILabel *wedHours;
+@property (nonatomic, retain) UILabel *thursHours;
+@property (nonatomic, retain) UILabel *friHours;
+@property (nonatomic, retain) UILabel *satHours;
+@property (nonatomic, retain) UILabel *sunHours;
 
-@property (nonatomic, retain) UIView  *secondHours;
-@property (nonatomic, retain) UILabel *day2;
-@property (nonatomic, retain) UILabel *hours2;
-
-@property (nonatomic, retain) UIView  *thirdHours;
-@property (nonatomic, retain) UILabel *day3;
-@property (nonatomic, retain) UILabel *hours3;
-
-@property (nonatomic, retain) UIView  *fourthHours;
-@property (nonatomic, retain) UILabel *day4;
-@property (nonatomic, retain) UILabel *hours4;
+@property (nonatomic, retain) UILabel *openClosed;
 
 @property (nonatomic, retain) UIView *mask;
 @property (nonatomic, retain) UIView *districtManagerView;
