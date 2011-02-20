@@ -41,6 +41,7 @@ extern NSString *const kURL;
 extern NSString *const kSpirits;
 extern NSString *const kCategory;
 extern NSString *const kCount;
+extern NSString *const kImageURL;
 
 // Short JSON constants
 extern NSString *const kShortName; 

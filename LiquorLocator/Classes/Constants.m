@@ -39,6 +39,7 @@
     NSString *const kSpirits = @"spirits";
     NSString *const kCategory = @"cat";
     NSString *const kCount = @"count";
+    NSString *const kImageURL = @"image_url";
 
     NSString *const kShortName = @"n";
     NSString *const kShortCount = @"c";
