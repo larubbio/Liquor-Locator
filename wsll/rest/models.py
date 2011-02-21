@@ -151,8 +151,15 @@ class Store(models.Model):
 
             ret['hours'] = []
             if hoursByDay:
-                for h in _hours:
-                    ret['hours'].append(h.dict())
+                for d in ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]:
+                    _days = [days for days in _hours if d == days.start_day]
+                    if len(_days) > 0:
+                        ret['hours'].append(_days[0].dict())
+                    else:
+                        ret['hours'].append({'start_day': d,
+                                             'end_day': d,
+                                             'store_id': self.id, 
+                                             'close': None, 'open' : None})
             else:
                 # We need to rebuild the old style of hours where
                 # consecutive days with the same hours are rolled up
