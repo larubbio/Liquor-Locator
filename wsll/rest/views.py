@@ -113,8 +113,13 @@ def stores(request):
 def store(request, store_id):
     store = get_object_or_404(Store, pk=store_id)
 
+    if 'hoursByDay' in request.GET:
+        jsonStr = store.json(hoursByDay=True)
+    else:
+        jsonStr = store.json()
+        
     mimetype = 'application/json'
-    return HttpResponse(store.json(),mimetype)
+    return HttpResponse(jsonStr,mimetype)
 
 def store_inventory(request, store_id):
     ret = []
