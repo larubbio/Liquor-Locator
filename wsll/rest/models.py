@@ -13,11 +13,16 @@ class Spirit(models.Model):
     class_h_price = models.DecimalField(max_digits=10, decimal_places=2)
     merchandising_note = models.TextField()
     size = models.DecimalField(max_digits=5, decimal_places=3)
+    size_name = models.CharField(max_length=25)
     case_price = models.DecimalField(max_digits=10, decimal_places=2)
     liter_cost = models.DecimalField(max_digits=10, decimal_places=2)
     proof = models.IntegerField()
     on_sale = models.BooleanField()
     closeout = models.BooleanField()
+    new_item = models.BooleanField()
+    one_time_only = models.BooleanField()
+    gift_item = models.BooleanField()
+    part_case = models.BooleanField()
 
     def __unicode__(self):
         return "<Spirit: %s '%s'>" % (self.id, self.brand_name)

@@ -51,6 +51,7 @@ class Spirit(Item):
     classHPrice = Field()
     casePrice = Field()
     size = Field()
+    size_name = Field()
     proof = Field()
     literCost = Field()
     merchandisingSpecialNotes = Field()

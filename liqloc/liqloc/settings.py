@@ -19,6 +19,7 @@ ITEM_PIPELINES = [
     'liqloc.pipelines.GeoCodeStorePipeline',
     'liqloc.pipelines.ValidateItemPipeline',
     'liqloc.pipelines.SaveItemPipeline',
+    'liqloc.pipelines.PriceBucketsPipeline', 
     'liqloc.pipelines.ToggleTablesPipeline',
     'liqloc.pipelines.EmailStatsPipeline'
 ]

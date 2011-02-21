@@ -2,6 +2,9 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/topics/item-pipeline.html
+import sys
+sys.path.append('..')
+
 from scrapy.xlib.pydispatch import dispatcher
 from scrapy import signals
 from scrapy.exceptions import DropItem
@@ -237,6 +240,8 @@ class SaveItemPipeline(object):
         if t is Category:
             pass
         elif t is Spirit:
+            item['size_name'] = self.nameForSize(item['size'])
+
             spirit = Model.Spirit(item['code'])
 
             spirit.category = item['category']
@@ -247,11 +252,16 @@ class SaveItemPipeline(object):
             spirit.class_h_price = item['classHPrice']
             spirit.merchandising_note = item['merchandisingSpecialNotes']
             spirit.size = item['size']
+            spirit.size_name = item['size_name']
             spirit.case_price = item['casePrice']
             spirit.proof = item['proof']
             spirit.liter_cost = item['literCost']
             spirit.on_sale = item['on_sale']
             spirit.closeout = item['closeout']
+            spirit.new_item = item['new_item']
+            spirit.one_time_only = item['one_time_only']
+            spirit.gift_item = item['gift_item']
+            spirit.part_case = item['part_case']
 
             stats.inc_value("spirits")
 
@@ -332,6 +342,170 @@ class SaveItemPipeline(object):
             stats.inc_value("inventory")
 
         return item
+
+    def nameForSize(self, size):
+        s = float(size)
+
+        if s <= .120:
+            return 'mini'
+
+        if s > .120 and s <= .240:
+            return 'half-pint'
+
+        if s > .240 and s <= .400:
+            return 'pint'
+
+        if s > .400 and s <= .650:
+            return '500ml'
+        
+        if s > .650 and s <= .800:
+            return 'fifth'
+
+        if s > .800 and s <= 1.130:
+            return 'liter'
+
+        if s > 1.130 and s <= 1.800:
+            return '1,750ml'
+
+        if s > 1.800:
+            return 'jumbo'
+
+
+class PriceBucketsPipeline(object):
+    def __init__(self):
+        self.duplicates = {}
+        dispatcher.connect(self.spider_opened, signals.spider_opened)
+        dispatcher.connect(self.spider_closed, signals.spider_closed)
+
+    def spider_opened(self, spider):
+        self.priceBuckets = {}
+
+        self.priceBuckets['global'] = {}
+        self.priceBuckets['category'] = {}
+
+    def spider_closed(self, spider):
+        # Calculate price ranges
+        for size in self.priceBuckets['global']:
+            lowPrice = float(self.priceBuckets['global'][size]['lowPrice'])
+            highPrice = float(self.priceBuckets['global'][size]['highPrice'])
+
+            priceRange = highPrice - lowPrice
+            bucketSize = priceRange * 1/3
+
+            # Update database
+            s = text("""UPDATE spirits_bak
+                           SET price_tier = 'BOTTOM'
+                         WHERE total_retail_price < :low
+                           AND size_name = :size""")
+            session.bind.execute(s, low=(lowPrice + bucketSize), size=size)
+
+            s = text("""UPDATE spirits_bak
+                           SET price_tier = 'MIDDLE'
+                         WHERE total_retail_price >= :low
+                           AND total_retail_price < :high
+                           AND size_name = :size""")
+            session.bind.execute(s, 
+                                 low=(lowPrice + bucketSize), 
+                                 high=(highPrice - bucketSize), 
+                                 size=size)
+
+            s = text("""UPDATE spirits_bak
+                           SET price_tier = 'TOP'
+                         WHERE total_retail_price >= :high
+                           AND size_name = :size""")
+            session.bind.execute(s, low=(highPrice - bucketSize), size=size)
+
+            for cat in self.priceBuckets['category']:
+                for size in self.priceBuckets['global']:
+             
+                    lowPrice = self.priceBuckets['category'][cat][size]['lowPrice']
+                    highPrice = self.priceBuckets['category'][cat][size]['highPrice']
+
+                    priceRange = highPrice - lowPrice
+                    bucketSize = priceRange * 1/3
+
+                    s = text("""UPDATE spirits_bak
+                                   SET category_price_tier = 'BOTTOM'
+                                 WHERE total_retail_price < :low
+                                   AND category = :cat
+                                   AND size_name = :size""")
+                    session.bind.execute(s, 
+                                         low=(lowPrice + bucketSize), 
+                                         size=size,
+                                         cat=category)
+
+                    s = text("""UPDATE spirits_bak
+                                   SET category_price_tier = 'MIDDLE'
+                                 WHERE total_retail_price >= :low
+                                   AND total_retail_price < :high
+                                   AND category = :cat
+                                   AND size_name = :size""")
+                    session.bind.execute(s, 
+                                         low=(lowPrice + bucketSize), 
+                                         high=(highPrice - bucketSize), 
+                                         size=size,
+                                         cat=category)
+
+                    s = text("""UPDATE spirits_bak
+                                   SET category_price_tier = 'TOP'
+                                 WHERE total_retail_price >= :high
+                                   AND category = :cat
+                                   AND size_name = :size""")
+                    session.bind.execute(s, 
+                                         high=(highPrice - bucketSize), 
+                                         size=size,
+                                         cat=category)
+                    
+    def process_item(self, item, spider):
+        t = type(item)
+        
+        if t is not Spirit:
+            return item
+
+        category = item['category']
+        size = item['size_name']
+        totalRetailPrice = item['totalRetailPrice']
+
+        if size not in self.priceBuckets['global']:
+            self.priceBuckets['global'][size] = {}
+            self.priceBuckets['global'][size]['lowPrice'] = None
+            self.priceBuckets['global'][size]['highPrice'] = None
+
+        if category not in self.priceBuckets['category']:
+            self.priceBuckets['category'][category] = {}
+
+        if size not in self.priceBuckets['category'][category]:
+            self.priceBuckets['category'][category][size] = {}
+            self.priceBuckets['category'][category][size]['lowPrice'] = None
+            self.priceBuckets['category'][category][size]['highPrice'] = None
+
+        # Set some variables to shorten my hashs
+        lowPrice = self.priceBuckets['global'][size]['lowPrice']
+        highPrice = self.priceBuckets['global'][size]['highPrice']
+
+        categoryLowPrice = self.priceBuckets['category'][category][size]['lowPrice']
+        categoryHighPrice = self.priceBuckets['category'][category][size]['highPrice']
+
+        if lowPrice is None or totalRetailPrice < lowPrice:
+            lowPrice = totalRetailPrice
+
+        if highPrice is None or totalRetailPrice > highPrice:
+            highPrice = totalRetailPrice
+
+        if categoryLowPrice is None or totalRetailPrice < categoryLowPrice:
+            categoryLowPrice = totalRetailPrice
+
+        if categoryHighPrice is None or totalRetailPrice > categoryHighPrice:
+            categoryHighPrice = totalRetailPrice
+
+        self.priceBuckets['global'][size]['lowPrice'] = lowPrice
+        self.priceBuckets['global'][size]['highPrice'] = highPrice
+
+        self.priceBuckets['category'][category][size]['lowPrice'] = categoryLowPrice
+        self.priceBuckets['category'][category][size]['highPrice'] = categoryHighPrice
+
+        return item
+
 
 # At completion of crawl toggles the database tables
 class ToggleTablesPipeline(object):
@@ -466,11 +640,22 @@ Tables Toggled:
                     stats.get_value("distillers"),
                     stats.get_value("toggled"))
 
+        s = text("""SELECT table_name, 
+                           table_rows 
+                      FROM information_schema.tables 
+                     WHERE table_schema = "wsll" 
+                       AND table_type = "BASE TABLE";""")
+        rows = session.execute(s).fetchall()
+
+        body += " \n\nTable Stats:\n"
+        for row in rows:
+            body += "  %s: %d\n" % (row[0], row[1])
+        
         mailer = MailSender()
         mailer.send(to=["rob@larubbio.org"], subject="Crawl Stats", body=body)
-
   
         pass
 
     def process_item(self, item, spider):
         return item
+
