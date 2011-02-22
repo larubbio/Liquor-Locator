@@ -413,14 +413,13 @@ class PriceBucketsPipeline(object):
                            SET price_tier = 'TOP'
                          WHERE total_retail_price >= :high
                            AND size_name = :size""")
-            session.bind.execute(s, low=(highPrice - bucketSize), size=size)
+            session.bind.execute(s, high=(highPrice - bucketSize), size=size)
 
             for cat in self.priceBuckets['category']:
                 for size in self.priceBuckets['global']:
              
-                    lowPrice = self.priceBuckets['category'][cat][size]['lowPrice']
-                    highPrice = self.priceBuckets['category'][cat][size]['highPrice']
-
+                    lowPrice = float(self.priceBuckets['category'][cat][size]['lowPrice'])
+                    highPrice = float(self.priceBuckets['category'][cat][size]['highPrice'])
                     priceRange = highPrice - lowPrice
                     bucketSize = priceRange * 1/3
 
@@ -432,7 +431,7 @@ class PriceBucketsPipeline(object):
                     session.bind.execute(s, 
                                          low=(lowPrice + bucketSize), 
                                          size=size,
-                                         cat=category)
+                                         cat=cat)
 
                     s = text("""UPDATE spirits_bak
                                    SET category_price_tier = 'MIDDLE'
@@ -444,7 +443,7 @@ class PriceBucketsPipeline(object):
                                          low=(lowPrice + bucketSize), 
                                          high=(highPrice - bucketSize), 
                                          size=size,
-                                         cat=category)
+                                         cat=cat)
 
                     s = text("""UPDATE spirits_bak
                                    SET category_price_tier = 'TOP'
@@ -454,7 +453,7 @@ class PriceBucketsPipeline(object):
                     session.bind.execute(s, 
                                          high=(highPrice - bucketSize), 
                                          size=size,
-                                         cat=category)
+                                         cat=cat)
                     
     def process_item(self, item, spider):
         t = type(item)
