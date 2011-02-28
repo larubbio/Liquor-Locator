@@ -14,10 +14,10 @@ NEWSPIDER_MODULE = 'liqloc.spiders'
 DEFAULT_ITEM_CLASS = 'liqloc.items.Spirit'
 
 ITEM_PIPELINES = [
-    'liqloc.pipelines.DuplicatesPipeline',
+#    'liqloc.pipelines.DuplicatesPipeline',
     'liqloc.pipelines.SpiritCleanerPipeline',
     'liqloc.pipelines.GeoCodeStorePipeline',
-    'liqloc.pipelines.ValidateItemPipeline',
+#    'liqloc.pipelines.ValidateItemPipeline',
     'liqloc.pipelines.SaveItemPipeline',
     'liqloc.pipelines.PriceBucketsPipeline', 
     'liqloc.pipelines.ToggleTablesPipeline',
@@ -34,3 +34,5 @@ LOG_STDOUT = True
 
 ROBOTSTXT_OBEY = True
 STATSMAILER_RCPTS = ['rob@larubbio.org']
+
+TRACK_REFS = True

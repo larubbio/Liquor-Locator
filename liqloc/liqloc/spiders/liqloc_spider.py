@@ -26,6 +26,8 @@ class LiqLocSpider(BaseSpider):
         hxs = HtmlXPathSelector(response)
         viewState = hxs.select('//input[@id="__VIEWSTATE"]/@value').extract()
         eventValidation = hxs.select('//input[@id="__EVENTVALIDATION"]/@value').extract()
+
+        ret = []
         for f in hxs.select('//option/@value').extract():
             idCatBrand = f
             category = Category()
@@ -40,7 +42,9 @@ class LiqLocSpider(BaseSpider):
             request.meta['category'] = category['name']
 
             stats.inc_value('categories_crawled')
-            yield request
+            ret.append(request)
+
+        return ret
 
     def parse_category(self, response):
         stats.inc_value('page_load')
@@ -53,6 +57,7 @@ class LiqLocSpider(BaseSpider):
         # Ignore the header row
         rows = table.select('tr')[1:]
 
+        ret = []
         for row in rows:
             columns = row.select('td')
             
@@ -72,7 +77,7 @@ class LiqLocSpider(BaseSpider):
             spirit['category'] = response.request.meta['category']
 
             stats.inc_value('spirits_crawled')
-            yield spirit
+            ret.append(spirit)
 
             value = columns[11].select('a/@href').extract()
             m = re.search("javascript:__doPostBack\('(.*?)','(.*?)'", str(value))
@@ -87,7 +92,9 @@ class LiqLocSpider(BaseSpider):
             request.meta['spirit-code'] = spirit['code']
             request.meta['spirit-name'] = spirit['name']
 
-            yield request
+            ret.append(request)
+
+        return ret
             
     def parse_store(self, response):
         stats.inc_value('page_load')
@@ -96,6 +103,8 @@ class LiqLocSpider(BaseSpider):
 
         hxs = HtmlXPathSelector(response)
         table = hxs.select('//table')[0]
+
+        ret = []
 
         # Ignore the header row
         rows = table.select('tr')[1:]
@@ -137,7 +146,7 @@ class LiqLocSpider(BaseSpider):
                 store['hours'] = hours + summerHours
 
                 stats.inc_value('stores_crawled')
-                yield store
+                ret.append(store)
 
             si = StoreInventory()
             si['store'] = number
@@ -145,7 +154,9 @@ class LiqLocSpider(BaseSpider):
             si['spirit'] = response.request.meta['spirit-code']
 
             stats.inc_value('inventory_crawled')
-            yield si
+            ret.append(si)
+
+        return ret
 
     def parseHours(self, store, spans, summer=False):
         ret = []

@@ -16,6 +16,7 @@ import simplejson
 import time
 import urllib,urllib2
 import math
+import datetime
 
 from sqlalchemy import create_engine
 from sqlalchemy.sql import text
@@ -329,15 +330,15 @@ class SaveItemPipeline(object):
 
 
         elif t is StoreInventory:
-            store = session.query(Model.Store).filter(Model.Store.id==item['store']).first()
-            spirit = session.query(Model.Spirit).filter(Model.Spirit.id==item['spirit']).first()
+#            store = session.query(Model.Store).filter(Model.Store.id==item['store']).first()
+#            spirit = session.query(Model.Spirit).filter(Model.Spirit.id==item['spirit']).first()
 
-            inv = Model.StoreInventory(store.id, spirit.id)
-
+#            inv = Model.StoreInventory(store.id, spirit.id)
+            inv = Model.StoreInventory(item['store'], item['spirit'])
             inv.qty = item['qty']
 
-            store.inventory.append(inv)
-            spirit.inventory.append(inv)
+#            store.inventory.append(inv)
+#            spirit.inventory.append(inv)
 
             stats.inc_value("inventory")
 
@@ -416,7 +417,7 @@ class PriceBucketsPipeline(object):
             session.bind.execute(s, high=(highPrice - bucketSize), size=size)
 
             for cat in self.priceBuckets['category']:
-                for size in self.priceBuckets['global']:
+                for size in self.priceBuckets['category'][cat]:
              
                     lowPrice = float(self.priceBuckets['category'][cat][size]['lowPrice'])
                     highPrice = float(self.priceBuckets['category'][cat][size]['highPrice'])
@@ -581,16 +582,26 @@ class ToggleTablesPipeline(object):
 
 class EmailStatsPipeline(object):
     def __init__(self):
+        self.startTime = None
+        self.endTime = None
+
         dispatcher.connect(self.spider_opened, signals.spider_opened)
         dispatcher.connect(self.spider_closed, signals.spider_closed)
 
     def spider_opened(self, spider):
-        pass
+        self.startTime = datetime.datetime.now()
 
     def spider_closed(self, spider):
+        self.endTime = datetime.datetime.now()
+        runTime = self.endTime - self.startTime
+
         # Send email with stats
 
         body = """ Crawling completed.
+
+Start: %s
+End: %s
+Run Time: %s
 
 Crawl Stats:
   page loads: %s
@@ -619,7 +630,10 @@ Records written:
   Distillers: %s
 
 Tables Toggled:
-  toggled: %s""" % (stats.get_value('page_load'),
+  toggled: %s""" % (self.startTime,
+                    self.endTime,
+                    runTime,
+                    stats.get_value('page_load'),
                     stats.get_value('categories_crawled'),
                     stats.get_value('spirits_crawled'),
                     stats.get_value('stores_crawled'),
