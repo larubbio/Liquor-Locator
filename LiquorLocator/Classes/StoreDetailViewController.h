@@ -31,6 +31,14 @@
     IBOutlet UILabel *satHours;
     IBOutlet UILabel *sunHours;
 
+    IBOutlet UILabel *mon;
+    IBOutlet UILabel *tue;
+    IBOutlet UILabel *wed;
+    IBOutlet UILabel *thurs;
+    IBOutlet UILabel *fri;
+    IBOutlet UILabel *sat;
+    IBOutlet UILabel *sun;
+
     IBOutlet UILabel *openClosed;
     
     IBOutlet UIView *mask;
@@ -56,6 +64,14 @@
 @property (nonatomic, retain) UILabel *friHours;
 @property (nonatomic, retain) UILabel *satHours;
 @property (nonatomic, retain) UILabel *sunHours;
+
+@property (nonatomic, retain) UILabel *mon;
+@property (nonatomic, retain) UILabel *tue;
+@property (nonatomic, retain) UILabel *wed;
+@property (nonatomic, retain) UILabel *thurs;
+@property (nonatomic, retain) UILabel *fri;
+@property (nonatomic, retain) UILabel *sat;
+@property (nonatomic, retain) UILabel *sun;
 
 @property (nonatomic, retain) UILabel *openClosed;
 

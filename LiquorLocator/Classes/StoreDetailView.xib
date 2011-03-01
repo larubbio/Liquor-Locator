@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="99"/>
+			<integer value="75"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -541,7 +541,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<object class="IBUILabel" id="590023830">
 						<reference key="NSNextResponder" ref="678799577"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{165, 121}, {77, 21}}</string>
+						<string key="NSFrame">{{165, 123}, {77, 21}}</string>
 						<reference key="NSSuperview" ref="678799577"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -558,7 +558,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<object class="IBUILabel" id="119359184">
 						<reference key="NSNextResponder" ref="678799577"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{221, 121}, {79, 21}}</string>
+						<string key="NSFrame">{{221, 123}, {79, 21}}</string>
 						<reference key="NSSuperview" ref="678799577"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -898,6 +898,62 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<int key="connectionID">113</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">mon</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="901954161"/>
+					</object>
+					<int key="connectionID">114</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">tue</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="491494382"/>
+					</object>
+					<int key="connectionID">115</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">fri</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="358237324"/>
+					</object>
+					<int key="connectionID">116</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">sat</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="560115971"/>
+					</object>
+					<int key="connectionID">117</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">sun</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="917508180"/>
+					</object>
+					<int key="connectionID">118</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">thurs</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="590023830"/>
+					</object>
+					<int key="connectionID">119</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">wed</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="527074731"/>
+					</object>
+					<int key="connectionID">120</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -948,11 +1004,11 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="163366397"/>
 							<reference ref="917508180"/>
 							<reference ref="119359184"/>
-							<reference ref="590023830"/>
 							<reference ref="358237324"/>
 							<reference ref="847889109"/>
 							<reference ref="933672883"/>
 							<reference ref="93810579"/>
+							<reference ref="590023830"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1273,7 +1329,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">113</int>
+			<int key="maxID">120</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1369,19 +1425,26 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>districtManagerName</string>
 							<string>districtManagerPhone</string>
 							<string>districtManagerView</string>
+							<string>fri</string>
 							<string>friHours</string>
 							<string>map</string>
 							<string>mask</string>
+							<string>mon</string>
 							<string>monHours</string>
 							<string>openClosed</string>
+							<string>sat</string>
 							<string>satHours</string>
 							<string>storeManagerName</string>
 							<string>storeManagerPhone</string>
 							<string>storeName</string>
 							<string>street</string>
+							<string>sun</string>
 							<string>sunHours</string>
+							<string>thurs</string>
 							<string>thursHours</string>
+							<string>tue</string>
 							<string>tueHours</string>
+							<string>wed</string>
 							<string>wedHours</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1392,8 +1455,15 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>UILabel</string>
 							<string>UIView</string>
 							<string>UILabel</string>
+							<string>UILabel</string>
 							<string>MKMapView</string>
 							<string>UIView</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
@@ -1416,19 +1486,26 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>districtManagerName</string>
 							<string>districtManagerPhone</string>
 							<string>districtManagerView</string>
+							<string>fri</string>
 							<string>friHours</string>
 							<string>map</string>
 							<string>mask</string>
+							<string>mon</string>
 							<string>monHours</string>
 							<string>openClosed</string>
+							<string>sat</string>
 							<string>satHours</string>
 							<string>storeManagerName</string>
 							<string>storeManagerPhone</string>
 							<string>storeName</string>
 							<string>street</string>
+							<string>sun</string>
 							<string>sunHours</string>
+							<string>thurs</string>
 							<string>thursHours</string>
+							<string>tue</string>
 							<string>tueHours</string>
+							<string>wed</string>
 							<string>wedHours</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1454,6 +1531,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">fri</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">friHours</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
@@ -1466,11 +1547,19 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">mon</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">monHours</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">openClosed</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">sat</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -1494,7 +1583,15 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">sun</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">sunHours</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">thurs</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -1502,7 +1599,15 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">tue</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">tueHours</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">wed</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">

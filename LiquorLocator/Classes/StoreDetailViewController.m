@@ -36,6 +36,14 @@
 @synthesize satHours;
 @synthesize sunHours;
 
+@synthesize mon;
+@synthesize tue;
+@synthesize wed;
+@synthesize thurs;
+@synthesize fri;
+@synthesize sat;
+@synthesize sun;
+
 @synthesize openClosed;
 
 @synthesize mask;
@@ -148,7 +156,35 @@
     [controller release];
 }
 
+- (void)processLablesForDay:(UILabel *)dayLabel dayHoursLabel:(UILabel *)dayHoursLabel 
+                  storeOpen:(NSString *)open storeClose:(NSString *)close
+                    weekday:(NSInteger)weekday today:(NSInteger)today curTime:(NSInteger) curTime {
+
+    if ( [open isEqual: [NSNull null]] ) {
+        dayHoursLabel.text = @"Closed";
+    } else {
+        dayHoursLabel.text = [NSString stringWithFormat:@"%@ - %@", open, close];
+    }
     
+    if (weekday == today) {    
+        dayLabel.font = [UIFont boldSystemFontOfSize:12];
+        dayHoursLabel.font = [UIFont boldSystemFontOfSize:12];
+        
+        openClosed.text = @"CLOSED";
+        if (open != nil && close != nil) {
+            NSArray *openItems = [open componentsSeparatedByString:@":"];
+            NSInteger openTime = ([[openItems objectAtIndex:0] integerValue] * 100) + [[openItems objectAtIndex:1] integerValue];
+    
+            NSArray *closeItems = [close componentsSeparatedByString:@":"];
+            NSInteger closingTime = (([[closeItems objectAtIndex:0] integerValue] + 12) * 100) + [[closeItems objectAtIndex:1] integerValue];
+    
+            if (curTime > openTime && curTime < closingTime) {  
+                openClosed.text = @"OPEN";
+            }
+        }
+    }
+}
+
 #pragma mark -
 #pragma mark JSON Parsing Method
 - (void)jsonParsingComplete:(id)objects {
@@ -177,11 +213,20 @@
             storeManagerName.text = name;
             storeManagerPhone.text = number;
         } else {
-            districtManagerName.text = name;
-            districtManagerPhone.text = number;
-            districtManagerView.hidden = NO;
+            if (![name isEqualToString:@""]) {
+                districtManagerName.text = name;
+                districtManagerPhone.text = number;
+                districtManagerView.hidden = NO;
+            }
         }
     }
+    
+    // Get the current day (Sun == 1)
+    NSCalendar *calendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+    NSCalendarUnit unitFlags = NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:[NSDate date]];
+    NSInteger weekday = [comps weekday];
+    NSInteger curTime = ([comps hour] * 100) + [comps minute];    
     
     // Handle hours
     for (NSDictionary *hours in [self.objectList objectForKey:kHours]) {
@@ -190,60 +235,46 @@
         NSString *close = [hours objectForKey:kClose];
 
         
+        if ([startDay isEqualToString:@"Sun"]) {
+            [self processLablesForDay:sun dayHoursLabel:sunHours 
+                            storeOpen:open storeClose:close
+                              weekday:weekday today:1 curTime:curTime]; 
+        }
+        
         if ([startDay isEqualToString:@"Mon"]) {
-            if (open == nil) {
-                monHours.text = @"Closed";
-            } else {
-                monHours.text = [NSString stringWithFormat:@"%@ - %@", open, close];
-            }
+            [self processLablesForDay:mon dayHoursLabel:monHours 
+                            storeOpen:open storeClose:close
+                              weekday:weekday today:2 curTime:curTime]; 
         }
-            
+        
         if ([startDay isEqualToString:@"Tue"]) {
-            if (open == nil) {
-                tueHours.text = @"Closed";
-            } else {
-                tueHours.text = [NSString stringWithFormat:@"%@ - %@", open, close];
-            }
+            [self processLablesForDay:tue dayHoursLabel:tueHours 
+                            storeOpen:open storeClose:close
+                              weekday:weekday today:3 curTime:curTime]; 
         }
-
+        
         if ([startDay isEqualToString:@"Wed"]) {
-            if (open == nil) {
-                wedHours.text = @"Closed";
-            } else {
-                wedHours.text = [NSString stringWithFormat:@"%@ - %@", open, close];
-            }
+            [self processLablesForDay:wed dayHoursLabel:wedHours
+                            storeOpen:open storeClose:close
+                              weekday:weekday today:4 curTime:curTime]; 
         }
 
         if ([startDay isEqualToString:@"Thur"]) {
-            if (open == nil) {
-                thursHours.text = @"Closed";
-            } else {
-                thursHours.text = [NSString stringWithFormat:@"%@ - %@", open, close];
-            }
+            [self processLablesForDay:thurs dayHoursLabel:thursHours 
+                            storeOpen:open storeClose:close
+                              weekday:weekday today:5 curTime:curTime]; 
         }
-
+        
         if ([startDay isEqualToString:@"Fri"]) {
-            if (open == nil) {
-                friHours.text = @"Closed";
-            } else {
-                friHours.text = [NSString stringWithFormat:@"%@ - %@", open, close];
-            }
+            [self processLablesForDay:fri dayHoursLabel:friHours 
+                            storeOpen:open storeClose:close
+                              weekday:weekday today:6 curTime:curTime]; 
         }
-
+        
         if ([startDay isEqualToString:@"Sat"]) {
-            if (open == nil) {
-                satHours.text = @"Closed";
-            } else {
-                satHours.text = [NSString stringWithFormat:@"%@ - %@", open, close];
-            }
-        }
-
-        if ([startDay isEqualToString:@"Sun"]) {
-            if (open == nil) {
-                sunHours.text = @"Closed";
-            } else {
-                sunHours.text = [NSString stringWithFormat:@"%@ - %@", open, close];
-            }
+            [self processLablesForDay:sat dayHoursLabel:satHours 
+                            storeOpen:open storeClose:close
+                              weekday:weekday today:7 curTime:curTime]; 
         }
     }
     
