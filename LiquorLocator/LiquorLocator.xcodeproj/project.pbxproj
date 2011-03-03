@@ -22,6 +22,7 @@
 		4628BF0B1202849200ECE4BE /* CategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF091202849200ECE4BE /* CategoriesView.xib */; };
 		4628BF0F120284A500ECE4BE /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4628BF0D120284A500ECE4BE /* SearchViewController.m */; };
 		4628BF10120284A500ECE4BE /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF0E120284A500ECE4BE /* SearchView.xib */; };
+		463ECCC7131E133800372C24 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 463ECCC6131E133800372C24 /* NSString+URLEncoding.m */; };
 		4650CECC1241BD8E00C7C1EF /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4650CEC91241BD8E00C7C1EF /* AsyncImageView.m */; };
 		4650CECD1241BD8E00C7C1EF /* HTTPUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4650CECB1241BD8E00C7C1EF /* HTTPUtil.m */; };
 		4650CED31241BE1600C7C1EF /* HTTPParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 4650CED01241BE1600C7C1EF /* HTTPParam.m */; };
@@ -94,6 +95,8 @@
 		4628BF0C120284A500ECE4BE /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		4628BF0D120284A500ECE4BE /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		4628BF0E120284A500ECE4BE /* SearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchView.xib; path = Classes/SearchView.xib; sourceTree = "<group>"; };
+		463ECCC5131E133800372C24 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		463ECCC6131E133800372C24 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
 		4650CEC81241BD8E00C7C1EF /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		4650CEC91241BD8E00C7C1EF /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
 		4650CECA1241BD8E00C7C1EF /* HTTPUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPUtil.h; sourceTree = "<group>"; };
@@ -206,6 +209,8 @@
 				1D3623250D0F684500981E51 /* LiquorLocatorAppDelegate.m */,
 				4671147B1210677000B250F9 /* Constants.h */,
 				4671147C1210677000B250F9 /* Constants.m */,
+				463ECCC5131E133800372C24 /* NSString+URLEncoding.h */,
+				463ECCC6131E133800372C24 /* NSString+URLEncoding.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -430,7 +435,14 @@
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "LiquorLocator" */;
 			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -511,6 +523,7 @@
 				4650CED41241BE1600C7C1EF /* HTTPParamList.m in Sources */,
 				4650CED91241BE6000C7C1EF /* NSString+Extension.m in Sources */,
 				4650CEDE1241BEE600C7C1EF /* Base64Transcoder.c in Sources */,
+				463ECCC7131E133800372C24 /* NSString+URLEncoding.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,8 +620,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CC6575BD-4F26-477D-84EB-05C1BA39F0A2";
-				SDKROOT = iphoneos4.0;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C095199F-F06E-4A20-9636-9BE01CDC4980";
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
