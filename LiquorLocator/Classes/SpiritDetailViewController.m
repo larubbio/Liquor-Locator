@@ -14,6 +14,8 @@
 #import "FlurryAPI.h"
 #import "SBJSON.h"
 
+#import "NSString+URLEncoding.h"
+
 @implementation SpiritDetailViewController
 
 @synthesize spiritId;
@@ -80,7 +82,7 @@
     
     if ([self.image loadedImage] == nil) {
         NSString *urlString = [NSString stringWithFormat:@"http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%@&key=%@", 
-                                        [Constants urlencode:[objectList objectForKey:kBrandName]],
+                                        [[objectList objectForKey:kBrandName] urlEncodeUsingEncoding:NSUTF8StringEncoding],
                                         @"ABQIAAAAOtgwyX124IX2Zpe7gGhBsxS3tJNgUZ1nThh1KEATL8UWMaiosxQ7wZ2BhjWP4DLhPcIryslC442YvA"];
     
         [http sendAsyncGetRequestWithURL:[NSURL URLWithString:urlString] 

@@ -14,6 +14,8 @@
 #import "Constants.h"
 #import "FlurryAPI.h"
 
+#import "NSString+URLEncoding.h"
+
 @implementation SpiritListViewController
 
 @synthesize category;
@@ -25,7 +27,8 @@
     indexed = YES;
     
     if (self.category != nil && self.storeId != 0) {
-        NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/store/%d/spirits?category=%@", storeId, [Constants urlencode:category]];
+        NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/store/%d/spirits?category=%@", 
+                           storeId, [category urlEncodeUsingEncoding:NSUTF8StringEncoding]];
         self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         self.title = category;        
         
@@ -34,7 +37,8 @@
         [FlurryAPI logEvent:@"StoreInventoryView" withParameters:params];
 #endif
     } else if (self.category != nil) {
-        NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?category=%@", [Constants urlencode:category]];
+        NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?category=%@", 
+                           [category urlEncodeUsingEncoding:NSUTF8StringEncoding]];
         self.feedURLString = query;
         self.title = category;
      
@@ -43,7 +47,8 @@
         [FlurryAPI logEvent:@"SpiritsView" withParameters:params];
 #endif        
     } else if (self.brandName != nil) {
-        NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?name=%@", [Constants urlencode:brandName]];
+        NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?name=%@", 
+                           [brandName urlEncodeUsingEncoding:NSUTF8StringEncoding]];
         self.feedURLString = query;
         self.title = brandName;
       
