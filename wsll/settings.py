@@ -1,10 +1,11 @@
 # Django settings for pepperstep project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
+     ('Rob LaRubbio', 'rob@pugdogdev.com'),
 )
 
 MANAGERS = ADMINS
@@ -40,7 +41,7 @@ SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = True
+USE_I18N = False
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
@@ -78,6 +79,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    "/home/rob/LiquorLocator/wsll/templates",
     "/home/rob/projects/WashingtonStateLiquorLocator/wsll/templates",
 )
 

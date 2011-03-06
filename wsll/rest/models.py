@@ -13,11 +13,16 @@ class Spirit(models.Model):
     class_h_price = models.DecimalField(max_digits=10, decimal_places=2)
     merchandising_note = models.TextField()
     size = models.DecimalField(max_digits=5, decimal_places=3)
+    size_name = models.CharField(max_length=25)
     case_price = models.DecimalField(max_digits=10, decimal_places=2)
     liter_cost = models.DecimalField(max_digits=10, decimal_places=2)
     proof = models.IntegerField()
     on_sale = models.BooleanField()
     closeout = models.BooleanField()
+    new_item = models.BooleanField()
+    one_time_only = models.BooleanField()
+    gift_item = models.BooleanField()
+    part_case = models.BooleanField()
 
     def __unicode__(self):
         return "<Spirit: %s '%s'>" % (self.id, self.brand_name)
@@ -95,7 +100,7 @@ class Store(models.Model):
     def __unicode__(self):
         return "<Store: %d, '%s'>" % (self.id, self.city)
 
-    def dict(self, children=False):
+    def dict(self, children=False, hoursByDay=False):
         ret = self.__dict__.copy()
         del ret['_state']
         del ret['lat_rad']
@@ -137,7 +142,7 @@ class Store(models.Model):
 
                 # If we are in sep. but after the sat of the week of the 15th
                 if today.month == 9:
-                    if today.day > upper_day:
+                    if today.day > end_day:
                         in_summer_hours = False
 
             if in_summer_hours:
@@ -149,11 +154,71 @@ class Store(models.Model):
             else:
                 _hours = self.hours.all()
 
-
             ret['hours'] = []
-            for h in _hours:
-                ret['hours'].append(h.dict())
+            if hoursByDay:
+                for d in ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]:
+                    _days = [days for days in _hours if d == days.start_day]
+                    if len(_days) > 0:
+                        ret['hours'].append(_days[0].dict())
+                    else:
+                        ret['hours'].append({'start_day': d,
+                                             'end_day': d,
+                                             'store_id': self.id, 
+                                             'close': None, 'open' : None})
+            else:
+                # We need to rebuild the old style of hours where
+                # consecutive days with the same hours are rolled up
+                startDay = "Mon"
+                endDay = "Mon"
+                cur = [days for days in _hours if 'Mon' == days.start_day][0].dict()
 
+                for d in ["Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]:
+
+                    _days = [days for days in _hours if d == days.start_day]
+                    if len(_days) > 0:
+                        day = _days[0].dict()
+
+                        if cur['open'] == day['open'] and cur['close'] == day['close']:
+                            endDay = d
+                        else:
+                            # Todays hours are different from yesterdays so 
+                            # output the previous hours and set variables
+                            ret['hours'].append({'start_day': startDay, 
+                                                 'store_id': cur['store_id'], 
+                                                 'end_day': endDay, 
+                                                 'close': cur['close'],
+                                                 'open': cur['open']})
+                            startDay = d
+                            endDay = d
+
+                        cur = day
+
+                    else:
+                        # The day I'm looking for isn't in the hash
+                        ret['hours'].append({'start_day': startDay, 
+                                             'store_id': cur['store_id'], 
+                                             'end_day': endDay, 
+                                             'close': cur['close'], 
+                                             'open': cur['open']})
+
+                        # If I am on Sun then don't reset the data
+                        # The old system just left Sun off if the store was
+                        # closed
+                        if 'Sun' != d:
+                            startDay = d
+                            endDay = d
+                            cur = {'store_id': cur['store_id'], 
+                                   'close': None, 'open' : None}
+
+                    # If this is Sun we need to output since we are at the 
+                    # end of the week
+                    if 'Sun' == d and startDay == endDay and 'Sun' == startDay:
+                        ret['hours'].append({'start_day': startDay, 
+                                             'store_id': cur['store_id'], 
+                                             'end_day': endDay, 
+                                             'close': cur['close'], 
+                                             'open': cur['open']})
+               
 
             ret['contacts'] = []
             for c in self.contacts.all():
@@ -161,8 +226,8 @@ class Store(models.Model):
 
         return ret
 
-    def json(self):
-        ret = self.dict(children=True)
+    def json(self, hoursByDay=False):
+        ret = self.dict(children=True, hoursByDay=hoursByDay)
 
         return simplejson.dumps(ret)
 

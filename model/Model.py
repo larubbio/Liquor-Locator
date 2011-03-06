@@ -128,11 +128,16 @@ class Spirit(Base):
     class_h_price = Column(Numeric('10,2'))
     merchandising_note = Column(UnicodeText)
     size = Column(Numeric('6,4'))
+    size_name = Column(String(25))
     case_price = Column(Numeric('10,2'))
     liter_cost = Column(Numeric('10,2'))
     proof = Column(Integer)
     on_sale = Column(Boolean)
     closeout = Column(Boolean)
+    new_item = Column(Boolean)
+    one_time_only = Column(Boolean)
+    gift_item = Column(Boolean)
+    part_case = Column(Boolean)
 
     def __init__(self, id):
         self.id = id
