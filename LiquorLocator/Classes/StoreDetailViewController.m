@@ -171,7 +171,7 @@
         dayHoursLabel.font = [UIFont boldSystemFontOfSize:12];
         
         openClosed.text = @"CLOSED";
-        if (open != nil && close != nil) {
+        if (![open isEqual:[NSNull null]] && ![close isEqual:[NSNull null]]) {
             NSArray *openItems = [open componentsSeparatedByString:@":"];
             NSInteger openTime = ([[openItems objectAtIndex:0] integerValue] * 100) + [[openItems objectAtIndex:1] integerValue];
     
@@ -259,7 +259,7 @@
                               weekday:weekday today:4 curTime:curTime]; 
         }
 
-        if ([startDay isEqualToString:@"Thur"]) {
+        if ([startDay isEqualToString:@"Thu"]) {
             [self processLablesForDay:thurs dayHoursLabel:thursHours 
                             storeOpen:open storeClose:close
                               weekday:weekday today:5 curTime:curTime]; 
