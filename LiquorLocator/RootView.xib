@@ -2,17 +2,17 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">784</int>
-		<string key="IBDocument.SystemVersion">10F569</string>
+		<string key="IBDocument.SystemVersion">10J567</string>
 		<string key="IBDocument.InterfaceBuilderVersion">788</string>
-		<string key="IBDocument.AppKitVersion">1038.29</string>
-		<string key="IBDocument.HIToolboxVersion">461.00</string>
+		<string key="IBDocument.AppKitVersion">1038.35</string>
+		<string key="IBDocument.HIToolboxVersion">462.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">117</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="17"/>
+			<integer value="30"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -91,15 +91,6 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUITabBar" ref="944349941"/>
 							</object>
-							<object class="IBUITabBarItem" id="830009061">
-								<string key="IBUITitle">Campaign</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">campaign.png</string>
-								</object>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<reference key="IBUITabBar" ref="944349941"/>
-							</object>
 						</object>
 					</object>
 				</object>
@@ -155,14 +146,6 @@
 						<reference key="destination" ref="173797320"/>
 					</object>
 					<int key="connectionID">36</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">campaignTabBarItem</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="830009061"/>
-					</object>
-					<int key="connectionID">37</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -223,18 +206,12 @@
 						<reference key="object" ref="944349941"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="830009061"/>
 							<reference ref="748909250"/>
 							<reference ref="135511110"/>
 							<reference ref="173797320"/>
 							<reference ref="66164437"/>
 						</object>
 						<reference key="parent" ref="427046030"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">24</int>
-						<reference key="object" ref="830009061"/>
-						<reference key="parent" ref="944349941"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">20</int>
@@ -327,7 +304,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>campaignTabBarItem</string>
 							<string>categoriesTabBarItem</string>
 							<string>localDistillersTabBarItem</string>
 							<string>spiritsTabBarItem</string>
@@ -336,7 +312,6 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UITabBarItem</string>
 							<string>UITabBarItem</string>
 							<string>UITabBarItem</string>
 							<string>UITabBarItem</string>
@@ -348,7 +323,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>campaignTabBarItem</string>
 							<string>categoriesTabBarItem</string>
 							<string>localDistillersTabBarItem</string>
 							<string>spiritsTabBarItem</string>
@@ -357,10 +331,6 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">campaignTabBarItem</string>
-								<string key="candidateClassName">UITabBarItem</string>
-							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">categoriesTabBarItem</string>
 								<string key="candidateClassName">UITabBarItem</string>
@@ -601,7 +571,6 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>campaign.png</string>
 				<string>categories.png</string>
 				<string>local.png</string>
 				<string>search.png</string>
@@ -609,7 +578,6 @@
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{48, 32}</string>
 				<string>{48, 32}</string>
 				<string>{48, 32}</string>
 				<string>{48, 32}</string>

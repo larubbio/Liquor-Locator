@@ -32,6 +32,7 @@
     MKCoordinateSpan span = {0.5, 0.5};
     region.span = span;
     map.region = region;   
+    map.showsUserLocation = YES;
     
     NSString *title = kMap;
     if (table.hidden) {
@@ -47,10 +48,6 @@
 
     [barBtn release];
 }    
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];

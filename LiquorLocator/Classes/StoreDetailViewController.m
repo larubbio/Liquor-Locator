@@ -28,28 +28,30 @@
 @synthesize districtManagerName;                                                               
 @synthesize districtManagerPhone; 
 
-@synthesize firstHours;
-@synthesize day1;
-@synthesize hours1;
+@synthesize monHours;
+@synthesize tueHours;
+@synthesize wedHours;
+@synthesize thursHours;
+@synthesize friHours;
+@synthesize satHours;
+@synthesize sunHours;
 
-@synthesize secondHours;
-@synthesize day2;
-@synthesize hours2;
+@synthesize mon;
+@synthesize tue;
+@synthesize wed;
+@synthesize thurs;
+@synthesize fri;
+@synthesize sat;
+@synthesize sun;
 
-@synthesize thirdHours;
-@synthesize day3;
-@synthesize hours3;
-
-@synthesize fourthHours;
-@synthesize day4;
-@synthesize hours4;
+@synthesize openClosed;
 
 @synthesize mask;
 @synthesize districtManagerView;
 @synthesize map;
 
 - (void)viewDidAppear:(BOOL)animated {
-    self.feedURLString = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/store/%d", storeId];
+    self.feedURLString = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/store/%d?hoursByDay=1", storeId];
     
     [super viewDidAppear:animated];
 }
@@ -64,6 +66,16 @@
     [districtManagerName release];                                                                 
     [districtManagerPhone release];                                                                
 
+    [monHours release];
+    [tueHours release];
+    [wedHours release];
+    [thursHours release];
+    [friHours release];
+    [satHours release];
+    [sunHours release];
+    
+    [openClosed release];
+    
     [map release];
     [super dealloc];
 }
@@ -144,7 +156,35 @@
     [controller release];
 }
 
+- (void)processLablesForDay:(UILabel *)dayLabel dayHoursLabel:(UILabel *)dayHoursLabel 
+                  storeOpen:(NSString *)open storeClose:(NSString *)close
+                    weekday:(NSInteger)weekday today:(NSInteger)today curTime:(NSInteger) curTime {
+
+    if ( [open isEqual: [NSNull null]] ) {
+        dayHoursLabel.text = @"Closed";
+    } else {
+        dayHoursLabel.text = [NSString stringWithFormat:@"%@ - %@", open, close];
+    }
     
+    if (weekday == today) {    
+        dayLabel.font = [UIFont boldSystemFontOfSize:12];
+        dayHoursLabel.font = [UIFont boldSystemFontOfSize:12];
+        
+        openClosed.text = @"CLOSED";
+        if (open != nil && close != nil) {
+            NSArray *openItems = [open componentsSeparatedByString:@":"];
+            NSInteger openTime = ([[openItems objectAtIndex:0] integerValue] * 100) + [[openItems objectAtIndex:1] integerValue];
+    
+            NSArray *closeItems = [close componentsSeparatedByString:@":"];
+            NSInteger closingTime = (([[closeItems objectAtIndex:0] integerValue] + 12) * 100) + [[closeItems objectAtIndex:1] integerValue];
+    
+            if (curTime > openTime && curTime < closingTime) {  
+                openClosed.text = @"OPEN";
+            }
+        }
+    }
+}
+
 #pragma mark -
 #pragma mark JSON Parsing Method
 - (void)jsonParsingComplete:(id)objects {
@@ -173,58 +213,69 @@
             storeManagerName.text = name;
             storeManagerPhone.text = number;
         } else {
-            districtManagerName.text = name;
-            districtManagerPhone.text = number;
-            districtManagerView.hidden = NO;
+            if (![name isEqualToString:@""]) {
+                districtManagerName.text = name;
+                districtManagerPhone.text = number;
+                districtManagerView.hidden = NO;
+            }
         }
     }
     
+    // Get the current day (Sun == 1)
+    NSCalendar *calendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+    NSCalendarUnit unitFlags = NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:[NSDate date]];
+    NSInteger weekday = [comps weekday];
+    NSInteger curTime = ([comps hour] * 100) + [comps minute];    
+    
     // Handle hours
-    int count = 0;
     for (NSDictionary *hours in [self.objectList objectForKey:kHours]) {
         NSString *startDay = [hours objectForKey:kStartDay];
-        NSString *endDay = [hours objectForKey:kEndDay];
         NSString *open = [hours objectForKey:kOpen];
         NSString *close = [hours objectForKey:kClose];
+
         
-        if (count == 0) {
-            if ([startDay isEqualToString:endDay]) {
-                day1.text = startDay;
-            } else {
-                day1.text = [NSString stringWithFormat:@"%@ - %@", startDay, endDay];
-            }
-            hours1.text = [NSString stringWithFormat:@"%@ - %@", open, close];
-            firstHours.hidden = NO;
-            
-        } else if (count == 1) {
-            if ([startDay isEqualToString:endDay]) {
-                day2.text = startDay;
-            } else {    
-                day2.text = [NSString stringWithFormat:@"%@ - %@", startDay, endDay];
-            }            
-            hours2.text = [NSString stringWithFormat:@"%@ - %@", open, close];
-            secondHours.hidden = NO;
-
-        } else if (count == 2) {
-            if ([startDay isEqualToString:endDay]) {
-                day3.text = startDay;
-            } else {
-                day3.text = [NSString stringWithFormat:@"%@ - %@", startDay, endDay];
-            }            
-            hours3.text = [NSString stringWithFormat:@"%@ - %@", open, close];
-            thirdHours.hidden = NO;
-
-        } else if (count == 3) {
-            if ([startDay isEqualToString:endDay]) {
-                day4.text = startDay;
-            } else {
-                day4.text = [NSString stringWithFormat:@"%@ - %@", startDay, endDay];
-            }            
-            hours4.text = [NSString stringWithFormat:@"%@ - %@", open, close];
-            fourthHours.hidden = NO;
+        if ([startDay isEqualToString:@"Sun"]) {
+            [self processLablesForDay:sun dayHoursLabel:sunHours 
+                            storeOpen:open storeClose:close
+                              weekday:weekday today:1 curTime:curTime]; 
         }
         
-        count = count + 1;
+        if ([startDay isEqualToString:@"Mon"]) {
+            [self processLablesForDay:mon dayHoursLabel:monHours 
+                            storeOpen:open storeClose:close
+                              weekday:weekday today:2 curTime:curTime]; 
+        }
+        
+        if ([startDay isEqualToString:@"Tue"]) {
+            [self processLablesForDay:tue dayHoursLabel:tueHours 
+                            storeOpen:open storeClose:close
+                              weekday:weekday today:3 curTime:curTime]; 
+        }
+        
+        if ([startDay isEqualToString:@"Wed"]) {
+            [self processLablesForDay:wed dayHoursLabel:wedHours
+                            storeOpen:open storeClose:close
+                              weekday:weekday today:4 curTime:curTime]; 
+        }
+
+        if ([startDay isEqualToString:@"Thur"]) {
+            [self processLablesForDay:thurs dayHoursLabel:thursHours 
+                            storeOpen:open storeClose:close
+                              weekday:weekday today:5 curTime:curTime]; 
+        }
+        
+        if ([startDay isEqualToString:@"Fri"]) {
+            [self processLablesForDay:fri dayHoursLabel:friHours 
+                            storeOpen:open storeClose:close
+                              weekday:weekday today:6 curTime:curTime]; 
+        }
+        
+        if ([startDay isEqualToString:@"Sat"]) {
+            [self processLablesForDay:sat dayHoursLabel:satHours 
+                            storeOpen:open storeClose:close
+                              weekday:weekday today:7 curTime:curTime]; 
+        }
     }
     
     // Add data to view outlets

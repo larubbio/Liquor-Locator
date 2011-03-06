@@ -11,7 +11,6 @@
 #import "StoresViewController.h"
 #import "SearchViewController.h"
 #import "LocalDistillersViewController.h"
-#import "CampaignViewController.h"
 
 #import "Constants.h"
 #import "FlurryAPI.h"
@@ -27,7 +26,6 @@
 @synthesize storesTabBarItem;
 @synthesize	spiritsTabBarItem;
 @synthesize localDistillersTabBarItem;
-@synthesize campaignTabBarItem;
 @synthesize selectedTabBarItem;
 @synthesize selectedViewController;
 
@@ -47,9 +45,8 @@
     StoresViewController *storesTabViewController = [[StoresViewController alloc] initWithNibName:@"StoresView" bundle:nil];
     SearchViewController *searchTabViewController = [[SearchViewController alloc] initWithNibName:@"SearchView" bundle:nil];
     LocalDistillersViewController *localDistillersTabViewController = [[LocalDistillersViewController alloc] initWithNibName:@"LocalDistillersView" bundle:nil];
-    CampaignViewController *campaignTabViewController = [[CampaignViewController alloc] initWithNibName:@"CampaignView" bundle:nil];
 		
-    NSArray *array = [[NSArray alloc] initWithObjects:categoriesTabViewController, storesTabViewController, searchTabViewController, localDistillersTabViewController, campaignTabViewController, nil];
+    NSArray *array = [[NSArray alloc] initWithObjects:categoriesTabViewController, storesTabViewController, searchTabViewController, localDistillersTabViewController, nil];
     self.viewControllers = array;
 		
 	[categoriesTabViewController viewWillAppear:YES];
@@ -64,7 +61,6 @@
     [storesTabViewController release];
     [searchTabViewController release];
     [localDistillersTabViewController release];
-    [campaignTabViewController release];
     
     [super viewDidLoad];
 }
@@ -83,7 +79,6 @@
     [storesTabBarItem release];
     [spiritsTabBarItem release];
     [localDistillersTabBarItem release];
-    [campaignTabBarItem release];
     [selectedTabBarItem release];
     [viewControllers release];
     [selectedViewController release];
@@ -129,9 +124,6 @@
     } else if (item == localDistillersTabBarItem) {
 		controller = [viewControllers objectAtIndex:3];
         self.title = kLocalDistillers;
-    } else if (item == campaignTabBarItem) {
-		controller = [viewControllers objectAtIndex:4];
-        self.title = kCampaign;
     }
     
     [controller viewWillAppear:YES];

@@ -10,6 +10,7 @@
 
 #import "Constants.h"
 #import "FlurryAPI.h"
+#import "NSString+URLEncoding.h"
 
 @implementation SearchViewController
 
@@ -81,7 +82,10 @@
         self.JSONConnection = nil;
     }
     
-    NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?search=%@", [Constants urlencode:searchTerm]];
+//    NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?search=%@", [Constants urlencode:searchTerm]];
+    
+    NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirits?search=%@",
+                       [searchTerm urlEncodeUsingEncoding:NSUTF8StringEncoding]];
     self.feedURLString = query;
 
     // Start the status bar network activity indicator. We'll turn it off when the connection finishes or experiences an error.

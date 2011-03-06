@@ -12,10 +12,16 @@
 
 #import "Constants.h"
 #import "FlurryAPI.h"
+#import "SBJSON.h"
+
+#import "NSString+URLEncoding.h"
 
 @implementation SpiritDetailViewController
 
 @synthesize spiritId;
+@synthesize image;
+@synthesize imageSrcBtn;
+@synthesize imageSrcUrl;
 
 @synthesize spiritName;
 @synthesize onSale;
@@ -23,22 +29,14 @@
 @synthesize sizeBtn;
 @synthesize viewStoresBtn;
 
+- (void)viewDidLoad {
+    http = [[HTTPUtil alloc] init];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     self.feedURLString = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirit/%@", spiritId];
     
     [super viewDidAppear:animated];
-}
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
 }
 
 - (void)dealloc {
@@ -48,6 +46,10 @@
     [priceBtn release];
     [sizeBtn release];
     [viewStoresBtn release];
+    [http release];
+    [image release];
+    [imageSrcBtn release];
+    [imageSrcUrl release];
     [super dealloc];
 }
 
@@ -62,6 +64,12 @@
     [controller release];
 }
 
+- (void) viewImageSrc:(id)sender {
+    if (imageSrcUrl != nil) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:imageSrcUrl]];
+    }
+}
+
 #pragma mark -
 #pragma mark JSON Parsing Method
 - (void)jsonParsingComplete:(id)objects {
@@ -71,6 +79,19 @@
     NSDictionary *searchParameters= [NSDictionary dictionaryWithObjectsAndKeys:[self.objectList objectForKey:kBrandName], @"Spirit", nil]; 
     [FlurryAPI logEvent:@"SpiritDetail" withParameters:searchParameters];
 #endif
+    
+    if ([self.image loadedImage] == nil) {
+        NSString *urlString = [NSString stringWithFormat:@"http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%@&key=%@", 
+                                        [[objectList objectForKey:kBrandName] urlEncodeUsingEncoding:NSUTF8StringEncoding],
+                                        @"ABQIAAAAOtgwyX124IX2Zpe7gGhBsxS3tJNgUZ1nThh1KEATL8UWMaiosxQ7wZ2BhjWP4DLhPcIryslC442YvA"];
+    
+        [http sendAsyncGetRequestWithURL:[NSURL URLWithString:urlString] 
+                              parameters:nil 
+                        additionalHeaderFields:nil
+                         timeoutInterval:15
+                                      to:self 
+                                selector:@selector(googleImageSearchComplete:)];
+    }
     
     NSString *priceTitle = [NSString stringWithFormat:@"Cost: $%@", [objectList objectForKey:kPrice]];
     NSString *sizeTitle = [NSString stringWithFormat:@"Size: %@ Liters", [objectList objectForKey:kSize]];
@@ -99,6 +120,45 @@
     viewStoresBtn.hidden = NO;
     
     self.title = [objectList objectForKey:kBrandName];
+}
+
+- (void)googleImageSearchComplete:(NSDictionary*)theResponse
+{
+	int statusCode = [[theResponse objectForKey:kHTTP_ASYNC_RESULT_CODE] intValue];
+	if(statusCode == 200)
+	{
+        NSString *jsonString = [[NSString alloc] initWithData:(NSData*)[theResponse objectForKey:kHTTP_ASYNC_RESULT_DATA] 
+                                                 encoding:NSUTF8StringEncoding];
+        
+        SBJSON *parser = [[SBJSON alloc] init];
+        
+        // parse the JSON response into an object
+        NSError *error;
+        NSDictionary *objects = (NSDictionary *)[parser objectWithString:jsonString error:&error];
+        NSDictionary *responseData = [objects objectForKey:@"responseData"];
+        
+        if (responseData) {
+            NSArray *results = [responseData objectForKey:@"results"];
+            
+            if ([results count] > 0) {
+                NSDictionary *firstResult = [results objectAtIndex:0];
+                NSString *url = [firstResult objectForKey:@"url"];
+        
+                [image loadImageWithURLString:url parameters:nil 
+                       additionalHeaderFields:nil timeoutInterval:15];
+                
+                NSString *imgSrcTitle = [NSString stringWithFormat:@"image: %@", [firstResult objectForKey:@"visibleUrl"]];
+                
+                [imageSrcBtn setTitle:imgSrcTitle forState:UIControlStateNormal];
+                imageSrcBtn.hidden = NO;        
+                
+                self.imageSrcUrl = [firstResult objectForKey:@"originalContextUrl"];
+            }
+        }
+
+        [parser release];
+        [jsonString release];
+	}
 }
 
 @end

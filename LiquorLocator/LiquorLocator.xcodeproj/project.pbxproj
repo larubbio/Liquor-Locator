@@ -22,8 +22,13 @@
 		4628BF0B1202849200ECE4BE /* CategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF091202849200ECE4BE /* CategoriesView.xib */; };
 		4628BF0F120284A500ECE4BE /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4628BF0D120284A500ECE4BE /* SearchViewController.m */; };
 		4628BF10120284A500ECE4BE /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF0E120284A500ECE4BE /* SearchView.xib */; };
-		4628BF14120284BD00ECE4BE /* CampaignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4628BF12120284BD00ECE4BE /* CampaignViewController.m */; };
-		4628BF15120284BD00ECE4BE /* CampaignView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF13120284BD00ECE4BE /* CampaignView.xib */; };
+		463ECCC7131E133800372C24 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 463ECCC6131E133800372C24 /* NSString+URLEncoding.m */; };
+		4650CECC1241BD8E00C7C1EF /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4650CEC91241BD8E00C7C1EF /* AsyncImageView.m */; };
+		4650CECD1241BD8E00C7C1EF /* HTTPUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4650CECB1241BD8E00C7C1EF /* HTTPUtil.m */; };
+		4650CED31241BE1600C7C1EF /* HTTPParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 4650CED01241BE1600C7C1EF /* HTTPParam.m */; };
+		4650CED41241BE1600C7C1EF /* HTTPParamList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4650CED21241BE1600C7C1EF /* HTTPParamList.m */; };
+		4650CED91241BE6000C7C1EF /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4650CED81241BE6000C7C1EF /* NSString+Extension.m */; };
+		4650CEDE1241BEE600C7C1EF /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 4650CEDC1241BEE600C7C1EF /* Base64Transcoder.c */; };
 		4651F1121205099800A2079B /* JSONLoaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4651F1111205099800A2079B /* JSONLoaderController.m */; };
 		4651F3061205D30400A2079B /* SpiritDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4651F3051205D30400A2079B /* SpiritDetailViewController.m */; };
 		4651F3081205D34900A2079B /* SpiritDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4651F3071205D34900A2079B /* SpiritDetailView.xib */; };
@@ -31,6 +36,7 @@
 		4671108D120DAE5300B250F9 /* StoreList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4671108B120DAE5300B250F9 /* StoreList.m */; };
 		46711123120E02EC00B250F9 /* SpiritList.m in Sources */ = {isa = PBXBuildFile; fileRef = 46711122120E02EC00B250F9 /* SpiritList.m */; };
 		4671147D1210677000B250F9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4671147C1210677000B250F9 /* Constants.m */; };
+		4672FAE51310838700E2549B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4672FAE41310838700E2549B /* Default.png */; };
 		469B5F35120881E700A7E5DE /* StoreAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 469B5F34120881E700A7E5DE /* StoreAnnotation.m */; };
 		469B5FD11208A92900A7E5DE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 469B5FD01208A92800A7E5DE /* CoreLocation.framework */; };
 		469B60961209205C00A7E5DE /* StoreListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 469B60941209205C00A7E5DE /* StoreListViewController.m */; };
@@ -41,11 +47,11 @@
 		46A6AF85122383A900038466 /* DistillerAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46A6AF84122383A900038466 /* DistillerAddressCell.xib */; };
 		46A6AF9512243E5A00038466 /* BlurbViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A6AF9212243E5A00038466 /* BlurbViewCell.m */; };
 		46A6AF9612243E5A00038466 /* DistillerAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A6AF9412243E5A00038466 /* DistillerAddressCell.m */; };
+		46B52659123871B200FB3E10 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 46B52658123871B200FB3E10 /* Icon.png */; };
 		46CABEB71228394400B8D751 /* CategoriesList.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CABEB61228394400B8D751 /* CategoriesList.m */; };
 		46CABED612283AB500B8D751 /* StoreCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CABED412283AB500B8D751 /* StoreCategoriesViewController.m */; };
 		46CABED712283AB500B8D751 /* StoreCategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46CABED512283AB500B8D751 /* StoreCategoriesView.xib */; };
 		46CABF25122867AB00B8D751 /* libFlurryWithLocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CABF24122867AB00B8D751 /* libFlurryWithLocation.a */; };
-		46CAC0F5122F530B00B8D751 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 46CAC0F4122F530B00B8D751 /* Default.png */; };
 		46CAC0FB122F531E00B8D751 /* campaign.png in Resources */ = {isa = PBXBuildFile; fileRef = 46CAC0F6122F531E00B8D751 /* campaign.png */; };
 		46CAC0FC122F531E00B8D751 /* categories.png in Resources */ = {isa = PBXBuildFile; fileRef = 46CAC0F7122F531E00B8D751 /* categories.png */; };
 		46CAC0FD122F531E00B8D751 /* local.png in Resources */ = {isa = PBXBuildFile; fileRef = 46CAC0F8122F531E00B8D751 /* local.png */; };
@@ -89,9 +95,21 @@
 		4628BF0C120284A500ECE4BE /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		4628BF0D120284A500ECE4BE /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		4628BF0E120284A500ECE4BE /* SearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchView.xib; path = Classes/SearchView.xib; sourceTree = "<group>"; };
-		4628BF11120284BD00ECE4BE /* CampaignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CampaignViewController.h; sourceTree = "<group>"; };
-		4628BF12120284BD00ECE4BE /* CampaignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CampaignViewController.m; sourceTree = "<group>"; };
-		4628BF13120284BD00ECE4BE /* CampaignView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CampaignView.xib; path = Classes/CampaignView.xib; sourceTree = "<group>"; };
+		463ECCC5131E133800372C24 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		463ECCC6131E133800372C24 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
+		4650CEC81241BD8E00C7C1EF /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
+		4650CEC91241BD8E00C7C1EF /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
+		4650CECA1241BD8E00C7C1EF /* HTTPUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPUtil.h; sourceTree = "<group>"; };
+		4650CECB1241BD8E00C7C1EF /* HTTPUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPUtil.m; sourceTree = "<group>"; };
+		4650CECE1241BDBD00C7C1EF /* Logging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logging.h; sourceTree = "<group>"; };
+		4650CECF1241BE1600C7C1EF /* HTTPParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPParam.h; sourceTree = "<group>"; };
+		4650CED01241BE1600C7C1EF /* HTTPParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPParam.m; sourceTree = "<group>"; };
+		4650CED11241BE1600C7C1EF /* HTTPParamList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPParamList.h; sourceTree = "<group>"; };
+		4650CED21241BE1600C7C1EF /* HTTPParamList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPParamList.m; sourceTree = "<group>"; };
+		4650CED71241BE6000C7C1EF /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		4650CED81241BE6000C7C1EF /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		4650CEDC1241BEE600C7C1EF /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
+		4650CEDD1241BEE600C7C1EF /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
 		4651F1101205099800A2079B /* JSONLoaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONLoaderController.h; sourceTree = "<group>"; };
 		4651F1111205099800A2079B /* JSONLoaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONLoaderController.m; sourceTree = "<group>"; };
 		4651F3041205D30400A2079B /* SpiritDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpiritDetailViewController.h; sourceTree = "<group>"; };
@@ -105,6 +123,7 @@
 		46711122120E02EC00B250F9 /* SpiritList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpiritList.m; sourceTree = "<group>"; };
 		4671147B1210677000B250F9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		4671147C1210677000B250F9 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		4672FAE41310838700E2549B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		469B5F33120881E700A7E5DE /* StoreAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreAnnotation.h; sourceTree = "<group>"; };
 		469B5F34120881E700A7E5DE /* StoreAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreAnnotation.m; sourceTree = "<group>"; };
 		469B5FD01208A92800A7E5DE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -120,6 +139,7 @@
 		46A6AF9212243E5A00038466 /* BlurbViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlurbViewCell.m; path = Classes/BlurbViewCell.m; sourceTree = "<group>"; };
 		46A6AF9312243E5A00038466 /* DistillerAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DistillerAddressCell.h; path = Classes/DistillerAddressCell.h; sourceTree = "<group>"; };
 		46A6AF9412243E5A00038466 /* DistillerAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DistillerAddressCell.m; path = Classes/DistillerAddressCell.m; sourceTree = "<group>"; };
+		46B52658123871B200FB3E10 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		46CABEB51228394400B8D751 /* CategoriesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesList.h; sourceTree = "<group>"; };
 		46CABEB61228394400B8D751 /* CategoriesList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesList.m; sourceTree = "<group>"; };
 		46CABED312283AB500B8D751 /* StoreCategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreCategoriesViewController.h; sourceTree = "<group>"; };
@@ -128,7 +148,6 @@
 		46CABF22122867AB00B8D751 /* FlurryAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAdDelegate.h; sourceTree = "<group>"; };
 		46CABF23122867AB00B8D751 /* FlurryAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAPI.h; sourceTree = "<group>"; };
 		46CABF24122867AB00B8D751 /* libFlurryWithLocation.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryWithLocation.a; sourceTree = "<group>"; };
-		46CAC0F4122F530B00B8D751 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		46CAC0F6122F531E00B8D751 /* campaign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = campaign.png; sourceTree = "<group>"; };
 		46CAC0F7122F531E00B8D751 /* categories.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = categories.png; sourceTree = "<group>"; };
 		46CAC0F8122F531E00B8D751 /* local.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = local.png; sourceTree = "<group>"; };
@@ -180,6 +199,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4650CEC11241BD6A00C7C1EF /* iphone-lib */,
 				46CABF21122867AB00B8D751 /* FlurryLibWithLocation */,
 				46710EB01209C78200B250F9 /* HUD */,
 				469B5F2A120881B800A7E5DE /* Views */,
@@ -189,6 +209,8 @@
 				1D3623250D0F684500981E51 /* LiquorLocatorAppDelegate.m */,
 				4671147B1210677000B250F9 /* Constants.h */,
 				4671147C1210677000B250F9 /* Constants.m */,
+				463ECCC5131E133800372C24 /* NSString+URLEncoding.h */,
+				463ECCC6131E133800372C24 /* NSString+URLEncoding.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -239,7 +261,6 @@
 				4628BF0E120284A500ECE4BE /* SearchView.xib */,
 				46E649DF1203D11A00AB9328 /* SpiritListView.xib */,
 				4651F3071205D34900A2079B /* SpiritDetailView.xib */,
-				4628BF13120284BD00ECE4BE /* CampaignView.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* LiquorLocator-Info.plist */,
 				46E64864120374B700AB9328 /* RootView.xib */,
@@ -269,8 +290,6 @@
 				46CABED412283AB500B8D751 /* StoreCategoriesViewController.m */,
 				4628BF0C120284A500ECE4BE /* SearchViewController.h */,
 				4628BF0D120284A500ECE4BE /* SearchViewController.m */,
-				4628BF11120284BD00ECE4BE /* CampaignViewController.h */,
-				4628BF12120284BD00ECE4BE /* CampaignViewController.m */,
 				46E649DD1203D11A00AB9328 /* SpiritListViewController.h */,
 				46E649DE1203D11A00AB9328 /* SpiritListViewController.m */,
 				4651F3041205D30400A2079B /* SpiritDetailViewController.h */,
@@ -295,6 +314,26 @@
 				46CABEB61228394400B8D751 /* CategoriesList.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		4650CEC11241BD6A00C7C1EF /* iphone-lib */ = {
+			isa = PBXGroup;
+			children = (
+				4650CEC81241BD8E00C7C1EF /* AsyncImageView.h */,
+				4650CEC91241BD8E00C7C1EF /* AsyncImageView.m */,
+				4650CEDC1241BEE600C7C1EF /* Base64Transcoder.c */,
+				4650CEDD1241BEE600C7C1EF /* Base64Transcoder.h */,
+				4650CECA1241BD8E00C7C1EF /* HTTPUtil.h */,
+				4650CECB1241BD8E00C7C1EF /* HTTPUtil.m */,
+				4650CECF1241BE1600C7C1EF /* HTTPParam.h */,
+				4650CED01241BE1600C7C1EF /* HTTPParam.m */,
+				4650CED11241BE1600C7C1EF /* HTTPParamList.h */,
+				4650CED21241BE1600C7C1EF /* HTTPParamList.m */,
+				4650CED71241BE6000C7C1EF /* NSString+Extension.h */,
+				4650CED81241BE6000C7C1EF /* NSString+Extension.m */,
+				4650CECE1241BDBD00C7C1EF /* Logging.h */,
+			);
+			name = "iphone-lib";
 			sourceTree = "<group>";
 		};
 		46710EB01209C78200B250F9 /* HUD */ = {
@@ -334,12 +373,13 @@
 		46CABFBF122B4BB000B8D751 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4672FAE41310838700E2549B /* Default.png */,
 				46CAC0F6122F531E00B8D751 /* campaign.png */,
 				46CAC0F7122F531E00B8D751 /* categories.png */,
 				46CAC0F8122F531E00B8D751 /* local.png */,
 				46CAC0F9122F531E00B8D751 /* search.png */,
+				46B52658123871B200FB3E10 /* Icon.png */,
 				46CAC0FA122F531E00B8D751 /* stores.png */,
-				46CAC0F4122F530B00B8D751 /* Default.png */,
 				46DB35C8121998CB001C5C4B /* 37x-Checkmark.png */,
 			);
 			name = Images;
@@ -395,7 +435,14 @@
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "LiquorLocator" */;
 			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -414,7 +461,6 @@
 				4628BF061202846900ECE4BE /* StoresView.xib in Resources */,
 				4628BF0B1202849200ECE4BE /* CategoriesView.xib in Resources */,
 				4628BF10120284A500ECE4BE /* SearchView.xib in Resources */,
-				4628BF15120284BD00ECE4BE /* CampaignView.xib in Resources */,
 				46E64865120374B700AB9328 /* RootView.xib in Resources */,
 				46E649E11203D11A00AB9328 /* SpiritListView.xib in Resources */,
 				4651F3081205D34900A2079B /* SpiritDetailView.xib in Resources */,
@@ -426,12 +472,13 @@
 				46A6AF821223834800038466 /* BlurbCell.xib in Resources */,
 				46A6AF85122383A900038466 /* DistillerAddressCell.xib in Resources */,
 				46CABED712283AB500B8D751 /* StoreCategoriesView.xib in Resources */,
-				46CAC0F5122F530B00B8D751 /* Default.png in Resources */,
 				46CAC0FB122F531E00B8D751 /* campaign.png in Resources */,
 				46CAC0FC122F531E00B8D751 /* categories.png in Resources */,
 				46CAC0FD122F531E00B8D751 /* local.png in Resources */,
 				46CAC0FE122F531E00B8D751 /* search.png in Resources */,
 				46CAC0FF122F531E00B8D751 /* stores.png in Resources */,
+				46B52659123871B200FB3E10 /* Icon.png in Resources */,
+				4672FAE51310838700E2549B /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,7 +494,6 @@
 				4628BF051202846900ECE4BE /* StoresViewController.m in Sources */,
 				4628BF0A1202849200ECE4BE /* CategoriesViewController.m in Sources */,
 				4628BF0F120284A500ECE4BE /* SearchViewController.m in Sources */,
-				4628BF14120284BD00ECE4BE /* CampaignViewController.m in Sources */,
 				46E647EA12034DAB00AB9328 /* NSObject+SBJSON.m in Sources */,
 				46E647EB12034DAB00AB9328 /* NSString+SBJSON.m in Sources */,
 				46E647EC12034DAB00AB9328 /* SBJSON.m in Sources */,
@@ -471,6 +517,13 @@
 				46A6AF9612243E5A00038466 /* DistillerAddressCell.m in Sources */,
 				46CABEB71228394400B8D751 /* CategoriesList.m in Sources */,
 				46CABED612283AB500B8D751 /* StoreCategoriesViewController.m in Sources */,
+				4650CECC1241BD8E00C7C1EF /* AsyncImageView.m in Sources */,
+				4650CECD1241BD8E00C7C1EF /* HTTPUtil.m in Sources */,
+				4650CED31241BE1600C7C1EF /* HTTPParam.m in Sources */,
+				4650CED41241BE1600C7C1EF /* HTTPParamList.m in Sources */,
+				4650CED91241BE6000C7C1EF /* NSString+Extension.m in Sources */,
+				4650CEDE1241BEE600C7C1EF /* Base64Transcoder.c in Sources */,
+				463ECCC7131E133800372C24 /* NSString+URLEncoding.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +566,44 @@
 			};
 			name = Release;
 		};
+		46B525F0123854F600FB3E10 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					UIKit,
+					"-weak_library",
+					/usr/lib/libSystem.B.dylib,
+				);
+				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos4.0;
+			};
+			name = Distribution;
+		};
+		46B525F1123854F600FB3E10 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = LiquorLocator_Prefix.pch;
+				INFOPLIST_FILE = "LiquorLocator-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/FlurryLibWithLocation\"",
+					"\"$(SRCROOT)/../../../Downloads/Flurry iPhone SDK v2.7/FlurryLibWithLocation\"",
+				);
+				PRODUCT_NAME = LiquorLocator;
+			};
+			name = Distribution;
+		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -522,9 +613,15 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					UIKit,
+					"-weak_library",
+					/usr/lib/libSystem.B.dylib,
+				);
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "76215F00-0550-41ED-997C-8A8AAC1FCF82";
-				SDKROOT = iphoneos4.0;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C095199F-F06E-4A20-9636-9BE01CDC4980";
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -537,8 +634,14 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					UIKit,
+					"-weak_library",
+					/usr/lib/libSystem.B.dylib,
+				);
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CE20FEC0-6916-4D0B-86EF-59A8FD18F9C7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CC6575BD-4F26-477D-84EB-05C1BA39F0A2";
 				SDKROOT = iphoneos4.0;
 			};
 			name = Release;
@@ -551,6 +654,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				46B525F1123854F600FB3E10 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -560,6 +664,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				46B525F0123854F600FB3E10 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

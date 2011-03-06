@@ -11,6 +11,7 @@
 
 #import "LiquorLocatorAppDelegate.h"
 #import "FlurryAPI.h"
+#import "Constants.h"
 
 @implementation CategoriesViewController
 
@@ -33,9 +34,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger row = [indexPath row];
+    NSDictionary *cat = [objectList objectAtIndex:row];
     
     SpiritListViewController *spiritListController = [[SpiritListViewController alloc] initWithNibName:@"SpiritListView" bundle:nil];
-    spiritListController.category = [objectList objectAtIndex:row];
+    spiritListController.category = [cat objectForKey:kCategory];
     
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate.navController pushViewController:spiritListController animated:YES];

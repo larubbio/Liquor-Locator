@@ -318,35 +318,14 @@
 					<string key="className">LiquorLocatorAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>navController</string>
-							<string>splashView</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UINavigationController</string>
-							<string>UIView</string>
-						</object>
+						<string key="NS.key.0">navController</string>
+						<string key="NS.object.0">UINavigationController</string>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>navController</string>
-							<string>splashView</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">navController</string>
-								<string key="candidateClassName">UINavigationController</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">splashView</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
+						<string key="NS.key.0">navController</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">navController</string>
+							<string key="candidateClassName">UINavigationController</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -385,12 +364,14 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>campaignTabBarItem</string>
 							<string>categoriesTabBarItem</string>
+							<string>localDistillersTabBarItem</string>
 							<string>spiritsTabBarItem</string>
 							<string>storesTabBarItem</string>
 							<string>tabBar</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UITabBarItem</string>
 							<string>UITabBarItem</string>
 							<string>UITabBarItem</string>
 							<string>UITabBarItem</string>
@@ -404,6 +385,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>campaignTabBarItem</string>
 							<string>categoriesTabBarItem</string>
+							<string>localDistillersTabBarItem</string>
 							<string>spiritsTabBarItem</string>
 							<string>storesTabBarItem</string>
 							<string>tabBar</string>
@@ -416,6 +398,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">categoriesTabBarItem</string>
+								<string key="candidateClassName">UITabBarItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">localDistillersTabBarItem</string>
 								<string key="candidateClassName">UITabBarItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -698,7 +684,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">Default.png</string>
-			<string key="NS.object.0">{60, 60}</string>
+			<string key="NS.object.0">{320, 480}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">117</string>
 	</data>

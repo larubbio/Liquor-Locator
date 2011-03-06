@@ -2,17 +2,17 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1024</int>
-		<string key="IBDocument.SystemVersion">10F569</string>
+		<string key="IBDocument.SystemVersion">10J567</string>
 		<string key="IBDocument.InterfaceBuilderVersion">788</string>
-		<string key="IBDocument.AppKitVersion">1038.29</string>
-		<string key="IBDocument.HIToolboxVersion">461.00</string>
+		<string key="IBDocument.AppKitVersion">1038.35</string>
+		<string key="IBDocument.HIToolboxVersion">462.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">117</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="42"/>
+			<integer value="75"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -38,15 +38,13 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="663517480">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<string key="NSFrameSize">{331, 423}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
-					<object class="NSColorSpace" key="NSCustomColorSpace" id="54127911">
+					<object class="NSColorSpace" key="NSCustomColorSpace">
 						<int key="NSID">2</int>
 					</object>
 				</object>
@@ -109,6 +107,27 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText"/>
+						<reference key="IBUITextColor" ref="747418852"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+					</object>
+					<object class="IBUILabel" id="93810579">
+						<reference key="NSNextResponder" ref="678799577"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{117, 71}, {183, 22}}</string>
+						<reference key="NSSuperview" ref="678799577"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText"/>
+						<object class="NSFont" key="IBUIFont" id="595780624">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">18</double>
+							<int key="NSfFlags">16</int>
+						</object>
 						<reference key="IBUITextColor" ref="747418852"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -193,11 +212,7 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Store Manager</string>
-						<object class="NSFont" key="IBUIFont" id="595780624">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">18</double>
-							<int key="NSfFlags">16</int>
-						</object>
+						<reference key="IBUIFont" ref="595780624"/>
 						<reference key="IBUITextColor" ref="747418852"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -414,217 +429,266 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="1046033379"/>
 					</object>
-					<object class="IBUIView" id="512131482">
-						<reference key="NSNextResponder" ref="678799577"/>
-						<int key="NSvFlags">-2147483356</int>
-						<object class="NSMutableArray" key="NSSubviews">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUILabel" id="901954161">
-								<reference key="NSNextResponder" ref="512131482"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{25, 0}, {77, 21}}</string>
-								<reference key="NSSuperview" ref="512131482"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Mon - Fri</string>
-								<reference key="IBUIFont" ref="580546867"/>
-								<reference key="IBUITextColor" ref="747418852"/>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">10</float>
-							</object>
-							<object class="IBUILabel" id="541306632">
-								<reference key="NSNextResponder" ref="512131482"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{103, 0}, {79, 21}}</string>
-								<reference key="NSSuperview" ref="512131482"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">10:00 - 6:30</string>
-								<reference key="IBUIFont" ref="580546867"/>
-								<reference key="IBUITextColor" ref="747418852"/>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">10</float>
-								<int key="IBUITextAlignment">1</int>
-							</object>
-						</object>
-						<string key="NSFrame">{{103, 118}, {193, 25}}</string>
-						<reference key="NSSuperview" ref="678799577"/>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
-							<reference key="NSCustomColorSpace" ref="54127911"/>
-						</object>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-					</object>
-					<object class="IBUIView" id="571036620">
-						<reference key="NSNextResponder" ref="678799577"/>
-						<int key="NSvFlags">-2147483356</int>
-						<object class="NSMutableArray" key="NSSubviews">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUILabel" id="491494382">
-								<reference key="NSNextResponder" ref="571036620"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{25, 0}, {77, 21}}</string>
-								<reference key="NSSuperview" ref="571036620"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Mon - Fri</string>
-								<reference key="IBUIFont" ref="580546867"/>
-								<reference key="IBUITextColor" ref="747418852"/>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">10</float>
-							</object>
-							<object class="IBUILabel" id="190031410">
-								<reference key="NSNextResponder" ref="571036620"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{103, 0}, {79, 21}}</string>
-								<reference key="NSSuperview" ref="571036620"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">10:00 - 6:30</string>
-								<reference key="IBUIFont" ref="580546867"/>
-								<reference key="IBUITextColor" ref="747418852"/>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">10</float>
-								<int key="IBUITextAlignment">1</int>
-							</object>
-						</object>
-						<string key="NSFrame">{{103, 138}, {193, 25}}</string>
-						<reference key="NSSuperview" ref="678799577"/>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
-							<reference key="NSCustomColorSpace" ref="54127911"/>
-						</object>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-					</object>
-					<object class="IBUIView" id="285035944">
-						<reference key="NSNextResponder" ref="678799577"/>
-						<int key="NSvFlags">-2147483356</int>
-						<object class="NSMutableArray" key="NSSubviews">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUILabel" id="527074731">
-								<reference key="NSNextResponder" ref="285035944"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{25, 0}, {77, 21}}</string>
-								<reference key="NSSuperview" ref="285035944"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Mon - Fri</string>
-								<reference key="IBUIFont" ref="580546867"/>
-								<reference key="IBUITextColor" ref="747418852"/>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">10</float>
-							</object>
-							<object class="IBUILabel" id="1007792261">
-								<reference key="NSNextResponder" ref="285035944"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{103, 0}, {79, 21}}</string>
-								<reference key="NSSuperview" ref="285035944"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">10:00 - 6:30</string>
-								<reference key="IBUIFont" ref="580546867"/>
-								<reference key="IBUITextColor" ref="747418852"/>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">10</float>
-								<int key="IBUITextAlignment">1</int>
-							</object>
-						</object>
-						<string key="NSFrame">{{103, 156}, {193, 25}}</string>
-						<reference key="NSSuperview" ref="678799577"/>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
-							<reference key="NSCustomColorSpace" ref="54127911"/>
-						</object>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-					</object>
-					<object class="IBUIView" id="261193724">
-						<reference key="NSNextResponder" ref="678799577"/>
-						<int key="NSvFlags">-2147483356</int>
-						<object class="NSMutableArray" key="NSSubviews">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUILabel" id="590023830">
-								<reference key="NSNextResponder" ref="261193724"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{25, 0}, {77, 21}}</string>
-								<reference key="NSSuperview" ref="261193724"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Mon - Fri</string>
-								<reference key="IBUIFont" ref="580546867"/>
-								<reference key="IBUITextColor" ref="747418852"/>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">10</float>
-							</object>
-							<object class="IBUILabel" id="119359184">
-								<reference key="NSNextResponder" ref="261193724"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{103, 0}, {79, 21}}</string>
-								<reference key="NSSuperview" ref="261193724"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">10:00 - 6:30</string>
-								<reference key="IBUIFont" ref="580546867"/>
-								<reference key="IBUITextColor" ref="747418852"/>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">10</float>
-								<int key="IBUITextAlignment">1</int>
-							</object>
-						</object>
-						<string key="NSFrame">{{103, 176}, {193, 25}}</string>
-						<reference key="NSSuperview" ref="678799577"/>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
-							<reference key="NSCustomColorSpace" ref="54127911"/>
-						</object>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-					</object>
-					<object class="IBUILabel" id="163366397">
+					<object class="IBUILabel" id="901954161">
 						<reference key="NSNextResponder" ref="678799577"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{52, 118}, {51, 22}}</string>
+						<string key="NSFrame">{{26, 143}, {77, 15}}</string>
 						<reference key="NSSuperview" ref="678799577"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">hours</string>
+						<string key="IBUIText">Mon</string>
+						<object class="NSFont" key="IBUIFont" id="829345685">
+							<string key="NSName">Helvetica</string>
+							<double key="NSSize">12</double>
+							<int key="NSfFlags">16</int>
+						</object>
+						<reference key="IBUITextColor" ref="747418852"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+					</object>
+					<object class="IBUILabel" id="541306632">
+						<reference key="NSNextResponder" ref="678799577"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{71, 140}, {79, 21}}</string>
+						<reference key="NSSuperview" ref="678799577"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">10:00 - 6:30</string>
+						<reference key="IBUIFont" ref="829345685"/>
+						<reference key="IBUITextColor" ref="747418852"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUITextAlignment">1</int>
+					</object>
+					<object class="IBUILabel" id="491494382">
+						<reference key="NSNextResponder" ref="678799577"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{26, 160}, {77, 15}}</string>
+						<reference key="NSSuperview" ref="678799577"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">Tue</string>
+						<reference key="IBUIFont" ref="829345685"/>
+						<reference key="IBUITextColor" ref="747418852"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+					</object>
+					<object class="IBUILabel" id="190031410">
+						<reference key="NSNextResponder" ref="678799577"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{71, 157}, {79, 21}}</string>
+						<reference key="NSSuperview" ref="678799577"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">10:00 - 6:30</string>
+						<reference key="IBUIFont" ref="829345685"/>
+						<reference key="IBUITextColor" ref="747418852"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUITextAlignment">1</int>
+					</object>
+					<object class="IBUILabel" id="527074731">
+						<reference key="NSNextResponder" ref="678799577"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{26, 176}, {77, 16}}</string>
+						<reference key="NSSuperview" ref="678799577"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">Wed</string>
+						<reference key="IBUIFont" ref="829345685"/>
+						<reference key="IBUITextColor" ref="747418852"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+					</object>
+					<object class="IBUILabel" id="1007792261">
+						<reference key="NSNextResponder" ref="678799577"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{71, 174}, {79, 21}}</string>
+						<reference key="NSSuperview" ref="678799577"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">10:00 - 6:30</string>
+						<reference key="IBUIFont" ref="829345685"/>
+						<reference key="IBUITextColor" ref="747418852"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUITextAlignment">1</int>
+					</object>
+					<object class="IBUILabel" id="590023830">
+						<reference key="NSNextResponder" ref="678799577"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{165, 123}, {77, 21}}</string>
+						<reference key="NSSuperview" ref="678799577"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">Thur</string>
+						<reference key="IBUIFont" ref="829345685"/>
+						<reference key="IBUITextColor" ref="747418852"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+					</object>
+					<object class="IBUILabel" id="119359184">
+						<reference key="NSNextResponder" ref="678799577"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{221, 123}, {79, 21}}</string>
+						<reference key="NSSuperview" ref="678799577"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">10:00 - 6:30</string>
+						<reference key="IBUIFont" ref="829345685"/>
+						<reference key="IBUITextColor" ref="747418852"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUITextAlignment">1</int>
+					</object>
+					<object class="IBUILabel" id="358237324">
+						<reference key="NSNextResponder" ref="678799577"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{165, 140}, {77, 21}}</string>
+						<reference key="NSSuperview" ref="678799577"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">Fri</string>
+						<reference key="IBUIFont" ref="829345685"/>
+						<reference key="IBUITextColor" ref="747418852"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+					</object>
+					<object class="IBUILabel" id="847889109">
+						<reference key="NSNextResponder" ref="678799577"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{221, 140}, {79, 21}}</string>
+						<reference key="NSSuperview" ref="678799577"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">10:00 - 6:30</string>
+						<reference key="IBUIFont" ref="829345685"/>
+						<reference key="IBUITextColor" ref="747418852"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUITextAlignment">1</int>
+					</object>
+					<object class="IBUILabel" id="560115971">
+						<reference key="NSNextResponder" ref="678799577"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{165, 157}, {77, 21}}</string>
+						<reference key="NSSuperview" ref="678799577"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">Sat</string>
+						<reference key="IBUIFont" ref="829345685"/>
+						<reference key="IBUITextColor" ref="747418852"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+					</object>
+					<object class="IBUILabel" id="933672883">
+						<reference key="NSNextResponder" ref="678799577"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{221, 157}, {79, 21}}</string>
+						<reference key="NSSuperview" ref="678799577"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">10:00 - 6:30</string>
+						<reference key="IBUIFont" ref="829345685"/>
+						<reference key="IBUITextColor" ref="747418852"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUITextAlignment">1</int>
+					</object>
+					<object class="IBUILabel" id="917508180">
+						<reference key="NSNextResponder" ref="678799577"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{165, 174}, {77, 21}}</string>
+						<reference key="NSSuperview" ref="678799577"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">Sun</string>
+						<reference key="IBUIFont" ref="829345685"/>
+						<reference key="IBUITextColor" ref="747418852"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+					</object>
+					<object class="IBUILabel" id="1058230895">
+						<reference key="NSNextResponder" ref="678799577"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{221, 174}, {79, 21}}</string>
+						<reference key="NSSuperview" ref="678799577"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">10:00 - 6:30</string>
+						<reference key="IBUIFont" ref="829345685"/>
+						<reference key="IBUITextColor" ref="747418852"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUITextAlignment">1</int>
+					</object>
+					<object class="IBUILabel" id="163366397">
+						<reference key="NSNextResponder" ref="678799577"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{26, 118}, {69, 22}}</string>
+						<reference key="NSSuperview" ref="678799577"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">Hours </string>
 						<reference key="IBUIFont" ref="595780624"/>
 						<reference key="IBUITextColor" ref="747418852"/>
 						<nil key="IBUIHighlightedColor"/>
@@ -744,102 +808,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">51</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">firstHours</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="512131482"/>
-					</object>
-					<int key="connectionID">82</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">secondHours</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="571036620"/>
-					</object>
-					<int key="connectionID">83</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">thirdHours</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="285035944"/>
-					</object>
-					<int key="connectionID">84</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">fourthHours</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="261193724"/>
-					</object>
-					<int key="connectionID">85</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">day1</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="901954161"/>
-					</object>
-					<int key="connectionID">86</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">day2</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="491494382"/>
-					</object>
-					<int key="connectionID">87</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">day3</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="527074731"/>
-					</object>
-					<int key="connectionID">88</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">day4</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="590023830"/>
-					</object>
-					<int key="connectionID">89</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">hours1</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="541306632"/>
-					</object>
-					<int key="connectionID">90</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">hours2</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="190031410"/>
-					</object>
-					<int key="connectionID">91</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">hours3</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="1007792261"/>
-					</object>
-					<int key="connectionID">92</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">hours4</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="119359184"/>
-					</object>
-					<int key="connectionID">93</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">callStoreManager:</string>
 						<reference key="source" ref="482542514"/>
@@ -865,6 +833,126 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">96</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">monHours</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="541306632"/>
+					</object>
+					<int key="connectionID">106</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">friHours</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="847889109"/>
+					</object>
+					<int key="connectionID">107</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">openClosed</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="93810579"/>
+					</object>
+					<int key="connectionID">108</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">satHours</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="933672883"/>
+					</object>
+					<int key="connectionID">109</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">sunHours</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1058230895"/>
+					</object>
+					<int key="connectionID">110</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">thursHours</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="119359184"/>
+					</object>
+					<int key="connectionID">111</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">tueHours</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="190031410"/>
+					</object>
+					<int key="connectionID">112</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">wedHours</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1007792261"/>
+					</object>
+					<int key="connectionID">113</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">mon</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="901954161"/>
+					</object>
+					<int key="connectionID">114</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">tue</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="491494382"/>
+					</object>
+					<int key="connectionID">115</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">fri</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="358237324"/>
+					</object>
+					<int key="connectionID">116</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">sat</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="560115971"/>
+					</object>
+					<int key="connectionID">117</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">sun</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="917508180"/>
+					</object>
+					<int key="connectionID">118</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">thurs</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="590023830"/>
+					</object>
+					<int key="connectionID">119</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">wed</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="527074731"/>
+					</object>
+					<int key="connectionID">120</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -903,13 +991,24 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="524180413"/>
 							<reference ref="403656609"/>
 							<reference ref="531875041"/>
-							<reference ref="163366397"/>
 							<reference ref="998219238"/>
 							<reference ref="754941985"/>
-							<reference ref="512131482"/>
-							<reference ref="571036620"/>
-							<reference ref="285035944"/>
-							<reference ref="261193724"/>
+							<reference ref="901954161"/>
+							<reference ref="491494382"/>
+							<reference ref="527074731"/>
+							<reference ref="541306632"/>
+							<reference ref="190031410"/>
+							<reference ref="1007792261"/>
+							<reference ref="1058230895"/>
+							<reference ref="560115971"/>
+							<reference ref="163366397"/>
+							<reference ref="917508180"/>
+							<reference ref="119359184"/>
+							<reference ref="358237324"/>
+							<reference ref="847889109"/>
+							<reference ref="933672883"/>
+							<reference ref="93810579"/>
+							<reference ref="590023830"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -960,16 +1059,19 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<int key="objectID">19</int>
 						<reference key="object" ref="622768222"/>
 						<reference key="parent" ref="678799577"/>
+						<string key="objectName">cityZip</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">17</int>
 						<reference key="object" ref="34166023"/>
 						<reference key="parent" ref="678799577"/>
+						<string key="objectName">street</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">20</int>
 						<reference key="object" ref="610746695"/>
 						<reference key="parent" ref="678799577"/>
+						<string key="objectName">storeName</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">50</int>
@@ -1025,17 +1127,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="parent" ref="678799577"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">72</int>
-						<reference key="object" ref="512131482"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="901954161"/>
-							<reference ref="541306632"/>
-						</object>
-						<reference key="parent" ref="678799577"/>
-						<string key="objectName">First Hours View</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">66</int>
 						<reference key="object" ref="754941985"/>
 						<reference key="parent" ref="678799577"/>
@@ -1044,83 +1135,92 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<object class="IBObjectRecord">
 						<int key="objectID">68</int>
 						<reference key="object" ref="901954161"/>
-						<reference key="parent" ref="512131482"/>
-						<string key="objectName">days</string>
+						<reference key="parent" ref="678799577"/>
+						<string key="objectName">mon</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">70</int>
 						<reference key="object" ref="541306632"/>
-						<reference key="parent" ref="512131482"/>
-						<string key="objectName">hours</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">73</int>
-						<reference key="object" ref="571036620"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="190031410"/>
-							<reference ref="491494382"/>
-						</object>
 						<reference key="parent" ref="678799577"/>
-						<string key="objectName">Second Hours View</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">74</int>
-						<reference key="object" ref="190031410"/>
-						<reference key="parent" ref="571036620"/>
-						<string key="objectName">hours</string>
+						<string key="objectName">monHours</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">75</int>
 						<reference key="object" ref="491494382"/>
-						<reference key="parent" ref="571036620"/>
-						<string key="objectName">days</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">76</int>
-						<reference key="object" ref="285035944"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="1007792261"/>
-							<reference ref="527074731"/>
-						</object>
 						<reference key="parent" ref="678799577"/>
-						<string key="objectName">Third Hours View</string>
+						<string key="objectName">tue</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">77</int>
-						<reference key="object" ref="1007792261"/>
-						<reference key="parent" ref="285035944"/>
-						<string key="objectName">hours</string>
+						<int key="objectID">74</int>
+						<reference key="object" ref="190031410"/>
+						<reference key="parent" ref="678799577"/>
+						<string key="objectName">tueHours</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">78</int>
 						<reference key="object" ref="527074731"/>
-						<reference key="parent" ref="285035944"/>
-						<string key="objectName">days</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">79</int>
-						<reference key="object" ref="261193724"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="119359184"/>
-							<reference ref="590023830"/>
-						</object>
 						<reference key="parent" ref="678799577"/>
-						<string key="objectName">Fourth Hours View</string>
+						<string key="objectName">wed</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">80</int>
-						<reference key="object" ref="119359184"/>
-						<reference key="parent" ref="261193724"/>
-						<string key="objectName">hours</string>
+						<int key="objectID">77</int>
+						<reference key="object" ref="1007792261"/>
+						<reference key="parent" ref="678799577"/>
+						<string key="objectName">wedHours</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">99</int>
+						<reference key="object" ref="358237324"/>
+						<reference key="parent" ref="678799577"/>
+						<string key="objectName">fri</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">81</int>
 						<reference key="object" ref="590023830"/>
-						<reference key="parent" ref="261193724"/>
-						<string key="objectName">days</string>
+						<reference key="parent" ref="678799577"/>
+						<string key="objectName">thur</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">80</int>
+						<reference key="object" ref="119359184"/>
+						<reference key="parent" ref="678799577"/>
+						<string key="objectName">thurHours</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">100</int>
+						<reference key="object" ref="560115971"/>
+						<reference key="parent" ref="678799577"/>
+						<string key="objectName">sat</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">101</int>
+						<reference key="object" ref="917508180"/>
+						<reference key="parent" ref="678799577"/>
+						<string key="objectName">sun</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">102</int>
+						<reference key="object" ref="847889109"/>
+						<reference key="parent" ref="678799577"/>
+						<string key="objectName">friHours</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">103</int>
+						<reference key="object" ref="933672883"/>
+						<reference key="parent" ref="678799577"/>
+						<string key="objectName">satHours</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">104</int>
+						<reference key="object" ref="1058230895"/>
+						<reference key="parent" ref="678799577"/>
+						<string key="objectName">sunHours</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">105</int>
+						<reference key="object" ref="93810579"/>
+						<reference key="parent" ref="678799577"/>
+						<string key="objectName">openClosed</string>
 					</object>
 				</object>
 			</object>
@@ -1131,6 +1231,12 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>-1.CustomClassName</string>
 					<string>-2.CustomClassName</string>
 					<string>10.IBPluginDependency</string>
+					<string>100.IBPluginDependency</string>
+					<string>101.IBPluginDependency</string>
+					<string>102.IBPluginDependency</string>
+					<string>103.IBPluginDependency</string>
+					<string>104.IBPluginDependency</string>
+					<string>105.IBPluginDependency</string>
 					<string>11.IBPluginDependency</string>
 					<string>12.IBPluginDependency</string>
 					<string>13.IBPluginDependency</string>
@@ -1153,18 +1259,15 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>68.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
 					<string>70.IBPluginDependency</string>
-					<string>72.IBPluginDependency</string>
-					<string>73.IBPluginDependency</string>
 					<string>74.IBPluginDependency</string>
 					<string>75.IBPluginDependency</string>
-					<string>76.IBPluginDependency</string>
 					<string>77.IBPluginDependency</string>
 					<string>78.IBPluginDependency</string>
-					<string>79.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
 					<string>80.IBPluginDependency</string>
 					<string>81.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
+					<string>99.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1181,12 +1284,15 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{339, 172}, {320, 480}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>{{318, 227}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>{{331, 265}, {331, 423}}</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1223,7 +1329,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">98</int>
+			<int key="maxID">120</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1316,27 +1422,30 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>address2</string>
 							<string>cityZip</string>
-							<string>day1</string>
-							<string>day2</string>
-							<string>day3</string>
-							<string>day4</string>
 							<string>districtManagerName</string>
 							<string>districtManagerPhone</string>
 							<string>districtManagerView</string>
-							<string>firstHours</string>
-							<string>fourthHours</string>
-							<string>hours1</string>
-							<string>hours2</string>
-							<string>hours3</string>
-							<string>hours4</string>
+							<string>fri</string>
+							<string>friHours</string>
 							<string>map</string>
 							<string>mask</string>
-							<string>secondHours</string>
+							<string>mon</string>
+							<string>monHours</string>
+							<string>openClosed</string>
+							<string>sat</string>
+							<string>satHours</string>
 							<string>storeManagerName</string>
 							<string>storeManagerPhone</string>
 							<string>storeName</string>
 							<string>street</string>
-							<string>thirdHours</string>
+							<string>sun</string>
+							<string>sunHours</string>
+							<string>thurs</string>
+							<string>thursHours</string>
+							<string>tue</string>
+							<string>tueHours</string>
+							<string>wed</string>
+							<string>wedHours</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1344,25 +1453,28 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
 							<string>UIView</string>
-							<string>UIView</string>
-							<string>UIView</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>MKMapView</string>
 							<string>UIView</string>
-							<string>UIView</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
-							<string>UIView</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -1371,27 +1483,30 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>address2</string>
 							<string>cityZip</string>
-							<string>day1</string>
-							<string>day2</string>
-							<string>day3</string>
-							<string>day4</string>
 							<string>districtManagerName</string>
 							<string>districtManagerPhone</string>
 							<string>districtManagerView</string>
-							<string>firstHours</string>
-							<string>fourthHours</string>
-							<string>hours1</string>
-							<string>hours2</string>
-							<string>hours3</string>
-							<string>hours4</string>
+							<string>fri</string>
+							<string>friHours</string>
 							<string>map</string>
 							<string>mask</string>
-							<string>secondHours</string>
+							<string>mon</string>
+							<string>monHours</string>
+							<string>openClosed</string>
+							<string>sat</string>
+							<string>satHours</string>
 							<string>storeManagerName</string>
 							<string>storeManagerPhone</string>
 							<string>storeName</string>
 							<string>street</string>
-							<string>thirdHours</string>
+							<string>sun</string>
+							<string>sunHours</string>
+							<string>thurs</string>
+							<string>thursHours</string>
+							<string>tue</string>
+							<string>tueHours</string>
+							<string>wed</string>
+							<string>wedHours</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1401,22 +1516,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">cityZip</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">day1</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">day2</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">day3</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">day4</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -1432,27 +1531,11 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">firstHours</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">fourthHours</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">hours1</string>
+								<string key="name">fri</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">hours2</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">hours3</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">hours4</string>
+								<string key="name">friHours</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -1464,8 +1547,24 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">secondHours</string>
-								<string key="candidateClassName">UIView</string>
+								<string key="name">mon</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">monHours</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">openClosed</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">sat</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">satHours</string>
+								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">storeManagerName</string>
@@ -1484,8 +1583,36 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">thirdHours</string>
-								<string key="candidateClassName">UIView</string>
+								<string key="name">sun</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">sunHours</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">thurs</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">thursHours</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">tue</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">tueHours</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">wed</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">wedHours</string>
+								<string key="candidateClassName">UILabel</string>
 							</object>
 						</object>
 					</object>

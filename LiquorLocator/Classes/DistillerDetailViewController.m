@@ -171,6 +171,9 @@
     NSUInteger row = [indexPath row];
 
     // For section 0 load map?  Call number?
+    if (section == 0) {
+        [self loadDirections];
+    }
     
     // For section 1 open url in safari
     if (section == 1) {
@@ -210,7 +213,7 @@
 
 #pragma mark -
 #pragma mark IBAction methods
-- (IBAction)loadDirections:(id)sender {
+- (IBAction)loadDirections {
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     RootViewController *rootView = [delegate.navController.viewControllers objectAtIndex:0];
     
@@ -225,7 +228,7 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:googleURL]];
 }
 
-- (IBAction)callDistiller:(id)sender {
+- (IBAction)callDistiller {
     NSString *phone = [self.objectList objectForKey:kNumber];
     if (phone) {
         NSCharacterSet *doNotWant = [NSCharacterSet characterSetWithCharactersInString:@"-() ."];
