@@ -15,7 +15,24 @@ images/
 *~
 *anjuta*
 *sqlite*
-*.class
 output.log
 *\#
 
+.scrapy
+
+# Eclipse
+.classpath
+.project
+
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated GUI files
+*R.java
