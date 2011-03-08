@@ -159,10 +159,13 @@ class Store(models.Model):
                 for d in ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]:
                     _days = [days for days in _hours if d == days.start_day]
                     if len(_days) > 0:
-                        ret['hours'].append(_days[0].dict())
+                        hoursDict = _days[0].dict()
+                        hoursDict['day'] = hoursDict['start_day']
+                        del hoursDict['start_day']
+                        del hoursDict['end_day']
+                        ret['hours'].append(hoursDict)
                     else:
-                        ret['hours'].append({'start_day': d,
-                                             'end_day': d,
+                        ret['hours'].append({'day': d,
                                              'store_id': self.id, 
                                              'close': None, 'open' : None})
             else:
