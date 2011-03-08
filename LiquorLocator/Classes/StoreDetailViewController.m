@@ -230,48 +230,48 @@
     
     // Handle hours
     for (NSDictionary *hours in [self.objectList objectForKey:kHours]) {
-        NSString *startDay = [hours objectForKey:kStartDay];
+        NSString *day = [hours objectForKey:kDay];
         NSString *open = [hours objectForKey:kOpen];
         NSString *close = [hours objectForKey:kClose];
 
         
-        if ([startDay isEqualToString:@"Sun"]) {
+        if ([day isEqualToString:@"Sun"]) {
             [self processLablesForDay:sun dayHoursLabel:sunHours 
                             storeOpen:open storeClose:close
                               weekday:weekday today:1 curTime:curTime]; 
         }
         
-        if ([startDay isEqualToString:@"Mon"]) {
+        if ([day isEqualToString:@"Mon"]) {
             [self processLablesForDay:mon dayHoursLabel:monHours 
                             storeOpen:open storeClose:close
                               weekday:weekday today:2 curTime:curTime]; 
         }
         
-        if ([startDay isEqualToString:@"Tue"]) {
+        if ([day isEqualToString:@"Tue"]) {
             [self processLablesForDay:tue dayHoursLabel:tueHours 
                             storeOpen:open storeClose:close
                               weekday:weekday today:3 curTime:curTime]; 
         }
         
-        if ([startDay isEqualToString:@"Wed"]) {
+        if ([day isEqualToString:@"Wed"]) {
             [self processLablesForDay:wed dayHoursLabel:wedHours
                             storeOpen:open storeClose:close
                               weekday:weekday today:4 curTime:curTime]; 
         }
 
-        if ([startDay isEqualToString:@"Thu"]) {
+        if ([day isEqualToString:@"Thu"]) {
             [self processLablesForDay:thurs dayHoursLabel:thursHours 
                             storeOpen:open storeClose:close
                               weekday:weekday today:5 curTime:curTime]; 
         }
         
-        if ([startDay isEqualToString:@"Fri"]) {
+        if ([day isEqualToString:@"Fri"]) {
             [self processLablesForDay:fri dayHoursLabel:friHours 
                             storeOpen:open storeClose:close
                               weekday:weekday today:6 curTime:curTime]; 
         }
         
-        if ([startDay isEqualToString:@"Sat"]) {
+        if ([day isEqualToString:@"Sat"]) {
             [self processLablesForDay:sat dayHoursLabel:satHours 
                             storeOpen:open storeClose:close
                               weekday:weekday today:7 curTime:curTime]; 
