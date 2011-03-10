@@ -29,7 +29,7 @@
     if (self.category != nil && self.storeId != 0) {
         NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/store/%d/spirits?category=%@", 
                            storeId, [category urlEncodeUsingEncoding:NSUTF8StringEncoding]];
-        self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        self.feedURLString = query;
         self.title = category;        
         
 #ifdef FLURRY
