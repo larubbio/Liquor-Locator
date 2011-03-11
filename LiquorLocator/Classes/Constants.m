@@ -25,8 +25,7 @@
     NSString *const kRole = @"role";
     NSString *const kNumber = @"number";
     NSString *const kHours = @"hours";
-    NSString *const kStartDay = @"start_day";
-    NSString *const kEndDay = @"end_day";
+    NSString *const kDay = @"day";
     NSString *const kOpen = @"open";
     NSString *const kClose = @"close";
     NSString *const kBrandName = @"brand_name";
