@@ -1,7 +1,9 @@
-package com.pugdogdev.wsll;
+package com.pugdogdev.wsll.adapter;
 
 import java.util.ArrayList;
 
+import com.pugdogdev.wsll.R;
+import com.pugdogdev.wsll.model.ShortSpirit;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class BrocabAdapter extends ArrayAdapter<Brocab> {
-    public BrocabAdapter(Context context, int textViewResourceId, ArrayList<Brocab> items) {
+public class ShortSpiritAdapter extends ArrayAdapter<ShortSpirit> {
+    public ShortSpiritAdapter(Context context, int textViewResourceId, ArrayList<ShortSpirit> items) {
         super(context, textViewResourceId, items);
     }
 
@@ -23,7 +25,7 @@ public class BrocabAdapter extends ArrayAdapter<Brocab> {
         if (row == null) {
             LayoutInflater inflater = LayoutInflater.from(this.getContext());
             
-            row = inflater.inflate(R.layout.list_item_with_disclosure,null);
+            row = inflater.inflate(R.layout.list_item_with_disclosure, null);
             
             ImageView disclosure = (ImageView)row.findViewById(R.id.disclosure);
             disclosure.setImageResource(R.drawable.disclosure);
@@ -31,8 +33,8 @@ public class BrocabAdapter extends ArrayAdapter<Brocab> {
         
         TextView label = (TextView)row.findViewById(R.id.term);
 
-        Brocab rowItem = (Brocab)this.getItem(position);
-        label.setText(rowItem.getTerm());
+        ShortSpirit rowItem = (ShortSpirit)this.getItem(position);
+        label.setText(rowItem.getName());
         
         row.setOnClickListener((OnClickListener)this.getContext());
         row.setTag(position);
