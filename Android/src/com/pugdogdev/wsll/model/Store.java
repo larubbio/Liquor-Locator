@@ -13,8 +13,8 @@ public class Store {
 	String address;
 	String address2;
 	String zip;
-	@JsonProperty("lat") float latitude;
-	@JsonProperty("long") float longitude;
+	@JsonProperty("lat") String _latitude;
+	@JsonProperty("long") String _longitude;
 	List<Contact> contacts;
 	List<Hour> hours;
 	
@@ -54,17 +54,17 @@ public class Store {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
-	public float getLatitude() {
-		return latitude;
+	public String getLatitude() {
+		return _latitude;
 	}
-	public void setLatitude(float latitude) {
-		this.latitude = latitude;
+	public void setLatitude(String latitude) {
+		this._latitude = latitude;
 	}
-	public float getLongitude() {
-		return longitude;
+	public String getLongitude() {
+		return _longitude;
 	}
-	public void setLongitude(float longitude) {
-		this.longitude = longitude;
+	public void setLongitude(String longitude) {
+		this._longitude = longitude;
 	}
 	public List<Contact> getContacts() {
 		return contacts;

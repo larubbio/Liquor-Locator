@@ -1,7 +1,10 @@
-package com.pugdogdev.wsll.activity;
+package com.pugdogdev.wsll;
 
-import com.pugdogdev.wsll.OfflineListActivity;
 import com.pugdogdev.wsll.R;
+import com.pugdogdev.wsll.activity.CategoryListActivity;
+import com.pugdogdev.wsll.activity.SpiritListActivity;
+import com.pugdogdev.wsll.activity.StoreListActivity;
+
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,10 +19,6 @@ public class LiquorLocatorTabBarActivity extends TabActivity {
 
         TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
 
-        TabSpec firstTabSpec = tabHost.newTabSpec("tid1");
-        firstTabSpec.setIndicator("Brocabs");
-        firstTabSpec.setContent(new Intent(this, OfflineListActivity.class));
-
         TabSpec secondTabSpec = tabHost.newTabSpec("tid2");
         secondTabSpec.setIndicator("Categories");
         secondTabSpec.setContent(new Intent(this, CategoryListActivity.class));
@@ -32,7 +31,6 @@ public class LiquorLocatorTabBarActivity extends TabActivity {
         fourthTabSpec.setIndicator("Spirits");
         fourthTabSpec.setContent(new Intent(this, SpiritListActivity.class));
 
-        tabHost.addTab(firstTabSpec);
         tabHost.addTab(secondTabSpec);
         tabHost.addTab(thirdTabSpec);
         tabHost.addTab(fourthTabSpec);

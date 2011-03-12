@@ -1,7 +1,9 @@
 package com.pugdogdev.wsll.model;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Spirit {
 	String price;
 	@JsonProperty("brand_name") String brandName;

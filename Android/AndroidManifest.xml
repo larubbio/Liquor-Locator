@@ -15,11 +15,11 @@
             </intent-filter>
         </activity>
 
-         <activity android:name=".OfflineListActivity"/>
 		 <activity android:name=".activity.StoreListActivity" />
 		 <activity android:name=".activity.CategoryListActivity" />
 		 <activity android:name=".activity.SpiritListActivity" />
+		 <activity android:name=".activity.SpiritDetailActivity" />
 		 <activity android:name=".BrocabDetailActivity" />
-		 <activity android:name="activity.LiquorLocatorTabBarActivity" />
+		 <activity android:name=".LiquorLocatorTabBarActivity" />
     </application>
 </manifest>

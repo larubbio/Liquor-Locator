@@ -1,15 +1,15 @@
 package com.pugdogdev.wsll.activity;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
+import com.pugdogdev.wsll.HttpConnection;
+import com.pugdogdev.wsll.R;
+import com.pugdogdev.wsll.model.Spirit;
 
+import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources.NotFoundException;
@@ -18,32 +18,30 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pugdogdev.wsll.HttpConnection;
-import com.pugdogdev.wsll.R;
-import com.pugdogdev.wsll.adapter.StoreAdapter;
-import com.pugdogdev.wsll.model.Store;
-
-public class StoreListActivity extends ListActivity implements OnClickListener  {
+public class SpiritDetailActivity extends Activity implements OnClickListener {
 	ProgressDialog progress;
-	ArrayList<Store> storeList = new ArrayList<Store>();
-
-    /** Called when the activity is first created. */
+	String spiritId;
+    Spirit spirit;
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.stores);
-
+        setContentView(R.layout.spirit_detail);
+        
+        spiritId = (String)this.getIntent().getSerializableExtra("spiritId");
+        
         progress = ProgressDialog.show(this, "Refreshing...","Just chill bro.",true,false);
-        downloadStores();
+        downloadSpirits();
     }
- 
-    public void loadStores(String jsonRep) { 
+    
+    public void loadSpirits(String jsonRep) { 
         
         try {
         	ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
-        	storeList = mapper.readValue(jsonRep, new TypeReference<ArrayList<Store>>() {});
+        	spirit = mapper.readValue(jsonRep, Spirit.class);
         } catch (JsonParseException e) {
             Toast.makeText(this, "JsonParseException: " + e.toString(), 2000).show();
 		} catch (JsonMappingException e) {
@@ -53,19 +51,18 @@ public class StoreListActivity extends ListActivity implements OnClickListener  
 		} catch (IOException e) {
             Toast.makeText(this, "IOException: " + e.toString(), 2000).show();
 		}
-
-        setListAdapter(new StoreAdapter(this, android.R.layout.simple_list_item_1, storeList));
+		
+        TextView term = (TextView)findViewById(R.id.spiritName);
+        term.setText(spirit.getBrandName());
     }
     
-    public void downloadStores() {
+    public void downloadSpirits() {
         Handler handler = new Handler () {
             public void handleMessage(Message message) {
                 switch (message.what) {
-                    case HttpConnection.DID_START:
-                        break;
                     case HttpConnection.DID_SUCCEED:
                         String response = (String)message.obj;
-                        loadStores(response);
+                        loadSpirits(response);
                         progress.dismiss();
                         break;
                     case HttpConnection.DID_ERROR:
@@ -78,7 +75,8 @@ public class StoreListActivity extends ListActivity implements OnClickListener  
             }
         };
 
-        new HttpConnection(handler).get("http://wsll.pugdogdev.com/stores");
+        String url = "http://wsll.pugdogdev.com/spirit/" + spiritId;
+        new HttpConnection(handler).get(url);
     }
 
     public void handleError(Exception e) {

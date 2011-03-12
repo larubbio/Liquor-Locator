@@ -23,11 +23,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.Toast;
 
 public class CategoryListActivity extends ListActivity implements OnClickListener  {
-	Button refresh;
 	ProgressDialog progress;
 	ArrayList<Category> categoryList = new ArrayList<Category>();
 
@@ -36,8 +34,9 @@ public class CategoryListActivity extends ListActivity implements OnClickListene
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stores);
-        refresh=(Button)findViewById(R.id.online_refresh);
-        refresh.setOnClickListener(this);
+        
+        progress = ProgressDialog.show(this, "Refreshing...","Just chill bro.",true,false);
+        downloadCategories();
     }
  
     public void loadCategories(String jsonRep) { 
@@ -63,16 +62,13 @@ public class CategoryListActivity extends ListActivity implements OnClickListene
             public void handleMessage(Message message) {
                 switch (message.what) {
                     case HttpConnection.DID_START:
-                        refresh.setText("Refreshing...");
                         break;
                     case HttpConnection.DID_SUCCEED:
-                        refresh.setText("Refresh");
                         String response = (String)message.obj;
                         loadCategories(response);
                         progress.dismiss();
                         break;
                     case HttpConnection.DID_ERROR:
-                        refresh.setText("Refresh");
                         Exception e = (Exception) message.obj;
                         e.printStackTrace();
                         progress.dismiss();
@@ -99,14 +95,9 @@ public class CategoryListActivity extends ListActivity implements OnClickListene
     
     @Override
     public void onClick(View v) {
-        if (v == refresh) {
-            progress = ProgressDialog.show(this, "Refreshing...","Just chill bro.",true,false);
-            downloadCategories();
-        } else {
-        	Category cat = categoryList.get((Integer)v.getTag());
-        	Intent i = new Intent(this, SpiritListActivity.class);
-        	i.putExtra("category", cat.getName());
-        	startActivity(i);
-        }
+      	Category cat = categoryList.get((Integer)v.getTag());
+       	Intent i = new Intent(this, SpiritListActivity.class);
+       	i.putExtra("category", cat.getName());
+       	startActivity(i);
     }
 }
