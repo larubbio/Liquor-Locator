@@ -8,28 +8,20 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
-import com.pugdogdev.wsll.HttpConnection;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.adapter.SpiritInventoryAdapter;
 import com.pugdogdev.wsll.adapter.StoreAdapter;
 import com.pugdogdev.wsll.model.SpiritInventory;
 import com.pugdogdev.wsll.model.Store;
 
-public class StoreListActivity extends ListActivity implements OnClickListener  {
-	ProgressDialog progress;
+public class StoreListActivity extends BaseListActivity implements OnClickListener  {
     String spiritId;
 
     ArrayList<Store> storeList = new ArrayList<Store>();
@@ -43,11 +35,15 @@ public class StoreListActivity extends ListActivity implements OnClickListener  
 
         spiritId = (String)this.getIntent().getSerializableExtra("spiritId");
 
-        progress = ProgressDialog.show(this, "Refreshing...","Just chill bro.",true,false);
-        downloadStores();
+        String url = "http://wsll.pugdogdev.com/stores";
+        if (spiritId != null) {
+        	url = "http://wsll.pugdogdev.com/spirit/" + spiritId + "/stores";
+        }
+        downloadObjects(url);
     }
  
-    public void loadStores(String jsonRep) { 
+    @Override
+    public void parseObjects(String jsonRep) { 
         
         try {
         	ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
@@ -74,47 +70,6 @@ public class StoreListActivity extends ListActivity implements OnClickListener  
     	}
     }
     
-	public void handleError(Exception e) {
-	    AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-	    alertDialog.setTitle("Uh, error bro");
-	    alertDialog.setMessage("There was a problem: " + e.toString());
-	    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-	           public void onClick(DialogInterface dialog, int which) {
-	                  // here you can add functions
-	               }
-	    });
-	    alertDialog.show();
-	}
-	
-	public void downloadStores() {
-        Handler handler = new Handler () {
-            public void handleMessage(Message message) {
-                switch (message.what) {
-                    case HttpConnection.DID_START:
-                        break;
-                    case HttpConnection.DID_SUCCEED:
-                        String response = (String)message.obj;
-                        loadStores(response);
-                        progress.dismiss();
-                        break;
-                    case HttpConnection.DID_ERROR:
-                        Exception e = (Exception) message.obj;
-                        e.printStackTrace();
-                        progress.dismiss();
-                        handleError(e);
-                        break;
-                }
-            }
-        };
-
-        String url = "http://wsll.pugdogdev.com/stores";
-
-        if (spiritId != null) {
-        	url = "http://wsll.pugdogdev.com/spirit/" + spiritId + "/stores";
-        }
-        new HttpConnection(handler).get(url);
-    }
-    
     @Override
     public void onClick(View v) {
     	Store s;
@@ -123,7 +78,7 @@ public class StoreListActivity extends ListActivity implements OnClickListener  
     	} else {
     		s = storeList.get((Integer)v.getTag());
     	}
-    	Intent i = new Intent(this, CategoryListActivity.class);
+    	Intent i = new Intent(this, StoreDetailActivity.class);
     	i.putExtra("storeId", s.getId());
     	startActivity(i);
     }

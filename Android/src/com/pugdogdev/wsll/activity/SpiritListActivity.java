@@ -8,26 +8,18 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
-import com.pugdogdev.wsll.HttpConnection;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.adapter.ShortSpiritAdapter;
 import com.pugdogdev.wsll.model.ShortSpirit;
 
-public class SpiritListActivity extends ListActivity implements OnClickListener  {
-	ProgressDialog progress;
+public class SpiritListActivity extends BaseListActivity implements OnClickListener  {
 	String category;
 	Integer storeId;
 	ArrayList<ShortSpirit> spiritList = new ArrayList<ShortSpirit>();
@@ -41,11 +33,17 @@ public class SpiritListActivity extends ListActivity implements OnClickListener 
         category = (String)this.getIntent().getSerializableExtra("category");
         storeId = (Integer)this.getIntent().getSerializableExtra("storeId");
         
-        progress = ProgressDialog.show(this, "Refreshing...","Just chill bro.",true,false);
-        downloadShortSpirits();
+        String url = "http://wsll.pugdogdev.com/spirits";
+        if (category != null && storeId == null) {
+        	url += "?category=" + category;
+        } else if (category != null && storeId != null) {
+        	url = "http://wsll.pugdogdev.com/store/" + storeId + "/spirits?category=" + category;
+        }
+        downloadObjects(url);
     }
  
-    public void loadShortSpirits(String jsonRep) { 
+    @Override
+    public void parseObjects(String jsonRep) { 
         
         try {
         	ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
@@ -62,49 +60,7 @@ public class SpiritListActivity extends ListActivity implements OnClickListener 
 
         setListAdapter(new ShortSpiritAdapter(this, android.R.layout.simple_list_item_1, spiritList));
     }
-    
-	public void handleError(Exception e) {
-	    AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-	    alertDialog.setTitle("Uh, error bro");
-	    alertDialog.setMessage("There was a problem: " + e.toString());
-	    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-	           public void onClick(DialogInterface dialog, int which) {
-	                  // here you can add functions
-	               }
-	    });
-	    alertDialog.show();
-	}
-	
-	public void downloadShortSpirits() {
-        Handler handler = new Handler () {
-            public void handleMessage(Message message) {
-                switch (message.what) {
-                    case HttpConnection.DID_START:
-                        break;
-                    case HttpConnection.DID_SUCCEED:
-                        String response = (String)message.obj;
-                        loadShortSpirits(response);
-                        progress.dismiss();
-                        break;
-                    case HttpConnection.DID_ERROR:
-                        Exception e = (Exception) message.obj;
-                        e.printStackTrace();
-                        progress.dismiss();
-                        handleError(e);
-                        break;
-                }
-            }
-        };
-
-        String url = "http://wsll.pugdogdev.com/spirits";
-        if (category != null && storeId == null) {
-        	url += "?category=" + category;
-        } else if (category != null && storeId != null) {
-        	url = "http://wsll.pugdogdev.com/store/" + storeId + "/spirits?category=" + category;
-        }
-        new HttpConnection(handler).get(url);
-    }
-    
+    	    
     @Override
     public void onClick(View v) {
     	ShortSpirit ss = spiritList.get((Integer)v.getTag());
@@ -112,4 +68,7 @@ public class SpiritListActivity extends ListActivity implements OnClickListener 
     	i.putExtra("spiritId", ss.getId());
     	startActivity(i);
     }
+
+	public void loadCategories(String jsonRep) {
+	}
 }
