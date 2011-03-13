@@ -23,30 +23,30 @@ import android.widget.Toast;
 
 import com.pugdogdev.wsll.HttpConnection;
 import com.pugdogdev.wsll.R;
-import com.pugdogdev.wsll.model.Spirit;
+import com.pugdogdev.wsll.model.Store;
 
-public class SpiritDetailActivity extends Activity implements OnClickListener {
-	Button viewStores;
+public class StoreDetailActivity extends Activity implements OnClickListener {
+	Button viewInventory;
 	ProgressDialog progress;
-	String spiritId;
-    Spirit spirit;
+	Integer storeId;
+    Store store;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.spirit_detail);
+        setContentView(R.layout.store_detail);
         
-        spiritId = (String)this.getIntent().getSerializableExtra("spiritId");
+        storeId = (Integer)this.getIntent().getSerializableExtra("storeId");
         
         progress = ProgressDialog.show(this, "Refreshing...","Just chill bro.",true,false);
-        downloadSpirits();
+        downloadStore();
     }
     
-    public void loadSpirits(String jsonRep) { 
+    public void loadStore(String jsonRep) { 
         
         try {
         	ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
-        	spirit = mapper.readValue(jsonRep, Spirit.class);
+        	store = mapper.readValue(jsonRep, Store.class);
         } catch (JsonParseException e) {
             Toast.makeText(this, "JsonParseException: " + e.toString(), 2000).show();
 		} catch (JsonMappingException e) {
@@ -57,18 +57,12 @@ public class SpiritDetailActivity extends Activity implements OnClickListener {
             Toast.makeText(this, "IOException: " + e.toString(), 2000).show();
 		}
 		
-        TextView name = (TextView)findViewById(R.id.spiritName);
-        name.setText(spirit.getBrandName());
+        TextView name = (TextView)findViewById(R.id.storeName);
+        name.setText(store.getName());
 
-        TextView cost = (TextView)findViewById(R.id.cost);
-        cost.setText("Cost: " + spirit.getRetailPrice());
-
-        TextView size = (TextView)findViewById(R.id.size);
-        size.setText("Size: " + spirit.getSize());
-
-        viewStores = (Button)findViewById(R.id.viewStores);
-        viewStores.setVisibility(View.VISIBLE);
-        viewStores.setOnClickListener(this);
+        viewInventory = (Button)findViewById(R.id.viewInventory);
+        viewInventory.setVisibility(View.VISIBLE);
+        viewInventory.setOnClickListener(this);
     }
     
 	public void handleError(Exception e) {
@@ -83,13 +77,13 @@ public class SpiritDetailActivity extends Activity implements OnClickListener {
 	    alertDialog.show();
 	}
 	
-	public void downloadSpirits() {
+	public void downloadStore() {
         Handler handler = new Handler () {
             public void handleMessage(Message message) {
                 switch (message.what) {
                     case HttpConnection.DID_SUCCEED:
                         String response = (String)message.obj;
-                        loadSpirits(response);
+                        loadStore(response);
                         progress.dismiss();
                         break;
                     case HttpConnection.DID_ERROR:
@@ -102,15 +96,15 @@ public class SpiritDetailActivity extends Activity implements OnClickListener {
             }
         };
 
-        String url = "http://wsll.pugdogdev.com/spirit/" + spiritId;
+        String url = "http://wsll.pugdogdev.com/store/" + storeId;
         new HttpConnection(handler).get(url);
     }
-    
+
     @Override
     public void onClick(View v) {
-    	if (v == viewStores) {
-        	Intent i = new Intent(this, StoreListActivity.class);
-        	i.putExtra("spiritId", spirit.getId());
+    	if (v == viewInventory) {      	
+  			Intent i = new Intent(this, CategoryListActivity.class);
+        	i.putExtra("storeId", storeId);
         	startActivity(i);
     	}
     }

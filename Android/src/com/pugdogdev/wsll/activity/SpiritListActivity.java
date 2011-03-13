@@ -29,6 +29,7 @@ import com.pugdogdev.wsll.model.ShortSpirit;
 public class SpiritListActivity extends ListActivity implements OnClickListener  {
 	ProgressDialog progress;
 	String category;
+	Integer storeId;
 	ArrayList<ShortSpirit> spiritList = new ArrayList<ShortSpirit>();
 
     /** Called when the activity is first created. */
@@ -38,6 +39,7 @@ public class SpiritListActivity extends ListActivity implements OnClickListener 
         setContentView(R.layout.spirits);
         
         category = (String)this.getIntent().getSerializableExtra("category");
+        storeId = (Integer)this.getIntent().getSerializableExtra("storeId");
         
         progress = ProgressDialog.show(this, "Refreshing...","Just chill bro.",true,false);
         downloadShortSpirits();
@@ -61,7 +63,19 @@ public class SpiritListActivity extends ListActivity implements OnClickListener 
         setListAdapter(new ShortSpiritAdapter(this, android.R.layout.simple_list_item_1, spiritList));
     }
     
-    public void downloadShortSpirits() {
+	public void handleError(Exception e) {
+	    AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+	    alertDialog.setTitle("Uh, error bro");
+	    alertDialog.setMessage("There was a problem: " + e.toString());
+	    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+	           public void onClick(DialogInterface dialog, int which) {
+	                  // here you can add functions
+	               }
+	    });
+	    alertDialog.show();
+	}
+	
+	public void downloadShortSpirits() {
         Handler handler = new Handler () {
             public void handleMessage(Message message) {
                 switch (message.what) {
@@ -83,22 +97,12 @@ public class SpiritListActivity extends ListActivity implements OnClickListener 
         };
 
         String url = "http://wsll.pugdogdev.com/spirits";
-        if (category != null) {
+        if (category != null && storeId == null) {
         	url += "?category=" + category;
+        } else if (category != null && storeId != null) {
+        	url = "http://wsll.pugdogdev.com/store/" + storeId + "/spirits?category=" + category;
         }
         new HttpConnection(handler).get(url);
-    }
-
-    public void handleError(Exception e) {
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Uh, error bro");
-        alertDialog.setMessage("There was a problem: " + e.toString());
-        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-               public void onClick(DialogInterface dialog, int which) {
-                      // here you can add functions
-                   }
-        });
-        alertDialog.show();
     }
     
     @Override

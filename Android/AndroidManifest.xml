@@ -19,6 +19,7 @@
 		 <activity android:name=".activity.CategoryListActivity" />
 		 <activity android:name=".activity.SpiritListActivity" />
 		 <activity android:name=".activity.SpiritDetailActivity" />
+		 <activity android:name=".activity.StoreDetailActivity" />
 		 <activity android:name=".BrocabDetailActivity" />
 		 <activity android:name=".LiquorLocatorTabBarActivity" />
     </application>
