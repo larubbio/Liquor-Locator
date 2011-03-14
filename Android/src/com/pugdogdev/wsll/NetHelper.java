@@ -1,23 +1,23 @@
-package com.pugdogdev.wsll.activity;
-
-import com.pugdogdev.wsll.HttpConnection;
+package com.pugdogdev.wsll;
 
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 
-public abstract class BaseListActivity extends ListActivity {
-	ProgressDialog progress;
+import com.pugdogdev.wsll.activity.LiquorLocatorActivity;
 
-	public BaseListActivity() {
-		super();
+public class NetHelper {
+	ProgressDialog progress;
+	LiquorLocatorActivity lla;
+
+	public NetHelper(LiquorLocatorActivity lla) {
+		this.lla = lla;
 	}
 
 	public void handleError(Exception e) {
-	    AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+	    AlertDialog alertDialog = new AlertDialog.Builder(lla.getActivity()).create();
 	    alertDialog.setTitle("Uh, error bro");
 	    alertDialog.setMessage("There was a problem: " + e.toString());
 	    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
@@ -28,19 +28,15 @@ public abstract class BaseListActivity extends ListActivity {
 	    alertDialog.show();
 	}
 
-	public abstract void parseObjects(String jsonRep);
-
-	public void downloadObjects(String url) {
-        progress = ProgressDialog.show(this, "Refreshing...","Just chill bro.", true, false);    
-
+	public void downloadObject(String url) {
+        progress = ProgressDialog.show(lla.getActivity(), "Refreshing...","Just chill bro.", true, false);
+        
 	    Handler handler = new Handler () {
 	        public void handleMessage(Message message) {
 	            switch (message.what) {
-	                case HttpConnection.DID_START:
-	                    break;
 	                case HttpConnection.DID_SUCCEED:
 	                    String response = (String)message.obj;
-	                    parseObjects(response);
+	                    lla.parseJson(response);
 	                    progress.dismiss();
 	                    break;
 	                case HttpConnection.DID_ERROR:
@@ -53,7 +49,7 @@ public abstract class BaseListActivity extends ListActivity {
 	        }
 	    };
 	
+	
 	    new HttpConnection(handler).get(url);
 	}
-
 }

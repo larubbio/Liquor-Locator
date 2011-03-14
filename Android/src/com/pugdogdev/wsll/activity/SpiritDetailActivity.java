@@ -6,6 +6,7 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
@@ -15,27 +16,30 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.model.Spirit;
 
-public class SpiritDetailActivity extends BaseActivity implements OnClickListener {
+public class SpiritDetailActivity extends Activity implements OnClickListener, LiquorLocatorActivity {
 	Button viewStores;
 	String spiritId;
     Spirit spirit;
+	NetHelper net;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.spirit_detail);
+        net = new NetHelper(this);
         
         spiritId = (String)this.getIntent().getSerializableExtra("spiritId");
         
         String url = "http://wsll.pugdogdev.com/spirit/" + spiritId;
-        downloadObject(url);
+        net.downloadObject(url);
     }
     
     @Override
-	public void parseObject(String jsonRep) { 
+	public void parseJson(String jsonRep) { 
         
         try {
         	ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
@@ -72,4 +76,9 @@ public class SpiritDetailActivity extends BaseActivity implements OnClickListene
         	startActivity(i);
     	}
     }
+
+	@Override
+	public Activity getActivity() {
+		return this;
+	}
 }

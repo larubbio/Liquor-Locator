@@ -6,6 +6,7 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
@@ -15,27 +16,30 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.model.Store;
 
-public class StoreDetailActivity extends BaseActivity implements OnClickListener {
+public class StoreDetailActivity extends Activity implements OnClickListener, LiquorLocatorActivity {
 	Button viewInventory;
 	Integer storeId;
     Store store;
+    NetHelper net;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.store_detail);
+        net = new NetHelper(this);
         
         storeId = (Integer)this.getIntent().getSerializableExtra("storeId");
         
         String url = "http://wsll.pugdogdev.com/store/" + storeId;
-        downloadObject(url);
+        net.downloadObject(url);
     }
     
     @Override
-    public void parseObject(String jsonRep) { 
+    public void parseJson(String jsonRep) { 
         
         try {
         	ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
@@ -66,4 +70,9 @@ public class StoreDetailActivity extends BaseActivity implements OnClickListener
         	startActivity(i);
     	}
     }
+
+	@Override
+	public Activity getActivity() {
+		return this;
+	}
 }

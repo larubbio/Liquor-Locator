@@ -8,6 +8,8 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
+import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
@@ -15,18 +17,22 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.adapter.CategoryAdapter;
 import com.pugdogdev.wsll.model.Category;
 
-public class CategoryListActivity extends BaseListActivity implements OnClickListener  {
+public class CategoryListActivity extends ListActivity implements OnClickListener, LiquorLocatorActivity  {
 	Integer storeId;
 	ArrayList<Category> categoryList = new ArrayList<Category>();
+	NetHelper net;
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        net = new NetHelper(this);
+        
         setContentView(R.layout.stores);
         
         storeId = (Integer)this.getIntent().getSerializableExtra("storeId");
@@ -35,11 +41,14 @@ public class CategoryListActivity extends BaseListActivity implements OnClickLis
         if (storeId != null) {
         	url = "http://wsll.pugdogdev.com/store/" + storeId + "/categories";
         }
-        downloadObjects(url);
+        net.downloadObject(url);
     }
  
+    /* (non-Javadoc)
+	 * @see com.pugdogdev.wsll.activity.LiquorLocatorActivity#parseObjects(java.lang.String)
+	 */
     @Override
-	public void parseObjects(String jsonRep) { 
+	public void parseJson(String jsonRep) { 
         
         try {
         	ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
@@ -68,4 +77,9 @@ public class CategoryListActivity extends BaseListActivity implements OnClickLis
        	}
        	startActivity(i);
     }
+
+	@Override
+	public Activity getActivity() {
+		return this;
+	}
 }

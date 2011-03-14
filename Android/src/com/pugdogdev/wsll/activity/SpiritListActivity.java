@@ -8,6 +8,8 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
+import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
@@ -15,20 +17,23 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.adapter.ShortSpiritAdapter;
 import com.pugdogdev.wsll.model.ShortSpirit;
 
-public class SpiritListActivity extends BaseListActivity implements OnClickListener  {
+public class SpiritListActivity extends ListActivity implements OnClickListener, LiquorLocatorActivity  {
 	String category;
 	Integer storeId;
 	ArrayList<ShortSpirit> spiritList = new ArrayList<ShortSpirit>();
+	NetHelper net;
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.spirits);
+        net = new NetHelper(this);
         
         category = (String)this.getIntent().getSerializableExtra("category");
         storeId = (Integer)this.getIntent().getSerializableExtra("storeId");
@@ -39,11 +44,11 @@ public class SpiritListActivity extends BaseListActivity implements OnClickListe
         } else if (category != null && storeId != null) {
         	url = "http://wsll.pugdogdev.com/store/" + storeId + "/spirits?category=" + category;
         }
-        downloadObjects(url);
+        net.downloadObject(url);
     }
  
     @Override
-    public void parseObjects(String jsonRep) { 
+    public void parseJson(String jsonRep) { 
         
         try {
         	ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
@@ -70,5 +75,10 @@ public class SpiritListActivity extends BaseListActivity implements OnClickListe
     }
 
 	public void loadCategories(String jsonRep) {
+	}
+
+	@Override
+	public Activity getActivity() {
+		return this;
 	}
 }

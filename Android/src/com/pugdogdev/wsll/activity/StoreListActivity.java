@@ -8,6 +8,8 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
+import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
@@ -15,35 +17,40 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.adapter.SpiritInventoryAdapter;
 import com.pugdogdev.wsll.adapter.StoreAdapter;
 import com.pugdogdev.wsll.model.SpiritInventory;
 import com.pugdogdev.wsll.model.Store;
 
-public class StoreListActivity extends BaseListActivity implements OnClickListener  {
+public class StoreListActivity extends ListActivity implements OnClickListener, LiquorLocatorActivity  {
     String spiritId;
 
     ArrayList<Store> storeList = new ArrayList<Store>();
 	ArrayList<SpiritInventory> inventoryList = new ArrayList<SpiritInventory>();
 
+	NetHelper net;
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stores);
-
+        net = new NetHelper(this);
+        
         spiritId = (String)this.getIntent().getSerializableExtra("spiritId");
 
         String url = "http://wsll.pugdogdev.com/stores";
         if (spiritId != null) {
         	url = "http://wsll.pugdogdev.com/spirit/" + spiritId + "/stores";
         }
-        downloadObjects(url);
+        
+        net.downloadObject(url);
     }
  
     @Override
-    public void parseObjects(String jsonRep) { 
+    public void parseJson(String jsonRep) { 
         
         try {
         	ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
@@ -82,4 +89,9 @@ public class StoreListActivity extends BaseListActivity implements OnClickListen
     	i.putExtra("storeId", s.getId());
     	startActivity(i);
     }
+
+	@Override
+	public Activity getActivity() {
+		return this;
+	}
 }
