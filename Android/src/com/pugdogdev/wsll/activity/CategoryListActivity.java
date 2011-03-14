@@ -32,7 +32,7 @@ public class CategoryListActivity extends ListActivity implements OnClickListene
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         net = new NetHelper(this);
-        
+		
         setContentView(R.layout.stores);
         
         storeId = (Integer)this.getIntent().getSerializableExtra("storeId");
