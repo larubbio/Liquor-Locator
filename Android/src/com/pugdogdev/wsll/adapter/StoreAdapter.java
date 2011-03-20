@@ -26,7 +26,7 @@ public class StoreAdapter extends ArrayAdapter<Store> {
         if (row == null) {
             LayoutInflater inflater = LayoutInflater.from(this.getContext());
             
-            row = inflater.inflate(R.layout.list_item_with_disclosure, null);
+            row = inflater.inflate(R.layout.list_item_with_count, null);
             
             ImageView disclosure = (ImageView)row.findViewById(R.id.disclosure);
             disclosure.setImageResource(R.drawable.disclosure);

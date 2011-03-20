@@ -25,17 +25,20 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         if (row == null) {
             LayoutInflater inflater = LayoutInflater.from(this.getContext());
             
-            row = inflater.inflate(R.layout.list_item_with_disclosure, null);
+            row = inflater.inflate(R.layout.list_item_with_count, null);
             
             ImageView disclosure = (ImageView)row.findViewById(R.id.disclosure);
             disclosure.setImageResource(R.drawable.disclosure);
         }
         
         TextView label = (TextView)row.findViewById(R.id.term);
-
-        Category rowItem = (Category)this.getItem(position);
-        label.setText(rowItem.getName());
+        TextView count = (TextView)row.findViewById(R.id.count);
         
+        Category rowItem = (Category)this.getItem(position);
+        
+        label.setText(rowItem.getName());
+        count.setText(rowItem.getCount());
+
         row.setOnClickListener((OnClickListener)this.getContext());
         row.setTag(position);
         

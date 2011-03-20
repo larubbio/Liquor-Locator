@@ -41,11 +41,14 @@ public class StoreListActivity extends ListActivity implements OnClickListener, 
         
         spiritId = (String)this.getIntent().getSerializableExtra("spiritId");
 
-        String url = "http://wsll.pugdogdev.com/stores";
+        String url = "http://wsll.pugdogdev.com/";
+        String path = null;
         if (spiritId != null) {
-        	url = "http://wsll.pugdogdev.com/spirit/" + spiritId + "/stores";
+        	path = "spirit/" + spiritId + "/stores";
+        } else {
+        	path = "stores";
         }
-        
+        url += path;
         net.downloadObject(url);
     }
  

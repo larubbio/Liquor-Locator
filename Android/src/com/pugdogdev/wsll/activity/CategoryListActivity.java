@@ -37,10 +37,14 @@ public class CategoryListActivity extends ListActivity implements OnClickListene
         
         storeId = (Integer)this.getIntent().getSerializableExtra("storeId");
         
-        String url = "http://wsll.pugdogdev.com/categories";
+        String url = "http://wsll.pugdogdev.com/";
+        String path = null;
         if (storeId != null) {
-        	url = "http://wsll.pugdogdev.com/store/" + storeId + "/categories";
+        	path = "store/" + storeId + "/categories";
+        } else {
+        	path = "categories";
         }
+        url += path;
         net.downloadObject(url);
     }
  

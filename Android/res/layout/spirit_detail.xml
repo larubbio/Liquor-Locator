@@ -5,15 +5,44 @@
     android:layout_height="fill_parent">
   <TextView android:layout_height="wrap_content" 
     		android:id="@+id/spiritName" 
-    		android:layout_width="fill_parent" android:gravity="center_horizontal">
+    		android:layout_width="fill_parent" 
+    		android:gravity="center_horizontal"
+    		android:textStyle="bold"
+    		android:textSize="10pt">
   </TextView>
   <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
     		android:id="@+id/cost" 
-    		android:layout_width="fill_parent" android:gravity="center_horizontal">
+  		    android:textColor="#6D7B8D"
+            android:paddingTop="25px"
+    		android:gravity="center_horizontal">
   </TextView>
   <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
     		android:id="@+id/size" 
-    		android:layout_width="fill_parent" android:gravity="center_horizontal">
+    		android:paddingTop="15px"
+  		    android:textColor="#6D7B8D"
+    		android:gravity="center_horizontal">
   </TextView>
-  <Button android:id="@+id/viewStores" android:layout_width="wrap_content" android:text="View Stores" android:layout_height="wrap_content" android:gravity="center_horizontal" android:visibility="invisible"></Button>
+  <Button android:id="@+id/viewStores" 
+          android:text="View Stores" 
+          android:layout_height="wrap_content" 
+          android:layout_width="fill_parent"
+          android:paddingLeft="50px"
+          android:paddingRight="50px" 
+          android:gravity="center_horizontal" 
+          android:visibility="invisible">
+  </Button>
+  <ImageView android:layout_width="wrap_content" 
+  			 android:layout_height="wrap_content" 
+  			 android:id="@+id/spiritImage">
+  </ImageView>
+  <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
+    		android:id="@+id/attribution" 
+    		android:paddingTop="5px"
+  		    android:textColor="#6D7B8D"
+  		    android:textSize="5pt"
+    		android:gravity="center_horizontal">
+  </TextView>
 </LinearLayout>

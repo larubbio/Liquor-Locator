@@ -29,20 +29,20 @@ public class NetHelper {
 	}
 
 	public void downloadObject(String url) {
-        progress = ProgressDialog.show(lla.getActivity(), "Refreshing...","Just chill bro.", true, false);
-        
+		progress = ProgressDialog.show(lla.getActivity(), "Refreshing...","Just chill bro.", true, false);
+		
 	    Handler handler = new Handler () {
 	        public void handleMessage(Message message) {
 	            switch (message.what) {
 	                case HttpConnection.DID_SUCCEED:
 	                    String response = (String)message.obj;
-	                    lla.parseJson(response);
-	                    progress.dismiss();
+	                    lla.parseJson(response);	                  
+                    	progress.dismiss();
 	                    break;
 	                case HttpConnection.DID_ERROR:
 	                    Exception e = (Exception) message.obj;
-	                    e.printStackTrace();
-	                    progress.dismiss();
+	                    e.printStackTrace();                    
+                    	progress.dismiss();
 	                    handleError(e);
 	                    break;
 	            }

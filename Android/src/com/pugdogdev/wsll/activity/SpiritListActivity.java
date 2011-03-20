@@ -1,6 +1,7 @@
 package com.pugdogdev.wsll.activity;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.codehaus.jackson.JsonParseException;
@@ -23,8 +24,6 @@ import com.pugdogdev.wsll.adapter.ShortSpiritAdapter;
 import com.pugdogdev.wsll.model.ShortSpirit;
 
 public class SpiritListActivity extends ListActivity implements OnClickListener, LiquorLocatorActivity  {
-	String category;
-	Integer storeId;
 	ArrayList<ShortSpirit> spiritList = new ArrayList<ShortSpirit>();
 	NetHelper net;
 
@@ -35,14 +34,29 @@ public class SpiritListActivity extends ListActivity implements OnClickListener,
         setContentView(R.layout.spirits);
         net = new NetHelper(this);
         
-        category = (String)this.getIntent().getSerializableExtra("category");
-        storeId = (Integer)this.getIntent().getSerializableExtra("storeId");
+        String category = (String)this.getIntent().getSerializableExtra("category");
+        String name = (String)this.getIntent().getSerializableExtra("name");
+        Integer storeId = (Integer)this.getIntent().getSerializableExtra("storeId");
         
-        String url = "http://wsll.pugdogdev.com/spirits";
+        String url = "http://wsll.pugdogdev.com/";
+        String path = null;
+        String query = null;
+        
         if (category != null && storeId == null) {
-        	url += "?category=" + category;
+        	path = "spirits";
+        	query = "category=" + URLEncoder.encode(category);
         } else if (category != null && storeId != null) {
-        	url = "http://wsll.pugdogdev.com/store/" + storeId + "/spirits?category=" + category;
+        	path = "store/" + storeId + "/spirits";
+        	query = "category=" + URLEncoder.encode(category);
+        } else if (name != null) {
+        	path = "spirits";
+        	query = "name=" + URLEncoder.encode(name);        	
+        } else {
+        	path = "spirits";
+        }
+        url += path;
+        if (query != null) {
+        	url += "?" + query;
         }
         net.downloadObject(url);
     }
@@ -69,13 +83,17 @@ public class SpiritListActivity extends ListActivity implements OnClickListener,
     @Override
     public void onClick(View v) {
     	ShortSpirit ss = spiritList.get((Integer)v.getTag());
-    	Intent i = new Intent(this, SpiritDetailActivity.class);
-    	i.putExtra("spiritId", ss.getId());
+    	Intent i;
+    	
+    	if (ss.getCount() != null) {
+           	i = new Intent(this, SpiritListActivity.class);
+           	i.putExtra("name", ss.getName());	
+    	} else {
+    		i = new Intent(this, SpiritDetailActivity.class);
+    		i.putExtra("spiritId", ss.getId());
+    	}
     	startActivity(i);
     }
-
-	public void loadCategories(String jsonRep) {
-	}
 
 	@Override
 	public Activity getActivity() {
