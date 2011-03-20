@@ -14,13 +14,14 @@
     		android:layout_width="fill_parent" 
     		android:id="@+id/cost" 
   		    android:textColor="#6D7B8D"
-            android:paddingTop="25px"
+            android:paddingTop="15px"
     		android:gravity="center_horizontal">
   </TextView>
   <TextView android:layout_height="wrap_content" 
     		android:layout_width="fill_parent" 
     		android:id="@+id/size" 
-    		android:paddingTop="15px"
+    		android:paddingTop="5px"
+    		android:paddingBottom="5px"
   		    android:textColor="#6D7B8D"
     		android:gravity="center_horizontal">
   </TextView>
@@ -28,14 +29,17 @@
           android:text="View Stores" 
           android:layout_height="wrap_content" 
           android:layout_width="fill_parent"
-          android:paddingLeft="50px"
-          android:paddingRight="50px" 
           android:gravity="center_horizontal" 
           android:visibility="invisible">
   </Button>
   <ImageView android:layout_width="wrap_content" 
-  			 android:layout_height="wrap_content" 
-  			 android:id="@+id/spiritImage">
+  			 android:layout_height="wrap_content"
+  			 android:layout_weight="1"
+  			 android:scaleType="fitCenter" 
+  			 android:id="@+id/spiritImage"
+  			 android:gravity="center_horizontal"
+  			 android:layout_centerVertical="true"
+  			 android:layout_centerHorizontal="true">
   </ImageView>
   <TextView android:layout_height="wrap_content" 
     		android:layout_width="fill_parent" 
