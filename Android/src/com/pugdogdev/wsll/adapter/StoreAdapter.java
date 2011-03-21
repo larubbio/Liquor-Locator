@@ -2,10 +2,8 @@ package com.pugdogdev.wsll.adapter;
 
 import java.util.ArrayList;
 
-import com.pugdogdev.wsll.R;
-import com.pugdogdev.wsll.model.Store;
-
 import android.content.Context;
+import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,6 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.pugdogdev.wsll.LocationHelper;
+import com.pugdogdev.wsll.R;
+import com.pugdogdev.wsll.model.Store;
 
 public class StoreAdapter extends ArrayAdapter<Store> {
     public StoreAdapter(Context context, int textViewResourceId, ArrayList<Store> items) {
@@ -26,17 +28,28 @@ public class StoreAdapter extends ArrayAdapter<Store> {
         if (row == null) {
             LayoutInflater inflater = LayoutInflater.from(this.getContext());
             
-            row = inflater.inflate(R.layout.list_item_with_count, null);
+            row = inflater.inflate(R.layout.list_item_store, null);
             
             ImageView disclosure = (ImageView)row.findViewById(R.id.disclosure);
             disclosure.setImageResource(R.drawable.disclosure);
         }
         
-        TextView label = (TextView)row.findViewById(R.id.term);
+        TextView label = (TextView)row.findViewById(R.id.label);
+        TextView distance = (TextView)row.findViewById(R.id.distance);
+        TextView distanceLabel = (TextView)row.findViewById(R.id.distanceLabel);
 
-        Store rowItem = (Store)this.getItem(position);
-        label.setText(rowItem.getName());
+        Store store = (Store)this.getItem(position);
+        label.setText(store.getName());
         
+        if (store.getDistanceToUser() != null) {
+        	distance.setVisibility(View.VISIBLE);
+        	distanceLabel.setVisibility(View.VISIBLE);
+        	
+        	distance.setText(String.format("%.2f", store.getDistanceToUser().floatValue()));
+        } else {
+        	distance.setVisibility(View.GONE);
+        	distanceLabel.setVisibility(View.GONE);
+        }
         row.setOnClickListener((OnClickListener)this.getContext());
         row.setTag(position);
         

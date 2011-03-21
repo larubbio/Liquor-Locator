@@ -1,11 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+  <ImageView android:src="@drawable/icon" 
+             android:layout_width="wrap_content" 
+             android:id="@+id/mapView" 
+             android:layout_height="wrap_content" 
+    		 android:layout_alignParentTop="true">
+  </ImageView>
   <TextView android:layout_height="wrap_content" 
-    		android:id="@+id/storeName" 
-    		android:layout_width="fill_parent" android:gravity="center_horizontal">
+    		android:id="@+id/storeName"
+    		android:layout_alignParentTop="true"
+    		android:layout_toRightOf="@+id/mapView"
+    		android:layout_width="fill_parent" 
+    		android:textStyle="bold"    		
+    		android:textSize="7pt"
+    		android:gravity="left">
   </TextView>
-  <Button android:id="@+id/viewInventory" android:layout_width="wrap_content" android:text="View Inventory" android:layout_height="wrap_content" android:gravity="center_horizontal" android:visibility="invisible"></Button>
-</LinearLayout>
+  <TextView android:layout_height="wrap_content" 
+    		android:id="@+id/storeAddress"
+    		android:layout_below="@+id/storeName" 
+    		android:layout_toRightOf="@+id/mapView"
+    		android:layout_width="fill_parent" 
+    		android:textSize="5pt"
+    		android:gravity="left">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:id="@+id/storeCity"
+    		android:layout_below="@+id/storeAddress" 
+    		android:layout_toRightOf="@+id/mapView"
+    		android:layout_width="fill_parent" 
+    		android:textSize="5pt"
+    		android:gravity="left">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:id="@+id/storeOpenOrClosed"
+    		android:layout_below="@+id/storeCity" 
+    		android:layout_toRightOf="@+id/mapView"
+    		android:layout_width="fill_parent"
+    		android:textStyle="bold"
+    		android:textSize="7pt"    		
+    		android:gravity="left">
+  </TextView>
+  <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="1"
+    android:layout_below="@+id/storeOpenOrClosed" 
+    android:id="@+id/hoursTable"
+    android:paddingLeft="20px"
+    android:paddingRight="20px" android:visibility="invisible">
+
+    <TableRow>
+        <TextView
+            android:layout_span="2"
+            android:text="Hours" 
+            android:textSize="7pt" 
+            android:textStyle="bold"/>
+        <TextView
+        	android:id="@+id/thurLabel"
+            android:text="Thur"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/thurHours"
+            android:gravity="left"
+            android:padding="3dip" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+        	android:id="@+id/monLabel"
+            android:text="Mon"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/monHours"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/friLabel"
+            android:text="Fri"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/friHours"
+            android:gravity="left"
+            android:padding="3dip" />
+    </TableRow>
+    
+    <TableRow>
+        <TextView
+        	android:id="@+id/tueLabel"
+            android:text="Tue"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/tueHours"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/satLabel"
+            android:text="Sat"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/satHours"
+            android:gravity="left"
+            android:padding="3dip" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+        	android:id="@+id/wedLabel"
+            android:text="Wed"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/wedHours"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/sunLabel"
+            android:text="Sun"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/sunHours"
+            android:gravity="left"
+            android:padding="3dip" />
+    </TableRow>
+  </TableLayout>
+  
+  <Button android:id="@+id/directions" 
+          android:layout_width="wrap_content" 
+          android:text="Directions to Store" 
+          android:layout_below="@+id/hoursTable" 
+          android:layout_alignParentLeft="true"
+          android:layout_height="wrap_content" 
+          android:gravity="center_horizontal"
+          android:paddingTop="15px"
+          android:visibility="invisible">
+  </Button>
+  <Button android:id="@+id/viewInventory" 
+          android:layout_width="wrap_content" 
+          android:text="View Inventory" 
+          android:layout_below="@+id/hoursTable" 
+          android:layout_alignParentRight="true"
+          android:layout_height="wrap_content" 
+          android:gravity="center_horizontal"
+          android:paddingTop="15px"
+          android:visibility="invisible">
+  </Button>
+</RelativeLayout>

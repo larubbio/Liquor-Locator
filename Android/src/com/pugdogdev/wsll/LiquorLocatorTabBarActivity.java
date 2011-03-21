@@ -19,20 +19,25 @@ public class LiquorLocatorTabBarActivity extends TabActivity {
 
         TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
 
-        TabSpec secondTabSpec = tabHost.newTabSpec("tid2");
-        secondTabSpec.setIndicator("Categories");
-        secondTabSpec.setContent(new Intent(this, CategoryListActivity.class));
+        TabSpec categoryTab = tabHost.newTabSpec("categories");
+        categoryTab.setIndicator("Categories");
+        categoryTab.setContent(new Intent(this, CategoryListActivity.class));
 
-        TabSpec thirdTabSpec = tabHost.newTabSpec("tid3");
-        thirdTabSpec.setIndicator("Stores");
-        thirdTabSpec.setContent(new Intent(this, StoreListActivity.class));
+        TabSpec storeTab = tabHost.newTabSpec("stores");
+        storeTab.setIndicator("Stores");
+        storeTab.setContent(new Intent(this, StoreListActivity.class));
 
-        TabSpec fourthTabSpec = tabHost.newTabSpec("tid4");
-        fourthTabSpec.setIndicator("Spirits");
-        fourthTabSpec.setContent(new Intent(this, SpiritListActivity.class));
+        TabSpec searchTab = tabHost.newTabSpec("search");
+        searchTab.setIndicator("Spirits");
+        searchTab.setContent(new Intent(this, SpiritListActivity.class));
 
-        tabHost.addTab(secondTabSpec);
-        tabHost.addTab(thirdTabSpec);
-        tabHost.addTab(fourthTabSpec);
+        TabSpec localTab = tabHost.newTabSpec("local");
+        localTab.setIndicator("Local");
+        localTab.setContent(new Intent(this, SpiritListActivity.class));
+
+        tabHost.addTab(categoryTab);
+        tabHost.addTab(storeTab);
+        tabHost.addTab(searchTab);
+        tabHost.addTab(localTab);
     }
 }

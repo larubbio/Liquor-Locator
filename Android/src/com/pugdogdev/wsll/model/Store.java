@@ -2,8 +2,11 @@ package com.pugdogdev.wsll.model;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
+
+import android.location.Location;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Store {
@@ -17,6 +20,9 @@ public class Store {
 	@JsonProperty("long") String _longitude;
 	List<Contact> contacts;
 	List<Hour> hours;
+	
+	@JsonIgnore Location location;
+	@JsonIgnore Float distanceToUser;
 	
 	public int getId() {
 		return id;
@@ -77,5 +83,26 @@ public class Store {
 	}
 	public void setHours(List<Hour> hours) {
 		this.hours = hours;
+	}
+	public void setDistanceToUser(Location userLocation) {
+		if (userLocation != null && getLocation() != null) {
+			float dist = userLocation.distanceTo(getLocation());
+			distanceToUser = new Float(dist * (float)0.000621371192);
+		}
+	}
+	public Float getDistanceToUser() {
+		return distanceToUser;
+	}
+	public Location getLocation() {
+		
+		// Looks like some python has leaked into my json.
+		if (location == null && ((_latitude != null && !_latitude.equals("None") &&
+				                  _longitude != null && !_longitude.equals("None")))) {
+			location = new Location("");
+			location.setLatitude(new Double(_latitude).doubleValue());
+			location.setLongitude(new Double(_longitude).doubleValue());
+		}
+		
+		return location;
 	}
 }
