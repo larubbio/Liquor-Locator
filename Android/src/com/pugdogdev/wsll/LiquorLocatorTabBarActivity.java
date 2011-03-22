@@ -1,15 +1,14 @@
 package com.pugdogdev.wsll;
 
-import com.pugdogdev.wsll.R;
-import com.pugdogdev.wsll.activity.CategoryListActivity;
-import com.pugdogdev.wsll.activity.SpiritListActivity;
-import com.pugdogdev.wsll.activity.StoreListActivity;
-
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+
+import com.pugdogdev.wsll.activity.CategoryListActivity;
+import com.pugdogdev.wsll.activity.SpiritListActivity;
+import com.pugdogdev.wsll.activity.StoreListActivity;
 
 public class LiquorLocatorTabBarActivity extends TabActivity {
     @Override

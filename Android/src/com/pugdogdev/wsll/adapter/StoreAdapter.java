@@ -3,7 +3,6 @@ package com.pugdogdev.wsll.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pugdogdev.wsll.LocationHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.model.Store;
 

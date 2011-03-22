@@ -3,12 +3,21 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+   <com.google.android.maps.MapView
+        android:id="@+id/mapView"
+        android:clickable="true"
+        android:layout_width="100dip" 
+        android:layout_height="100dip"
+    	android:layout_alignParentTop="true"
+    	android:visibility="invisible"
+        android:apiKey="09EeknnpIeMPpvXm7Oc_U5f4hGElFdaBdjppDkw"/>
+<!--       
   <ImageView android:src="@drawable/icon" 
-             android:layout_width="wrap_content" 
-             android:id="@+id/mapView" 
-             android:layout_height="wrap_content" 
-    		 android:layout_alignParentTop="true">
-  </ImageView>
+  			 android:layout_width="100dip" 
+  			 android:layout_height="100dip" 
+     		 android:layout_alignParentTop="true"
+  			 android:id="@+id/mapView"></ImageView>
+-->       
   <TextView android:layout_height="wrap_content" 
     		android:id="@+id/storeName"
     		android:layout_alignParentTop="true"
@@ -47,7 +56,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:stretchColumns="1"
-    android:layout_below="@+id/storeOpenOrClosed" 
+    android:layout_below="@+id/mapView" 
     android:id="@+id/hoursTable"
     android:paddingLeft="20px"
     android:paddingRight="20px" android:visibility="invisible">
@@ -88,8 +97,7 @@
         	android:id="@+id/friHours"
             android:gravity="left"
             android:padding="3dip" />
-    </TableRow>
-    
+    </TableRow>    
     <TableRow>
         <TextView
         	android:id="@+id/tueLabel"

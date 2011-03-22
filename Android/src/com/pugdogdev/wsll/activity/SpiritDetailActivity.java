@@ -110,7 +110,7 @@ public class SpiritDetailActivity extends Activity implements OnClickListener, L
 
         				String url = (String)result.get("url");
         				String visibleUrl = (String)result.get("visibleUrl");
-        				String originalContextUrl = (String)result.get("originalContextUrl");
+        				//String originalContextUrl = (String)result.get("originalContextUrl");
         				
         				attribution.setText(visibleUrl);
         				

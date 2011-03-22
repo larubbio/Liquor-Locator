@@ -2,8 +2,6 @@ package com.pugdogdev.wsll.adapter;
 
 import java.util.ArrayList;
 
-import com.pugdogdev.wsll.R;
-import com.pugdogdev.wsll.model.ShortSpirit;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.pugdogdev.wsll.R;
+import com.pugdogdev.wsll.model.ShortSpirit;
 
 public class ShortSpiritAdapter extends ArrayAdapter<ShortSpirit> {
     public ShortSpiritAdapter(Context context, int textViewResourceId, ArrayList<ShortSpirit> items) {

@@ -3,6 +3,7 @@ package com.pugdogdev.wsll.activity;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -12,6 +13,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,18 +24,28 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapActivity;
+import com.google.android.maps.MapController;
+import com.google.android.maps.MapView;
+import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayItem;
 import com.pugdogdev.wsll.LocationHelper;
+import com.pugdogdev.wsll.MapPinOverlay;
 import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.model.Hour;
 import com.pugdogdev.wsll.model.Store;
 
-public class StoreDetailActivity extends Activity implements OnClickListener, LiquorLocatorActivity {
+public class StoreDetailActivity extends MapActivity implements OnClickListener, LiquorLocatorActivity {
 	Button viewInventory;
 	Button directions;
 	Integer storeId;
     Store store;
     NetHelper net;
+    List<Overlay> mapOverlays;
+    Drawable drawable;
+    MapPinOverlay itemizedOverlay;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -148,6 +160,27 @@ public class StoreDetailActivity extends Activity implements OnClickListener, Li
         street.setText(String.format("%s, WA %s", store.getCity(), store.getZip()));
         openOrClosed.setText("CLOSED");
 
+        MapView mapView = (MapView) findViewById(R.id.mapView);
+        double lat = Double.parseDouble(store.getLatitude());
+        double lng = Double.parseDouble(store.getLongitude());
+
+        MapController mc = mapView.getController();
+        GeoPoint p = new GeoPoint((int) (lat * 1E6), 
+        						  (int) (lng * 1E6));
+ 
+        mapOverlays = mapView.getOverlays();
+        drawable = this.getResources().getDrawable(R.drawable.pushpin);
+        itemizedOverlay = new MapPinOverlay(drawable);
+        OverlayItem overlayItem = new OverlayItem(p, "", "");
+        itemizedOverlay.addOverlay(overlayItem);
+        mapOverlays.add(itemizedOverlay);
+        
+        mc.animateTo(p);
+        mc.setZoom(16); 
+        mapView.invalidate();
+        
+        mapView.setVisibility(View.VISIBLE);
+        
         viewInventory = (Button)findViewById(R.id.viewInventory);
         viewInventory.setVisibility(View.VISIBLE);
         viewInventory.setOnClickListener(this);
@@ -187,7 +220,7 @@ public class StoreDetailActivity extends Activity implements OnClickListener, Li
     	}
     }
 
-      @Override
+    @Override
     public void onClick(View v) {
     	if (v == viewInventory) {      	
   			Intent i = new Intent(this, CategoryListActivity.class);
@@ -198,14 +231,28 @@ public class StoreDetailActivity extends Activity implements OnClickListener, Li
     		
     		String startLocationParameter = String.format("%f,%f", userLocation.getLatitude(), userLocation.getLongitude());
     		String destinationLocationParameter = String.format("%s,%s", store.getLatitude(), store.getLongitude());
-    		String googleURL = String.format("http://maps.google.com/maps?daddr=%s&saddr=%s", destinationLocationParameter, startLocationParameter);
+    		String googleURL = String.format("http://maps.google.com/maps?daddr=%s&saddr=%s&sensor=true", destinationLocationParameter, startLocationParameter);
     		Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse(googleURL));
     		startActivity(browserIntent);
     	}
+    	/*
+    	    try {
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:123456789"));
+        startActivity(callIntent);
+    } catch (ActivityNotFoundException e) {
+        Log.e("helloandroid dialing example", "Call failed", e);
+    }
+    	  */
     }
 
 	@Override
 	public Activity getActivity() {
 		return this;
+	}
+
+	@Override
+	protected boolean isRouteDisplayed() {
+		return false;
 	}
 }

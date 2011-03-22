@@ -2,16 +2,17 @@ package com.pugdogdev.wsll.adapter;
 
 import java.util.ArrayList;
 
-import com.pugdogdev.wsll.R;
-import com.pugdogdev.wsll.model.SpiritInventory;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.pugdogdev.wsll.R;
+import com.pugdogdev.wsll.model.SpiritInventory;
 
 public class SpiritInventoryAdapter extends ArrayAdapter<SpiritInventory> {
 
