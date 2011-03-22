@@ -34,6 +34,7 @@ import com.pugdogdev.wsll.LocationHelper;
 import com.pugdogdev.wsll.MapPinOverlay;
 import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
+import com.pugdogdev.wsll.model.Contact;
 import com.pugdogdev.wsll.model.Hour;
 import com.pugdogdev.wsll.model.Store;
 
@@ -181,6 +182,34 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener,
         
         mapView.setVisibility(View.VISIBLE);
         
+        TextView storeManager = (TextView)findViewById(R.id.storeManager);
+        TextView storeManagerName = (TextView)findViewById(R.id.storeManagerName);
+        TextView storeManagerNumber = (TextView)findViewById(R.id.storeManagerNumber);
+        
+        TextView districtManager = (TextView)findViewById(R.id.districtManager);
+        TextView districtManagerName = (TextView)findViewById(R.id.districtManagerName);
+        TextView districtManagerNumber = (TextView)findViewById(R.id.districtManagerNumber);
+        
+        for (Contact c : store.getContacts()) {
+        	if (c.getRole().equals("Store Manager")) {
+        		storeManager.setVisibility(View.VISIBLE);
+        		storeManagerName.setVisibility(View.VISIBLE);
+        		storeManagerNumber.setVisibility(View.VISIBLE);
+        		
+        		storeManagerName.setText(c.getName());
+        		storeManagerNumber.setText(c.getNumber());
+        	}
+
+        	if (c.getRole().equals("Store Manager")) {
+        		districtManager.setVisibility(View.VISIBLE);
+        		districtManagerName.setVisibility(View.VISIBLE);
+        		districtManagerNumber.setVisibility(View.VISIBLE);
+        		
+        		districtManagerName.setText(c.getName());
+        		districtManagerNumber.setText(c.getNumber());
+        	}
+        }
+        
         viewInventory = (Button)findViewById(R.id.viewInventory);
         viewInventory.setVisibility(View.VISIBLE);
         viewInventory.setOnClickListener(this);
@@ -231,7 +260,7 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener,
     		
     		String startLocationParameter = String.format("%f,%f", userLocation.getLatitude(), userLocation.getLongitude());
     		String destinationLocationParameter = String.format("%s,%s", store.getLatitude(), store.getLongitude());
-    		String googleURL = String.format("http://maps.google.com/maps?daddr=%s&saddr=%s&sensor=true", destinationLocationParameter, startLocationParameter);
+    		String googleURL = String.format("http://maps.google.com/maps?daddr=%s&saddr=%s", destinationLocationParameter, startLocationParameter);
     		Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse(googleURL));
     		startActivity(browserIntent);
     	}

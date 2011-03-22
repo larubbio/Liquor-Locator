@@ -161,4 +161,62 @@
           android:paddingTop="15px"
           android:visibility="invisible">
   </Button>
+  
+  <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
+    		android:text="Store Manager"
+    		android:id="@+id/storeManager"
+    		android:layout_below="@+id/viewInventory"
+    		android:textStyle="bold"    		
+    		android:textSize="7pt"
+    		android:gravity="center"
+            android:visibility="invisible">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
+    		android:id="@+id/storeManagerName"
+    		android:layout_below="@+id/storeManager" 
+    		android:textSize="5pt"
+    		android:gravity="center"
+            android:visibility="invisible">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
+    		android:id="@+id/storeManagerNumber"
+    		android:layout_below="@+id/storeManagerName" 
+    		android:textSize="5pt"
+    		android:gravity="center" 
+    		android:clickable="true" 
+    		android:autoLink="phone"
+            android:visibility="invisible">
+  </TextView>
+
+  <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
+    		android:text="District Manager"
+    		android:id="@+id/districtManager"
+    		android:layout_below="@+id/storeManagerNumber"
+    		android:textStyle="bold"    		
+    		android:textSize="7pt"
+    		android:gravity="center"
+            android:visibility="invisible">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
+    		android:id="@+id/districtManagerName"
+    		android:layout_below="@+id/districtManager" 
+    		android:textSize="5pt"
+    		android:gravity="center"
+            android:visibility="invisible">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
+    		android:id="@+id/districtManagerNumber"
+    		android:layout_below="@+id/districtManagerName" 
+    		android:textSize="5pt"
+    		android:gravity="center" 
+    		android:clickable="true" 
+    		android:autoLink="phone"
+            android:visibility="invisible">
+  </TextView>
 </RelativeLayout>
