@@ -7,6 +7,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
 import com.pugdogdev.wsll.activity.CategoryListActivity;
+import com.pugdogdev.wsll.activity.SearchActivity;
 import com.pugdogdev.wsll.activity.SpiritListActivity;
 import com.pugdogdev.wsll.activity.StoreListActivity;
 
@@ -27,8 +28,8 @@ public class LiquorLocatorTabBarActivity extends TabActivity {
         storeTab.setContent(new Intent(this, StoreListActivity.class));
 
         TabSpec searchTab = tabHost.newTabSpec("search");
-        searchTab.setIndicator("Spirits");
-        searchTab.setContent(new Intent(this, SpiritListActivity.class));
+        searchTab.setIndicator("Search");
+        searchTab.setContent(new Intent(this, SearchActivity.class));
 
         TabSpec localTab = tabHost.newTabSpec("local");
         localTab.setIndicator("Local");

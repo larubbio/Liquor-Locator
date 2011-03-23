@@ -20,6 +20,7 @@
 		 <activity android:name=".activity.StoreListActivity" />
 		 <activity android:name=".activity.CategoryListActivity" />
 		 <activity android:name=".activity.SpiritListActivity" />
+		 <activity android:name=".activity.SearchActivity" />
 		 <activity android:name=".activity.SpiritDetailActivity" />
 		 <activity android:name=".activity.StoreDetailActivity" />
 		 <activity android:name=".BrocabDetailActivity" />
