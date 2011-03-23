@@ -22,8 +22,6 @@ import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -35,7 +33,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pugdogdev.wsll.HttpConnection;
 import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.adapter.ShortSpiritAdapter;
@@ -174,26 +171,5 @@ public class SearchActivity extends ListActivity implements OnClickListener, Tex
 	               }
 	    });
 	    alertDialog.show();
-	}
-
-	public void downloadObject(String url) {
-	    Handler handler = new Handler () {
-	        public void handleMessage(Message message) {
-	            switch (message.what) {
-	                case HttpConnection.DID_SUCCEED:
-	                    String response = (String)message.obj;
-	                    parseJson(response);	 
-	                    break;
-	                case HttpConnection.DID_ERROR:
-	                    Exception e = (Exception) message.obj;
-	                    e.printStackTrace();                    
-	                    handleError(e);
-	                    break;
-	            }
-	        }
-	    };
-	
-	
-	    new HttpConnection(handler).get(url);
 	}
 }
