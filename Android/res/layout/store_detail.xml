@@ -10,14 +10,7 @@
         android:layout_height="100dip"
     	android:layout_alignParentTop="true"
     	android:visibility="invisible"
-        android:apiKey="09EeknnpIeMPpvXm7Oc_U5f4hGElFdaBdjppDkw"/>
-<!--       
-  <ImageView android:src="@drawable/icon" 
-  			 android:layout_width="100dip" 
-  			 android:layout_height="100dip" 
-     		 android:layout_alignParentTop="true"
-  			 android:id="@+id/mapView"></ImageView>
--->       
+        android:apiKey="09EeknnpIeMPpvXm7Oc_U5f4hGElFdaBdjppDkw"/>     
   <TextView android:layout_height="wrap_content" 
     		android:id="@+id/storeName"
     		android:layout_alignParentTop="true"

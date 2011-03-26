@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+  <ViewSwitcher 
+    	android:layout_width="fill_parent" 
+    	android:layout_height="fill_parent"
+    	android:layout_alignParentTop="true"
+    	android:id="@+id/switcher">             
     <ListView
-        android:id="@android:id/list"
+        android:id="@+id/storeList"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+    	android:layout_alignParentTop="true"
         android:layout_weight="1" />
-</LinearLayout>
+    <com.google.android.maps.MapView
+        android:id="@+id/mapView"
+        android:clickable="true"
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent"
+    	android:layout_alignParentTop="true"
+        android:apiKey="09EeknnpIeMPpvXm7Oc_U5f4hGElFdaBdjppDkw"/>
+   </ViewSwitcher>
+   <Button android:id="@+id/toggle" 
+          android:layout_width="wrap_content" 
+          android:text="Toggle" 
+          android:layout_alignParentRight="true"
+          android:layout_alignParentBottom="true"
+          android:layout_height="wrap_content" 
+          android:gravity="center_horizontal">
+   </Button>
+  </RelativeLayout>

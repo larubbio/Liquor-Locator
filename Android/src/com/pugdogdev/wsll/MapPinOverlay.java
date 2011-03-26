@@ -26,6 +26,10 @@ public class MapPinOverlay extends ItemizedOverlay<OverlayItem> {
 	
 	public void addOverlay(OverlayItem overlay) {
 	    mOverlays.add(overlay);
-	    populate();
+//	    populate();
+	}
+	
+	public void populateOverlay() {
+		populate();
 	}
 }
