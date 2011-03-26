@@ -1,5 +1,6 @@
 package com.pugdogdev.wsll;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -11,7 +12,8 @@ import com.pugdogdev.wsll.activity.LiquorLocatorActivity;
 public class NetHelper {
 	ProgressDialog progress;
 	LiquorLocatorActivity lla;
-
+	String _url;
+	
 	public NetHelper(LiquorLocatorActivity lla) {
 		this.lla = lla;
 	}
@@ -29,6 +31,13 @@ public class NetHelper {
 	}
 
 	public void downloadObject(String url) {
+		_url = url;
+		String json = ((LiquorLocator)lla.getActivity().getApplicationContext()).getCachedJson(url);
+		if (json != null) {
+			lla.parseJson(json);
+			return;
+		}
+		
 		progress = ProgressDialog.show(lla.getActivity(), "Refreshing...","Just chill bro.", true, false);
 		
 	    Handler handler = new Handler () {
@@ -36,6 +45,7 @@ public class NetHelper {
 	            switch (message.what) {
 	                case HttpConnection.DID_SUCCEED:
 	                    String response = (String)message.obj;
+	                    ((LiquorLocator)lla.getActivity().getApplicationContext()).putCachedJson(_url, response);
 	                    lla.parseJson(response);	                  
                     	progress.dismiss();
 	                    break;

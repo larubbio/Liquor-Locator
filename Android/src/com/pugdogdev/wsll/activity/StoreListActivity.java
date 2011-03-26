@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -24,12 +26,14 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.flurry.android.FlurryAgent;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
+import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.LocationHelper;
 import com.pugdogdev.wsll.MapPinOverlay;
 import com.pugdogdev.wsll.NetHelper;
@@ -56,17 +60,26 @@ public class StoreListActivity extends MapActivity implements OnClickListener, L
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         setContentView(R.layout.stores);
         net = new NetHelper(this);
         
         spiritId = (String)this.getIntent().getSerializableExtra("spiritId");
+        String spiritName = (String)this.getIntent().getSerializableExtra("spiritName");
 
         String url = "http://wsll.pugdogdev.com/";
         String path = null;
+        
+        Map<String, String> parameters = new HashMap<String, String>();
         if (spiritId != null) {
         	path = "spirit/" + spiritId + "/stores";
+        	
+        	parameters.put("Spirit", spiritName);
+            FlurryAgent.logEvent("StoresView", parameters);
         } else {
         	path = "stores";
+        	
+            FlurryAgent.logEvent("StoresView");       	
         }
         url += path;
         net.downloadObject(url);
@@ -84,6 +97,12 @@ public class StoreListActivity extends MapActivity implements OnClickListener, L
     public void onStart() {
     	super.onStart();
     	setDistanceAndSort();
+    }
+    
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	FlurryAgent.onPageView();
     }
 
 	private void setDistanceAndSort() {
@@ -253,4 +272,10 @@ public class StoreListActivity extends MapActivity implements OnClickListener, L
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+    @Override
+    public void onStop() {
+    	super.onStop();
+        FlurryAgent.onEndSession(this);
+    }
 }

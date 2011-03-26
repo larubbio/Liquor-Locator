@@ -3,6 +3,7 @@ package com.pugdogdev.wsll.activity;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.codehaus.jackson.JsonParseException;
@@ -24,7 +25,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flurry.android.FlurryAgent;
 import com.pugdogdev.wsll.HttpConnection;
+import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.model.Spirit;
@@ -40,6 +43,7 @@ public class SpiritDetailActivity extends Activity implements OnClickListener, L
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         setContentView(R.layout.spirit_detail);
         net = new NetHelper(this);
         
@@ -47,6 +51,12 @@ public class SpiritDetailActivity extends Activity implements OnClickListener, L
         
         String url = "http://wsll.pugdogdev.com/spirit/" + spiritId;
         net.downloadObject(url);
+    }
+    
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	FlurryAgent.onPageView();
     }
     
     @Override
@@ -86,7 +96,11 @@ public class SpiritDetailActivity extends Activity implements OnClickListener, L
 
         viewStores = (Button)findViewById(R.id.viewStores);
         viewStores.setVisibility(View.VISIBLE);
-        viewStores.setOnClickListener(this);        
+        viewStores.setOnClickListener(this);       
+        
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("Spirit", spirit.getBrandName());
+        FlurryAgent.logEvent("SpiritDetail", parameters);
     }
 
 	public void parseGoogleResult(String jsonRep) { 
@@ -134,6 +148,7 @@ public class SpiritDetailActivity extends Activity implements OnClickListener, L
     	if (v == viewStores) {
         	Intent i = new Intent(this, StoreListActivity.class);
         	i.putExtra("spiritId", spirit.getId());
+        	i.putExtra("spiritName", spirit.getBrandName());
         	startActivity(i);
     	}
     }
@@ -182,4 +197,10 @@ public class SpiritDetailActivity extends Activity implements OnClickListener, L
 	
 	    new HttpConnection(handler).bitmap(url);
 	}
+	
+    @Override
+    public void onStop() {
+    	super.onStop();
+        FlurryAgent.onEndSession(this);
+    }
 }

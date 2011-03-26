@@ -1,5 +1,7 @@
 package com.pugdogdev.wsll;
 
+import com.flurry.android.FlurryAgent;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +19,7 @@ public class SplashScreen extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
 		setContentView(R.layout.splash);
 		
 		// Just get the instance so it inits and starts getting the location
@@ -62,6 +65,12 @@ public class SplashScreen extends Activity {
 		splashThread.start();
 	}
 	
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	FlurryAgent.onPageView();
+    }
+    
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 	    if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -69,4 +78,10 @@ public class SplashScreen extends Activity {
 	    }
 	    return true;
 	}
+	
+    @Override
+    public void onStop() {
+    	super.onStop();
+        FlurryAgent.onEndSession(this);
+    }
 }

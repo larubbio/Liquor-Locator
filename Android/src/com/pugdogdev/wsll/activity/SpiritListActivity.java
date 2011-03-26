@@ -3,6 +3,8 @@ package com.pugdogdev.wsll.activity;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -18,6 +20,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import com.flurry.android.FlurryAgent;
+import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.adapter.ShortSpiritAdapter;
@@ -31,28 +35,44 @@ public class SpiritListActivity extends ListActivity implements OnClickListener,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         setContentView(R.layout.spirits);
         net = new NetHelper(this);
         
         String category = (String)this.getIntent().getSerializableExtra("category");
         String name = (String)this.getIntent().getSerializableExtra("name");
         Integer storeId = (Integer)this.getIntent().getSerializableExtra("storeId");
+        String storeName = (String)this.getIntent().getSerializableExtra("storeName");
         
         String url = "http://wsll.pugdogdev.com/";
         String path = null;
         String query = null;
-        
+                
+    	Map<String, String> parameters = new HashMap<String, String>();
+
         if (category != null && storeId == null) {
         	path = "spirits";
         	query = "category=" + URLEncoder.encode(category);
+
+        	parameters.put("Category", category);
+            FlurryAgent.logEvent("SpiritsView", parameters);
         } else if (category != null && storeId != null) {
         	path = "store/" + storeId + "/spirits";
         	query = "category=" + URLEncoder.encode(category);
+
+        	parameters.put("Category", category);
+        	parameters.put("Store", storeName);
+            FlurryAgent.logEvent("StoreInventoryView", parameters);
         } else if (name != null) {
         	path = "spirits";
         	query = "name=" + URLEncoder.encode(name);        	
+        	
+        	parameters.put("Name", name);
+            FlurryAgent.logEvent("SpiritsView", parameters);
         } else {
         	path = "spirits";
+
+            FlurryAgent.logEvent("SpiritsView", parameters);
         }
         url += path;
         if (query != null) {
@@ -61,6 +81,12 @@ public class SpiritListActivity extends ListActivity implements OnClickListener,
         net.downloadObject(url);
     }
  
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	FlurryAgent.onPageView();
+    }
+    
     @Override
     public void parseJson(String jsonRep) { 
         
@@ -99,4 +125,10 @@ public class SpiritListActivity extends ListActivity implements OnClickListener,
 	public Activity getActivity() {
 		return this;
 	}
+	
+    @Override
+    public void onStop() {
+    	super.onStop();
+        FlurryAgent.onEndSession(this);
+    }
 }

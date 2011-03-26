@@ -3,7 +3,9 @@ package com.pugdogdev.wsll.activity;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -24,12 +26,14 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flurry.android.FlurryAgent;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
+import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.LocationHelper;
 import com.pugdogdev.wsll.MapPinOverlay;
 import com.pugdogdev.wsll.NetHelper;
@@ -51,6 +55,7 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         setContentView(R.layout.store_detail);
         net = new NetHelper(this);
         
@@ -58,6 +63,12 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener,
         
         String url = "http://wsll.pugdogdev.com/store/" + storeId + "?hoursByDay";
         net.downloadObject(url);
+    }
+    
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	FlurryAgent.onPageView();
     }
     
     @Override
@@ -218,6 +229,9 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener,
         directions.setVisibility(View.VISIBLE);
         directions.setOnClickListener(this);
 
+        Map<String, String> parameters = new HashMap<String, String>();
+    	parameters.put("Store", store.getName());
+        FlurryAgent.logEvent("StoreDetail", parameters);
     }
 
     private void processLablesForDay(TextView dayLabel, TextView dayHoursLabel, TextView openOrClosed,
@@ -254,6 +268,8 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener,
     	if (v == viewInventory) {      	
   			Intent i = new Intent(this, CategoryListActivity.class);
         	i.putExtra("storeId", storeId);
+        	if (store != null)
+        		i.putExtra("storeName", store.getName());
         	startActivity(i);
     	} else if (v == directions) {
     		Location userLocation = LocationHelper.getInstance().getLocation(); 
@@ -264,15 +280,6 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener,
     		Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse(googleURL));
     		startActivity(browserIntent);
     	}
-    	/*
-    	    try {
-        Intent callIntent = new Intent(Intent.ACTION_CALL);
-        callIntent.setData(Uri.parse("tel:123456789"));
-        startActivity(callIntent);
-    } catch (ActivityNotFoundException e) {
-        Log.e("helloandroid dialing example", "Call failed", e);
-    }
-    	  */
     }
 
 	@Override
@@ -284,4 +291,10 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener,
 	protected boolean isRouteDisplayed() {
 		return false;
 	}
+	
+    @Override
+    public void onStop() {
+    	super.onStop();
+        FlurryAgent.onEndSession(this);
+    }
 }

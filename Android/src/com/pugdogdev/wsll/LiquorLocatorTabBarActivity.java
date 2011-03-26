@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
+import com.flurry.android.FlurryAgent;
 import com.pugdogdev.wsll.activity.CategoryListActivity;
 import com.pugdogdev.wsll.activity.SearchActivity;
 import com.pugdogdev.wsll.activity.SpiritListActivity;
@@ -15,6 +16,8 @@ public class LiquorLocatorTabBarActivity extends TabActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
+        		
         setContentView(R.layout.tab);
 
         TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
@@ -39,5 +42,17 @@ public class LiquorLocatorTabBarActivity extends TabActivity {
         tabHost.addTab(storeTab);
         tabHost.addTab(searchTab);
         tabHost.addTab(localTab);
+    }
+    
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	FlurryAgent.onPageView();
+    }
+    
+    @Override
+    public void onStop() {
+    	super.onStop();
+        FlurryAgent.onEndSession(this);
     }
 }

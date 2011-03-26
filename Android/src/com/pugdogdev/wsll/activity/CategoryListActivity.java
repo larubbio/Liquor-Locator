@@ -17,6 +17,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import com.flurry.android.FlurryAgent;
+import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.adapter.CategoryAdapter;
@@ -31,6 +33,7 @@ public class CategoryListActivity extends ListActivity implements OnClickListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         net = new NetHelper(this);
 		
         setContentView(R.layout.categories);
@@ -46,8 +49,16 @@ public class CategoryListActivity extends ListActivity implements OnClickListene
         }
         url += path;
         net.downloadObject(url);
+        
+    	FlurryAgent.logEvent("CategoriesView");
     }
  
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	FlurryAgent.onPageView();
+    }
+    
     /* (non-Javadoc)
 	 * @see com.pugdogdev.wsll.activity.LiquorLocatorActivity#parseObjects(java.lang.String)
 	 */
@@ -86,4 +97,10 @@ public class CategoryListActivity extends ListActivity implements OnClickListene
 	public Activity getActivity() {
 		return this;
 	}
+	
+    @Override
+    public void onStop() {
+    	super.onStop();
+        FlurryAgent.onEndSession(this);
+    }
 }

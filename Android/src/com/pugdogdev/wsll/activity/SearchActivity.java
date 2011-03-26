@@ -8,6 +8,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -33,6 +35,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flurry.android.FlurryAgent;
+import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.adapter.ShortSpiritAdapter;
@@ -48,11 +52,18 @@ public class SearchActivity extends ListActivity implements OnClickListener, Tex
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         setContentView(R.layout.search);
         
         searchBar = (EditText)findViewById(R.id.searchBar);
         searchBar.addTextChangedListener(this);
         searchBar.setOnEditorActionListener(onSearch);
+    }
+    
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	FlurryAgent.onPageView();
     }
     
     @Override
@@ -155,6 +166,10 @@ public class SearchActivity extends ListActivity implements OnClickListener, Tex
 
 				InputMethodManager imm=(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+				
+				Map<String, String> parameters = new HashMap<String, String>();
+				parameters.put("SearchTerm", v.getText().toString());
+		    	FlurryAgent.logEvent("Search", parameters);
 			}
 
 			return(true);
@@ -172,4 +187,10 @@ public class SearchActivity extends ListActivity implements OnClickListener, Tex
 	    });
 	    alertDialog.show();
 	}
+	
+    @Override
+    public void onStop() {
+    	super.onStop();
+        FlurryAgent.onEndSession(this);
+    }
 }
