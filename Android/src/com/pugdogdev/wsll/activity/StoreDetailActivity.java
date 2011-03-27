@@ -185,6 +185,7 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener,
         itemizedOverlay = new MapPinOverlay(drawable);
         OverlayItem overlayItem = new OverlayItem(p, "", "");
         itemizedOverlay.addOverlay(overlayItem);
+        itemizedOverlay.populateOverlay();
         mapOverlays.add(itemizedOverlay);
         
         mc.animateTo(p);
