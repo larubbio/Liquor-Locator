@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/distillerDetailLayout"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+   <com.google.android.maps.MapView
+        android:id="@+id/mapView"
+        android:clickable="true"
+        android:layout_width="100dip" 
+        android:layout_height="100dip"
+    	android:layout_alignParentTop="true"
+    	android:visibility="invisible"
+        android:apiKey="09EeknnpIeMPpvXm7Oc_U5f4hGElFdaBdjppDkw"/>
+<!--     	android:apiKey="09EeknnpIeMP3mJi_3bQqD9l8FlrnUh-Lb9NnPQ"/ Production -->
+  <TextView android:layout_height="wrap_content" 
+    		android:id="@+id/distillerName"
+    		android:layout_alignParentTop="true"
+    		android:layout_toRightOf="@+id/mapView"
+    		android:layout_width="fill_parent" 
+    		android:textStyle="bold"    		
+    		android:textSize="7pt"
+    		android:gravity="left">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:id="@+id/distillerStreet"
+    		android:layout_below="@+id/distillerName" 
+    		android:layout_toRightOf="@+id/mapView"
+    		android:layout_width="fill_parent" 
+    		android:textSize="5pt"
+    		android:gravity="left">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:id="@+id/distillerAddress"
+    		android:layout_below="@+id/distillerStreet" 
+    		android:layout_toRightOf="@+id/mapView"
+    		android:layout_width="fill_parent" 
+    		android:textSize="5pt"
+    		android:gravity="left">
+  </TextView>
+  
+  <TextView android:layout_height="wrap_content" 
+    		android:id="@+id/url"
+    		android:layout_below="@+id/mapView" 
+    		android:layout_width="fill_parent"
+    		android:textStyle="bold"
+    		android:textSize="7pt"    		
+    		android:gravity="left">
+  </TextView>
+
+  <TextView android:text="Spirits"
+  	        android:visibility="invisible"
+  	        android:layout_height="wrap_content" 
+  	        android:layout_below="@+id/url" 
+    		android:id="@+id/spiritsLabel"
+    		android:layout_width="fill_parent"
+    		android:textStyle="bold"
+    		android:textSize="7pt"    		
+    		android:gravity="left">
+  </TextView>
+  
+</RelativeLayout>

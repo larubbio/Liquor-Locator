@@ -26,6 +26,7 @@
 		 <activity android:name=".activity.SpiritDetailActivity" />
 		 <activity android:name=".activity.StoreDetailActivity" />
 		 <activity android:name=".activity.LocalActivity" />
+		 <activity android:name=".activity.DistillerDetailActivity" />
 		 <activity android:name=".LiquorLocatorTabBarActivity" />
 
   		 <uses-library android:name="com.google.android.maps" />

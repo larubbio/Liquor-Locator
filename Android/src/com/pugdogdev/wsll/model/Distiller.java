@@ -3,10 +3,12 @@ package com.pugdogdev.wsll.model;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import android.location.Location;
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Distiller {
 	int id;
 	String name;
