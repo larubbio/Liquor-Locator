@@ -21,6 +21,7 @@
         android:layout_height="fill_parent"
     	android:layout_alignParentTop="true"
         android:apiKey="09EeknnpIeMPpvXm7Oc_U5f4hGElFdaBdjppDkw"/>
+<!--     	android:apiKey="09EeknnpIeMP3mJi_3bQqD9l8FlrnUh-Lb9NnPQ"/ Production -->
    </ViewSwitcher>
    <Button android:id="@+id/toggle" 
           android:layout_width="wrap_content" 

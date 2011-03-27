@@ -110,7 +110,7 @@ public class StoreListActivity extends MapActivity implements OnClickListener, L
         
         MapController mc = mapView.getController();
         Drawable drawable = this.getResources().getDrawable(R.drawable.pushpin);
-        MapPinOverlay itemizedOverlay = new MapPinOverlay(drawable);
+        MapPinOverlay itemizedOverlay = new MapPinOverlay(drawable, this);
 
         
 		if (storeList != null) {

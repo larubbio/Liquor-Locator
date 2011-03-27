@@ -10,7 +10,8 @@
     <application android:name=".LiquorLocator"
     			 android:icon="@drawable/icon" 
     			 android:label="@string/app_name" 
-    			 android:theme="@android:style/Theme.Light">
+    			 android:theme="@android:style/Theme.Light" 
+    			 android:debuggable="true">
         <activity android:name="SplashScreen" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +25,7 @@
 		 <activity android:name=".activity.SearchActivity" />
 		 <activity android:name=".activity.SpiritDetailActivity" />
 		 <activity android:name=".activity.StoreDetailActivity" />
+		 <activity android:name=".activity.LocalActivity" />
 		 <activity android:name=".LiquorLocatorTabBarActivity" />
 
   		 <uses-library android:name="com.google.android.maps" />

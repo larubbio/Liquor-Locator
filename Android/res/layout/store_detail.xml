@@ -10,7 +10,8 @@
         android:layout_height="100dip"
     	android:layout_alignParentTop="true"
     	android:visibility="invisible"
-        android:apiKey="09EeknnpIeMPpvXm7Oc_U5f4hGElFdaBdjppDkw"/>     
+        android:apiKey="09EeknnpIeMPpvXm7Oc_U5f4hGElFdaBdjppDkw"/>
+<!--     	android:apiKey="09EeknnpIeMP3mJi_3bQqD9l8FlrnUh-Lb9NnPQ"/ Production -->
   <TextView android:layout_height="wrap_content" 
     		android:id="@+id/storeName"
     		android:layout_alignParentTop="true"

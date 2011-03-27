@@ -8,8 +8,8 @@ import android.widget.TabHost.TabSpec;
 
 import com.flurry.android.FlurryAgent;
 import com.pugdogdev.wsll.activity.CategoryListActivity;
+import com.pugdogdev.wsll.activity.LocalActivity;
 import com.pugdogdev.wsll.activity.SearchActivity;
-import com.pugdogdev.wsll.activity.SpiritListActivity;
 import com.pugdogdev.wsll.activity.StoreListActivity;
 
 public class LiquorLocatorTabBarActivity extends TabActivity {
@@ -36,7 +36,7 @@ public class LiquorLocatorTabBarActivity extends TabActivity {
 
         TabSpec localTab = tabHost.newTabSpec("local");
         localTab.setIndicator("Local");
-        localTab.setContent(new Intent(this, SpiritListActivity.class));
+        localTab.setContent(new Intent(this, LocalActivity.class));
 
         tabHost.addTab(categoryTab);
         tabHost.addTab(storeTab);
