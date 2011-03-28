@@ -58,5 +58,9 @@
     		android:textSize="7pt"    		
     		android:gravity="left">
   </TextView>
-  
+  <LinearLayout android:id="@+id/distillerDetailSpiritLayout"
+  				android:orientation="vertical"
+    			android:layout_width="fill_parent"
+    			android:layout_height="fill_parent"
+    			android:layout_below="@+id/spiritsLabel"/>
 </RelativeLayout>

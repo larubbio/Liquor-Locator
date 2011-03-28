@@ -18,10 +18,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.TableRow.LayoutParams;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.maps.GeoPoint;
@@ -93,8 +92,7 @@ public class DistillerDetailActivity extends MapActivity implements OnClickListe
         TextView spirits = (TextView)findViewById(R.id.spiritsLabel);
         spirits.setVisibility(View.VISIBLE);
         
-		RelativeLayout layout = (RelativeLayout)findViewById(R.id.distillerDetailLayout);
-        int layoutBelowId = R.id.spiritsLabel;
+		LinearLayout layout = (LinearLayout)findViewById(R.id.distillerDetailSpiritLayout);
         for (Spirit s : distiller.getSpirits()) {
         	View row;
 
@@ -129,12 +127,6 @@ public class DistillerDetailActivity extends MapActivity implements OnClickListe
             row.setOnClickListener((OnClickListener)this);
             row.setTag(s.getId());
             
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, 
-            																	 LayoutParams.WRAP_CONTENT);
-            params.addRule(RelativeLayout.BELOW, layoutBelowId );
-            row.setId(layoutBelowId + 1);
-            layoutBelowId = row.getId();
-            row.setLayoutParams( params );
             layout.addView(row);
         }
         
