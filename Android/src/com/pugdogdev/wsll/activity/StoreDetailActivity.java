@@ -12,6 +12,8 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Typeface;
@@ -274,12 +276,26 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener,
         	startActivity(i);
     	} else if (v == directions) {
     		Location userLocation = LocationHelper.getInstance().getLocation(); 
-    		
-    		String startLocationParameter = String.format("%f,%f", userLocation.getLatitude(), userLocation.getLongitude());
-    		String destinationLocationParameter = String.format("%s,%s", store.getLatitude(), store.getLongitude());
-    		String googleURL = String.format("http://maps.google.com/maps?daddr=%s&saddr=%s", destinationLocationParameter, startLocationParameter);
-    		Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse(googleURL));
-    		startActivity(browserIntent);
+
+    		if (userLocation != null) {
+				String startLocationParameter = String.format("%f,%f", userLocation.getLatitude(), userLocation.getLongitude());
+				String destinationLocationParameter = String.format("%s,%s", store.getLatitude(), store.getLongitude());
+				String googleURL = String.format("http://maps.google.com/maps?daddr=%s&saddr=%s", destinationLocationParameter, startLocationParameter);
+		
+				Intent intent = new Intent(android.content.Intent.ACTION_VIEW, 
+									       Uri.parse(googleURL));
+				startActivity(intent);
+    		} else {
+    		    AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+    		    alertDialog.setTitle("Uh, where are you?");
+    		    alertDialog.setMessage("Sorry, but I don't know where you are so I can't give you directions");
+    		    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+    		           public void onClick(DialogInterface dialog, int which) {
+    		                  dialog.dismiss();
+    		               }
+    		    });
+    		    alertDialog.show();
+    		}
     	}
     }
 
