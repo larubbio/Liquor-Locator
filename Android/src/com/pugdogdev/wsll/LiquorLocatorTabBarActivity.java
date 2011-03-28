@@ -23,19 +23,19 @@ public class LiquorLocatorTabBarActivity extends TabActivity {
         TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
 
         TabSpec categoryTab = tabHost.newTabSpec("categories");
-        categoryTab.setIndicator("Categories");
+        categoryTab.setIndicator("Categories", this.getResources().getDrawable(R.drawable.ic_tab_categories));
         categoryTab.setContent(new Intent(this, CategoryListActivity.class));
 
         TabSpec storeTab = tabHost.newTabSpec("stores");
-        storeTab.setIndicator("Stores");
+        storeTab.setIndicator("Stores", this.getResources().getDrawable(R.drawable.ic_tab_stores));
         storeTab.setContent(new Intent(this, StoreListActivity.class));
 
         TabSpec searchTab = tabHost.newTabSpec("search");
-        searchTab.setIndicator("Search");
+        searchTab.setIndicator("Search", this.getResources().getDrawable(R.drawable.ic_tab_search));
         searchTab.setContent(new Intent(this, SearchActivity.class));
 
         TabSpec localTab = tabHost.newTabSpec("local");
-        localTab.setIndicator("Local");
+        localTab.setIndicator("Local", this.getResources().getDrawable(R.drawable.ic_tab_local));
         localTab.setContent(new Intent(this, LocalActivity.class));
 
         tabHost.addTab(categoryTab);
