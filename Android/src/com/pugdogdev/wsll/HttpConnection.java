@@ -20,6 +20,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 /**
  * Asynchronous HTTP connections
@@ -44,6 +45,8 @@ public class HttpConnection implements Runnable {
 	private String data;
 
 	private HttpClient httpClient;
+
+	private static final String TAG = "HttpConnection";
 
 	public HttpConnection() {
 		this(new Handler());
@@ -90,6 +93,7 @@ public class HttpConnection implements Runnable {
 		HttpConnectionParams.setSoTimeout(httpClient.getParams(), 25000);
 		try {
 			HttpResponse response = null;
+			Log.d(TAG, "About to go to the net");
 			switch (method) {
 			case GET:
 				HttpGet httpGet = new HttpGet(url);
@@ -113,6 +117,8 @@ public class HttpConnection implements Runnable {
 				processBitmapEntity(response.getEntity());
 				break;
 			}
+			Log.d(TAG, "done");
+
 			if (method < BITMAP)
 				processEntity(response.getEntity());
 		} catch (Exception e) {

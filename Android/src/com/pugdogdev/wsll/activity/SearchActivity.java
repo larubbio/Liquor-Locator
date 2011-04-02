@@ -37,14 +37,12 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 import com.pugdogdev.wsll.LiquorLocator;
-import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.adapter.ShortSpiritAdapter;
 import com.pugdogdev.wsll.model.ShortSpirit;
 
 public class SearchActivity extends ListActivity implements OnClickListener, TextWatcher  {
 	ArrayList<ShortSpirit> spiritList = new ArrayList<ShortSpirit>();
-	NetHelper net;
 	EditText searchBar;
 	AsyncTask<URL, Integer, String> searchTask;
 	

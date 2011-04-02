@@ -1,18 +1,26 @@
 package com.pugdogdev.wsll.activity;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
@@ -20,6 +28,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,33 +47,54 @@ import com.google.android.maps.OverlayItem;
 import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.LocationHelper;
 import com.pugdogdev.wsll.MapPinOverlay;
-import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.model.Contact;
 import com.pugdogdev.wsll.model.Hour;
 import com.pugdogdev.wsll.model.Store;
 
-public class StoreDetailActivity extends MapActivity implements OnClickListener, LiquorLocatorActivity {
+public class StoreDetailActivity extends MapActivity implements OnClickListener {
 	Button viewInventory;
 	Button directions;
 	Integer storeId;
     Store store;
-    NetHelper net;
     List<Overlay> mapOverlays;
     Drawable drawable;
     MapPinOverlay itemizedOverlay;
-    
+    DownloadTask downloadTask;
+	ProgressDialog progress;
+	String url;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         setContentView(R.layout.store_detail);
-        net = new NetHelper(this);
         
         storeId = (Integer)this.getIntent().getSerializableExtra("storeId");
         
-        String url = "http://wsll.pugdogdev.com/store/" + storeId + "?hoursByDay";
-        net.downloadObject(url);
+        url = "http://wsll.pugdogdev.com/store/" + storeId + "?hoursByDay";
+		store = (Store)((LiquorLocator)this.getApplicationContext()).getCachedObjects(url);
+		if (store != null) {
+			setUI();
+		} else {
+			progress = ProgressDialog.show(this, "Refreshing...","Just chill bro.", true, false);
+			downloadTask = new DownloadTask();
+			downloadTask.execute(url);
+		}
+    }
+    
+    @Override
+    public void onPause() {
+    	super.onPause();
+    	
+    	if (progress != null) {
+    		progress.dismiss();
+    		progress = null;
+    	}
+    	
+    	if (downloadTask != null) {
+    		downloadTask.cancel(true);
+    	}
     }
     
     @Override
@@ -73,7 +103,6 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener,
     	FlurryAgent.onPageView();
     }
     
-    @Override
     public void parseJson(String jsonRep) { 
         
         try {
@@ -89,6 +118,13 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener,
             Toast.makeText(this, "IOException: " + e.toString(), 2000).show();
 		}
 		
+		((LiquorLocator)getApplicationContext()).putCachedObjects(url, store);
+		
+		setUI();
+        progress.dismiss();
+    }
+    
+    public void setUI() {
         TextView name = (TextView)findViewById(R.id.storeName);
         TextView address = (TextView)findViewById(R.id.storeAddress);
         TextView street = (TextView)findViewById(R.id.storeCity);
@@ -172,7 +208,6 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener,
         name.setText(String.format("%s - #%d", store.getName(), store.getId()));
         address.setText(store.getAddress());
         street.setText(String.format("%s, WA %s", store.getCity(), store.getZip()));
-        openOrClosed.setText("CLOSED");
 
         MapView mapView = (MapView) findViewById(R.id.mapView);
         double lat = Double.parseDouble(store.getLatitude());
@@ -214,7 +249,7 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener,
         		storeManagerNumber.setText(c.getNumber());
         	}
 
-        	if (c.getRole().equals("Store Manager")) {
+        	if (c.getRole().equals("District Manager")) {
         		districtManager.setVisibility(View.VISIBLE);
         		districtManagerName.setVisibility(View.VISIBLE);
         		districtManagerNumber.setVisibility(View.VISIBLE);
@@ -300,11 +335,6 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener,
     }
 
 	@Override
-	public Activity getActivity() {
-		return this;
-	}
-
-	@Override
 	protected boolean isRouteDisplayed() {
 		return false;
 	}
@@ -313,5 +343,37 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener,
     public void onStop() {
     	super.onStop();
         FlurryAgent.onEndSession(this);
+    }
+    
+    private class DownloadTask extends AsyncTask<String, Void, String> {
+        protected String doInBackground(String... urls) {
+        	String result = "";
+        	
+        	HttpClient httpClient = new DefaultHttpClient();
+    		HttpConnectionParams.setSoTimeout(httpClient.getParams(), 25000);
+   			HttpResponse response = null;
+			HttpGet httpGet = new HttpGet(urls[0]);
+			
+			try {
+				response = httpClient.execute(httpGet);
+				BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+				String line;
+				while ((line = br.readLine()) != null)
+					result += line;
+				
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+            return result;
+        }
+
+        protected void onPostExecute(String result) {
+        	parseJson(result);
+        }
     }
 }

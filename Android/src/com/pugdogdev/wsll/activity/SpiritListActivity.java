@@ -1,20 +1,29 @@
 package com.pugdogdev.wsll.activity;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-import android.app.Activity;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,29 +31,30 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 import com.pugdogdev.wsll.LiquorLocator;
-import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.adapter.ShortSpiritAdapter;
 import com.pugdogdev.wsll.model.ShortSpirit;
 
-public class SpiritListActivity extends ListActivity implements OnClickListener, LiquorLocatorActivity  {
+public class SpiritListActivity extends ListActivity implements OnClickListener  {
 	ArrayList<ShortSpirit> spiritList = new ArrayList<ShortSpirit>();
-	NetHelper net;
+    DownloadTask downloadTask;
+	ProgressDialog progress;
+	String url;
 
     /** Called when the activity is first created. */
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         setContentView(R.layout.spirits);
-        net = new NetHelper(this);
         
         String category = (String)this.getIntent().getSerializableExtra("category");
         String name = (String)this.getIntent().getSerializableExtra("name");
         Integer storeId = (Integer)this.getIntent().getSerializableExtra("storeId");
         String storeName = (String)this.getIntent().getSerializableExtra("storeName");
         
-        String url = "http://wsll.pugdogdev.com/";
+        url = "http://wsll.pugdogdev.com/";
         String path = null;
         String query = null;
                 
@@ -78,16 +88,37 @@ public class SpiritListActivity extends ListActivity implements OnClickListener,
         if (query != null) {
         	url += "?" + query;
         }
-        net.downloadObject(url);
+
+        spiritList = (ArrayList<ShortSpirit>)((LiquorLocator)this.getApplicationContext()).getCachedObjects(url);
+		if (spiritList != null) {
+	        setListAdapter(new ShortSpiritAdapter(this, android.R.layout.simple_list_item_1, spiritList));
+		} else {
+			progress = ProgressDialog.show(this, "Refreshing...","Just chill bro.", true, false);
+			downloadTask = new DownloadTask();
+			downloadTask.execute(url);
+		}
     }
- 
+    
+    @Override
+    public void onPause() {
+    	super.onPause();
+    	
+    	if (progress != null) {
+    		progress.dismiss();
+    		progress = null;
+    	}
+    	
+    	if (downloadTask != null) {
+    		downloadTask.cancel(true);
+    	}
+    }
+    
     @Override
     public void onResume() {
     	super.onResume();
     	FlurryAgent.onPageView();
     }
     
-    @Override
     public void parseJson(String jsonRep) { 
         
         try {
@@ -103,7 +134,12 @@ public class SpiritListActivity extends ListActivity implements OnClickListener,
             Toast.makeText(this, "IOException: " + e.toString(), 2000).show();
 		}
 
-        setListAdapter(new ShortSpiritAdapter(this, android.R.layout.simple_list_item_1, spiritList));
+
+		((LiquorLocator)getApplicationContext()).putCachedObjects(url, spiritList);
+		
+		setListAdapter(new ShortSpiritAdapter(this, android.R.layout.simple_list_item_1, spiritList));
+		
+		progress.dismiss(); 
     }
     	    
     @Override
@@ -121,14 +157,41 @@ public class SpiritListActivity extends ListActivity implements OnClickListener,
     	startActivity(i);
     }
 
-	@Override
-	public Activity getActivity() {
-		return this;
-	}
-	
     @Override
     public void onStop() {
     	super.onStop();
         FlurryAgent.onEndSession(this);
+    }
+
+    private class DownloadTask extends AsyncTask<String, Void, String> {
+        protected String doInBackground(String... urls) {
+        	String result = "";
+        	
+        	HttpClient httpClient = new DefaultHttpClient();
+    		HttpConnectionParams.setSoTimeout(httpClient.getParams(), 25000);
+   			HttpResponse response = null;
+			HttpGet httpGet = new HttpGet(urls[0]);
+			
+			try {
+				response = httpClient.execute(httpGet);
+				BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+				String line;
+				while ((line = br.readLine()) != null)
+					result += line;
+				
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+            return result;
+        }
+
+        protected void onPostExecute(String result) {
+        	parseJson(result);
+        }
     }
 }

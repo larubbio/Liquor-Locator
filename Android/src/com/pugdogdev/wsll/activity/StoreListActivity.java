@@ -1,6 +1,8 @@
 package com.pugdogdev.wsll.activity;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,17 +10,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -36,14 +46,13 @@ import com.google.android.maps.OverlayItem;
 import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.LocationHelper;
 import com.pugdogdev.wsll.MapPinOverlay;
-import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.adapter.SpiritInventoryAdapter;
 import com.pugdogdev.wsll.adapter.StoreAdapter;
 import com.pugdogdev.wsll.model.SpiritInventory;
 import com.pugdogdev.wsll.model.Store;
 
-public class StoreListActivity extends MapActivity implements OnClickListener, LiquorLocatorActivity  {
+public class StoreListActivity extends MapActivity implements OnClickListener  {
     String spiritId;
     ListView listView;
     ViewSwitcher viewSwitcher;
@@ -51,23 +60,27 @@ public class StoreListActivity extends MapActivity implements OnClickListener, L
     MapView mapView;
     List<Overlay> mapOverlays;
     
+    String url;
+	DownloadStoreList downloadTask;
+	ProgressDialog progress;
+	
+	private static final String TAG = "StoreListActivity";
+	
     ArrayList<Store> storeList = new ArrayList<Store>();
 	ArrayList<SpiritInventory> inventoryList = new ArrayList<SpiritInventory>();
-
-	NetHelper net;
 	
     /** Called when the activity is first created. */
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         setContentView(R.layout.stores);
-        net = new NetHelper(this);
         
         spiritId = (String)this.getIntent().getSerializableExtra("spiritId");
         String spiritName = (String)this.getIntent().getSerializableExtra("spiritName");
 
-        String url = "http://wsll.pugdogdev.com/";
+        url = "http://wsll.pugdogdev.com/";
         String path = null;
         
         Map<String, String> parameters = new HashMap<String, String>();
@@ -82,7 +95,23 @@ public class StoreListActivity extends MapActivity implements OnClickListener, L
             FlurryAgent.logEvent("StoresView");       	
         }
         url += path;
-        net.downloadObject(url);
+
+        Object cachedObjects = ((LiquorLocator)this.getApplicationContext()).getCachedObjects(url);
+
+		if (cachedObjects != null) {
+	    	if (spiritId != null) {
+	    		inventoryList = (ArrayList<SpiritInventory>)cachedObjects;
+				listView.setAdapter(new SpiritInventoryAdapter(this, android.R.layout.simple_list_item_1, inventoryList));
+	    	} else {
+	    		storeList = (ArrayList<Store>)cachedObjects;
+	    		listView.setAdapter(new StoreAdapter(this, android.R.layout.simple_list_item_1, storeList));
+	    	}
+	    	setDistanceAndSort();
+		} else {
+			progress = ProgressDialog.show(this, "Refreshing...","Just chill bro.", true, false);
+			downloadTask = new DownloadStoreList();
+			downloadTask.execute(url);
+		}
 
         listView = (ListView)findViewById(R.id.storeList);
         viewSwitcher = (ViewSwitcher)findViewById(R.id.switcher);
@@ -98,13 +127,27 @@ public class StoreListActivity extends MapActivity implements OnClickListener, L
     	super.onStart();
     	setDistanceAndSort();
     }
+   
+    @Override
+    public void onPause() {
+    	super.onPause();
+    	
+    	if (progress != null) {
+    		progress.dismiss();
+    		progress = null;
+    	}
+    	
+    	if (downloadTask != null) {
+    		downloadTask.cancel(true);
+    	}
+    }
     
     @Override
     public void onResume() {
     	super.onResume();
     	FlurryAgent.onPageView();
     }
-
+    
 	private void setDistanceAndSort() {
 		Location userLocation = LocationHelper.getInstance().getLocation(); 
         
@@ -215,17 +258,18 @@ public class StoreListActivity extends MapActivity implements OnClickListener, L
 		}
 	}
 	
-    @Override
     public void parseJson(String jsonRep) { 
         
         try {
         	ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
         	
+        	Log.d(TAG, "About to map items");
         	if (spiritId != null) {
         		inventoryList = mapper.readValue(jsonRep, new TypeReference<ArrayList<SpiritInventory>>() {});
         	} else {
         		storeList = mapper.readValue(jsonRep, new TypeReference<ArrayList<Store>>() {});
         	}
+        	Log.d(TAG, "done");
         } catch (JsonParseException e) {
             Toast.makeText(this, "JsonParseException: " + e.toString(), 2000).show();
 		} catch (JsonMappingException e) {
@@ -238,11 +282,14 @@ public class StoreListActivity extends MapActivity implements OnClickListener, L
 
     	if (spiritId != null) {
     		listView.setAdapter(new SpiritInventoryAdapter(this, android.R.layout.simple_list_item_1, inventoryList));
+    		((LiquorLocator)getApplicationContext()).putCachedObjects(url, inventoryList);
     	} else {
     		listView.setAdapter(new StoreAdapter(this, android.R.layout.simple_list_item_1, storeList));
+    		((LiquorLocator)getApplicationContext()).putCachedObjects(url, storeList);
     	}
     	
     	setDistanceAndSort();
+        progress.dismiss();
     }
     
     @Override
@@ -263,11 +310,6 @@ public class StoreListActivity extends MapActivity implements OnClickListener, L
     }
 
 	@Override
-	public Activity getActivity() {
-		return this;
-	}
-
-	@Override
 	protected boolean isRouteDisplayed() {
 		// TODO Auto-generated method stub
 		return false;
@@ -277,5 +319,37 @@ public class StoreListActivity extends MapActivity implements OnClickListener, L
     public void onStop() {
     	super.onStop();
         FlurryAgent.onEndSession(this);
+    }
+    
+    private class DownloadStoreList extends AsyncTask<String, Void, String> {
+        protected String doInBackground(String... urls) {
+        	String result = "";
+        	
+        	HttpClient httpClient = new DefaultHttpClient();
+    		HttpConnectionParams.setSoTimeout(httpClient.getParams(), 25000);
+   			HttpResponse response = null;
+			HttpGet httpGet = new HttpGet(urls[0]);
+			
+			try {
+				response = httpClient.execute(httpGet);
+				BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+				String line;
+				while ((line = br.readLine()) != null)
+					result += line;
+				
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+            return result;
+        }
+
+        protected void onPostExecute(String result) {
+        	parseJson(result);
+        }
     }
 }

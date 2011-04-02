@@ -1,18 +1,27 @@
 package com.pugdogdev.wsll.activity;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,30 +40,51 @@ import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.MapPinOverlay;
-import com.pugdogdev.wsll.NetHelper;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.model.Distiller;
 import com.pugdogdev.wsll.model.Spirit;
 
-public class DistillerDetailActivity extends MapActivity implements OnClickListener, LiquorLocatorActivity {
+public class DistillerDetailActivity extends MapActivity implements OnClickListener {
 	Integer distillerId;
     Distiller distiller;
-    NetHelper net;
     List<Overlay> mapOverlays;
     Drawable drawable;
     MapPinOverlay itemizedOverlay;
-    
+    DownloadTask downloadTask;
+	ProgressDialog progress;
+	String url;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         setContentView(R.layout.distiller_detail);
-        net = new NetHelper(this);
         
         distillerId = (Integer)this.getIntent().getSerializableExtra("distillerId");
         
-        String url = "http://wsll.pugdogdev.com/distiller/" + distillerId;
-        net.downloadObject(url);
+        url = "http://wsll.pugdogdev.com/distiller/" + distillerId;
+		distiller = (Distiller)((LiquorLocator)this.getApplicationContext()).getCachedObjects(url);
+		if (distiller != null) {
+			setUI();
+		} else {
+			progress = ProgressDialog.show(this, "Refreshing...","Just chill bro.", true, false);
+			downloadTask = new DownloadTask();
+			downloadTask.execute(url);
+		}
+    }
+    
+    @Override
+    public void onPause() {
+    	super.onPause();
+    	
+    	if (progress != null) {
+    		progress.dismiss();
+    		progress = null;
+    	}
+    	
+    	if (downloadTask != null) {
+    		downloadTask.cancel(true);
+    	}
     }
     
     @Override
@@ -63,7 +93,6 @@ public class DistillerDetailActivity extends MapActivity implements OnClickListe
     	FlurryAgent.onPageView();
     }
     
-    @Override
     public void parseJson(String jsonRep) { 
         
         try {
@@ -78,7 +107,14 @@ public class DistillerDetailActivity extends MapActivity implements OnClickListe
 		} catch (IOException e) {
             Toast.makeText(this, "IOException: " + e.toString(), 2000).show();
 		}
+
+		((LiquorLocator)getApplicationContext()).putCachedObjects(url, distiller);
 		
+		setUI();
+        progress.dismiss();
+    }
+    
+    public void setUI() {
         TextView name = (TextView)findViewById(R.id.distillerName);
         TextView street = (TextView)findViewById(R.id.distillerStreet);
         TextView address = (TextView)findViewById(R.id.distillerAddress);
@@ -169,11 +205,6 @@ public class DistillerDetailActivity extends MapActivity implements OnClickListe
     }
 
 	@Override
-	public Activity getActivity() {
-		return this;
-	}
-
-	@Override
 	protected boolean isRouteDisplayed() {
 		return false;
 	}
@@ -182,5 +213,37 @@ public class DistillerDetailActivity extends MapActivity implements OnClickListe
     public void onStop() {
     	super.onStop();
         FlurryAgent.onEndSession(this);
+    }
+    
+    private class DownloadTask extends AsyncTask<String, Void, String> {
+        protected String doInBackground(String... urls) {
+        	String result = "";
+        	
+        	HttpClient httpClient = new DefaultHttpClient();
+    		HttpConnectionParams.setSoTimeout(httpClient.getParams(), 25000);
+   			HttpResponse response = null;
+			HttpGet httpGet = new HttpGet(urls[0]);
+			
+			try {
+				response = httpClient.execute(httpGet);
+				BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+				String line;
+				while ((line = br.readLine()) != null)
+					result += line;
+				
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+            return result;
+        }
+
+        protected void onPostExecute(String result) {
+        	parseJson(result);
+        }
     }
 }
