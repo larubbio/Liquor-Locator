@@ -57,7 +57,7 @@ public class SplashScreen extends Activity {
 					finish();
 					Intent i = new Intent();
 					i.setClassName("com.pugdogdev.wsll",
-					               "com.pugdogdev.wsll.LiquorLocatorTabBarActivity");
+					               "com.pugdogdev.wsll.activity.DashboardActivity");
 					startActivity(i);
 				}
 			}
