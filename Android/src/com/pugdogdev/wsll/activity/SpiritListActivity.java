@@ -30,12 +30,15 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
+import com.pugdogdev.wsll.ActivityBar;
 import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.adapter.ShortSpiritAdapter;
 import com.pugdogdev.wsll.model.ShortSpirit;
 
 public class SpiritListActivity extends ListActivity implements OnClickListener  {
+	ActivityBar activityBar;
+	
 	ArrayList<ShortSpirit> spiritList = new ArrayList<ShortSpirit>();
     DownloadTask downloadTask;
 	ProgressDialog progress;
@@ -48,6 +51,8 @@ public class SpiritListActivity extends ListActivity implements OnClickListener 
         super.onCreate(savedInstanceState);
         FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         setContentView(R.layout.spirits);
+
+        activityBar = new ActivityBar(this);
         
         String category = (String)this.getIntent().getSerializableExtra("category");
         String name = (String)this.getIntent().getSerializableExtra("name");
@@ -61,12 +66,16 @@ public class SpiritListActivity extends ListActivity implements OnClickListener 
     	Map<String, String> parameters = new HashMap<String, String>();
 
         if (category != null && storeId == null) {
+        	activityBar.setTitle(category);
+        	
         	path = "spirits";
         	query = "category=" + URLEncoder.encode(category);
 
         	parameters.put("Category", category);
             FlurryAgent.logEvent("SpiritsView", parameters);
         } else if (category != null && storeId != null) {
+        	activityBar.setTitle(String.format("%s - %s", storeName, category));
+
         	path = "store/" + storeId + "/spirits";
         	query = "category=" + URLEncoder.encode(category);
 
@@ -74,12 +83,15 @@ public class SpiritListActivity extends ListActivity implements OnClickListener 
         	parameters.put("Store", storeName);
             FlurryAgent.logEvent("StoreInventoryView", parameters);
         } else if (name != null) {
+        	activityBar.setTitle(name);
+
         	path = "spirits";
         	query = "name=" + URLEncoder.encode(name);        	
         	
         	parameters.put("Name", name);
             FlurryAgent.logEvent("SpiritsView", parameters);
         } else {
+        	activityBar.setTitle("Spirits");
         	path = "spirits";
 
             FlurryAgent.logEvent("SpiritsView", parameters);

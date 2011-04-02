@@ -36,11 +36,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
+import com.pugdogdev.wsll.ActivityBar;
 import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.model.Spirit;
 
 public class SpiritDetailActivity extends Activity implements OnClickListener {
+	ActivityBar activityBar;
+	
 	Button viewStores;
 	String spiritId;
     Spirit spirit;
@@ -74,6 +77,8 @@ public class SpiritDetailActivity extends Activity implements OnClickListener {
 			downloadTask = new DownloadTask();
 			downloadTask.execute(url);
 		}
+		
+		activityBar = new ActivityBar(this);
     }
     
     @Override
@@ -139,6 +144,8 @@ public class SpiritDetailActivity extends Activity implements OnClickListener {
 	}
     
     public void setUI() {
+    	activityBar.setTitle(spirit.getBrandName());
+    	
         TextView name = (TextView)findViewById(R.id.spiritName);
         name.setText(spirit.getBrandName());
 

@@ -36,12 +36,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
+import com.pugdogdev.wsll.ActivityBar;
 import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.adapter.ShortSpiritAdapter;
 import com.pugdogdev.wsll.model.ShortSpirit;
 
 public class SearchActivity extends ListActivity implements OnClickListener, TextWatcher  {
+	ActivityBar activityBar;
+	
 	ArrayList<ShortSpirit> spiritList = new ArrayList<ShortSpirit>();
 	EditText searchBar;
 	AsyncTask<URL, Integer, String> searchTask;
@@ -56,6 +59,8 @@ public class SearchActivity extends ListActivity implements OnClickListener, Tex
         searchBar = (EditText)findViewById(R.id.searchBar);
         searchBar.addTextChangedListener(this);
         searchBar.setOnEditorActionListener(onSearch);
+        
+		activityBar = new ActivityBar(this, "Search");
     }
     
     @Override

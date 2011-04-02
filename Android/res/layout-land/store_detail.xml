@@ -3,6 +3,9 @@
     android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+        
+    <include layout="@layout/activity_bar" />
+    
    <com.google.android.maps.MapView
         android:id="@+id/mapView"
         android:clickable="true"

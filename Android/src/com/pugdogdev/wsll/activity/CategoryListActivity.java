@@ -27,12 +27,15 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
+import com.pugdogdev.wsll.ActivityBar;
 import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.adapter.CategoryAdapter;
 import com.pugdogdev.wsll.model.Category;
 
 public class CategoryListActivity extends ListActivity implements OnClickListener  {
+	ActivityBar activityBar;
+	
 	Integer storeId;
 	ArrayList<Category> categoryList = new ArrayList<Category>();
 	DownloadTask downloadTask;
@@ -67,6 +70,8 @@ public class CategoryListActivity extends ListActivity implements OnClickListene
 			downloadTask = new DownloadTask();
 			downloadTask.execute(url);
 		}
+		
+		activityBar = new ActivityBar(this, "Categories");
 		
     	FlurryAgent.logEvent("CategoriesView");
     }

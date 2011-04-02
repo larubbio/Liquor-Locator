@@ -43,6 +43,7 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
+import com.pugdogdev.wsll.ActivityBar;
 import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.LocationHelper;
 import com.pugdogdev.wsll.MapPinOverlay;
@@ -53,6 +54,7 @@ import com.pugdogdev.wsll.model.SpiritInventory;
 import com.pugdogdev.wsll.model.Store;
 
 public class StoreListActivity extends MapActivity implements OnClickListener  {
+	ActivityBar activityBar;
     String spiritId;
     ListView listView;
     ViewSwitcher viewSwitcher;
@@ -77,6 +79,8 @@ public class StoreListActivity extends MapActivity implements OnClickListener  {
         FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         setContentView(R.layout.stores);
         
+        activityBar = new ActivityBar(this);
+        
         spiritId = (String)this.getIntent().getSerializableExtra("spiritId");
         String spiritName = (String)this.getIntent().getSerializableExtra("spiritName");
 
@@ -85,11 +89,15 @@ public class StoreListActivity extends MapActivity implements OnClickListener  {
         
         Map<String, String> parameters = new HashMap<String, String>();
         if (spiritId != null) {
+        	activityBar.setTitle(String.format("Stores w/ %s", spiritName));
+        	
         	path = "spirit/" + spiritId + "/stores";
         	
         	parameters.put("Spirit", spiritName);
             FlurryAgent.logEvent("StoresView", parameters);
         } else {
+        	activityBar.setTitle("Stores");
+
         	path = "stores";
         	
             FlurryAgent.logEvent("StoresView");       	

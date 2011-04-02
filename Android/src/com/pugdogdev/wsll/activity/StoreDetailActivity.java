@@ -44,6 +44,7 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
+import com.pugdogdev.wsll.ActivityBar;
 import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.LocationHelper;
 import com.pugdogdev.wsll.MapPinOverlay;
@@ -53,6 +54,7 @@ import com.pugdogdev.wsll.model.Hour;
 import com.pugdogdev.wsll.model.Store;
 
 public class StoreDetailActivity extends MapActivity implements OnClickListener {
+	ActivityBar activityBar;
 	Button viewInventory;
 	Button directions;
 	Integer storeId;
@@ -81,6 +83,8 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener 
 			downloadTask = new DownloadTask();
 			downloadTask.execute(url);
 		}
+		
+		activityBar = new ActivityBar(this);
     }
     
     @Override
@@ -125,6 +129,8 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener 
     }
     
     public void setUI() {
+    	activityBar.setTitle(store.getName());
+    	
         TextView name = (TextView)findViewById(R.id.storeName);
         TextView address = (TextView)findViewById(R.id.storeAddress);
         TextView street = (TextView)findViewById(R.id.storeCity);

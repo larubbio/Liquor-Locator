@@ -38,6 +38,7 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
+import com.pugdogdev.wsll.ActivityBar;
 import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.MapPinOverlay;
 import com.pugdogdev.wsll.R;
@@ -45,6 +46,7 @@ import com.pugdogdev.wsll.model.Distiller;
 import com.pugdogdev.wsll.model.Spirit;
 
 public class DistillerDetailActivity extends MapActivity implements OnClickListener {
+	ActivityBar activityBar;
 	Integer distillerId;
     Distiller distiller;
     List<Overlay> mapOverlays;
@@ -71,6 +73,8 @@ public class DistillerDetailActivity extends MapActivity implements OnClickListe
 			downloadTask = new DownloadTask();
 			downloadTask.execute(url);
 		}
+		
+		activityBar = new ActivityBar(this);
     }
     
     @Override
@@ -115,6 +119,8 @@ public class DistillerDetailActivity extends MapActivity implements OnClickListe
     }
     
     public void setUI() {
+    	activityBar.setTitle(distiller.getName());
+    	
         TextView name = (TextView)findViewById(R.id.distillerName);
         TextView street = (TextView)findViewById(R.id.distillerStreet);
         TextView address = (TextView)findViewById(R.id.distillerAddress);

@@ -32,11 +32,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
+import com.pugdogdev.wsll.ActivityBar;
 import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.R;
 import com.pugdogdev.wsll.model.Distiller;
 
 public class LocalActivity extends Activity implements OnClickListener {
+	ActivityBar activityBar;
+	
     ArrayList<Distiller> distillers;
 	DownloadTask downloadTask;
 	ProgressDialog progress;
@@ -59,6 +62,8 @@ public class LocalActivity extends Activity implements OnClickListener {
 			downloadTask = new DownloadTask();
 			downloadTask.execute(url);
 		}
+		
+		activityBar = new ActivityBar(this, "Local Distillers");
     }
     
     @Override
