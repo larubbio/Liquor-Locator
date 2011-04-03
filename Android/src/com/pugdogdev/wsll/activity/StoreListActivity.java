@@ -42,12 +42,12 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
-import com.google.android.maps.OverlayItem;
 import com.pugdogdev.wsll.ActivityBar;
 import com.pugdogdev.wsll.LiquorLocator;
 import com.pugdogdev.wsll.LocationHelper;
 import com.pugdogdev.wsll.MapPinOverlay;
 import com.pugdogdev.wsll.R;
+import com.pugdogdev.wsll.StoreOverlayItem;
 import com.pugdogdev.wsll.adapter.SpiritInventoryAdapter;
 import com.pugdogdev.wsll.adapter.StoreAdapter;
 import com.pugdogdev.wsll.model.SpiritInventory;
@@ -259,7 +259,10 @@ public class StoreListActivity extends MapActivity implements OnClickListener  {
 			GeoPoint p = new GeoPoint((int) (lat * 1E6), 
 					(int) (lng * 1E6));
 
-			OverlayItem overlayItem = new OverlayItem(p, store.getName(), "");
+			StoreOverlayItem overlayItem = new StoreOverlayItem(p, 
+					                                            store.getName(),
+					                                            store.getAddress(),
+														        store);
 			itemizedOverlay.addOverlay(overlayItem);
 		} catch (NumberFormatException e) {
 			// I want to ignore this an just not plot the store
