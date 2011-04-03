@@ -37,6 +37,8 @@ public class CategoryListActivity extends ListActivity implements OnClickListene
 	ActivityBar activityBar;
 	
 	Integer storeId;
+	String storeName;
+	
 	ArrayList<Category> categoryList = new ArrayList<Category>();
 	DownloadTask downloadTask;
 	ProgressDialog progress;
@@ -50,15 +52,20 @@ public class CategoryListActivity extends ListActivity implements OnClickListene
         FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
 		
         setContentView(R.layout.categories);
-        
+  
+		activityBar = new ActivityBar(this);
+		
         storeId = (Integer)this.getIntent().getSerializableExtra("storeId");
+        storeName = (String)this.getIntent().getSerializableExtra("storeName");
         
         url = "http://wsll.pugdogdev.com/";
         String path = null;
         if (storeId != null) {
         	path = "store/" + storeId + "/categories";
+        	activityBar.setTitle(String.format("%s - Categories", storeName));
         } else {
         	path = "categories";
+        	activityBar.setTitle("Categories");
         }
         url += path;
         
@@ -70,8 +77,7 @@ public class CategoryListActivity extends ListActivity implements OnClickListene
 			downloadTask = new DownloadTask();
 			downloadTask.execute(url);
 		}
-		
-		activityBar = new ActivityBar(this, "Categories");
+
 		
     	FlurryAgent.logEvent("CategoriesView");
     }
@@ -129,6 +135,11 @@ public class CategoryListActivity extends ListActivity implements OnClickListene
        	if (storeId != null) {
            	i.putExtra("storeId", storeId);       		
        	}
+       	
+       	if (storeName != null) {
+           	i.putExtra("storeName", storeName);       		       		
+       	}
+       	
        	startActivity(i);
     }
 	

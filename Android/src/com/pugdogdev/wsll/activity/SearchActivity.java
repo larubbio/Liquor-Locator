@@ -56,11 +56,12 @@ public class SearchActivity extends ListActivity implements OnClickListener, Tex
         FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         setContentView(R.layout.search);
         
+		activityBar = new ActivityBar(this, "Search");
+		
         searchBar = (EditText)findViewById(R.id.searchBar);
         searchBar.addTextChangedListener(this);
         searchBar.setOnEditorActionListener(onSearch);
-        
-		activityBar = new ActivityBar(this, "Search");
+
     }
     
     @Override

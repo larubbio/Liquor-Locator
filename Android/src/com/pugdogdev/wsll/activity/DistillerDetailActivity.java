@@ -61,7 +61,9 @@ public class DistillerDetailActivity extends MapActivity implements OnClickListe
         super.onCreate(savedInstanceState);
         FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         setContentView(R.layout.distiller_detail);
-        
+		
+		activityBar = new ActivityBar(this);
+		
         distillerId = (Integer)this.getIntent().getSerializableExtra("distillerId");
         
         url = "http://wsll.pugdogdev.com/distiller/" + distillerId;
@@ -73,8 +75,6 @@ public class DistillerDetailActivity extends MapActivity implements OnClickListe
 			downloadTask = new DownloadTask();
 			downloadTask.execute(url);
 		}
-		
-		activityBar = new ActivityBar(this);
     }
     
     @Override

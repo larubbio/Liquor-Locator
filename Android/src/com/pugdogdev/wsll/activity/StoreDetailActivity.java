@@ -72,6 +72,8 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener 
         FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         setContentView(R.layout.store_detail);
         
+		activityBar = new ActivityBar(this);
+		
         storeId = (Integer)this.getIntent().getSerializableExtra("storeId");
         
         url = "http://wsll.pugdogdev.com/store/" + storeId + "?hoursByDay";
@@ -83,8 +85,6 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener 
 			downloadTask = new DownloadTask();
 			downloadTask.execute(url);
 		}
-		
-		activityBar = new ActivityBar(this);
     }
     
     @Override

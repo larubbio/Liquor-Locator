@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+ <include layout="@layout/activity_bar" />
+ <ScrollView
             android:id="@+id/scrollView"
 		    android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
         
-  <include layout="@layout/activity_bar" />
+
     
   <RelativeLayout android:id="@+id/localDistillersLayout"
     android:orientation="vertical"
@@ -31,3 +36,4 @@
 
   </RelativeLayout>
 </ScrollView>
+</LinearLayout>

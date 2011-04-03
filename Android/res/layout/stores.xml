@@ -4,12 +4,14 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
         
-  <include layout="@layout/activity_bar" />
+  <include layout="@layout/activity_bar"
+  		   android:id="@+id/activityBar"
+    	   android:layout_alignParentTop="true" />
     
   <ViewSwitcher 
     	android:layout_width="fill_parent" 
     	android:layout_height="fill_parent"
-    	android:layout_alignParentTop="true"
+        android:layout_below="@+id/activityBar"
     	android:id="@+id/switcher">             
     <ListView
         android:id="@+id/storeList"

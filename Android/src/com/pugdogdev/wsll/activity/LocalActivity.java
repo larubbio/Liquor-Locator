@@ -51,7 +51,9 @@ public class LocalActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         setContentView(R.layout.local);
-        
+		
+		activityBar = new ActivityBar(this, "Local Distillers");
+		
         url = "http://wsll.pugdogdev.com/distillers";
         
         distillers = (ArrayList<Distiller>)((LiquorLocator)this.getApplicationContext()).getCachedObjects(url);
@@ -62,8 +64,7 @@ public class LocalActivity extends Activity implements OnClickListener {
 			downloadTask = new DownloadTask();
 			downloadTask.execute(url);
 		}
-		
-		activityBar = new ActivityBar(this, "Local Distillers");
+
     }
     
     @Override

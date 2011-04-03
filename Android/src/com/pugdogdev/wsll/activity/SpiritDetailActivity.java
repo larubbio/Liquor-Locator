@@ -61,7 +61,9 @@ public class SpiritDetailActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         FlurryAgent.onStartSession(this, ((LiquorLocator)getApplicationContext()).getFlurryKey());
         setContentView(R.layout.spirit_detail);
-        
+		
+		activityBar = new ActivityBar(this);
+		
         spiritImage = (ImageView)findViewById(R.id.spiritImage);
         attribution = (TextView)findViewById(R.id.attribution);
         
@@ -77,8 +79,6 @@ public class SpiritDetailActivity extends Activity implements OnClickListener {
 			downloadTask = new DownloadTask();
 			downloadTask.execute(url);
 		}
-		
-		activityBar = new ActivityBar(this);
     }
     
     @Override
