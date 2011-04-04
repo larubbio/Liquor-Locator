@@ -28,12 +28,4 @@
      	android:apiKey="09EeknnpIeMP3mJi_3bQqD9l8FlrnUh-Lb9NnPQ"/>
 <!--        android:apiKey="09EeknnpIeMPpvXm7Oc_U5f4hGElFdaBdjppDkw"/> Development -->
    </ViewSwitcher>
-   <Button android:id="@+id/toggle" 
-          android:layout_width="wrap_content" 
-          android:text="Toggle" 
-          android:layout_alignParentRight="true"
-          android:layout_alignParentBottom="true"
-          android:layout_height="wrap_content" 
-          android:gravity="center_horizontal">
-   </Button>
   </RelativeLayout>

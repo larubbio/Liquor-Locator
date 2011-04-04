@@ -31,7 +31,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
@@ -58,9 +58,12 @@ public class StoreListActivity extends MapActivity implements OnClickListener  {
     String spiritId;
     ListView listView;
     ViewSwitcher viewSwitcher;
-    Button toggle;
     MapView mapView;
     List<Overlay> mapOverlays;
+    
+    ImageView listIcon;
+    ImageView mapIcon;
+    boolean showingListView = true;
     
     String url;
 	DownloadStoreList downloadTask;
@@ -106,6 +109,32 @@ public class StoreListActivity extends MapActivity implements OnClickListener  {
 
         Object cachedObjects = ((LiquorLocator)this.getApplicationContext()).getCachedObjects(url);
 
+        listView = (ListView)findViewById(R.id.storeList);
+        viewSwitcher = (ViewSwitcher)findViewById(R.id.switcher);
+
+        mapView = (MapView)findViewById(R.id.mapView);
+        mapOverlays = mapView.getOverlays();
+        mapView.setBuiltInZoomControls(true);
+        
+        listIcon = new ImageView(this);
+        listIcon.setOnClickListener(this);
+
+        mapIcon = new ImageView(this);
+        mapIcon.setOnClickListener(this);
+
+        Boolean savedConfig = (Boolean)getLastNonConfigurationInstance();
+        if (savedConfig != null) {
+        	showingListView = savedConfig.booleanValue();
+        }
+        setActivityBarIcons();
+        
+        if (!showingListView) {
+        	viewSwitcher.showNext();
+        }
+        
+        activityBar.addIcon(listIcon);
+        activityBar.addIcon(mapIcon);
+        
 		if (cachedObjects != null) {
 	    	if (spiritId != null) {
 	    		inventoryList = (ArrayList<SpiritInventory>)cachedObjects;
@@ -120,16 +149,23 @@ public class StoreListActivity extends MapActivity implements OnClickListener  {
 			downloadTask = new DownloadStoreList();
 			downloadTask.execute(url);
 		}
-
-        listView = (ListView)findViewById(R.id.storeList);
-        viewSwitcher = (ViewSwitcher)findViewById(R.id.switcher);
-        toggle = (Button)findViewById(R.id.toggle);
-        toggle.setOnClickListener(this);
-        mapView = (MapView)findViewById(R.id.mapView);
-        mapOverlays = mapView.getOverlays();
-        mapView.setBuiltInZoomControls(true);
-    }
+	}
  
+    @Override
+    public Object onRetainNonConfigurationInstance() {
+        return new Boolean(showingListView);
+    }
+    
+    private void setActivityBarIcons() {
+		if (showingListView == true) {
+			listIcon.setImageDrawable(this.getResources().getDrawable(R.drawable.list_selected));
+			mapIcon.setImageDrawable(this.getResources().getDrawable(R.drawable.map));
+		} else {
+			listIcon.setImageDrawable(this.getResources().getDrawable(R.drawable.list));
+			mapIcon.setImageDrawable(this.getResources().getDrawable(R.drawable.map_selected));			
+		}
+    }
+    
     @Override
     public void onStart() {
     	super.onStart();
@@ -305,8 +341,18 @@ public class StoreListActivity extends MapActivity implements OnClickListener  {
     
     @Override
     public void onClick(View v) {
-    	if (v == toggle) {
-    		viewSwitcher.showNext();
+    	if (v == listIcon) {
+    		if (showingListView == false) {
+    			showingListView = true;
+    			setActivityBarIcons();
+        		viewSwitcher.showNext();
+    		}
+    	} else if (v == mapIcon) {
+    		if (showingListView == true) {
+    			showingListView = false;
+    			setActivityBarIcons();
+        		viewSwitcher.showNext();
+    		}    		
     	} else {
     		Store s;
     		if (spiritId != null) {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pugdogdev.wsll.activity.DashboardActivity;
@@ -30,6 +31,11 @@ public class ActivityBar implements OnClickListener {
 		homeButton.setOnClickListener(this);
 	}
 
+	public void addIcon(View view) {
+		LinearLayout layout = (LinearLayout)parent.findViewById(R.id.actionView);
+		layout.addView(view);
+	}
+	
 	public String getTitle() {
 		return title;
 	}
