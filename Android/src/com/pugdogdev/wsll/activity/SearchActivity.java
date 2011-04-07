@@ -61,7 +61,8 @@ public class SearchActivity extends ListActivity implements OnClickListener, Tex
         searchBar = (EditText)findViewById(R.id.searchBar);
         searchBar.addTextChangedListener(this);
         searchBar.setOnEditorActionListener(onSearch);
-
+        
+		((LiquorLocator)this.getApplicationContext()).setAdView(this);
     }
     
     @Override
@@ -102,7 +103,7 @@ public class SearchActivity extends ListActivity implements OnClickListener, Tex
     	Intent i;
     	
     	if (ss.getCount() != null) {
-           	i = new Intent(this, SearchActivity.class);
+           	i = new Intent(this, SpiritListActivity.class);
            	i.putExtra("name", ss.getName());	
     	} else {
     		i = new Intent(this, SpiritDetailActivity.class);

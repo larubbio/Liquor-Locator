@@ -149,6 +149,8 @@ public class StoreListActivity extends MapActivity implements OnClickListener  {
 			downloadTask = new DownloadStoreList();
 			downloadTask.execute(url);
 		}
+		
+		((LiquorLocator)this.getApplicationContext()).setAdView(this);
 	}
  
     @Override

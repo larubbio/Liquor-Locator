@@ -79,6 +79,8 @@ public class SpiritDetailActivity extends Activity implements OnClickListener {
 			downloadTask = new DownloadTask();
 			downloadTask.execute(url);
 		}
+		
+		((LiquorLocator)this.getApplicationContext()).setAdView(this);
     }
     
     @Override
@@ -146,9 +148,11 @@ public class SpiritDetailActivity extends Activity implements OnClickListener {
     public void setUI() {
     	activityBar.setTitle(spirit.getBrandName());
     	
+    	/*
         TextView name = (TextView)findViewById(R.id.spiritName);
         name.setText(spirit.getBrandName());
-
+    	 */
+    	
         TextView cost = (TextView)findViewById(R.id.cost);
         cost.setText("Cost: " + spirit.getRetailPrice());
 

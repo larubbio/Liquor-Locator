@@ -109,6 +109,8 @@ public class SpiritListActivity extends ListActivity implements OnClickListener 
 			downloadTask = new DownloadTask();
 			downloadTask.execute(url);
 		}
+		
+		((LiquorLocator)this.getApplicationContext()).setAdView(this);
     }
     
     @Override

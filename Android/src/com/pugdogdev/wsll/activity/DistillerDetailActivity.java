@@ -194,6 +194,8 @@ public class DistillerDetailActivity extends MapActivity implements OnClickListe
         
         mapView.setVisibility(View.VISIBLE);
         
+		((LiquorLocator)this.getApplicationContext()).setAdView(this);
+		
         Map<String, String> parameters = new HashMap<String, String>();
     	parameters.put("Distiller", distiller.getName());
         FlurryAgent.logEvent("DistillerDetail", parameters);

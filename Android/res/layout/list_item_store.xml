@@ -10,14 +10,14 @@
 	android:textStyle="bold"
 	android:layout_alignParentLeft="true"
 	android:layout_weight="1"
-	android:paddingLeft="10px"
+	android:paddingLeft="10dip"
 	android:id="@+id/label" />
   <TextView 
     android:textColor="#6D7B8D"
     android:textSize="5pt"
     android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
-	android:paddingLeft="10px"
+	android:paddingLeft="10dip"
 	android:id="@+id/distance" 
 	android:layout_alignParentLeft="true"
 	android:layout_below="@+id/label"/>
@@ -28,7 +28,7 @@
     android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
 	android:id="@+id/distanceLabel" 
-	android:paddingLeft="5px"
+	android:paddingLeft="5dip"
 	android:layout_toRightOf="@+id/distance" 
 	android:layout_below="@+id/label"/>
   <ImageView

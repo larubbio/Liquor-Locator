@@ -154,6 +154,8 @@ public class LocalActivity extends Activity implements OnClickListener {
         params.addRule(RelativeLayout.BELOW, withInventoryLastId );
         withOutInventory.setLayoutParams(params);
 
+		((LiquorLocator)this.getApplicationContext()).setAdView(this);
+		
         FlurryAgent.logEvent("DistillersView");
     }
 

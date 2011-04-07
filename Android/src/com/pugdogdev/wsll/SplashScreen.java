@@ -37,10 +37,11 @@ public class SplashScreen extends Activity {
 		crta.setPowerRequirement(Criteria.POWER_LOW); 
 		String provider = locationManager.getBestProvider(crta, true); 
 
-//		String provider = LocationManager.GPS_PROVIDER; 
-		lh.setLocation(locationManager.getLastKnownLocation(provider)); 
+		if (provider != null) {
+			lh.setLocation(locationManager.getLastKnownLocation(provider)); 
 
-		locationManager.requestLocationUpdates(provider, 1000, 0, lh); 
+			locationManager.requestLocationUpdates(provider, 1000, 0, lh); 
+		}
 		
 		Thread splashThread = new Thread() {
 			@Override

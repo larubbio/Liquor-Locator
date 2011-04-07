@@ -273,6 +273,8 @@ public class StoreDetailActivity extends MapActivity implements OnClickListener 
         directions.setVisibility(View.VISIBLE);
         directions.setOnClickListener(this);
 
+		((LiquorLocator)this.getApplicationContext()).setAdView(this);
+		
         Map<String, String> parameters = new HashMap<String, String>();
     	parameters.put("Store", store.getName());
         FlurryAgent.logEvent("StoreDetail", parameters);

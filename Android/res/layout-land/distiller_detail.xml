@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res/com.pugdogdev.wsll"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 
@@ -8,12 +9,21 @@
   <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
         
+    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content"
+	android:layout_height="fill_parent">
 	<com.google.android.maps.MapView
 		android:id="@+id/mapView" android:clickable="true"
-		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:layout_alignParentTop="true" android:visibility="invisible"
-		android:layout_weight="1" android:apiKey="09EeknnpIeMPpvXm7Oc_U5f4hGElFdaBdjppDkw" />
+		android:layout_weight="1" 
+		android:apiKey="09EeknnpIeMPpvXm7Oc_U5f4hGElFdaBdjppDkw" />
 	<!-- android:apiKey="09EeknnpIeMP3mJi_3bQqD9l8FlrnUh-Lb9NnPQ"/ Production -->
+	    <com.google.ads.AdView android:id="@+id/adView"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   ads:adUnitId="a14d9bf7683916f"
+                   ads:adSize="BANNER" />
+	</LinearLayout>
 	<LinearLayout android:orientation="vertical"
 		android:layout_width="fill_parent" android:layout_height="fill_parent"
 		android:layout_weight="1">

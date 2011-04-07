@@ -78,7 +78,8 @@ public class CategoryListActivity extends ListActivity implements OnClickListene
 			downloadTask.execute(url);
 		}
 
-		
+		((LiquorLocator)this.getApplicationContext()).setAdView(this);
+        
     	FlurryAgent.logEvent("CategoriesView");
     }
  
