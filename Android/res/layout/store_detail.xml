@@ -53,13 +53,12 @@
     		android:gravity="left">
   </TextView>
   <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:stretchColumns="1"
     android:layout_below="@+id/mapView" 
     android:id="@+id/hoursTable"
-    android:paddingLeft="20dip"
-    android:paddingRight="20dip" android:visibility="invisible">
+    android:visibility="invisible">
 
     <TableRow>
         <TextView
@@ -86,17 +85,14 @@
             android:padding="3dip" />
         <TextView
         	android:id="@+id/monHours"
-            android:gravity="left"
-            android:padding="3dip" />
+            android:gravity="left" />
         <TextView
         	android:id="@+id/friLabel"
             android:text="Fri"
-            android:gravity="left"
-            android:padding="3dip" />
+            android:gravity="left" />
         <TextView
         	android:id="@+id/friHours"
-            android:gravity="left"
-            android:padding="3dip" />
+            android:gravity="left" />
     </TableRow>    
     <TableRow>
         <TextView
@@ -106,17 +102,14 @@
             android:padding="3dip" />
         <TextView
         	android:id="@+id/tueHours"
-            android:gravity="left"
-            android:padding="3dip" />
+            android:gravity="left" />
         <TextView
         	android:id="@+id/satLabel"
             android:text="Sat"
-            android:gravity="left"
-            android:padding="3dip" />
+            android:gravity="left" />
         <TextView
         	android:id="@+id/satHours"
-            android:gravity="left"
-            android:padding="3dip" />
+            android:gravity="left" />
     </TableRow>
 
     <TableRow>
@@ -127,17 +120,14 @@
             android:padding="3dip" />
         <TextView
         	android:id="@+id/wedHours"
-            android:gravity="left"
-            android:padding="3dip" />
+            android:gravity="left" />
         <TextView
         	android:id="@+id/sunLabel"
             android:text="Sun"
-            android:gravity="left"
-            android:padding="3dip" />
+            android:gravity="left" />
         <TextView
         	android:id="@+id/sunHours"
-            android:gravity="left"
-            android:padding="3dip" />
+            android:gravity="left" />
     </TableRow>
   </TableLayout>
   
