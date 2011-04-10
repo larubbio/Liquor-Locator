@@ -45,7 +45,7 @@
           <ImageView android:src="@drawable/dash_search" 
                      android:layout_width="wrap_content" 
                      android:layout_height="wrap_content"></ImageView>
-          <TextView android:text="Search" 
+          <TextView android:text="Spirit Search" 
                     android:layout_width="wrap_content" 
                     android:layout_height="wrap_content"></TextView>
         </LinearLayout>
