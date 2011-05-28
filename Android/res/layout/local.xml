@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    		  xmlns:ads="http://schemas.android.com/apk/res/com.pugdogdev.wsll" 
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+ <include layout="@layout/activity_bar" />
+ <ScrollView
+            android:id="@+id/scrollView"
+		    android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_weight="1">
+          
+  <RelativeLayout android:id="@+id/localDistillersLayout"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+  <TextView android:layout_height="wrap_content" 
+    		android:id="@+id/withInventoryLabel"
+    		android:text="With Inventory in Stores"
+    		android:layout_width="fill_parent"
+    		android:textStyle="bold"
+    		android:textSize="7pt"    		
+    		android:gravity="left" android:visibility="invisible">
+  </TextView>
+  
+  <TextView android:layout_height="wrap_content" 
+    		android:id="@+id/withOutInventoryLabel"
+    		android:text="Not Yet in Stores"
+    		android:layout_width="fill_parent"
+    		android:textStyle="bold"
+    		android:textSize="7pt"    		
+    		android:gravity="left" android:visibility="invisible">
+  </TextView>
+  
+  </RelativeLayout>
+</ScrollView>
+
+<com.google.ads.AdView android:id="@+id/adView"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   ads:adUnitId="a14d9bf7683916f"
+                   ads:adSize="BANNER" />
+</LinearLayout>

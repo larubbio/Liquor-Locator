@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#38b34a" 
+    android:orientation="vertical">
+    
+  <TableLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="*" android:paddingTop="25dip">
+
+    <TableRow>
+        <LinearLayout android:id="@+id/categoriesDash" 
+                      android:orientation="vertical" 
+                      android:gravity="center" 
+                      android:padding="10dip">
+          <ImageView android:src="@drawable/dash_categories" 
+                     android:layout_width="wrap_content" 
+                     android:layout_height="wrap_content"></ImageView>
+          <TextView android:text="Categories" 
+          			android:layout_width="wrap_content" 
+          			android:layout_height="wrap_content"></TextView>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/storesDash" 
+        			  android:orientation="vertical" 
+        			  android:gravity="center" 
+        			  android:padding="10dip">
+          <ImageView android:src="@drawable/dash_stores" 
+                     android:layout_width="wrap_content" 
+                     android:layout_height="wrap_content"></ImageView>
+          <TextView android:text="Stores" 
+                    android:layout_width="wrap_content" 
+                    android:layout_height="wrap_content" 
+                    android:gravity="center"></TextView>
+        </LinearLayout>
+    </TableRow>
+
+    <TableRow>
+        <LinearLayout android:id="@+id/searchDash" 
+        		      android:orientation="vertical" 
+        		      android:gravity="center" 
+        		      android:padding="10dip">
+          <ImageView android:src="@drawable/dash_search" 
+                     android:layout_width="wrap_content" 
+                     android:layout_height="wrap_content"></ImageView>
+          <TextView android:text="Search" 
+                    android:layout_width="wrap_content" 
+                    android:layout_height="wrap_content"></TextView>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/localDash" 
+                      android:orientation="vertical" 
+                      android:gravity="center" 
+                      android:padding="10dip">
+          <ImageView android:src="@drawable/dash_local" 
+          	         android:layout_width="wrap_content" 
+          	         android:layout_height="wrap_content"></ImageView>
+          <TextView android:text="Local" 
+                    android:layout_width="wrap_content" 
+                    android:layout_height="wrap_content"></TextView>
+        </LinearLayout>
+    </TableRow>    
+  </TableLayout>
+</LinearLayout>

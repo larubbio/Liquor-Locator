@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="horizontal" 
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+  <TextView 
+    android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:textStyle="bold"
+	android:layout_alignParentLeft="true"
+	android:layout_weight="1"
+	android:paddingLeft="10dip"
+	android:id="@+id/label" />
+  <TextView 
+    android:textColor="#6D7B8D"
+    android:textSize="5pt"
+    android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:paddingLeft="10dip"
+	android:id="@+id/distance" 
+	android:layout_alignParentLeft="true"
+	android:layout_below="@+id/label"/>
+  <TextView 
+    android:text="miles"
+    android:textColor="#6D7B8D"
+    android:textSize="5pt"
+    android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:id="@+id/distanceLabel" 
+	android:paddingLeft="5dip"
+	android:layout_toRightOf="@+id/distance" 
+	android:layout_below="@+id/label"/>
+  <ImageView
+	android:layout_height="wrap_content" 
+	android:layout_width="wrap_content"
+	android:layout_alignParentRight="true"
+	android:id="@+id/disclosure" />
+</RelativeLayout>

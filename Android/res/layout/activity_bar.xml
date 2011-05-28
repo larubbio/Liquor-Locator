@@ -1,0 +1,31 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="#38b34a">
+    
+    <ImageView android:layout_height="wrap_content" 
+               android:layout_width="wrap_content"
+    		   android:layout_alignParentLeft="true"
+    		   android:layout_alignParentTop="true" 
+               android:src="@drawable/icon_small" 
+               android:id="@+id/homeButton"></ImageView>
+    <TextView android:text=""
+    		  android:layout_alignParentTop="true"
+    		  android:layout_centerInParent="true" 
+              android:id="@+id/activityBarTitle"
+              android:textStyle="bold"    		
+    		  android:textSize="7pt" 
+              android:layout_width="wrap_content" 
+              android:layout_height="wrap_content" 
+              android:ellipsize="end" 
+              android:lines="1"></TextView>
+   <LinearLayout android:orientation="horizontal"
+    		android:layout_alignParentRight="true"
+    		android:layout_alignParentTop="true"
+   			android:id="@+id/actionView"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:background="#38b34a">
+    </LinearLayout>
+</RelativeLayout>

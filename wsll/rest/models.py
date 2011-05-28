@@ -171,11 +171,21 @@ class Store(models.Model):
             else:
                 # We need to rebuild the old style of hours where
                 # consecutive days with the same hours are rolled up
-                startDay = "Mon"
-                endDay = "Mon"
-                cur = [days for days in _hours if 'Mon' == days.start_day][0].dict()
 
-                for d in ["Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]:
+                # First loop through to find the first open day
+                dayList = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+                while (dayList):
+                    d = dayList.pop(0)
+                    startDay = d
+                    endDay = d
+                    _days = [days for days in _hours if d == days.start_day]
+
+                    if (len(_days) > 0):
+                        cur = _days[0].dict()
+                        break
+
+                # Then loop throug remaining days building out the rolled up hours list
+                for d in dayList:
 
                     _days = [days for days in _hours if d == days.start_day]
                     if len(_days) > 0:

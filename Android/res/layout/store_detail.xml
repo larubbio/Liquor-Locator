@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res/com.pugdogdev.wsll"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+        
+   <include layout="@layout/activity_bar"
+  		    android:id="@+id/activityBar"
+    	    android:layout_alignParentTop="true" />
+    
+   <com.google.android.maps.MapView
+        android:id="@+id/mapView"
+        android:clickable="true"
+        android:layout_below="@+id/activityBar"
+        android:layout_width="100dip" 
+        android:layout_height="100dip"
+    	android:visibility="invisible"
+     	android:apiKey="09EeknnpIeMP3mJi_3bQqD9l8FlrnUh-Lb9NnPQ"/>
+<!--        android:apiKey="09EeknnpIeMPpvXm7Oc_U5f4hGElFdaBdjppDkw"/> Development -->
+  <TextView android:layout_height="wrap_content" 
+    		android:id="@+id/storeName"
+            android:layout_below="@+id/activityBar"
+    		android:layout_toRightOf="@+id/mapView"
+    		android:layout_width="fill_parent" 
+    		android:textStyle="bold"    		
+    		android:textSize="7pt"
+    		android:gravity="left">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:id="@+id/storeAddress"
+    		android:layout_below="@+id/storeName" 
+    		android:layout_toRightOf="@+id/mapView"
+    		android:layout_width="fill_parent" 
+    		android:textSize="5pt"
+    		android:gravity="left">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:id="@+id/storeCity"
+    		android:layout_below="@+id/storeAddress" 
+    		android:layout_toRightOf="@+id/mapView"
+    		android:layout_width="fill_parent" 
+    		android:textSize="5pt"
+    		android:gravity="left">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:id="@+id/storeOpenOrClosed"
+    		android:layout_below="@+id/storeCity" 
+    		android:layout_toRightOf="@+id/mapView"
+    		android:layout_width="fill_parent"
+    		android:textStyle="bold"
+    		android:textSize="7pt"    		
+    		android:gravity="left">
+  </TextView>
+  <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="1"
+    android:layout_below="@+id/mapView" 
+    android:id="@+id/hoursTable"
+    android:paddingLeft="20dip"
+    android:paddingRight="20dip" android:visibility="invisible">
+
+    <TableRow>
+        <TextView
+            android:layout_span="2"
+            android:text="Hours" 
+            android:textSize="7pt" 
+            android:textStyle="bold"/>
+        <TextView
+        	android:id="@+id/thurLabel"
+            android:text="Thur"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/thurHours"
+            android:gravity="left"
+            android:padding="3dip" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+        	android:id="@+id/monLabel"
+            android:text="Mon"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/monHours"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/friLabel"
+            android:text="Fri"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/friHours"
+            android:gravity="left"
+            android:padding="3dip" />
+    </TableRow>    
+    <TableRow>
+        <TextView
+        	android:id="@+id/tueLabel"
+            android:text="Tue"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/tueHours"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/satLabel"
+            android:text="Sat"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/satHours"
+            android:gravity="left"
+            android:padding="3dip" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+        	android:id="@+id/wedLabel"
+            android:text="Wed"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/wedHours"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/sunLabel"
+            android:text="Sun"
+            android:gravity="left"
+            android:padding="3dip" />
+        <TextView
+        	android:id="@+id/sunHours"
+            android:gravity="left"
+            android:padding="3dip" />
+    </TableRow>
+  </TableLayout>
+  
+  <Button android:id="@+id/directions" 
+          android:layout_width="wrap_content" 
+          android:text="Directions to Store" 
+          android:layout_below="@+id/hoursTable" 
+          android:layout_alignParentLeft="true"
+          android:layout_height="wrap_content" 
+          android:gravity="center_horizontal"
+          android:paddingTop="15dip"
+          android:visibility="invisible">
+  </Button>
+  <Button android:id="@+id/viewInventory" 
+          android:layout_width="wrap_content" 
+          android:text="View Inventory" 
+          android:layout_below="@+id/hoursTable" 
+          android:layout_alignParentRight="true"
+          android:layout_height="wrap_content" 
+          android:gravity="center_horizontal"
+          android:paddingTop="15dip"
+          android:visibility="invisible">
+  </Button>
+  
+  <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
+    		android:text="Store Manager"
+    		android:id="@+id/storeManager"
+    		android:layout_below="@+id/viewInventory"
+    		android:textStyle="bold"    		
+    		android:textSize="7pt"
+    		android:gravity="center"
+            android:visibility="invisible">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
+    		android:id="@+id/storeManagerName"
+    		android:layout_below="@+id/storeManager" 
+    		android:textSize="5pt"
+    		android:gravity="center"
+            android:visibility="invisible">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
+    		android:id="@+id/storeManagerNumber"
+    		android:layout_below="@+id/storeManagerName" 
+    		android:textSize="5pt"
+    		android:gravity="center" 
+    		android:clickable="true" 
+    		android:autoLink="phone"
+            android:visibility="invisible">
+  </TextView>
+
+  <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
+    		android:text="District Manager"
+    		android:id="@+id/districtManager"
+    		android:layout_below="@+id/storeManagerNumber"
+    		android:textStyle="bold"    		
+    		android:textSize="7pt"
+    		android:gravity="center"
+            android:visibility="invisible">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
+    		android:id="@+id/districtManagerName"
+    		android:layout_below="@+id/districtManager" 
+    		android:textSize="5pt"
+    		android:gravity="center"
+            android:visibility="invisible">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
+    		android:id="@+id/districtManagerNumber"
+    		android:layout_below="@+id/districtManagerName" 
+    		android:textSize="5pt"
+    		android:gravity="center" 
+    		android:clickable="true" 
+    		android:autoLink="phone"
+            android:visibility="invisible">
+  </TextView>
+          
+    <com.google.ads.AdView android:id="@+id/adView"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentBottom="true"
+                   ads:adUnitId="a14d9bf7683916f"
+                   ads:adSize="BANNER" />
+</RelativeLayout>

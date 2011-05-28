@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+  <include layout="@layout/activity_bar" />
+    
+  <LinearLayout android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+        
+    <LinearLayout android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1">
+  <TextView android:layout_height="wrap_content" 
+    		android:id="@+id/spiritName" 
+    		android:layout_width="fill_parent" 
+    		android:gravity="center_horizontal"
+    		android:textStyle="bold"
+    		android:textSize="10pt">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
+    		android:id="@+id/cost" 
+  		    android:textColor="#6D7B8D"
+            android:paddingTop="15px"
+    		android:gravity="center_horizontal">
+  </TextView>
+  <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
+    		android:id="@+id/size" 
+    		android:paddingTop="5px"
+    		android:paddingBottom="5px"
+  		    android:textColor="#6D7B8D"
+    		android:gravity="center_horizontal">
+  </TextView>
+  <Button android:id="@+id/viewStores" 
+          android:text="View Stores" 
+          android:layout_height="wrap_content" 
+          android:layout_width="fill_parent"
+          android:gravity="center_horizontal" 
+          android:visibility="invisible">
+  </Button>
+  </LinearLayout>
+  <LinearLayout android:orientation="vertical"
+  				android:layout_width="fill_parent"
+    			android:layout_height="fill_parent"
+    			android:layout_weight="1">
+  <ImageView android:layout_width="wrap_content" 
+  			 android:layout_height="wrap_content"
+  			 android:layout_weight="1"
+  			 android:scaleType="fitCenter" 
+  			 android:id="@+id/spiritImage"
+  			 android:gravity="center_horizontal"
+  			 android:layout_centerVertical="true"
+  			 android:layout_centerHorizontal="true">
+  </ImageView>
+  <TextView android:layout_height="wrap_content" 
+    		android:layout_width="fill_parent" 
+    		android:id="@+id/attribution" 
+    		android:paddingTop="5px"
+  		    android:textColor="#6D7B8D"
+  		    android:textSize="5pt"
+    		android:gravity="center_horizontal">
+  </TextView>
+  </LinearLayout>
+</LinearLayout>
+</LinearLayout>
