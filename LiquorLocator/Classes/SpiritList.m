@@ -29,6 +29,18 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self createAdBannerView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self fixupAdView:[UIDevice currentDevice].orientation];
+}
+
 - (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -39,6 +51,7 @@
     [table release];
     [spirits release];
     [keys release];
+    
     [super dealloc];
 }
 

@@ -24,6 +24,10 @@
 @synthesize jsonData;
 @synthesize objectList;
 
+@synthesize contentView = _contentView;
+@synthesize adBannerView = _adBannerView;
+@synthesize adBannerViewIsVisible = _adBannerViewIsVisible;
+
 - (void)viewDidAppear:(BOOL)animated {
     HUD = nil;
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -93,6 +97,9 @@
     [feedURLString release];
     [objectList release];
 
+    self.contentView = nil;
+    self.adBannerView = nil;
+    
     [super dealloc];
 }
 
@@ -224,6 +231,92 @@
     [HUD removeFromSuperview];
     [HUD release];
     HUD = nil;
+}
+
+#pragma mark -
+#pragma IAd Delegate Methods
+- (int)getBannerHeight:(UIDeviceOrientation)orientation {
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+        return 32;
+    } else {
+        return 50;
+    }
+}
+
+- (int)getBannerHeight {
+    return [self getBannerHeight:[UIDevice currentDevice].orientation];
+}
+
+- (void)createAdBannerView {
+    Class classAdBannerView = NSClassFromString(@"ADBannerView");
+    if (classAdBannerView != nil) {
+        self.adBannerView = [[[classAdBannerView alloc] 
+                              initWithFrame:CGRectMake(0, self.view.frame.size.height, 0, 0)] autorelease];
+        [_adBannerView setRequiredContentSizeIdentifiers:[NSSet setWithObjects: 
+                                                          ADBannerContentSizeIdentifierPortrait, 
+                                                          ADBannerContentSizeIdentifierLandscape, nil]];
+        if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
+            [_adBannerView setCurrentContentSizeIdentifier:
+             ADBannerContentSizeIdentifierLandscape];
+        } else {
+            [_adBannerView setCurrentContentSizeIdentifier:
+             ADBannerContentSizeIdentifierPortrait];            
+        }
+        [_adBannerView setDelegate:self];
+        
+        [self.view addSubview:_adBannerView];        
+    }
+}
+
+- (void)fixupAdView:(UIInterfaceOrientation)toInterfaceOrientation {
+    if (_adBannerView != nil) {        
+        if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+            [_adBannerView setCurrentContentSizeIdentifier:
+             ADBannerContentSizeIdentifierLandscape];
+        } else {
+            [_adBannerView setCurrentContentSizeIdentifier:
+             ADBannerContentSizeIdentifierPortrait];
+        }          
+        [UIView beginAnimations:@"fixupViews" context:nil];
+        if (_adBannerViewIsVisible) {
+            CGRect adBannerViewFrame = [_adBannerView frame];
+            adBannerViewFrame.origin.x = 0;
+            adBannerViewFrame.origin.y = self.view.frame.size.height - [self getBannerHeight:toInterfaceOrientation];
+            [_adBannerView setFrame:adBannerViewFrame];
+
+            CGRect contentViewFrame = _contentView.frame;
+            contentViewFrame.origin.y = 0;
+            contentViewFrame.size.height = self.view.frame.size.height - [self getBannerHeight:toInterfaceOrientation];
+            _contentView.frame = contentViewFrame;
+        } else {
+            CGRect adBannerViewFrame = [_adBannerView frame];
+            adBannerViewFrame.origin.x = 0;
+            adBannerViewFrame.origin.y = self.view.frame.size.height;
+            [_adBannerView setFrame:adBannerViewFrame];
+            
+            CGRect contentViewFrame = _contentView.frame;
+            contentViewFrame.origin.y = 0;
+            contentViewFrame.size.height = self.view.frame.size.height;
+            _contentView.frame = contentViewFrame;           
+        }
+        [UIView commitAnimations];
+    }   
+}
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner {
+    if (!_adBannerViewIsVisible) {                
+        _adBannerViewIsVisible = YES;
+        [self fixupAdView:[UIDevice currentDevice].orientation];
+    }
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    if (_adBannerViewIsVisible)
+    {        
+        _adBannerViewIsVisible = NO;
+        [self fixupAdView:[UIDevice currentDevice].orientation];
+    }
 }
 
 @end
