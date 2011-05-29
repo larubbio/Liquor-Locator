@@ -18,6 +18,18 @@
 @synthesize storeName;
 @synthesize storeId;
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self createAdBannerView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self fixupAdView:[UIDevice currentDevice].orientation];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
 #ifdef FLURRY
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:storeName, @"Store", nil]; 
