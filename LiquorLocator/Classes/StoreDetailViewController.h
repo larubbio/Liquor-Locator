@@ -44,6 +44,8 @@
     IBOutlet UIView *mask;
     IBOutlet UIView *districtManagerView;
     IBOutlet MKMapView *map;
+    
+    IBOutlet UIScrollView *scrollView;
 }
 
 @property (nonatomic, assign) int storeId;
@@ -78,6 +80,8 @@
 @property (nonatomic, retain) UIView *mask;
 @property (nonatomic, retain) UIView *districtManagerView;
 @property (nonatomic, retain) MKMapView *map;
+
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 
 - (IBAction)directions:(id)sender;
 - (IBAction)callStoreManager:(id)sender;

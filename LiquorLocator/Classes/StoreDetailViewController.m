@@ -50,6 +50,22 @@
 @synthesize districtManagerView;
 @synthesize map;
 
+@synthesize scrollView;
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self createAdBannerView];
+    
+    scrollView.contentSize = [_contentView sizeThatFits:CGSizeZero];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self fixupAdView:[UIDevice currentDevice].orientation];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     self.feedURLString = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/store/%d?hoursByDay=1", storeId];
     

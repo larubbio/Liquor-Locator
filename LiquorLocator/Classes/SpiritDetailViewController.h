@@ -23,6 +23,8 @@
     IBOutlet UIButton *viewStoresBtn;
     IBOutlet AsyncImageView *image;
     IBOutlet UIButton *imageSrcBtn;
+    
+    IBOutlet UIScrollView *scrollView;
 }
 
 @property (nonatomic, retain) NSString *spiritId;
@@ -35,6 +37,8 @@
 @property (nonatomic, retain) UIButton *viewStoresBtn;
 @property (nonatomic, retain) AsyncImageView *image;
 @property (nonatomic, retain) UIButton *imageSrcBtn;
+
+@property (nonatomic, retain) UIScrollView *scrollView;
 
 - (IBAction)viewStores:(id)sender;
 - (IBAction)viewImageSrc:(id)sender;

@@ -29,8 +29,22 @@
 @synthesize sizeBtn;
 @synthesize viewStoresBtn;
 
+@synthesize scrollView;
+
 - (void)viewDidLoad {
+    [super viewDidLoad];
+    
     http = [[HTTPUtil alloc] init];
+    
+    [self createAdBannerView];
+    
+    scrollView.contentSize = [_contentView sizeThatFits:CGSizeZero];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self fixupAdView:[UIDevice currentDevice].orientation];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

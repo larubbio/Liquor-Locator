@@ -23,6 +23,18 @@
 @synthesize table;
 @synthesize addressCell;
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self createAdBannerView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self fixupAdView:[UIDevice currentDevice].orientation];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     self.feedURLString = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/distiller/%d", distillerId];
     
