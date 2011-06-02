@@ -7,6 +7,7 @@
 //
 
 #import "RootViewController.h"
+#import "LiquorLocatorAppDelegate.h"
 #import "CategoriesViewController.h"
 #import "StoresViewController.h"
 #import "SearchViewController.h"
@@ -21,12 +22,11 @@
 @synthesize userLocation;
 
 @synthesize viewControllers;
-@synthesize tabBar;
-@synthesize	categoriesTabBarItem;
-@synthesize storesTabBarItem;
-@synthesize	spiritsTabBarItem;
-@synthesize localDistillersTabBarItem;
-@synthesize selectedTabBarItem;
+@synthesize	categoriesButton;
+@synthesize storesButton;
+@synthesize	spiritsButton;
+@synthesize localDistillersButton;
+@synthesize selectedButton;
 @synthesize selectedViewController;
 
 - (void)viewDidLoad {
@@ -36,32 +36,14 @@
     locationManager.distanceFilter = 10.0f;
     [locationManager startUpdatingLocation];
 
-    self.title = kCategories;
-    
-    tabBar.selectedItem = categoriesTabBarItem;	
+    self.title = @"Liquor Locator";
     
     // Custom initialization
-    CategoriesViewController *categoriesTabViewController = [[CategoriesViewController alloc] initWithNibName:@"CategoriesView" bundle:nil];
-    StoresViewController *storesTabViewController = [[StoresViewController alloc] initWithNibName:@"StoresView" bundle:nil];
-    SearchViewController *searchTabViewController = [[SearchViewController alloc] initWithNibName:@"SearchView" bundle:nil];
-    LocalDistillersViewController *localDistillersTabViewController = [[LocalDistillersViewController alloc] initWithNibName:@"LocalDistillersView" bundle:nil];
-		
-    NSArray *array = [[NSArray alloc] initWithObjects:categoriesTabViewController, storesTabViewController, searchTabViewController, localDistillersTabViewController, nil];
-    self.viewControllers = array;
-		
-	[categoriesTabViewController viewWillAppear:YES];
-	    
-    [self.view addSubview:categoriesTabViewController.view];
-    self.selectedViewController = categoriesTabViewController;
-    self.selectedTabBarItem = categoriesTabBarItem;
-//    [self.selectedViewController viewDidAppear:YES];
 
-    [array release];
-    [categoriesTabViewController release];
-    [storesTabViewController release];
-    [searchTabViewController release];
-    [localDistillersTabViewController release];
-    
+
+
+
+		    
     [super viewDidLoad];
 }
 
@@ -71,19 +53,46 @@
     [self.selectedViewController viewDidAppear:YES];
 }
 
-- (void)dealloc {
-    [locationManager release];
-    [userLocation release];
-    [tabBar release];
-    [categoriesTabBarItem release];
-    [storesTabBarItem release];
-    [spiritsTabBarItem release];
-    [localDistillersTabBarItem release];
-    [selectedTabBarItem release];
-    [viewControllers release];
-    [selectedViewController release];
-    [super dealloc];
+- (IBAction)viewCategories:(id)sender {
+    
+    CategoriesViewController *controller = [[CategoriesViewController alloc] initWithNibName:@"CategoriesView" bundle:nil];
+    
+    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate.navController pushViewController:controller animated:YES];
+    
+    [controller release];
 }
+
+- (IBAction)viewSearch:(id)sender {
+    
+    SearchViewController *controller = [[SearchViewController alloc] initWithNibName:@"SearchView" bundle:nil];
+    
+    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate.navController pushViewController:controller animated:YES];
+    
+    [controller release];
+}
+
+- (IBAction)viewStores:(id)sender {
+    
+    StoresViewController *controller = [[StoresViewController alloc] initWithNibName:@"StoresView" bundle:nil];
+    
+    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate.navController pushViewController:controller animated:YES];
+    
+    [controller release];
+}
+
+- (IBAction)viewLocal:(id)sender {
+    
+    LocalDistillersViewController *controller = [[LocalDistillersViewController alloc] initWithNibName:@"LocalDistillersView" bundle:nil];
+    
+    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate.navController pushViewController:controller animated:YES];
+    
+    [controller release];
+}
+
 
 #pragma mark -
 #pragma mark Core Location Delegate Methods
@@ -98,46 +107,17 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
 }
 
-#pragma mark -
-#pragma mark Tab Bar Deleget Methods
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
-{
-    if (item == self.selectedTabBarItem) {
-        return;
-    }
-    
-#ifdef FLURRY
-    [FlurryAPI countPageView];
-#endif
-        
-    UIViewController *controller = nil;
-    
-	if (item == categoriesTabBarItem) {
-		controller = [viewControllers objectAtIndex:0];
-        self.title = kCategories;
-	} else if (item == storesTabBarItem) {
-		controller = [viewControllers objectAtIndex:1];
-        self.title = kStores;
-	} else if (item == spiritsTabBarItem) {
-		controller = [viewControllers objectAtIndex:2];
-        self.title = kSearch;
-    } else if (item == localDistillersTabBarItem) {
-		controller = [viewControllers objectAtIndex:3];
-        self.title = kLocalDistillers;
-    }
-    
-    [controller viewWillAppear:YES];
-    [self.selectedViewController viewWillDisappear:YES];
-	
-    [self.selectedViewController.view removeFromSuperview];
-    [self.view addSubview:controller.view];
-	
-    [self.selectedViewController viewDidDisappear:YES];
-    [controller viewDidAppear:YES];
-    
-    self.selectedViewController = controller;
-    self.selectedTabBarItem = item;
+- (void)dealloc {
+    [locationManager release];
+    [userLocation release];
+    [categoriesButton release];
+    [storesButton release];
+    [spiritsButton release];
+    [localDistillersButton release];
+    [selectedButton release];
+    [viewControllers release];
+    [selectedViewController release];
+    [super dealloc];
 }
-
 
 @end

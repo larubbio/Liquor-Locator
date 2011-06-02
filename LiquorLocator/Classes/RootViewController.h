@@ -9,31 +9,34 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface RootViewController : UIViewController <UITabBarDelegate, CLLocationManagerDelegate> {
+@interface RootViewController : UIViewController <CLLocationManagerDelegate> {
     CLLocationManager *locationManager;
     CLLocation *userLocation;
 
 	NSArray *viewControllers;
-	IBOutlet UITabBar *tabBar;
-	IBOutlet UITabBarItem *categoriesTabBarItem;
-	IBOutlet UITabBarItem *storesTabBarItem;
-	IBOutlet UITabBarItem *spiritsTabBarItem;
-	IBOutlet UITabBarItem *localDistillersTabBarItem;
+	IBOutlet UIButton *categoriesButton;
+	IBOutlet UIButton *storesButton;
+	IBOutlet UIButton *spiritsButton;
+	IBOutlet UIButton *localDistillersButton;
     
-    UITabBarItem *selectedTabBarItem;
+    UIButton *selectedButton;
 	UIViewController *selectedViewController;
 }
 
 @property (nonatomic, retain) NSArray *viewControllers;
-@property (nonatomic, retain) IBOutlet UITabBar *tabBar;
-@property (nonatomic, retain) IBOutlet UITabBarItem *categoriesTabBarItem;
-@property (nonatomic, retain) IBOutlet UITabBarItem *storesTabBarItem;
-@property (nonatomic, retain) IBOutlet UITabBarItem *spiritsTabBarItem;
-@property (nonatomic, retain) IBOutlet UITabBarItem *localDistillersTabBarItem;
-@property (nonatomic, retain) UITabBarItem *selectedTabBarItem;
+@property (nonatomic, retain) IBOutlet UIButton *categoriesButton;
+@property (nonatomic, retain) IBOutlet UIButton *storesButton;
+@property (nonatomic, retain) IBOutlet UIButton *spiritsButton;
+@property (nonatomic, retain) IBOutlet UIButton *localDistillersButton;
+@property (nonatomic, retain) UIButton *selectedButton;
 @property (nonatomic, retain) UIViewController *selectedViewController;
 
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) CLLocation *userLocation;
+
+- (IBAction)viewCategories:(id)sender;
+- (IBAction)viewSearch:(id)sender;
+- (IBAction)viewStores:(id)sender;
+- (IBAction)viewLocal:(id)sender;
 
 @end
