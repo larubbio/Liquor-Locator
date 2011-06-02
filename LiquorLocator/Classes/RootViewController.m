@@ -9,7 +9,7 @@
 #import "RootViewController.h"
 #import "LiquorLocatorAppDelegate.h"
 #import "CategoriesViewController.h"
-#import "StoresViewController.h"
+#import "StoreListViewController.h"
 #import "SearchViewController.h"
 #import "LocalDistillersViewController.h"
 
@@ -37,13 +37,7 @@
     [locationManager startUpdatingLocation];
 
     self.title = @"Liquor Locator";
-    
-    // Custom initialization
-
-
-
-
-		    
+    	    
     [super viewDidLoad];
 }
 
@@ -75,7 +69,7 @@
 
 - (IBAction)viewStores:(id)sender {
     
-    StoresViewController *controller = [[StoresViewController alloc] initWithNibName:@"StoresView" bundle:nil];
+    StoreListViewController *controller = [[StoreListViewController alloc] initWithNibName:@"StoreListView" bundle:nil];
     
     LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate.navController pushViewController:controller animated:YES];

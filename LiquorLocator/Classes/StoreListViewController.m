@@ -16,13 +16,21 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 #ifdef FLURRY
-    NSDictionary *params= [NSDictionary dictionaryWithObjectsAndKeys:spiritName, @"Spirit", nil]; 
-    [FlurryAPI logEvent:@"StoresView" withParameters:params];
+    if (spiritName != nil) {
+        NSDictionary *params= [NSDictionary dictionaryWithObjectsAndKeys:spiritName, @"Spirit", nil]; 
+        [FlurryAPI logEvent:@"StoresView" withParameters:params];
+    } else {
+        [FlurryAPI logEvent:@"StoresView"];    
+    }
 #endif
     
-    NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirit/%@/stores", spiritId];
-    self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
+    if (spiritName != nil) {
+        NSString *query = [NSString stringWithFormat:@"http://wsll.pugdogdev.com/spirit/%@/stores", spiritId];
+        self.feedURLString = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    } else {
+        self.feedURLString = @"http://wsll.pugdogdev.com/stores"; 
+        self.title = @"Stores"; 
+    }
     [super viewDidAppear:animated];
 }
 

@@ -16,10 +16,6 @@
 		460A7EED120767E200F36A91 /* StoreDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 460A7EEB120767E200F36A91 /* StoreDetailViewController.m */; };
 		460A7EEE120767E200F36A91 /* StoreDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 460A7EEC120767E200F36A91 /* StoreDetailView.xib */; };
 		460A7FB3120779B100F36A91 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 460A7FB2120779B100F36A91 /* MapKit.framework */; };
-		4628BF051202846900ECE4BE /* StoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4628BF031202846900ECE4BE /* StoresViewController.m */; };
-		4628BF061202846900ECE4BE /* StoresView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF041202846900ECE4BE /* StoresView.xib */; };
-		4628BF0A1202849200ECE4BE /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4628BF081202849200ECE4BE /* CategoriesViewController.m */; };
-		4628BF0B1202849200ECE4BE /* CategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF091202849200ECE4BE /* CategoriesView.xib */; };
 		4628BF0F120284A500ECE4BE /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4628BF0D120284A500ECE4BE /* SearchViewController.m */; };
 		4628BF10120284A500ECE4BE /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4628BF0E120284A500ECE4BE /* SearchView.xib */; };
 		463ECCC7131E133800372C24 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 463ECCC6131E133800372C24 /* NSString+URLEncoding.m */; };
@@ -48,9 +44,8 @@
 		46A6AF9512243E5A00038466 /* BlurbViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A6AF9212243E5A00038466 /* BlurbViewCell.m */; };
 		46A6AF9612243E5A00038466 /* DistillerAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A6AF9412243E5A00038466 /* DistillerAddressCell.m */; };
 		46B52659123871B200FB3E10 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 46B52658123871B200FB3E10 /* Icon.png */; };
-		46CABEB71228394400B8D751 /* CategoriesList.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CABEB61228394400B8D751 /* CategoriesList.m */; };
-		46CABED612283AB500B8D751 /* StoreCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CABED412283AB500B8D751 /* StoreCategoriesViewController.m */; };
-		46CABED712283AB500B8D751 /* StoreCategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46CABED512283AB500B8D751 /* StoreCategoriesView.xib */; };
+		46CABED612283AB500B8D751 /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CABED412283AB500B8D751 /* CategoriesViewController.m */; };
+		46CABED712283AB500B8D751 /* CategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46CABED512283AB500B8D751 /* CategoriesView.xib */; };
 		46CABF25122867AB00B8D751 /* libFlurryWithLocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CABF24122867AB00B8D751 /* libFlurryWithLocation.a */; };
 		46CAC0FB122F531E00B8D751 /* campaign.png in Resources */ = {isa = PBXBuildFile; fileRef = 46CAC0F6122F531E00B8D751 /* campaign.png */; };
 		46CAC0FC122F531E00B8D751 /* categories.png in Resources */ = {isa = PBXBuildFile; fileRef = 46CAC0F7122F531E00B8D751 /* categories.png */; };
@@ -87,12 +82,6 @@
 		460A7EEB120767E200F36A91 /* StoreDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailViewController.m; sourceTree = "<group>"; };
 		460A7EEC120767E200F36A91 /* StoreDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StoreDetailView.xib; path = Classes/StoreDetailView.xib; sourceTree = "<group>"; };
 		460A7FB2120779B100F36A91 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		4628BF021202846900ECE4BE /* StoresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoresViewController.h; sourceTree = "<group>"; };
-		4628BF031202846900ECE4BE /* StoresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoresViewController.m; sourceTree = "<group>"; };
-		4628BF041202846900ECE4BE /* StoresView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StoresView.xib; path = Classes/StoresView.xib; sourceTree = "<group>"; };
-		4628BF071202849200ECE4BE /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesViewController.h; sourceTree = "<group>"; };
-		4628BF081202849200ECE4BE /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
-		4628BF091202849200ECE4BE /* CategoriesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CategoriesView.xib; path = Classes/CategoriesView.xib; sourceTree = "<group>"; };
 		4628BF0C120284A500ECE4BE /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		4628BF0D120284A500ECE4BE /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		4628BF0E120284A500ECE4BE /* SearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchView.xib; path = Classes/SearchView.xib; sourceTree = "<group>"; };
@@ -141,11 +130,9 @@
 		46A6AF9312243E5A00038466 /* DistillerAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DistillerAddressCell.h; path = Classes/DistillerAddressCell.h; sourceTree = "<group>"; };
 		46A6AF9412243E5A00038466 /* DistillerAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DistillerAddressCell.m; path = Classes/DistillerAddressCell.m; sourceTree = "<group>"; };
 		46B52658123871B200FB3E10 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		46CABEB51228394400B8D751 /* CategoriesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesList.h; sourceTree = "<group>"; };
-		46CABEB61228394400B8D751 /* CategoriesList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesList.m; sourceTree = "<group>"; };
-		46CABED312283AB500B8D751 /* StoreCategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreCategoriesViewController.h; sourceTree = "<group>"; };
-		46CABED412283AB500B8D751 /* StoreCategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreCategoriesViewController.m; sourceTree = "<group>"; };
-		46CABED512283AB500B8D751 /* StoreCategoriesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StoreCategoriesView.xib; path = Classes/StoreCategoriesView.xib; sourceTree = "<group>"; };
+		46CABED312283AB500B8D751 /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesViewController.h; sourceTree = "<group>"; };
+		46CABED412283AB500B8D751 /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
+		46CABED512283AB500B8D751 /* CategoriesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CategoriesView.xib; path = Classes/CategoriesView.xib; sourceTree = "<group>"; };
 		46CABF22122867AB00B8D751 /* FlurryAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAdDelegate.h; sourceTree = "<group>"; };
 		46CABF23122867AB00B8D751 /* FlurryAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAPI.h; sourceTree = "<group>"; };
 		46CABF24122867AB00B8D751 /* libFlurryWithLocation.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryWithLocation.a; sourceTree = "<group>"; };
@@ -254,10 +241,8 @@
 				46FF630F1221889D00EEC2F6 /* LocalDistillersView.xib */,
 				46A6AF76122380C300038466 /* DistillerDetailView.xib */,
 				46A6AF84122383A900038466 /* DistillerAddressCell.xib */,
-				4628BF091202849200ECE4BE /* CategoriesView.xib */,
-				4628BF041202846900ECE4BE /* StoresView.xib */,
 				469B60951209205C00A7E5DE /* StoreListView.xib */,
-				46CABED512283AB500B8D751 /* StoreCategoriesView.xib */,
+				46CABED512283AB500B8D751 /* CategoriesView.xib */,
 				460A7EEC120767E200F36A91 /* StoreDetailView.xib */,
 				4628BF0E120284A500ECE4BE /* SearchView.xib */,
 				46E649DF1203D11A00AB9328 /* SpiritListView.xib */,
@@ -286,12 +271,8 @@
 		4628BF25120289C500ECE4BE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4628BF071202849200ECE4BE /* CategoriesViewController.h */,
-				4628BF081202849200ECE4BE /* CategoriesViewController.m */,
-				4628BF021202846900ECE4BE /* StoresViewController.h */,
-				4628BF031202846900ECE4BE /* StoresViewController.m */,
-				46CABED312283AB500B8D751 /* StoreCategoriesViewController.h */,
-				46CABED412283AB500B8D751 /* StoreCategoriesViewController.m */,
+				46CABED312283AB500B8D751 /* CategoriesViewController.h */,
+				46CABED412283AB500B8D751 /* CategoriesViewController.m */,
 				4628BF0C120284A500ECE4BE /* SearchViewController.h */,
 				4628BF0D120284A500ECE4BE /* SearchViewController.m */,
 				46E649DD1203D11A00AB9328 /* SpiritListViewController.h */,
@@ -314,8 +295,6 @@
 				4671108B120DAE5300B250F9 /* StoreList.m */,
 				46711121120E02EC00B250F9 /* SpiritList.h */,
 				46711122120E02EC00B250F9 /* SpiritList.m */,
-				46CABEB51228394400B8D751 /* CategoriesList.h */,
-				46CABEB61228394400B8D751 /* CategoriesList.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -462,8 +441,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
-				4628BF061202846900ECE4BE /* StoresView.xib in Resources */,
-				4628BF0B1202849200ECE4BE /* CategoriesView.xib in Resources */,
 				4628BF10120284A500ECE4BE /* SearchView.xib in Resources */,
 				46E64865120374B700AB9328 /* RootView.xib in Resources */,
 				46E649E11203D11A00AB9328 /* SpiritListView.xib in Resources */,
@@ -475,7 +452,7 @@
 				46A6AF78122380C300038466 /* DistillerDetailView.xib in Resources */,
 				46A6AF821223834800038466 /* BlurbCell.xib in Resources */,
 				46A6AF85122383A900038466 /* DistillerAddressCell.xib in Resources */,
-				46CABED712283AB500B8D751 /* StoreCategoriesView.xib in Resources */,
+				46CABED712283AB500B8D751 /* CategoriesView.xib in Resources */,
 				46CAC0FB122F531E00B8D751 /* campaign.png in Resources */,
 				46CAC0FC122F531E00B8D751 /* categories.png in Resources */,
 				46CAC0FD122F531E00B8D751 /* local.png in Resources */,
@@ -495,8 +472,6 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* LiquorLocatorAppDelegate.m in Sources */,
-				4628BF051202846900ECE4BE /* StoresViewController.m in Sources */,
-				4628BF0A1202849200ECE4BE /* CategoriesViewController.m in Sources */,
 				4628BF0F120284A500ECE4BE /* SearchViewController.m in Sources */,
 				46E647EA12034DAB00AB9328 /* NSObject+SBJSON.m in Sources */,
 				46E647EB12034DAB00AB9328 /* NSString+SBJSON.m in Sources */,
@@ -519,8 +494,7 @@
 				46A6AF77122380C300038466 /* DistillerDetailViewController.m in Sources */,
 				46A6AF9512243E5A00038466 /* BlurbViewCell.m in Sources */,
 				46A6AF9612243E5A00038466 /* DistillerAddressCell.m in Sources */,
-				46CABEB71228394400B8D751 /* CategoriesList.m in Sources */,
-				46CABED612283AB500B8D751 /* StoreCategoriesViewController.m in Sources */,
+				46CABED612283AB500B8D751 /* CategoriesViewController.m in Sources */,
 				4650CECC1241BD8E00C7C1EF /* AsyncImageView.m in Sources */,
 				4650CECD1241BD8E00C7C1EF /* HTTPUtil.m in Sources */,
 				4650CED31241BE1600C7C1EF /* HTTPParam.m in Sources */,
