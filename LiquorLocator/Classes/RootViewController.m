@@ -26,8 +26,9 @@
 @synthesize storesButton;
 @synthesize	spiritsButton;
 @synthesize localDistillersButton;
-@synthesize selectedButton;
-@synthesize selectedViewController;
+
+@synthesize adBannerView = _adBannerView;
+@synthesize adBannerViewIsVisible = _adBannerViewIsVisible;
 
 - (void)viewDidLoad {
     self.locationManager = [[CLLocationManager alloc] init];
@@ -38,13 +39,23 @@
 
     self.title = @"Liquor Locator";
     	    
+    [self createAdBannerView];
+    
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self fixupAdView:[UIDevice currentDevice].orientation];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [locationManager startUpdatingLocation];
     
-    [self.selectedViewController viewDidAppear:YES];
+#ifdef FLURRY
+    [FlurryAPI logEvent:@"Dashboard"];        
+#endif
 }
 
 - (IBAction)viewCategories:(id)sender {
@@ -101,6 +112,81 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
 }
 
+#pragma mark -
+#pragma IAd Delegate Methods
+- (int)getBannerHeight:(UIDeviceOrientation)orientation {
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+        return 32;
+    } else {
+        return 50;
+    }
+}
+
+- (int)getBannerHeight {
+    return [self getBannerHeight:[UIDevice currentDevice].orientation];
+}
+
+- (void)createAdBannerView {
+    Class classAdBannerView = NSClassFromString(@"ADBannerView");
+    if (classAdBannerView != nil) {
+        self.adBannerView = [[[classAdBannerView alloc] 
+                              initWithFrame:CGRectMake(0, self.view.frame.size.height, 0, 0)] autorelease];
+        [_adBannerView setRequiredContentSizeIdentifiers:[NSSet setWithObjects: 
+                                                          ADBannerContentSizeIdentifierPortrait, 
+                                                          ADBannerContentSizeIdentifierLandscape, nil]];
+        if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
+            [_adBannerView setCurrentContentSizeIdentifier:
+             ADBannerContentSizeIdentifierLandscape];
+        } else {
+            [_adBannerView setCurrentContentSizeIdentifier:
+             ADBannerContentSizeIdentifierPortrait];            
+        }
+        [_adBannerView setDelegate:self];
+        
+        [self.view addSubview:_adBannerView];        
+    }
+}
+
+- (void)fixupAdView:(UIInterfaceOrientation)toInterfaceOrientation {
+    if (_adBannerView != nil) {        
+        if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+            [_adBannerView setCurrentContentSizeIdentifier:ADBannerContentSizeIdentifierLandscape];
+        } else {
+            [_adBannerView setCurrentContentSizeIdentifier:ADBannerContentSizeIdentifierPortrait];
+        }          
+        
+        [UIView beginAnimations:@"fixupViews" context:nil];
+        if (_adBannerViewIsVisible) {
+            CGRect adBannerViewFrame = [_adBannerView frame];
+            adBannerViewFrame.origin.x = 0;
+            adBannerViewFrame.origin.y = self.view.frame.size.height - [self getBannerHeight:toInterfaceOrientation];
+            [_adBannerView setFrame:adBannerViewFrame];
+        } else {
+            CGRect adBannerViewFrame = [_adBannerView frame];
+            adBannerViewFrame.origin.x = 0;
+            adBannerViewFrame.origin.y = self.view.frame.size.height;
+            [_adBannerView setFrame:adBannerViewFrame];
+        }
+        [UIView commitAnimations];
+    }   
+}
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner {
+    if (!_adBannerViewIsVisible) {                
+        _adBannerViewIsVisible = YES;
+        [self fixupAdView:[UIDevice currentDevice].orientation];
+    }
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    if (_adBannerViewIsVisible)
+    {        
+        _adBannerViewIsVisible = NO;
+        [self fixupAdView:[UIDevice currentDevice].orientation];
+    }
+}
+
 - (void)dealloc {
     [locationManager release];
     [userLocation release];
@@ -108,9 +194,8 @@
     [storesButton release];
     [spiritsButton release];
     [localDistillersButton release];
-    [selectedButton release];
     [viewControllers release];
-    [selectedViewController release];
+
     [super dealloc];
 }
 

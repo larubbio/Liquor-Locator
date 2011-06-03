@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "iAd/ADBannerView.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface RootViewController : UIViewController <CLLocationManagerDelegate> {
+@interface RootViewController : UIViewController <CLLocationManagerDelegate, ADBannerViewDelegate> {
     CLLocationManager *locationManager;
     CLLocation *userLocation;
 
@@ -19,8 +20,8 @@
 	IBOutlet UIButton *spiritsButton;
 	IBOutlet UIButton *localDistillersButton;
     
-    UIButton *selectedButton;
-	UIViewController *selectedViewController;
+    id _adBannerView;
+    BOOL _adBannerViewIsVisible;
 }
 
 @property (nonatomic, retain) NSArray *viewControllers;
@@ -28,15 +29,18 @@
 @property (nonatomic, retain) IBOutlet UIButton *storesButton;
 @property (nonatomic, retain) IBOutlet UIButton *spiritsButton;
 @property (nonatomic, retain) IBOutlet UIButton *localDistillersButton;
-@property (nonatomic, retain) UIButton *selectedButton;
-@property (nonatomic, retain) UIViewController *selectedViewController;
 
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) CLLocation *userLocation;
+
+@property (nonatomic, retain) id adBannerView;
+@property (nonatomic) BOOL adBannerViewIsVisible;
 
 - (IBAction)viewCategories:(id)sender;
 - (IBAction)viewSearch:(id)sender;
 - (IBAction)viewStores:(id)sender;
 - (IBAction)viewLocal:(id)sender;
 
+- (void)fixupAdView:(UIInterfaceOrientation)toInterfaceOrientation;
+- (void)createAdBannerView;
 @end
