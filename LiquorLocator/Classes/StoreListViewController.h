@@ -7,13 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "StoreList.h"
+#import <MapKit/MapKit.h>
+#import "JSONLoaderController.h"
 
-@interface StoreListViewController : StoreList {
+@interface StoreListViewController : JSONLoaderController  <UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate> {
     NSString *spiritId;
     NSString *spiritName;
+    
+    IBOutlet UITableView *table;   
+    IBOutlet MKMapView *map;
+    
+    NSArray *tableData;
 }
 
 @property (nonatomic, retain) NSString *spiritId;
 @property (nonatomic, retain) NSString *spiritName;
+
+@property (nonatomic, retain) UITableView *table;
+@property (nonatomic, retain) MKMapView *map;
+@property (nonatomic, retain) NSArray *tableData;
+
+- (void)toggleView:(id)sender;
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control;
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation;
 @end

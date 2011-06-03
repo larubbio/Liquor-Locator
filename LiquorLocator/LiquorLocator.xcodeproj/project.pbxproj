@@ -29,7 +29,6 @@
 		4651F3061205D30400A2079B /* SpiritDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4651F3051205D30400A2079B /* SpiritDetailViewController.m */; };
 		4651F3081205D34900A2079B /* SpiritDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4651F3071205D34900A2079B /* SpiritDetailView.xib */; };
 		46710EB51209C7A100B250F9 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 46710EB41209C7A100B250F9 /* MBProgressHUD.m */; };
-		4671108D120DAE5300B250F9 /* StoreList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4671108B120DAE5300B250F9 /* StoreList.m */; };
 		46711123120E02EC00B250F9 /* SpiritList.m in Sources */ = {isa = PBXBuildFile; fileRef = 46711122120E02EC00B250F9 /* SpiritList.m */; };
 		4671147D1210677000B250F9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4671147C1210677000B250F9 /* Constants.m */; };
 		4672FAE51310838700E2549B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4672FAE41310838700E2549B /* Default.png */; };
@@ -107,8 +106,6 @@
 		4651F3071205D34900A2079B /* SpiritDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpiritDetailView.xib; sourceTree = "<group>"; };
 		46710EB31209C7A100B250F9 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		46710EB41209C7A100B250F9 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		4671108A120DAE5300B250F9 /* StoreList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreList.h; sourceTree = "<group>"; };
-		4671108B120DAE5300B250F9 /* StoreList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreList.m; sourceTree = "<group>"; };
 		46711121120E02EC00B250F9 /* SpiritList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpiritList.h; sourceTree = "<group>"; };
 		46711122120E02EC00B250F9 /* SpiritList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpiritList.m; sourceTree = "<group>"; };
 		4671147B1210677000B250F9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -291,8 +288,6 @@
 				46FF630E1221889D00EEC2F6 /* LocalDistillersViewController.m */,
 				46A6AF74122380C300038466 /* DistillerDetailViewController.h */,
 				46A6AF75122380C300038466 /* DistillerDetailViewController.m */,
-				4671108A120DAE5300B250F9 /* StoreList.h */,
-				4671108B120DAE5300B250F9 /* StoreList.m */,
 				46711121120E02EC00B250F9 /* SpiritList.h */,
 				46711122120E02EC00B250F9 /* SpiritList.m */,
 			);
@@ -487,7 +482,6 @@
 				469B5F35120881E700A7E5DE /* StoreAnnotation.m in Sources */,
 				469B60961209205C00A7E5DE /* StoreListViewController.m in Sources */,
 				46710EB51209C7A100B250F9 /* MBProgressHUD.m in Sources */,
-				4671108D120DAE5300B250F9 /* StoreList.m in Sources */,
 				46711123120E02EC00B250F9 /* SpiritList.m in Sources */,
 				4671147D1210677000B250F9 /* Constants.m in Sources */,
 				46FF63101221889D00EEC2F6 /* LocalDistillersViewController.m in Sources */,
