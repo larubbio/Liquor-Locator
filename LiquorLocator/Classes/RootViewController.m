@@ -12,6 +12,7 @@
 #import "StoreListViewController.h"
 #import "SearchViewController.h"
 #import "LocalDistillersViewController.h"
+#import "SettingsViewController.h"
 
 #import "Constants.h"
 #import "FlurryAPI.h"
@@ -21,11 +22,11 @@
 @synthesize locationManager;
 @synthesize userLocation;
 
-@synthesize viewControllers;
 @synthesize	categoriesButton;
 @synthesize storesButton;
 @synthesize	spiritsButton;
 @synthesize localDistillersButton;
+@synthesize settingsButton;
 
 @synthesize adBannerView = _adBannerView;
 @synthesize adBannerViewIsVisible = _adBannerViewIsVisible;
@@ -98,6 +99,15 @@
     [controller release];
 }
 
+- (IBAction)viewSettings:(id)sender {
+    
+    SettingsViewController *controller = [[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
+    
+    LiquorLocatorAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate.navController pushViewController:controller animated:YES];
+    
+    [controller release];
+}
 
 #pragma mark -
 #pragma mark Core Location Delegate Methods
@@ -194,7 +204,6 @@
     [storesButton release];
     [spiritsButton release];
     [localDistillersButton release];
-    [viewControllers release];
 
     [super dealloc];
 }

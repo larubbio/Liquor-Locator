@@ -14,21 +14,21 @@
     CLLocationManager *locationManager;
     CLLocation *userLocation;
 
-	NSArray *viewControllers;
 	IBOutlet UIButton *categoriesButton;
 	IBOutlet UIButton *storesButton;
 	IBOutlet UIButton *spiritsButton;
 	IBOutlet UIButton *localDistillersButton;
+    IBOutlet UIButton *settingsButton;
     
     id _adBannerView;
     BOOL _adBannerViewIsVisible;
 }
 
-@property (nonatomic, retain) NSArray *viewControllers;
 @property (nonatomic, retain) IBOutlet UIButton *categoriesButton;
 @property (nonatomic, retain) IBOutlet UIButton *storesButton;
 @property (nonatomic, retain) IBOutlet UIButton *spiritsButton;
 @property (nonatomic, retain) IBOutlet UIButton *localDistillersButton;
+@property (nonatomic, retain) IBOutlet UIButton *settingsButton;
 
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) CLLocation *userLocation;
@@ -40,6 +40,7 @@
 - (IBAction)viewSearch:(id)sender;
 - (IBAction)viewStores:(id)sender;
 - (IBAction)viewLocal:(id)sender;
+- (IBAction)viewSettings:(id)sender;
 
 - (void)fixupAdView:(UIInterfaceOrientation)toInterfaceOrientation;
 - (void)createAdBannerView;
