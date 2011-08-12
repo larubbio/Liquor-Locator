@@ -68,6 +68,7 @@
 		46E64865120374B700AB9328 /* RootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E64864120374B700AB9328 /* RootView.xib */; };
 		46E649E01203D11A00AB9328 /* SpiritListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E649DE1203D11A00AB9328 /* SpiritListViewController.m */; };
 		46E649E11203D11A00AB9328 /* SpiritListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E649DF1203D11A00AB9328 /* SpiritListView.xib */; };
+		46ED5044139137BC001C17B0 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46ED5043139137BC001C17B0 /* iAd.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		46FF63101221889D00EEC2F6 /* LocalDistillersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FF630E1221889D00EEC2F6 /* LocalDistillersViewController.m */; };
 		46FF63111221889D00EEC2F6 /* LocalDistillersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46FF630F1221889D00EEC2F6 /* LocalDistillersView.xib */; };
 /* End PBXBuildFile section */
@@ -173,6 +174,7 @@
 		46E649DD1203D11A00AB9328 /* SpiritListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpiritListViewController.h; sourceTree = "<group>"; };
 		46E649DE1203D11A00AB9328 /* SpiritListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpiritListViewController.m; sourceTree = "<group>"; };
 		46E649DF1203D11A00AB9328 /* SpiritListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SpiritListView.xib; path = Classes/SpiritListView.xib; sourceTree = "<group>"; };
+		46ED5043139137BC001C17B0 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		46FF630D1221889D00EEC2F6 /* LocalDistillersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalDistillersViewController.h; sourceTree = "<group>"; };
 		46FF630E1221889D00EEC2F6 /* LocalDistillersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDistillersViewController.m; sourceTree = "<group>"; };
 		46FF630F1221889D00EEC2F6 /* LocalDistillersView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LocalDistillersView.xib; path = Classes/LocalDistillersView.xib; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46ED5044139137BC001C17B0 /* iAd.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -231,8 +234,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				460A7FB2120779B100F36A91 /* MapKit.framework */,
-				469B5FD01208A92800A7E5DE /* CoreLocation.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -272,6 +273,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46ED5043139137BC001C17B0 /* iAd.framework */,
+				469B5FD01208A92800A7E5DE /* CoreLocation.framework */,
+				460A7FB2120779B100F36A91 /* MapKit.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
@@ -563,6 +567,7 @@
 					"\"$(SRCROOT)/../../../Downloads/Flurry iPhone SDK v2.7/FlurryLibWithLocation\"",
 				);
 				PRODUCT_NAME = LiquorLocator;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};

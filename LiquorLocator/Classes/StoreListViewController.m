@@ -26,6 +26,18 @@
     [super viewDidAppear:animated];
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self createAdBannerView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self fixupAdView:[UIDevice currentDevice].orientation];
+}
+
 - (void)dealloc {
     [spiritId release];
     [super dealloc];
