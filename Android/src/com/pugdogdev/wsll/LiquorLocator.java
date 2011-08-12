@@ -10,8 +10,8 @@ import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 
 public class LiquorLocator extends Application {
-//	private String flurryKey = "5KQFDW1H3BAM5JYA3QXQ"; // Release Key
-	private String flurryKey = "HNVL69NJ7XM4V6S1WZXB"; // Development Key
+	private String flurryKey = "5KQFDW1H3BAM5JYA3QXQ"; // Release Key
+//	private String flurryKey = "HNVL69NJ7XM4V6S1WZXB"; // Development Key
 	
 	private String adMobKey = "a14d9bf7683916f";
 	

@@ -16,8 +16,8 @@
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:layout_alignParentTop="true" android:visibility="invisible"
 		android:layout_weight="1" 
-		android:apiKey="09EeknnpIeMPpvXm7Oc_U5f4hGElFdaBdjppDkw" />
-	<!-- android:apiKey="09EeknnpIeMP3mJi_3bQqD9l8FlrnUh-Lb9NnPQ"/ Production -->
+		android:apiKey="09EeknnpIeMP3mJi_3bQqD9l8FlrnUh-Lb9NnPQ" />
+	<!-- android:apiKey="09EeknnpIeMPpvXm7Oc_U5f4hGElFdaBdjppDkw"/ Development -->
 	    <com.google.ads.AdView android:id="@+id/adView"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"

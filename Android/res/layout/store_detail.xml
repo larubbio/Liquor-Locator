@@ -69,12 +69,10 @@
         <TextView
         	android:id="@+id/thurLabel"
             android:text="Thur"
-            android:gravity="left"
-            android:padding="3dip" />
+            android:gravity="left"/>
         <TextView
         	android:id="@+id/thurHours"
-            android:gravity="left"
-            android:padding="3dip" />
+            android:gravity="left"/>
     </TableRow>
 
     <TableRow>
