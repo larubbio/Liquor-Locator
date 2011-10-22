@@ -44,7 +44,7 @@
 		46A6AF9612243E5A00038466 /* DistillerAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A6AF9412243E5A00038466 /* DistillerAddressCell.m */; };
 		46B52659123871B200FB3E10 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 46B52658123871B200FB3E10 /* Icon.png */; };
 		46B7CFBF139921D80054E8BD /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46B7CFBD139921550054E8BD /* SettingsViewController.m */; };
-		46B7CFC0139921D90054E8BD /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46B7CFBE1399219A0054E8BD /* SettingsViewController.xib */; };
+		46B7CFC0139921D90054E8BD /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46B7CFBE1399219A0054E8BD /* SettingsView.xib */; };
 		46CABED612283AB500B8D751 /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CABED412283AB500B8D751 /* CategoriesViewController.m */; };
 		46CABED712283AB500B8D751 /* CategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46CABED512283AB500B8D751 /* CategoriesView.xib */; };
 		46CABF25122867AB00B8D751 /* libFlurryWithLocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CABF24122867AB00B8D751 /* libFlurryWithLocation.a */; };
@@ -131,7 +131,7 @@
 		46B52658123871B200FB3E10 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		46B7CFBC139921540054E8BD /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		46B7CFBD139921550054E8BD /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		46B7CFBE1399219A0054E8BD /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsViewController.xib; path = Classes/SettingsViewController.xib; sourceTree = "<group>"; };
+		46B7CFBE1399219A0054E8BD /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsView.xib; path = Classes/SettingsView.xib; sourceTree = "<group>"; };
 		46CABED312283AB500B8D751 /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesViewController.h; sourceTree = "<group>"; };
 		46CABED412283AB500B8D751 /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
 		46CABED512283AB500B8D751 /* CategoriesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CategoriesView.xib; path = Classes/CategoriesView.xib; sourceTree = "<group>"; };
@@ -240,7 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				46CABFBF122B4BB000B8D751 /* Images */,
-				46B7CFBE1399219A0054E8BD /* SettingsViewController.xib */,
+				46B7CFBE1399219A0054E8BD /* SettingsView.xib */,
 				46FF630F1221889D00EEC2F6 /* LocalDistillersView.xib */,
 				46A6AF76122380C300038466 /* DistillerDetailView.xib */,
 				46A6AF84122383A900038466 /* DistillerAddressCell.xib */,
@@ -463,7 +463,7 @@
 				46CAC0FF122F531E00B8D751 /* stores.png in Resources */,
 				46B52659123871B200FB3E10 /* Icon.png in Resources */,
 				4672FAE51310838700E2549B /* Default.png in Resources */,
-				46B7CFC0139921D90054E8BD /* SettingsViewController.xib in Resources */,
+				46B7CFC0139921D90054E8BD /* SettingsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
